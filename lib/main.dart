@@ -1,4 +1,4 @@
-import 'package:curely/features/welcome/presentation/views/splash_view.dart';
+import 'package:curely/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,9 +9,9 @@ class Curely extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      routerConfig: AppRouter.router,
     );
   }
 }
