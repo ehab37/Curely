@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
     super.key,
+    required this.onPressed,
+    required this.text,
   });
+
+  final Function() onPressed;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +18,12 @@ class CustomTextButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextButton(
-          onPressed: () {},
-          child: Text("Skip", style: Styles.style28,textAlign: TextAlign.start,),
+          onPressed: onPressed,
+          child: Text(
+            text,
+            style: Styles.style28,
+            textAlign: TextAlign.start,
+          ),
         ),
       ),
     );

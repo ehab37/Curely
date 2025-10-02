@@ -10,7 +10,7 @@ class OnBoardingViewBody extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          CustomTextButton(),
+          CustomTextButton(onPressed: (){},text: "Skip",),
           Expanded(child: OnBoardingPageView()),
           SizedBox(height: 200),
         ],
