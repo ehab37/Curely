@@ -35,7 +35,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         animation: animation,
         builder: (context, child) => FadeTransition(
           opacity: animation,
-          child: Image.asset(AssetsData.splashLogo),
+          child: Image.asset(AssetsData.kSplashLogo),
         ),
       ),
     );
@@ -52,7 +52,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateHome() {
     Future.delayed(const Duration(seconds: 3), () {
-      mounted ? GoRouter.of(context).push(AppRouter.kOnBoardingView) : null;
+      mounted ? GoRouter.of(context).pushReplacement(AppRouter.kOnBoardingView) : null;
     });
   }
 }
