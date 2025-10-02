@@ -7,6 +7,8 @@ const Color kPrimaryColor = Color.fromRGBO(122, 122, 255, 1);
 const Color kBlueColor = Color(0xff0D47A1);
 const Color kDarkBlueColor = Color(0xff2B475E);
 const Color kGrayColor = Color(0xffBDBDBD);
+const double kHorizontalPadding = 30;
+const double kBottomPadding = 30;
 
 const List<OnBoardingModel> onBoardingPages = [
   OnBoardingModel(

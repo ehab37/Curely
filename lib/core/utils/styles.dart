@@ -9,7 +9,7 @@ abstract class Styles {
   );
 
   static TextStyle style20 = TextStyle(
-    color: kBlueColor.withAlpha(120),
+    color: Colors.white,
     fontSize: 20,
     fontWeight: FontWeight.w400,
     wordSpacing: .1,
