@@ -53,7 +53,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void navigateHome() {
-    bool isOnBoardingViewSeen = CacheHelper.getData(key: kIsOnBoardingViewSeen);
+    final bool isOnBoardingViewSeen = CacheHelper.getData(
+      key: kIsOnBoardingViewSeen,
+    );
     Future.delayed(const Duration(seconds: 3), () {
       mounted
           ? isOnBoardingViewSeen

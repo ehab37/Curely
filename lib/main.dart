@@ -1,10 +1,18 @@
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/cache_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
   runApp(const Curely());
 }
 class Curely extends StatelessWidget {
@@ -14,6 +22,11 @@ class Curely extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData().copyWith(
+        textTheme: Theme.of(context).textTheme.apply(
+          fontSizeFactor: 1,
+        ),
+      ),
       routerConfig: AppRouter.router,
     );
   }

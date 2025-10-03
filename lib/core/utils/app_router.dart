@@ -1,5 +1,5 @@
-
 import 'package:curely/features/auth/presentation/views/login_view.dart';
+import 'package:curely/features/auth/presentation/views/register_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
 import 'package:curely/features/welcome/presentation/views/splash_view.dart';
 import 'package:curely/features/welcome/presentation/views/welcome_view.dart';
@@ -10,6 +10,7 @@ abstract class AppRouter {
   static const kOnBoardingView = "/onBoardingView";
   static const kWelcomeView = "/welcomeView";
   static const kLoginView = "/loginView";
+  static const kRegisterView = "/registerView";
 
   static final router = GoRouter(
     routes: [
@@ -29,7 +30,10 @@ abstract class AppRouter {
         path: kLoginView,
         builder: (context, state) => const LoginView(),
       ),
-
+      GoRoute(
+        path: kRegisterView,
+        builder: (context, state) => const RegisterView(),
+      ),
     ],
   );
 }

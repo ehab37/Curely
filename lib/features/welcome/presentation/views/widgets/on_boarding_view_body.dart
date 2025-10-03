@@ -50,7 +50,10 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             child: CustomTextButton(
               onPressed: () {
                 GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
-                CacheHelper.putBoolData(key: kIsOnBoardingViewSeen, value: true);
+                CacheHelper.putBoolData(
+                  key: kIsOnBoardingViewSeen,
+                  value: true,
+                );
               },
               text: "Skip",
             ),
@@ -62,8 +65,11 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             decorator: DotsDecorator(
               activeColor: kBlueColor,
               color: kGrayColor,
-              size: Size(12, 12),
-              activeSize: Size(16, 16),
+              size: Size(8, 8),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusDirectional.circular(25),
+              ),
+              activeSize: Size(20,8),
             ),
           ),
           SizedBox(height: 10),
@@ -75,7 +81,10 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             child: CustomButton(
               onPressed: () {
                 GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
-                CacheHelper.putBoolData(key: kIsOnBoardingViewSeen, value: true);
+                CacheHelper.putBoolData(
+                  key: kIsOnBoardingViewSeen,
+                  value: true,
+                );
               },
               backgroundColor: kBlueColor,
               child: Text("Get Started", style: Styles.style20),
