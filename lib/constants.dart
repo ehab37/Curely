@@ -9,6 +9,7 @@ const Color kDarkBlueColor = Color(0xff2B475E);
 const Color kGrayColor = Color(0xffBDBDBD);
 const double kHorizontalPadding = 30;
 const double kBottomPadding = 30;
+const kIsOnBoardingViewSeen = "kIsOnBoardingViewSeen";
 
 const List<OnBoardingModel> onBoardingPages = [
   OnBoardingModel(

@@ -1,11 +1,15 @@
 
+import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
 import 'package:curely/features/welcome/presentation/views/splash_view.dart';
+import 'package:curely/features/welcome/presentation/views/welcome_view.dart';
 import 'package:go_router/go_router.dart';
 
 
 abstract class AppRouter {
   static const kOnBoardingView = "/onBoardingView";
+  static const kWelcomeView = "/welcomeView";
+  static const kLoginView = "/loginView";
 
   static final router = GoRouter(
     routes: [
@@ -14,8 +18,16 @@ abstract class AppRouter {
         builder: (context, state) => const SplashView(),
       ),
       GoRoute(
-        path: '/onBoardingView',
+        path: kOnBoardingView,
         builder: (context, state) => const OnBoardingView(),
+      ),
+      GoRoute(
+        path: kWelcomeView,
+        builder: (context, state) => const WelcomeView(),
+      ),
+      GoRoute(
+        path: kLoginView,
+        builder: (context, state) => const LoginView(),
       ),
 
     ],

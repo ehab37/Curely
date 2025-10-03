@@ -1,10 +1,13 @@
 import 'package:curely/constants.dart';
+import 'package:curely/core/utils/app_router.dart';
+import 'package:curely/core/utils/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_button.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
@@ -43,19 +46,19 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
-            visible:
-                (pageController.hasClients
-                    ? currentPage
-                    : 0) !=
-                3,
-            child: CustomTextButton(onPressed: () {}, text: "Skip"),
+            visible: (pageController.hasClients ? currentPage : 0) != 3,
+            child: CustomTextButton(
+              onPressed: () {
+                GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
+                CacheHelper.putBoolData(key: kIsOnBoardingViewSeen, value: true);
+              },
+              text: "Skip",
+            ),
           ),
           Expanded(child: OnBoardingPageView(pageController: pageController)),
           DotsIndicator(
             dotsCount: onBoardingPages.length,
-            position: pageController.hasClients
-                ? pageController.page!
-                : 0,
+            position: pageController.hasClients ? pageController.page! : 0,
             decorator: DotsDecorator(
               activeColor: kBlueColor,
               color: kGrayColor,
@@ -65,16 +68,15 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
           SizedBox(height: 10),
           Visibility(
-            visible:
-                (pageController.hasClients
-                    ? currentPage
-                    : 0) ==
-                3,
+            visible: (pageController.hasClients ? currentPage : 0) == 3,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
             child: CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
+                CacheHelper.putBoolData(key: kIsOnBoardingViewSeen, value: true);
+              },
               backgroundColor: kBlueColor,
               child: Text("Get Started", style: Styles.style20),
             ),
