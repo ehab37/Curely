@@ -3,6 +3,7 @@ import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/assets.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_container.dart';
+import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,27 +16,25 @@ class WelcomeView extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 7,
-            ),
-            const Text(
-              "Welcome",
+            SizedBox(height: MediaQuery.of(context).size.height / 7),
+            Text(
+              S.of(context).welcome,
               style: TextStyle(
                 color: Color.fromRGBO(0, 174, 240, 1),
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
-              "to",
+            Text(
+              S.of(context).to,
               style: TextStyle(
                 color: Color.fromRGBO(0, 174, 240, 1),
                 fontSize: 25,
               ),
             ),
             const SizedBox(height: 10),
-            const Text(
-              "Curely",
+            Text(
+              S.of(context).title,
               style: TextStyle(
                 color: Color.fromRGBO(0, 174, 240, 1),
                 fontSize: 33,
@@ -43,9 +42,7 @@ class WelcomeView extends StatelessWidget {
                 letterSpacing: 1.5,
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             const SizedBox(
               width: 170,
               height: 170,
@@ -64,17 +61,14 @@ class WelcomeView extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 80,
-                  ),
+                  const SizedBox(height: 80),
                   CustomButton(
                     backgroundColor: kBlueColor,
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 20),
-                    ),
+                    child: const Text('Login', style: TextStyle(fontSize: 20)),
                     onPressed: () {
-                      GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+                      GoRouter.of(
+                        context,
+                      ).pushReplacement(AppRouter.kLoginView);
                     },
                   ),
                   CustomButton(
@@ -84,8 +78,9 @@ class WelcomeView extends StatelessWidget {
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () {
-                      GoRouter.of(context)
-                          .pushReplacement(AppRouter.kRegisterView);
+                      GoRouter.of(
+                        context,
+                      ).pushReplacement(AppRouter.kRegisterView);
                     },
                   ),
                 ],

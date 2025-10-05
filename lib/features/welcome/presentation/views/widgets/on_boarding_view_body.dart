@@ -5,6 +5,7 @@ import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_button.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
+import 'package:curely/generated/l10n.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -55,7 +56,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   value: true,
                 );
               },
-              text: "Skip",
+              text: S.of(context).skip,
             ),
           ),
           Expanded(child: OnBoardingPageView(pageController: pageController)),
@@ -69,7 +70,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusDirectional.circular(25),
               ),
-              activeSize: Size(20,8),
+              activeSize: Size(20, 8),
             ),
           ),
           SizedBox(height: 10),
@@ -87,7 +88,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 );
               },
               backgroundColor: kBlueColor,
-              child: Text("Get Started", style: Styles.style20),
+              child: Text(S.of(context).getStarted, style: Styles.style20),
             ),
           ),
           SizedBox(height: kBottomPadding),

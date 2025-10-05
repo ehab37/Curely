@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/utils/assets.dart';
 import 'features/welcome/presentation/view_models/on_boarding_model.dart';
+import 'package:intl/intl.dart';
 
 const kTransitionDuration = Duration(milliseconds: 250);
 const Color kPrimaryColor = Color.fromRGBO(122, 122, 255, 1);
@@ -10,6 +11,9 @@ const Color kGrayColor = Color(0xffBDBDBD);
 const double kHorizontalPadding = 30;
 const double kBottomPadding = 30;
 const kIsOnBoardingViewSeen = "kIsOnBoardingViewSeen";
+bool isArabic() {
+  return Intl.getCurrentLocale() == 'ar';
+}
 
 const List<OnBoardingModel> onBoardingPages = [
   OnBoardingModel(
