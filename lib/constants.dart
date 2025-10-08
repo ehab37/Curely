@@ -1,3 +1,4 @@
+import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'core/utils/assets.dart';
 import 'features/welcome/presentation/view_models/on_boarding_model.dart';
@@ -15,25 +16,27 @@ bool isArabic() {
   return Intl.getCurrentLocale() == 'ar';
 }
 
-const List<OnBoardingModel> onBoardingPages = [
-  OnBoardingModel(
-    image: AssetsData.kTrack,
-    title: 'Track your medicines',
-    subTitle: 'Never forget to take your medicines again.',
-  ),
-  OnBoardingModel(
-    image: AssetsData.kReminder,
-    title: 'Get reminders',
-    subTitle: 'Receive reminders when it is time to take your medicines.',
-  ),
-  OnBoardingModel(
-    image: AssetsData.kOrganizer,
-    title: 'Organize your medicines',
-    subTitle: 'Keep all your medicines organized in one place.',
-  ),
-  OnBoardingModel(
-    image: AssetsData.kStay,
-    title: 'Stay healthy',
-    subTitle: 'Stay on top of your health and never miss a dose again.',
-  ),
-];
+List<OnBoardingModel> onBoardingPages(context) {
+  return [
+    OnBoardingModel(
+      image: AssetsData.kTrack,
+      title: S.of(context).onBoardingTitle1,
+      subTitle: S.of(context).onBoardingSubTitle1,
+    ),
+    OnBoardingModel(
+      image: AssetsData.kReminder,
+      title: S.of(context).onBoardingTitle2,
+      subTitle: S.of(context).onBoardingSubTitle2,
+    ),
+    OnBoardingModel(
+      image: AssetsData.kOrganizer,
+      title: S.of(context).onBoardingTitle3,
+      subTitle: S.of(context).onBoardingSubTitle3,
+    ),
+    OnBoardingModel(
+      image: AssetsData.kStay,
+      title: S.of(context).onBoardingTitle4,
+      subTitle: S.of(context).onBoardingSubTitle4,
+    ),
+  ];
+}

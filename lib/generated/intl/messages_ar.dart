@@ -22,7 +22,46 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage(
+      "تأكيد كلمة المرور",
+    ),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage(
+      "ادخل البريد الالكتروني للحصول على رابط استعادة كلمة المرور.",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
+    "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+    "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "onBoardingSubTitle1": MessageLookupByLibrary.simpleMessage(
+      "قم بإدارة وتتبع أدويتك بسهولة في مكان واحد.",
+    ),
+    "onBoardingSubTitle2": MessageLookupByLibrary.simpleMessage(
+      "لا تفوت جرعة مع التذكيرات والإشعارات في الوقت المناسب.",
+    ),
+    "onBoardingSubTitle3": MessageLookupByLibrary.simpleMessage(
+      "حافظ على تنظيم أدويتك للوصول والإدارة بسهولة.",
+    ),
+    "onBoardingSubTitle4": MessageLookupByLibrary.simpleMessage(
+      "حافظ على صحتك من خلال إدارة الأدوية بشكل صحيح.",
+    ),
+    "onBoardingTitle1": MessageLookupByLibrary.simpleMessage("تتبع أدويتك"),
+    "onBoardingTitle2": MessageLookupByLibrary.simpleMessage(
+      "احصل على تذكيرات",
+    ),
+    "onBoardingTitle3": MessageLookupByLibrary.simpleMessage("نظم أدويتك"),
+    "onBoardingTitle4": MessageLookupByLibrary.simpleMessage("حافظ على صحتك"),
+    "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "register": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "resetPassword": MessageLookupByLibrary.simpleMessage(
+      "استعادة كلمة المرور",
+    ),
+    "sendResetLink": MessageLookupByLibrary.simpleMessage(
+      "ارسل رابط استعادة كلمة المرور",
+    ),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "title": MessageLookupByLibrary.simpleMessage("كيورلى"),
     "to": MessageLookupByLibrary.simpleMessage("إلى"),

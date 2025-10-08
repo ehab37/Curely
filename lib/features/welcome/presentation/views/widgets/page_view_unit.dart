@@ -12,9 +12,8 @@ class PageViewUnit extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
-
         children: [
-          Spacer(flex: 3,),
+          Spacer(flex: 3),
           SizedBox(
             width: MediaQuery.of(context).size.width * 2 / 3.25,
             child: AspectRatio(
@@ -22,14 +21,14 @@ class PageViewUnit extends StatelessWidget {
               child: Image.asset(onBoardingModel.image),
             ),
           ),
-          Spacer(flex: 3,),
+          Spacer(flex: 3),
           Text(onBoardingModel.title, style: Styles.style28),
           Text(
             onBoardingModel.subTitle,
             style: Styles.style18,
             textAlign: TextAlign.center,
           ),
-          Spacer(flex: 1,),
+          Spacer(flex: 1),
         ],
       ),
     );

@@ -28,7 +28,7 @@ class Curely extends StatelessWidget {
       theme: ThemeData().copyWith(
         textTheme: Theme.of(context).textTheme.apply(fontSizeFactor: 1),
       ),
-      locale: const Locale('ar'),
+      locale: const Locale('en'),
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

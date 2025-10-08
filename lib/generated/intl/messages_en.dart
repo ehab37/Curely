@@ -22,7 +22,46 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Already have an account?",
+    ),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account?",
+    ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Enter your email to receive a password reset link.",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot Password?"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "name": MessageLookupByLibrary.simpleMessage("Name"),
+    "onBoardingSubTitle1": MessageLookupByLibrary.simpleMessage(
+      "Easily manage and track your medications in one place.",
+    ),
+    "onBoardingSubTitle2": MessageLookupByLibrary.simpleMessage(
+      "Never miss a dose with timely reminders and notifications.",
+    ),
+    "onBoardingSubTitle3": MessageLookupByLibrary.simpleMessage(
+      "Keep your medications organized for easy access and management.",
+    ),
+    "onBoardingSubTitle4": MessageLookupByLibrary.simpleMessage(
+      "Maintain your health with proper medication management.",
+    ),
+    "onBoardingTitle1": MessageLookupByLibrary.simpleMessage(
+      "Track your medicines",
+    ),
+    "onBoardingTitle2": MessageLookupByLibrary.simpleMessage("Get reminders"),
+    "onBoardingTitle3": MessageLookupByLibrary.simpleMessage(
+      "Organize your medicines",
+    ),
+    "onBoardingTitle4": MessageLookupByLibrary.simpleMessage("Stay healthy"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "register": MessageLookupByLibrary.simpleMessage("Register"),
+    "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
+    "sendResetLink": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "title": MessageLookupByLibrary.simpleMessage("Curely"),
     "to": MessageLookupByLibrary.simpleMessage("to"),

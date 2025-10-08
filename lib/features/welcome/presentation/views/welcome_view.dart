@@ -64,7 +64,10 @@ class WelcomeView extends StatelessWidget {
                   const SizedBox(height: 80),
                   CustomButton(
                     backgroundColor: kBlueColor,
-                    child: const Text('Login', style: TextStyle(fontSize: 20)),
+                    child: Text(
+                      S.of(context).login,
+                      style: TextStyle(fontSize: 20),
+                    ),
                     onPressed: () {
                       GoRouter.of(
                         context,
@@ -73,8 +76,8 @@ class WelcomeView extends StatelessWidget {
                   ),
                   CustomButton(
                     backgroundColor: kBlueColor,
-                    child: const Text(
-                      'Register',
+                    child: Text(
+                      S.of(context).register,
                       style: TextStyle(fontSize: 20),
                     ),
                     onPressed: () {

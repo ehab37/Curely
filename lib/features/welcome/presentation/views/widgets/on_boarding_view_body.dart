@@ -61,7 +61,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
           Expanded(child: OnBoardingPageView(pageController: pageController)),
           DotsIndicator(
-            dotsCount: onBoardingPages.length,
+            dotsCount: onBoardingPages(context).length,
             position: pageController.hasClients ? pageController.page! : 0,
             decorator: DotsDecorator(
               activeColor: kBlueColor,
