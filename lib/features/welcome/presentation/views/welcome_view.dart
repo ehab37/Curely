@@ -6,6 +6,6 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: WelcomeViewBody());
+    return Scaffold(resizeToAvoidBottomInset: false, body: WelcomeViewBody());
   }
 }
