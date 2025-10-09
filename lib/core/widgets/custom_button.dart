@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
       style: ButtonStyle(
         side: WidgetStatePropertyAll(
           BorderSide(
-            color: kBlueColor,
+            color: kDarkBlueColor,
             width: 2,
           ),
         ),

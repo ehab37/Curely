@@ -2,8 +2,15 @@ import 'package:curely/constants.dart';
 import 'package:flutter/material.dart';
 
 abstract class Styles {
+  static const TextStyle style45 = TextStyle(
+    color: kNavyColor,
+    fontSize: 45,
+    fontWeight: FontWeight.w900,
+    letterSpacing: 1.5,
+    height: .8,
+  );
   static const TextStyle style28 = TextStyle(
-    color: kBlueColor,
+    color: kNavyColor,
     fontSize: 28,
     fontWeight: FontWeight.bold,
   );
@@ -11,17 +18,16 @@ abstract class Styles {
   static TextStyle style20 = TextStyle(
     color: Colors.white,
     fontSize: 20,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.bold,
     wordSpacing: .1,
     height: 0,
   );
 
   static TextStyle style18 = TextStyle(
-    color: kBlueColor.withAlpha(120),
-    fontSize: 18,
+    color: kNavyColor.withAlpha(160),
+    fontSize: 17,
     fontWeight: FontWeight.w400,
     wordSpacing: .1,
     height: 0,
   );
-
 }

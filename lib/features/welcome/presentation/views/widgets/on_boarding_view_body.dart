@@ -64,7 +64,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             dotsCount: onBoardingPages(context).length,
             position: pageController.hasClients ? pageController.page! : 0,
             decorator: DotsDecorator(
-              activeColor: kBlueColor,
+              activeColor: kNavyColor,
               color: kGrayColor,
               size: Size(8, 8),
               activeShape: RoundedRectangleBorder(
@@ -87,7 +87,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   value: true,
                 );
               },
-              backgroundColor: kBlueColor,
+              backgroundColor: kDarkBlueColor,
               child: Text(S.of(context).getStarted, style: Styles.style20),
             ),
           ),
