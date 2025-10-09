@@ -5,4 +5,6 @@ class AssetsData {
   static const kStay = 'assets/images/stay.jpg';
   static const kReminder = 'assets/images/reminder.jpg';
   static const kOrganizer = 'assets/images/organizer.jpg';
+  static const kEgypt = 'assets/images/egypt.png';
+  static const kUK = 'assets/images/united_kingdom.png';
 }

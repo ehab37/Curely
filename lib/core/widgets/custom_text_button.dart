@@ -15,15 +15,12 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.centerStart,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: TextButton(
-          onPressed: onPressed,
-          child: Text(
-            text,
-            style: Styles.style28,
-            textAlign: TextAlign.start,
-          ),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: Styles.style28,
+          textAlign: TextAlign.start,
         ),
       ),
     );

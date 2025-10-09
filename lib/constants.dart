@@ -2,9 +2,8 @@ import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'core/utils/assets.dart';
 import 'features/welcome/presentation/view_models/on_boarding_model.dart';
-import 'package:intl/intl.dart';
 
-const kTransitionDuration = Duration(milliseconds: 250);
+const kTransitionDuration = Duration(milliseconds: 600);
 const Color kPrimaryColor = Color.fromRGBO(122, 122, 255, 1);
 const Color kBrightBlueColor = Color(0xff347AF0);
 const Color kBlueColor = Color(0xff0D47A1);
@@ -18,12 +17,10 @@ const Color kLightGrayColor = Color(0xffE0E0E0);
 const Color kErrorColor = Color(0xffF44336);
 const Color kWarningColor = Color(0xffFFC107);
 const Color kSuccessColor = Color(0xff4CAF50);
-const double kHorizontalPadding = 30;
+const double kHorizontalPadding = 24;
 const double kBottomPadding = 30;
 const kIsOnBoardingViewSeen = "kIsOnBoardingViewSeen";
-bool isArabic() {
-  return Intl.getCurrentLocale() == 'ar';
-}
+const kIsArabic = "kIsArabic";
 
 List<OnBoardingModel> onBoardingPages(context) {
   return [

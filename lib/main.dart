@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_transitions/go_transitions.dart';
 
+import 'constants.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -25,7 +27,8 @@ class Curely extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GoTransition.defaultCurve = Curves.easeInOut;
-    GoTransition.defaultDuration = const Duration(milliseconds: 600);
+    GoTransition.defaultDuration = kTransitionDuration;
+    bool isArabic = CacheHelper.getData(key: kIsArabic);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
@@ -38,7 +41,7 @@ class Curely extends StatelessWidget {
           },
         ),
       ),
-      locale: const Locale('en'),
+      locale: isArabic ? Locale("ar") : Locale("en"),
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

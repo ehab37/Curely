@@ -3,12 +3,12 @@ import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_text_button.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'on_boarding_app_bar.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
@@ -43,20 +43,11 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     return SafeArea(
       child: Column(
         children: [
-          Visibility(
-            maintainSize: true,
-            maintainAnimation: true,
-            maintainState: true,
-            visible: (pageController.hasClients ? currentPage : 0) != 3,
-            child: CustomTextButton(
-              onPressed: () {
-                GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
-                CacheHelper.putBoolData(
-                  key: kIsOnBoardingViewSeen,
-                  value: true,
-                );
-              },
-              text: S.of(context).skip,
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: OnBoardingAppBar(
+              pageController: pageController,
+              currentPage: currentPage,
             ),
           ),
           Expanded(child: OnBoardingPageView(pageController: pageController)),
