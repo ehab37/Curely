@@ -4,6 +4,7 @@ import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart
 import 'package:curely/features/welcome/presentation/views/splash_view.dart';
 import 'package:curely/features/welcome/presentation/views/welcome_view.dart';
 import 'package:go_router/go_router.dart';
+import 'package:go_transitions/go_transitions.dart';
 
 
 abstract class AppRouter {
@@ -13,6 +14,7 @@ abstract class AppRouter {
   static const kRegisterView = "/registerView";
 
   static final router = GoRouter(
+    observers: [GoTransition.observer],
     routes: [
       GoRoute(
         path: '/',

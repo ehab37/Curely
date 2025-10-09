@@ -4,6 +4,7 @@ import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_transitions/go_transitions.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +24,19 @@ class Curely extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GoTransition.defaultCurve = Curves.easeInOut;
+    GoTransition.defaultDuration = const Duration(milliseconds: 600);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
         textTheme: Theme.of(context).textTheme.apply(fontSizeFactor: 1),
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: GoTransitions.fade,
+            TargetPlatform.iOS: GoTransitions.cupertino,
+            TargetPlatform.macOS: GoTransitions.cupertino,
+          },
+        ),
       ),
       locale: const Locale('en'),
       localizationsDelegates: [
