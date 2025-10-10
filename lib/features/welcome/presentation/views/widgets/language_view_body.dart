@@ -4,6 +4,7 @@ import 'package:curely/core/utils/assets.dart';
 import 'package:curely/core/utils/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
+import 'package:curely/features/welcome/presentation/views/widgets/custom_animated_container.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -46,99 +47,61 @@ class _LanguageViewBodyState extends State<LanguageViewBody> {
               "Select your preferred language below This helps us serve you better.",
               style: Styles.style18,
             ),
-            SizedBox(height: 30),
-            // Column(
-            //   children: List.generate(
-            //     2,
-            //         (index) => AnimatedContainer(
-            //       duration: const Duration(milliseconds: 300),
-            //       margin: const EdgeInsets.symmetric(horizontal: 8.0),
-            //       height: 8.0,
-            //       width: cubit.screenIndex == index ? 24.0 : 8.0,
-            //       decoration: BoxDecoration(
-            //         color: cubit.screenIndex == index
-            //             ? kBlueColor
-            //             : kGrayColor,
-            //         borderRadius: BorderRadius.circular(4.0),
-            //       ),
-            //     ),
-            //   ).toList(),
-            // ),
-            Center(
-              child: GestureDetector(
-                onTap: isArabic
-                    ? () {
-                        isArabic = false;
-                        setState(() {});
-                      }
-                    : null,
-                child: AnimatedContainer(
-                  duration: kTransitionDuration,
-                  decoration: BoxDecoration(
-                    color: isArabic ? kLightGrayColor : kNavyColor,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: MediaQuery.of(context).size.width / 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(height: 12),
-                      Image.asset(AssetsData.kUK, height: 70),
-                      Text(
-                        "English",
-                        style: isArabic
-                            ? Styles.styleBlue25
-                            : Styles.styleWhite25,
+            Spacer(),
+            CustomAnimatedContainer(
+              languageName: "English",
+              languageFlag: AssetsData.kUK,
+              onTab: isArabic
+                  ? () {
+                      isArabic = false;
+                      setState(() {});
+                    }
+                  : null,
+              boxShadow: isArabic
+                  ? null
+                  : [
+                      BoxShadow(
+                        color: kNavyColor.withAlpha(130),
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        offset: const Offset(10, 10),
                       ),
-                      SizedBox(height: 12),
                     ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Center(
-              child: GestureDetector(
-                onTap: isArabic
-                    ? null
-                    : () {
-                        isArabic = true;
-                        setState(() {});
-                      },
-                child: AnimatedContainer(
-                  duration: kTransitionDuration,
-                  decoration: BoxDecoration(
-                    color: isArabic ? kNavyColor : kLightGrayColor,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: MediaQuery.of(context).size.width / 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(height: 12),
-                      Image.asset(AssetsData.kEgypt, height: 70),
-                      Text(
-                        "Arabic",
-                        style: isArabic
-                            ? Styles.styleWhite25
-                            : Styles.styleBlue25,
-                      ),
-                      SizedBox(height: 12),
-                    ],
-                  ),
-                ),
-              ),
+              backgroundColor: isArabic ? kLightGrayColor : kNavyColor,
+              style: isArabic ? Styles.styleBlue25 : Styles.styleWhite25,
             ),
             Spacer(),
+            CustomAnimatedContainer(
+              languageName: "Arabic",
+              languageFlag: AssetsData.kEgypt,
+              onTab: isArabic
+                  ? null
+                  : () {
+                      isArabic = true;
+                      setState(() {});
+                    },
+              boxShadow: isArabic
+                  ? [
+                      BoxShadow(
+                        color: kNavyColor.withAlpha(130),
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        offset: const Offset(10, 10),
+                      ),
+                    ]
+                  : null,
+              backgroundColor: isArabic ? kNavyColor : kLightGrayColor,
+              style: isArabic ? Styles.styleWhite25 : Styles.styleBlue25,
+            ),
+            Spacer(),
+            SizedBox(height: 40),
             Center(
               child: CustomButton(
                 onPressed: () {
                   GoRouter.of(
                     context,
                   ).pushReplacement(AppRouter.kOnBoardingView);
-                  S.load(Locale(isArabic?"ar":"en"));
+                  S.load(Locale(isArabic ? "ar" : "en"));
                   CacheHelper.putBoolData(key: kIsArabic, value: isArabic);
                 },
                 backgroundColor: kDarkBlueColor,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'core/utils/assets.dart';
 import 'features/welcome/presentation/view_models/on_boarding_model.dart';
 
-const kTransitionDuration = Duration(milliseconds: 600);
+const kTransitionDuration = Duration(milliseconds: 400);
 const Color kPrimaryColor = Color.fromRGBO(122, 122, 255, 1);
 const Color kBrightBlueColor = Color(0xff347AF0);
 const Color kBlueColor = Color(0xff0D47A1);
