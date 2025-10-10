@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1032297134307",
+    "project_id": "curely-f7f4e",
+    "storage_bucket": "curely-f7f4e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032297134307:android:bd10a5ae0d62681ed56dd6",
+        "android_client_info": {
+          "package_name": "com.example.curely"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArexVtC2uu5spppH8eGZqXY_GirAQ5Ic8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

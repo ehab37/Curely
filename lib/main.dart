@@ -1,12 +1,14 @@
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/cache_helper.dart';
 import 'package:curely/generated/l10n.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_transitions/go_transitions.dart';
 
 import 'constants.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,9 @@ void main() async {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
+  );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const Curely());
 }
