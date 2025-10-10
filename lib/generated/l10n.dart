@@ -59,6 +59,41 @@ class S {
     return Intl.message('Curely', name: 'title', desc: '', args: []);
   }
 
+  /// `Choose The Language`
+  String get chooseLanguage {
+    return Intl.message(
+      'Choose The Language',
+      name: 'chooseLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select your preferred language below This helps us serve you better.`
+  String get chooseLanguageSubTitle {
+    return Intl.message(
+      'Select your preferred language below This helps us serve you better.',
+      name: 'chooseLanguageSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message('English', name: 'english', desc: '', args: []);
+  }
+
+  /// `Arabic`
+  String get arabic {
+    return Intl.message('Arabic', name: 'arabic', desc: '', args: []);
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message('Confirm', name: 'confirm', desc: '', args: []);
+  }
+
   /// `Skip`
   String get skip {
     return Intl.message('Skip', name: 'skip', desc: '', args: []);

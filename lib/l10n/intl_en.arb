@@ -1,5 +1,10 @@
 {
     "title": "Curely",
+    "chooseLanguage": "Choose The Language",
+    "chooseLanguageSubTitle": "Select your preferred language below This helps us serve you better.",
+    "english": "English",
+    "arabic": "Arabic",
+    "confirm": "Confirm",
     "skip": "Skip",
     "getStarted": "Get Started",
     "welcome": "Welcome",

@@ -21,6 +21,8 @@ const double kHorizontalPadding = 24;
 const double kBottomPadding = 30;
 const kIsOnBoardingViewSeen = "kIsOnBoardingViewSeen";
 const kIsArabic = "kIsArabic";
+const kArabic = "ar";
+const kEnglish = "en";
 
 List<OnBoardingModel> onBoardingPages(context) {
   return [

@@ -41,7 +41,7 @@ class Curely extends StatelessWidget {
           },
         ),
       ),
-      locale: isArabic ? Locale("ar") : Locale("en"),
+      locale: isArabic ? Locale(kArabic) : Locale(kEnglish),
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

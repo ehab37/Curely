@@ -1,5 +1,10 @@
 {
     "title": "كيورلى",
+    "chooseLanguage": "اختر اللغة",
+    "chooseLanguageSubTitle": "اختر لغتك المفضلة أدناه هذا يساعدنا في خدمتك بشكل أفضل.",
+    "english": "اللغة الإنجليزية",
+    "arabic": "اللغة العربية",
+    "confirm": "تاكيد",
     "skip": "تخطي",
     "getStarted": "ابدأ",
     "welcome": "مرحبا بك",

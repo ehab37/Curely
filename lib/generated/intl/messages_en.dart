@@ -25,11 +25,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
     ),
+    "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+    "chooseLanguage": MessageLookupByLibrary.simpleMessage(
+      "Choose The Language",
+    ),
+    "chooseLanguageSubTitle": MessageLookupByLibrary.simpleMessage(
+      "Select your preferred language below This helps us serve you better.",
+    ),
+    "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
     ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage(
       "Enter your email to receive a password reset link.",
     ),

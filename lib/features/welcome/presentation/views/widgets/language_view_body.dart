@@ -18,7 +18,7 @@ class LanguageViewBody extends StatefulWidget {
 }
 
 class _LanguageViewBodyState extends State<LanguageViewBody> {
-  bool isArabic = Intl.getCurrentLocale() == 'ar';
+  bool isArabic = Intl.getCurrentLocale() == kArabic;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +42,11 @@ class _LanguageViewBodyState extends State<LanguageViewBody> {
               ),
             ),
             SizedBox(height: 30),
-            Text("Choose The Language", style: Styles.styleBlue25),
-            Text(
-              "Select your preferred language below This helps us serve you better.",
-              style: Styles.style18,
-            ),
+            Text(S.of(context).chooseLanguage, style: Styles.styleBlue25),
+            Text(S.of(context).chooseLanguageSubTitle, style: Styles.style18),
             Spacer(),
             CustomAnimatedContainer(
-              languageName: "English",
+              languageName: S.of(context).english,
               languageFlag: AssetsData.kUK,
               onTab: isArabic
                   ? () {
@@ -72,7 +69,7 @@ class _LanguageViewBodyState extends State<LanguageViewBody> {
             ),
             Spacer(),
             CustomAnimatedContainer(
-              languageName: "Arabic",
+              languageName: S.of(context).arabic,
               languageFlag: AssetsData.kEgypt,
               onTab: isArabic
                   ? null
@@ -98,14 +95,15 @@ class _LanguageViewBodyState extends State<LanguageViewBody> {
             Center(
               child: CustomButton(
                 onPressed: () {
+                  S.load(Locale(isArabic ? kArabic : kEnglish));
+                  CacheHelper.putBoolData(key: kIsArabic, value: isArabic);
+                  setState(() {});
                   GoRouter.of(
                     context,
                   ).pushReplacement(AppRouter.kOnBoardingView);
-                  S.load(Locale(isArabic ? "ar" : "en"));
-                  CacheHelper.putBoolData(key: kIsArabic, value: isArabic);
                 },
                 backgroundColor: kDarkBlueColor,
-                child: Text("Confirm", style: Styles.style20),
+                child: Text(S.of(context).confirm, style: Styles.style20),
               ),
             ),
             SizedBox(height: kBottomPadding - 12),
