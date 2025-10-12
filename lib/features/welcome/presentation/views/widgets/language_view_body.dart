@@ -1,7 +1,7 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/assets.dart';
-import 'package:curely/core/utils/cache_helper.dart';
+import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/custom_animated_container.dart';

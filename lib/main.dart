@@ -1,12 +1,12 @@
+import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/app_router.dart';
-import 'package:curely/core/utils/cache_helper.dart';
+import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_transitions/go_transitions.dart';
-
 import 'constants.dart';
 import 'firebase_options.dart';
 
@@ -23,6 +23,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  setupGetIt();
   runApp(const Curely());
 }
 
