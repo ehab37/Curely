@@ -1,5 +1,7 @@
 import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
+import 'package:curely/features/auth/presentation/views/terms_and_conditions_view.dart';
+import 'package:curely/features/home/presentation/views/home_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
 import 'package:curely/features/welcome/presentation/views/splash_view.dart';
@@ -14,6 +16,8 @@ abstract class AppRouter {
   static const kWelcomeView = "/welcomeView";
   static const kLoginView = "/loginView";
   static const kRegisterView = "/registerView";
+  static const kTermsAndConditionsView = "/termsAndConditionsView";
+  static const kHomeView = "/homeView";
 
   static final router = GoRouter(
     observers: [GoTransition.observer],
@@ -41,6 +45,14 @@ abstract class AppRouter {
       GoRoute(
         path: kRegisterView,
         builder: (context, state) => const RegisterView(),
+      ),
+      GoRoute(
+        path: kTermsAndConditionsView,
+        builder: (context, state) => const TermsAndConditionsView(),
+      ),
+      GoRoute(
+        path: kHomeView,
+        builder: (context, state) => const HomeView (),
       ),
     ],
   );

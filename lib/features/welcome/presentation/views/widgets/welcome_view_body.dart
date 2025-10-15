@@ -47,37 +47,40 @@ class WelcomeViewBody extends StatelessWidget {
               topLeft: Radius.circular(80),
               topRight: Radius.circular(80),
             ),
-            child: Column(
-              children: [
-                const SizedBox(height: 80),
-                CustomButton(
-                  backgroundColor: kDarkBlueColor,
-                  child: Text(
-                    S.of(context).login,
-                    style: Styles.style20,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+              child: Column(
+                children: [
+                  const SizedBox(height: 80),
+                  CustomButton(
+                    backgroundColor: kDarkBlueColor,
+                    child: Text(
+                      S.of(context).login,
+                      style: Styles.style20,
+                    ),
+                    onPressed: () {
+                      GoRouter.of(
+                        context,
+                      ).pushReplacement(AppRouter.kLoginView);
+                    },
                   ),
-                  onPressed: () {
-                    GoRouter.of(
-                      context,
-                    ).pushReplacement(AppRouter.kLoginView);
-                  },
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                CustomButton(
-                  backgroundColor: kDarkBlueColor,
-                  child: Text(
-                    S.of(context).register,
-                    style: Styles.style20,
+                  const SizedBox(
+                    height: 25,
                   ),
-                  onPressed: () {
-                    GoRouter.of(
-                      context,
-                    ).pushReplacement(AppRouter.kRegisterView);
-                  },
-                ),
-              ],
+                  CustomButton(
+                    backgroundColor: kDarkBlueColor,
+                    child: Text(
+                      S.of(context).register,
+                      style: Styles.style20,
+                    ),
+                    onPressed: () {
+                      GoRouter.of(
+                        context,
+                      ).pushReplacement(AppRouter.kRegisterView);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],

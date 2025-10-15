@@ -70,16 +70,19 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
-            child: CustomButton(
-              onPressed: () {
-                GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
-                CacheHelper.putBoolData(
-                  key: kIsOnBoardingViewSeen,
-                  value: true,
-                );
-              },
-              backgroundColor: kDarkBlueColor,
-              child: Text(S.of(context).getStarted, style: Styles.style20),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+              child: CustomButton(
+                onPressed: () {
+                  GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
+                  CacheHelper.putBoolData(
+                    key: kIsOnBoardingViewSeen,
+                    value: true,
+                  );
+                },
+                backgroundColor: kDarkBlueColor,
+                child: Text(S.of(context).getStarted, style: Styles.style20),
+              ),
             ),
           ),
           SizedBox(height: kBottomPadding),

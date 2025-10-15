@@ -36,6 +36,9 @@ class AuthExceptionHandler extends Failure {
         case 'invalid-email':
           errorDescription = 'The email address is not valid.';
           break;
+          case 'network-request-failed':
+          errorDescription = 'There is no internet connection.';
+          break;
         default:
           errorDescription = 'Authentication failed. Please try again later.';
           break;

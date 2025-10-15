@@ -56,10 +56,17 @@ class _SplashViewBodyState extends State<SplashViewBody>
     final bool isOnBoardingViewSeen = CacheHelper.getData(
       key: kIsOnBoardingViewSeen,
     );
+    final bool isUserLogin = CacheHelper.getData(key: kIsUserLogin);
     Future.delayed(const Duration(seconds: 3), () {
       mounted
           ? isOnBoardingViewSeen
-                ? GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView)
+                ? isUserLogin
+                      ? GoRouter.of(
+                          context,
+                        ).pushReplacement(AppRouter.kHomeView)
+                      : GoRouter.of(
+                          context,
+                        ).pushReplacement(AppRouter.kWelcomeView)
                 : GoRouter.of(
                     context,
                   ).pushReplacement(AppRouter.kOnBoardingView)

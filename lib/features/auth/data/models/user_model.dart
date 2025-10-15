@@ -5,7 +5,6 @@ class UserModel extends UserEntity {
   UserModel({
     required super.name,
     required super.email,
-    required super.number,
     required super.uId,
   });
 
@@ -13,7 +12,6 @@ class UserModel extends UserEntity {
     return UserModel(
       name: user.displayName ?? "",
       email: user.email ?? "",
-      number: user.phoneNumber ?? "",
       uId: user.uid,
     );
   }

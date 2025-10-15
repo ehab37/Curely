@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/features/auth/data/models/user_model.dart';
@@ -16,8 +18,6 @@ class AuthRepoImpl implements AuthRepo {
     required String name,
     required String email,
     required String password,
-    required String number,
-    required String nationalId,
   }) async {
     try {
       User user = await firebaseAuthServices.createAccount(
@@ -28,6 +28,7 @@ class AuthRepoImpl implements AuthRepo {
     } on FirebaseAuthException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
     } catch (e) {
+      log(e.toString());
       throw Left(OtherErrors.fromOtherErrors(e));
     }
   }

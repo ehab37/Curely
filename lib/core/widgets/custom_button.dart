@@ -1,4 +1,3 @@
-import 'package:curely/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -20,11 +19,11 @@ class CustomButton extends StatelessWidget {
       style: ButtonStyle(
         side: WidgetStatePropertyAll(
           BorderSide(
-            color: kDarkBlueColor,
+            color: backgroundColor,
             width: 2,
           ),
         ),
-        fixedSize: WidgetStatePropertyAll(Size(MediaQuery.of(context).size.width-60, 50)),
+        fixedSize: WidgetStatePropertyAll(Size(double.maxFinite, 50)),
         backgroundColor: WidgetStatePropertyAll(backgroundColor),
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(

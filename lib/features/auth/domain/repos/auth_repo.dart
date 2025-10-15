@@ -7,7 +7,5 @@ abstract class AuthRepo {
     required String name,
     required String email,
     required String password,
-    required String number,
-    required String nationalId,
   });
 }

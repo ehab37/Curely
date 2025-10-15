@@ -25,7 +25,7 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle style20 = TextStyle(
+  static const TextStyle style20 = TextStyle(
     color: Colors.white,
     fontSize: 20,
     fontWeight: FontWeight.bold,
@@ -35,9 +35,29 @@ abstract class Styles {
 
   static TextStyle style18 = TextStyle(
     color: kNavyColor.withAlpha(160),
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     wordSpacing: .1,
     height: 0,
+  );
+
+  static const TextStyle style16 = TextStyle(
+    color: kNavyColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle styleUnderline16 = TextStyle(
+    color: kNavyColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    decoration:TextDecoration.underline,
+  );
+
+  static const TextStyle style15 = TextStyle(
+    color: kNavyColor,
+    fontSize: 15,
+    wordSpacing: .1,
+    height: 0,
+    fontWeight: FontWeight.w400,
   );
 }
