@@ -5,12 +5,20 @@ class FirebaseAuthServices {
     required String email,
     required String password,
   }) async {
-    final credential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    final credential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+    // FirebaseAuth.instance.currentUser!.sendEmailVerification();
+    return credential.user!;
+  }
+
+  Future<User> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
-    // FirebaseAuth.instance.currentUser!.sendEmailVerification();
     return credential.user!;
   }
 }

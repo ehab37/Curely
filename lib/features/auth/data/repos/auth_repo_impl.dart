@@ -32,4 +32,23 @@ class AuthRepoImpl implements AuthRepo {
       throw Left(OtherErrors.fromOtherErrors(e));
     }
   }
+
+  @override
+  Future<Either<AuthExceptionHandler, UserEntity>> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      User user = await firebaseAuthServices.loginUser(
+        email: email,
+        password: password,
+      );
+      return Right(UserModel.fromFirebaseUser(user));
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } catch (e) {
+      log(e.toString());
+      throw Left(OtherErrors.fromOtherErrors(e));
+    }
+  }
 }
