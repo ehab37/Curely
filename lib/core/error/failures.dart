@@ -28,19 +28,22 @@ class AuthExceptionHandler extends Failure {
           errorDescription = 'User not found.';
           break;
         case 'wrong-password':
-          errorDescription = 'Wrong password.';
+          errorDescription = 'Invalid email or password.';
           break;
         case 'weak-password':
           errorDescription = 'The password provided is too weak.';
           break;
         case 'invalid-email':
-          errorDescription = 'The email address is not valid.';
+          errorDescription = 'Invalid email or password.';
           break;
-          case 'network-request-failed':
+        case 'invalid-credential':
+          errorDescription = 'Invalid email or password.';
+          break;
+        case 'network-request-failed':
           errorDescription = 'There is no internet connection.';
           break;
         default:
-          errorDescription = 'Authentication failed. Please try again later.';
+          errorDescription = e.code.toString();
           break;
       }
     } else {

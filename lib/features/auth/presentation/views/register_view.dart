@@ -1,11 +1,15 @@
+import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/snack_bar_function.dart';
+import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/get_it.dart';
+import 'package:curely/core/utils/app_router.dart';
+import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:curely/features/auth/presentation/views/widgets/register_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -20,19 +24,20 @@ class RegisterView extends StatelessWidget {
             return BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSuccess) {
-                  customSnackBar(context, "Success");
+                  GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+                  CacheHelper.putBoolData(key: kIsUserLogin, value: true);
                 } else if (state is RegisterFailure) {
                   customSnackBar(context, state.errMessage);
                 }
               },
               builder: (context, state) {
-                return ModalProgressHUD(
-                  inAsyncCall: state is RegisterLoading ? true : false,
+                return CustomProgressHud(
+                  isLoading: state is RegisterLoading ? true : false,
                   child: RegisterViewBody(),
                 );
               },
             );
-          }
+          },
         ),
       ),
     );

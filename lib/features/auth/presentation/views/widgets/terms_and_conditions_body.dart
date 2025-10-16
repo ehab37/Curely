@@ -72,7 +72,7 @@ class TermsAndConditionsBody extends StatelessWidget {
                   ),
                   child: Text(
                     'I Accept and Continue',
-                    style: Styles.style20,
+                    style: Styles.styleWhite20,
                   ),
                 ),
               );

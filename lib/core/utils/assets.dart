@@ -8,4 +8,5 @@ class AssetsData {
   static const kEgypt = 'assets/images/egypt.png';
   static const kUK = 'assets/images/united_kingdom.png';
   static const kCheck = 'assets/images/Check.svg';
+  static const kGoogleLogo = 'assets/images/google_logo.png';
 }

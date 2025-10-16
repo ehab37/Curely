@@ -56,7 +56,7 @@ class WelcomeViewBody extends StatelessWidget {
                     backgroundColor: kDarkBlueColor,
                     child: Text(
                       S.of(context).login,
-                      style: Styles.style20,
+                      style: Styles.styleWhite20,
                     ),
                     onPressed: () {
                       GoRouter.of(
@@ -71,7 +71,7 @@ class WelcomeViewBody extends StatelessWidget {
                     backgroundColor: kDarkBlueColor,
                     child: Text(
                       S.of(context).register,
-                      style: Styles.style20,
+                      style: Styles.styleWhite20,
                     ),
                     onPressed: () {
                       GoRouter.of(

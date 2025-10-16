@@ -1,6 +1,6 @@
 import 'package:curely/constants.dart';
+import 'package:curely/core/helper_functions/snack_bar_function.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
-import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
@@ -43,12 +43,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Form(
-        autovalidateMode: autoValidateMode,
-        key: formKey,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(kHorizontalPadding),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(kHorizontalPadding),
+          child: Form(
+            autovalidateMode: autoValidateMode,
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -121,18 +121,23 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 const SizedBox(height: 25),
                 CustomButton(
                   backgroundColor: kDarkBlueColor,
-                  child: Text("Register", style: Styles.style20),
+                  child: Text("Register", style: Styles.styleWhite20),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      context.read<RegisterCubit>().createAccount(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        name: nameController.text,
-                      );
-                      FocusScope.of(context).unfocus();
-                      GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
-                      CacheHelper.putBoolData(key: kIsUserLogin, value: true);
+                      if (isAgreeTerms) {
+                        formKey.currentState!.save();
+                        context.read<RegisterCubit>().createAccount(
+                          email: emailController.text,
+                          password: passwordController.text,
+                          name: nameController.text,
+                        );
+                        FocusScope.of(context).unfocus();
+                      } else {
+                        customSnackBar(
+                          context,
+                          "Terms and Conditions must be accepted!",
+                        );
+                      }
                     } else {
                       autoValidateMode = AutovalidateMode.always;
                       setState(() {});
@@ -143,8 +148,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 Text.rich(
                   TextSpan(
                     children: [
-                      const TextSpan(text: "Already have account?", style: Styles.style15),
-                      const TextSpan(text: " ", style: Styles.style15),
+                      const TextSpan(
+                        text: "Already have account?",
+                        style: Styles.style15,
+                      ),
+                      const TextSpan(text: "  ", style: Styles.style15),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {

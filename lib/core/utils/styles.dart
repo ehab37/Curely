@@ -25,8 +25,15 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
   );
 
-  static const TextStyle style20 = TextStyle(
+  static const TextStyle styleWhite20 = TextStyle(
     color: Colors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    wordSpacing: .1,
+    height: 0,
+  );
+  static const TextStyle styleBlue20 = TextStyle(
+    color: kNavyColor,
     fontSize: 20,
     fontWeight: FontWeight.bold,
     wordSpacing: .1,

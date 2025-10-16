@@ -107,7 +107,7 @@ class LanguageViewBody extends StatelessWidget {
                       ).pushReplacement(AppRouter.kOnBoardingView);
                     },
                     backgroundColor: kDarkBlueColor,
-                    child: Text(S.of(context).confirm, style: Styles.style20),
+                    child: Text(S.of(context).confirm, style: Styles.styleWhite20),
                   ),
                 ),
                 SizedBox(height: kBottomPadding - 12),

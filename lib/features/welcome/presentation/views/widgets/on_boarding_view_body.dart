@@ -81,7 +81,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   );
                 },
                 backgroundColor: kDarkBlueColor,
-                child: Text(S.of(context).getStarted, style: Styles.style20),
+                child: Text(S.of(context).getStarted, style: Styles.styleWhite20),
               ),
             ),
           ),
