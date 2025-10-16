@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1032297134307-43fdc2nj7df5kb6456328r9iouqj0m7r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1032297134307-43fdc2nj7df5kb6456328r9iouqj0m7r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBWGZ60Nd2zsXQ3p-pchbNc9qxxYIKOC-0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1032297134307</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.curely</string>
+	<key>PROJECT_ID</key>
+	<string>curely-f7f4e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>curely-f7f4e.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1032297134307:ios:06b67c5b7574134ad56dd6</string>
+</dict>
+</plist>

@@ -50,5 +50,18 @@
     <string>en</string>
     <string>ar</string>
 	</array>
+	<key>GIDClientID</key>
+    <string>1032297134307-43fdc2nj7df5kb6456328r9iouqj0m7r.apps.googleusercontent.com</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.1032297134307-43fdc2nj7df5kb6456328r9iouqj0m7r</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

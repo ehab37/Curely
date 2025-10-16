@@ -12,7 +12,20 @@
           "package_name": "com.example.curely"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1032297134307-30c2qf1u7luk9dlb25cip7273u04lsmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.curely",
+            "certificate_hash": "7302f54c3b7cca476f76b4f402683c540a086a7e"
+          }
+        },
+        {
+          "client_id": "1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyArexVtC2uu5spppH8eGZqXY_GirAQ5Ic8"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1032297134307-43fdc2nj7df5kb6456328r9iouqj0m7r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.curely"
+              }
+            }
+          ]
         }
       }
     }

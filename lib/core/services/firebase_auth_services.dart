@@ -1,12 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthServices {
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
+  static bool isInitialize = false;
+
   Future<User> createAccount({
     required String email,
     required String password,
   }) async {
-    final credential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
+    final credential = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
     // FirebaseAuth.instance.currentUser!.sendEmailVerification();
     return credential.user!;
   }
@@ -15,10 +22,80 @@ class FirebaseAuthServices {
     required String email,
     required String password,
   }) async {
-    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    final credential = await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
     return credential.user!;
   }
+
+  static Future<void> initSignIn() async {
+    if (!isInitialize) {
+      await _googleSignIn.initialize(
+        serverClientId:
+            '1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com',
+      );
+    }
+    isInitialize = true;
+  }
+
+  Future<User> loginWithGoogle() async {
+    initSignIn();
+    final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
+    final idToken = googleUser.authentication.idToken;
+    final authorizationClient = googleUser.authorizationClient;
+    GoogleSignInClientAuthorization? authorization = await authorizationClient
+        .authorizationForScopes(['email', 'profile']);
+    final accessToken = authorization?.accessToken;
+    if (accessToken == null) {
+      final authorization2 = await authorizationClient.authorizationForScopes([
+        'email',
+        'profile',
+      ]);
+      if (authorization2?.accessToken == null) {
+        throw FirebaseAuthException(code: "error", message: "error");
+      }
+      authorization = authorization2;
+    }
+    final credential = GoogleAuthProvider.credential(
+      accessToken: accessToken,
+      idToken: idToken,
+    );
+    final UserCredential userCredential = await _auth.signInWithCredential(
+      credential,
+    );
+    final User? user = userCredential.user;
+    // if (user != null) {
+    //   final userDoc = FirebaseFirestore.instance
+    //       .collection('users')
+    //       .doc(user.uid);
+    //   final docSnapshot = await userDoc.get();
+    //   if (!docSnapshot.exists) {
+    //     await userDoc.set({
+    //       'uid': user.uid,
+    //       'name': user.displayName ?? '',
+    //       'email': user.email ?? '',
+    //       'photoURL': user.photoURL ?? '',
+    //       'provider': 'google',
+    //       'createdAt': FieldValue.serverTimestamp(),
+    //     });
+    //   }
+    // }
+    return user!;
+  }
+
+  //
+  //   static Future<void> signOut() async {
+  //     try {
+  //       await _googleSignIn.signOut();
+  //       await _auth.signOut();
+  //     } catch (e) {
+  //       print('Error signing out: $e');
+  //       throw e;
+  //     }
+  //   }
+  //
+  //   static User? getCurrentUser() {
+  //     return _auth.currentUser;
+  //   }
 }

@@ -115,11 +115,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       ),
                     ],
                   ),
-                  onPressed: () async {
-                    // BlocProvider.of<SignInCubit>(
-                    //   context,
-                    // ).signInWithGoogle(context);
-                    // FocusScope.of(context).unfocus();
+                  onPressed: () {
+                    context.read<LoginCubit>().loginUserWithGoogle();
+                    FocusScope.of(context).unfocus();
                   },
                 ),
                 const SizedBox(height: 20),
