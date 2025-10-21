@@ -1,5 +1,5 @@
 import 'package:curely/constants.dart';
-import 'package:curely/core/helper_functions/snack_bar_function.dart';
+import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
@@ -133,7 +133,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         );
                         FocusScope.of(context).unfocus();
                       } else {
-                        customSnackBar(
+                        InfoBox().customSnackBar(
                           context,
                           "Terms and Conditions must be accepted!",
                         );
