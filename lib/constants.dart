@@ -24,6 +24,7 @@ const kIsUserLogin = "kIsUserLogin";
 const kIsArabic = "kIsArabic";
 const kArabic = "ar";
 const kEnglish = "en";
+const users = "users";
 
 List<OnBoardingModel> onBoardingPages(context) {
   return [

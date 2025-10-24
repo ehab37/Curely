@@ -26,7 +26,7 @@ class LoginView extends StatelessWidget {
               listener: (context, state) {
                 if (state is LoginSuccess) {
                   GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
-                  // CacheHelper.putBoolData(key: kIsUserLogin, value: true);
+                  CacheHelper.putBoolData(key: kIsUserLogin, value: true);
                 } else if (state is LoginFailure) {
                   InfoBox().customSnackBar(context, state.errMessage);
                 }

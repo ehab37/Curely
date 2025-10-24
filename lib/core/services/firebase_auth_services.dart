@@ -65,37 +65,19 @@ class FirebaseAuthServices {
       credential,
     );
     final User? user = userCredential.user;
-    // if (user != null) {
-    //   final userDoc = FirebaseFirestore.instance
-    //       .collection('users')
-    //       .doc(user.uid);
-    //   final docSnapshot = await userDoc.get();
-    //   if (!docSnapshot.exists) {
-    //     await userDoc.set({
-    //       'uid': user.uid,
-    //       'name': user.displayName ?? '',
-    //       'email': user.email ?? '',
-    //       'photoURL': user.photoURL ?? '',
-    //       'provider': 'google',
-    //       'createdAt': FieldValue.serverTimestamp(),
-    //     });
-    //   }
-    // }
     return user!;
   }
 
-  //
-  //   static Future<void> signOut() async {
-  //     try {
-  //       await _googleSignIn.signOut();
-  //       await _auth.signOut();
-  //     } catch (e) {
-  //       print('Error signing out: $e');
-  //       throw e;
-  //     }
-  //   }
-  //
-  //   static User? getCurrentUser() {
-  //     return _auth.currentUser;
-  //   }
+  static User? getCurrentUser() {
+    return _auth.currentUser;
+  }
+
+  Future<void> logoutUser() async {
+    await _googleSignIn.signOut();
+    await _auth.signOut();
+  }
+
+  Future<void> deleteUser() async {
+    await _auth.currentUser!.delete();
+  }
 }
