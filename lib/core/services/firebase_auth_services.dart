@@ -1,3 +1,4 @@
+import 'package:curely/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -32,8 +33,7 @@ class FirebaseAuthServices {
   static Future<void> initSignIn() async {
     if (!isInitialize) {
       await _googleSignIn.initialize(
-        serverClientId:
-            '1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com',
+        serverClientId: DatabaseKeys.serverClientId,
       );
     }
     isInitialize = true;
@@ -45,15 +45,18 @@ class FirebaseAuthServices {
     final idToken = googleUser.authentication.idToken;
     final authorizationClient = googleUser.authorizationClient;
     GoogleSignInClientAuthorization? authorization = await authorizationClient
-        .authorizationForScopes(['email', 'profile']);
+        .authorizationForScopes([DatabaseKeys.email, DatabaseKeys.profile]);
     final accessToken = authorization?.accessToken;
     if (accessToken == null) {
       final authorization2 = await authorizationClient.authorizationForScopes([
-        'email',
-        'profile',
+        DatabaseKeys.email,
+        DatabaseKeys.profile,
       ]);
       if (authorization2?.accessToken == null) {
-        throw FirebaseAuthException(code: "error", message: "error");
+        throw FirebaseAuthException(
+          code: DatabaseKeys.error,
+          message: DatabaseKeys.error,
+        );
       }
       authorization = authorization2;
     }
@@ -67,9 +70,9 @@ class FirebaseAuthServices {
     final User? user = userCredential.user;
     return user!;
   }
-  Future<void> resetPassword({required String email}) async{
-    await _auth
-        .sendPasswordResetEmail(email: email);
+
+  Future<void> resetPassword({required String email}) async {
+    await _auth.sendPasswordResetEmail(email: email);
   }
 
   static User? getCurrentUser() {

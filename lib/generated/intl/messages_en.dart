@@ -22,10 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "TermsAndConditionsMustBeAccepted": MessageLookupByLibrary.simpleMessage(
+      "Terms and Conditions must be accepted!",
+    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
     ),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+    "authenticationFailed": MessageLookupByLibrary.simpleMessage(
+      "Authentication failed. Please try again later.",
+    ),
     "chooseLanguage": MessageLookupByLibrary.simpleMessage(
       "Choose The Language",
     ),
@@ -34,19 +40,61 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "confirmPasswordIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Confirm password is required.",
+    ),
+    "confirmYourPassword": MessageLookupByLibrary.simpleMessage(
+      "Confirm your password",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
     ),
-    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "email": MessageLookupByLibrary.simpleMessage("E-mail"),
+    "emailIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Email is required.",
+    ),
     "english": MessageLookupByLibrary.simpleMessage("English"),
-    "enterYourEmail": MessageLookupByLibrary.simpleMessage(
-      "Enter your email to receive a password reset link.",
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "enterYourEmailToReceiveAPasswordResetLink":
+        MessageLookupByLibrary.simpleMessage(
+          "Enter your email to receive a password reset link.",
+        ),
+    "enterYourName": MessageLookupByLibrary.simpleMessage("Enter your name"),
+    "enterYourPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter your password",
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot Password?"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "iAcceptAndContinue": MessageLookupByLibrary.simpleMessage(
+      "I Accept and Continue",
+    ),
+    "iAgreeToThe": MessageLookupByLibrary.simpleMessage("I agree to the "),
+    "iHaveReadAndAgreeToTheTermsAndConditions":
+        MessageLookupByLibrary.simpleMessage(
+          "I have read and agree to the Terms and Conditions.",
+        ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "Enter a valid email address.",
+    ),
+    "invalidEmailOrPassword": MessageLookupByLibrary.simpleMessage(
+      "Invalid email or password.",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "loginWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "Login with Google",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
+    "nameCanOnlyContainLettersOrSpaces": MessageLookupByLibrary.simpleMessage(
+      "Name can only contain letters or spaces.",
+    ),
+    "nameIsRequired": MessageLookupByLibrary.simpleMessage("Name is required."),
+    "nameTooShort": MessageLookupByLibrary.simpleMessage(
+      "Name must be at least 2 characters long.",
+    ),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "There is no internet connection.",
+    ),
     "onBoardingSubTitle1": MessageLookupByLibrary.simpleMessage(
       "Easily manage and track your medications in one place.",
     ),
@@ -67,13 +115,46 @@ class MessageLookup extends MessageLookupByLibrary {
       "Organize your medicines",
     ),
     "onBoardingTitle4": MessageLookupByLibrary.simpleMessage("Stay healthy"),
+    "or": MessageLookupByLibrary.simpleMessage("Or"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordIsRequired": MessageLookupByLibrary.simpleMessage(
+      "Password is required.",
+    ),
+    "passwordLowercaseLetter": MessageLookupByLibrary.simpleMessage(
+      "Lowercase letter",
+    ),
+    "passwordNumber": MessageLookupByLibrary.simpleMessage("Number"),
+    "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+      "Special character",
+    ),
+    "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 8 characters and include:",
+    ),
+    "passwordUppercaseLetter": MessageLookupByLibrary.simpleMessage(
+      "Uppercase letter",
+    ),
+    "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
+      "Passwords do not match.",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
     "sendResetLink": MessageLookupByLibrary.simpleMessage("Send Reset Link"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "Terms and Conditions",
+    ),
+    "thisEmailIsAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+      "This email is already in use.",
+    ),
     "title": MessageLookupByLibrary.simpleMessage("Curely"),
     "to": MessageLookupByLibrary.simpleMessage("to"),
+    "tooManyRequests": MessageLookupByLibrary.simpleMessage(
+      "Too many requests. Please try again later.",
+    ),
+    "userNotFound": MessageLookupByLibrary.simpleMessage("User not found."),
+    "weakPassword": MessageLookupByLibrary.simpleMessage(
+      "The password provided is too weak.",
+    ),
     "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
   };
 }

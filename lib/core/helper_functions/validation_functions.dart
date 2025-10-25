@@ -1,21 +1,24 @@
-String? emailValidator(String? value) {
+import 'package:curely/generated/l10n.dart';
+import 'package:flutter/material.dart';
+
+String? emailValidator(String? value, BuildContext context) {
   const pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
   final regex = RegExp(pattern);
 
   if (value == null || value.isEmpty) {
-    return 'Email is required.';
+    return S.of(context).emailIsRequired;
   }
 
   if (!regex.hasMatch(value)) {
-    return 'Enter a valid email address.';
+    return S.of(context).invalidEmail;
   }
 
   return null;
 }
 
-String? passwordValidator(String? value) {
+String? passwordValidator(String? value, BuildContext context) {
   if (value == null || value.isEmpty) {
-    return 'Password is required.';
+    return S.of(context).passwordIsRequired;
   }
   const minLength = 8;
   const regexPattern =
@@ -23,41 +26,50 @@ String? passwordValidator(String? value) {
   final regex = RegExp(regexPattern);
 
   if (value.length < minLength || !regex.hasMatch(value)) {
-    return 'Password must be at least 8 characters and include: \n'
-        '• Uppercase letter \n'
-        '• Lowercase letter \n'
-        '• Number \n'
-        '• Special character (@\$!%*?&)';
+    return '${S.of(context).passwordTooShort}'
+        '\n'
+        '• ${S.of(context).passwordUppercaseLetter} '
+        '\n'
+        '• ${S.of(context).passwordLowercaseLetter} '
+        '\n'
+        '• ${S.of(context).passwordNumber}'
+        ' \n'
+        '• ${S.of(context).passwordSpecialCharacter}'
+        ' (@\$!%*?&)';
   }
   return null;
 }
-String? confirmPasswordValidator(String? value, String originalPassword) {
+
+String? confirmPasswordValidator(
+  String? value,
+  String originalPassword,
+  BuildContext context,
+) {
   if (value == null || value.isEmpty) {
-    return 'Confirm Password is required.';
+    return S.of(context).confirmPasswordIsRequired;
   }
 
   if (value != originalPassword) {
-    return 'Passwords do not match.';
+    return S.of(context).passwordsDoNotMatch;
   }
 
   return null;
 }
 
-String? nameValidator(String? value) {
+String? nameValidator(String? value, BuildContext context) {
   const pattern = r"^[a-zA-Z\s]{2,}$";
   final regex = RegExp(pattern);
-  const minLength = 2;
 
   if (value == null || value.isEmpty) {
-    return 'Name is required.';
+    return S.of(context).nameIsRequired;
   }
 
-  if (value.length < minLength) {
-    return 'Name must be at least $minLength characters long.';
+  if (value.length < 2) {
+    return S.of(context).nameTooShort;
   }
 
   if (!regex.hasMatch(value)) {
-    return 'Name can only contain letters or spaces.';
+    return S.of(context).nameCanOnlyContainLettersOrSpaces;
   }
 
   return null;

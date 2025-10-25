@@ -4,6 +4,7 @@ import 'package:curely/core/helper_functions/validation_functions.dart';
 import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/reset_password_cubit.dart';
+import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,9 +49,9 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                     key: formKey,
                     child: CustomTextFormField(
                       controller: emailController,
-                      label: "E-mail",
-                      hint: "Enter your email",
-                      validation: (value) => emailValidator(value),
+                      label: S.of(context).email,
+                      hint: S.of(context).enterYourEmail,
+                      validation: (value) => emailValidator(value, context),
                       keyboard: TextInputType.emailAddress,
                     ),
                   ),

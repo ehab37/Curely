@@ -22,8 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "TermsAndConditionsMustBeAccepted": MessageLookupByLibrary.simpleMessage(
+      "يجب قبول الشروط والأحكام!",
+    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage("لديك حساب؟"),
     "arabic": MessageLookupByLibrary.simpleMessage("اللغة العربية"),
+    "authenticationFailed": MessageLookupByLibrary.simpleMessage(
+      "فشل التحقق. يرجى المحاولة مرة أخرى لاحقًا.",
+    ),
     "chooseLanguage": MessageLookupByLibrary.simpleMessage("اختر اللغة"),
     "chooseLanguageSubTitle": MessageLookupByLibrary.simpleMessage(
       "اختر لغتك المفضلة أدناه هذا يساعدنا في خدمتك بشكل أفضل.",
@@ -32,17 +38,59 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
+    "confirmPasswordIsRequired": MessageLookupByLibrary.simpleMessage(
+      "تأكيد كلمة المرور مطلوب.",
+    ),
+    "confirmYourPassword": MessageLookupByLibrary.simpleMessage(
+      "أكد كلمة المرور الخاصة بك",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "emailIsRequired": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني مطلوب.",
+    ),
     "english": MessageLookupByLibrary.simpleMessage("اللغة الإنجليزية"),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage(
-      "ادخل البريد الالكتروني للحصول على رابط استعادة كلمة المرور.",
+      "ادخل البريد الالكتروني",
+    ),
+    "enterYourEmailToReceiveAPasswordResetLink":
+        MessageLookupByLibrary.simpleMessage(
+          "ادخل البريد الالكتروني للحصول على رابط استعادة كلمة المرور.",
+        ),
+    "enterYourName": MessageLookupByLibrary.simpleMessage("ادخل الاسم"),
+    "enterYourPassword": MessageLookupByLibrary.simpleMessage(
+      "ادخل كلمة المرور",
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+    "iAcceptAndContinue": MessageLookupByLibrary.simpleMessage("اوافق واستمر"),
+    "iAgreeToThe": MessageLookupByLibrary.simpleMessage("أوافق على "),
+    "iHaveReadAndAgreeToTheTermsAndConditions":
+        MessageLookupByLibrary.simpleMessage(
+          "لقد قرات ووافقت على الشروط والأحكام.",
+        ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "ادخل عنوان بريد إلكتروني صالح.",
+    ),
+    "invalidEmailOrPassword": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "loginWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الدخول باستخدام جوجل",
+    ),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+    "nameCanOnlyContainLettersOrSpaces": MessageLookupByLibrary.simpleMessage(
+      "يمكن أن يحتوي الاسم على أحرف أو مسافات فقط.",
+    ),
+    "nameIsRequired": MessageLookupByLibrary.simpleMessage("الاسم مطلوب."),
+    "nameTooShort": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يكون الاسم 2 أحرف على الأقل.",
+    ),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت.",
+    ),
     "onBoardingSubTitle1": MessageLookupByLibrary.simpleMessage(
       "قم بإدارة وتتبع أدويتك بسهولة في مكان واحد.",
     ),
@@ -61,7 +109,21 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "onBoardingTitle3": MessageLookupByLibrary.simpleMessage("نظم أدويتك"),
     "onBoardingTitle4": MessageLookupByLibrary.simpleMessage("حافظ على صحتك"),
+    "or": MessageLookupByLibrary.simpleMessage("أو"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+    "passwordIsRequired": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور مطلوبة.",
+    ),
+    "passwordLowercaseLetter": MessageLookupByLibrary.simpleMessage("حرف صغير"),
+    "passwordNumber": MessageLookupByLibrary.simpleMessage("رقم"),
+    "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage("حرف خاص"),
+    "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تكون كلمة المرور 8 أحرف على الأقل وتشمل:",
+    ),
+    "passwordUppercaseLetter": MessageLookupByLibrary.simpleMessage("حرف كبير"),
+    "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
+      "كلمات المرور لا تتطابق.",
+    ),
     "register": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "استعادة كلمة المرور",
@@ -70,8 +132,21 @@ class MessageLookup extends MessageLookupByLibrary {
       "ارسل رابط استعادة كلمة المرور",
     ),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "الشروط والأحكام",
+    ),
+    "thisEmailIsAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+      "هذا البريد الإلكتروني مستخدم بالفعل.",
+    ),
     "title": MessageLookupByLibrary.simpleMessage("كيورلى"),
-    "to": MessageLookupByLibrary.simpleMessage("إلى"),
+    "to": MessageLookupByLibrary.simpleMessage("في"),
+    "tooManyRequests": MessageLookupByLibrary.simpleMessage(
+      "طلبات كثيرة جدًا. يرجى المحاولة مرة أخرى لاحقًا.",
+    ),
+    "userNotFound": MessageLookupByLibrary.simpleMessage("المستخدم غير موجود."),
+    "weakPassword": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور المقدمة ضعيفة جدًا.",
+    ),
     "welcome": MessageLookupByLibrary.simpleMessage("مرحبا بك"),
   };
 }

@@ -1,3 +1,4 @@
+import 'package:curely/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Failure {
@@ -22,35 +23,35 @@ class AuthExceptionHandler extends Failure {
     if (e is FirebaseAuthException) {
       switch (e.code) {
         case 'email-already-in-use':
-          errorDescription = 'This email is already in use.';
+          errorDescription = S.current.thisEmailIsAlreadyInUse;
           break;
         case 'user-not-found':
-          errorDescription = 'User not found.';
+          errorDescription = S.current.userNotFound;
           break;
         case 'wrong-password':
-          errorDescription = 'Invalid email or password.';
+          errorDescription = S.current.invalidEmailOrPassword;
           break;
         case 'weak-password':
-          errorDescription = 'The password provided is too weak.';
+          errorDescription = S.current.weakPassword;
           break;
         case 'invalid-email':
-          errorDescription = 'Invalid email or password.';
+          errorDescription = S.current.invalidEmailOrPassword;
           break;
         case 'invalid-credential':
-          errorDescription = 'Invalid email or password.';
+          errorDescription = S.current.invalidEmailOrPassword;
           break;
         case 'network-request-failed':
-          errorDescription = 'There is no internet connection.';
+          errorDescription = S.current.noInternetConnection;
           break;
         case 'too-many-requests':
-          errorDescription = 'Too many requests. Please try again later.';
+          errorDescription = S.current.tooManyRequests;
           break;
         default:
           errorDescription = e.code.toString();
           break;
       }
     } else {
-      errorDescription = 'Authentication failed. Please try again later.';
+      errorDescription = S.current.authenticationFailed;
     }
     return AuthExceptionHandler(errorDescription);
   }

@@ -57,23 +57,23 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 CustomTextFormField(
                   controller: nameController,
                   label: S.of(context).name,
-                  hint: "Enter your name",
+                  hint: S.of(context).enterYourName,
                   keyboard: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
-                  validation: (value) => nameValidator(value),
+                  validation: (value) => nameValidator(value, context),
                 ),
                 CustomTextFormField(
                   controller: emailController,
-                  label: 'E-mail',
-                  hint: "Enter your email",
+                  label: S.of(context).email,
+                  hint: S.of(context).enterYourEmail,
                   keyboard: TextInputType.emailAddress,
-                  validation: (value) => emailValidator(value),
+                  validation: (value) => emailValidator(value, context),
                   prefixIcon: Icons.email_outlined,
                 ),
                 CustomTextFormField(
                   controller: passwordController,
-                  label: "Password",
-                  hint: "Enter your password",
+                  label: S.of(context).password,
+                  hint: S.of(context).enterYourPassword,
                   keyboard: TextInputType.visiblePassword,
                   isSecure: isSecure,
                   suffixIcon: isSecure
@@ -83,12 +83,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     isSecure = !isSecure;
                     setState(() {});
                   },
-                  validation: (value) => passwordValidator(value),
+                  validation: (value) => passwordValidator(value, context),
                 ),
                 CustomTextFormField(
                   controller: password2Controller,
-                  label: "Confirm password",
-                  hint: "Confirm your password",
+                  label: S.of(context).confirmPassword,
+                  hint: S.of(context).confirmYourPassword,
                   keyboard: TextInputType.visiblePassword,
                   isSecure: isSecure2,
                   suffixIcon: isSecure2
@@ -98,8 +98,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     isSecure2 = !isSecure2;
                     setState(() {});
                   },
-                  validation: (value) =>
-                      confirmPasswordValidator(value, passwordController.text),
+                  validation: (value) => confirmPasswordValidator(
+                    value,
+                    passwordController.text,
+                    context,
+                  ),
                 ),
                 TermsAndConditionsWidget(
                   onChanged: (value) {
@@ -121,7 +124,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 const SizedBox(height: 25),
                 CustomButton(
                   backgroundColor: kDarkBlueColor,
-                  child: Text("Register", style: Styles.styleWhite20),
+                  child: Text(
+                    S.of(context).register,
+                    style: Styles.styleWhite20,
+                  ),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       if (isAgreeTerms) {
@@ -135,7 +141,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       } else {
                         InfoBox().customSnackBar(
                           context,
-                          "Terms and Conditions must be accepted!",
+                          S.of(context).TermsAndConditionsMustBeAccepted,
                         );
                       }
                     } else {
@@ -148,8 +154,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 Text.rich(
                   TextSpan(
                     children: [
-                      const TextSpan(
-                        text: "Already have account?",
+                      TextSpan(
+                        text: S.of(context).alreadyHaveAccount,
                         style: Styles.style15,
                       ),
                       const TextSpan(text: "  ", style: Styles.style15),
@@ -160,7 +166,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                               context,
                             ).pushReplacement(AppRouter.kLoginView);
                           },
-                        text: "Login!",
+                        text: '${S.of(context).login}!',
                         style: Styles.styleUnderline16,
                       ),
                     ],

@@ -1,5 +1,6 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/utils/styles.dart';
+import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'custom_check_box.dart';
 
@@ -29,7 +30,7 @@ class TermsAndConditionsWidget extends StatelessWidget {
         Expanded(
           child: Text.rich(
             TextSpan(
-              text: 'I agree to the ',
+              text: S.of(context).iAgreeToThe,
               style: Styles.style15.copyWith(
                 color: kDarkGrayColor.withAlpha(160),
               ),
@@ -37,8 +38,8 @@ class TermsAndConditionsWidget extends StatelessWidget {
                 WidgetSpan(
                   child: GestureDetector(
                     onTap: onTermsPressed,
-                    child: const Text(
-                      'Terms and Conditions',
+                    child: Text(
+                      S.of(context).termsAndConditions,
                       style: Styles.styleUnderline16,
                     ),
                   ),

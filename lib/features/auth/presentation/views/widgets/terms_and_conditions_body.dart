@@ -1,5 +1,6 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/utils/styles.dart';
+import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'custom_check_box.dart';
@@ -23,9 +24,7 @@ class TermsAndConditionsBody extends StatelessWidget {
                 color: Colors.white,
               ),
               padding: const EdgeInsets.all(15.0),
-              child: const SingleChildScrollView(
-                child: TermsDetails(),
-              ),
+              child: const SingleChildScrollView(child: TermsDetails()),
             ),
           ),
           const SizedBox(height: 15),
@@ -43,7 +42,7 @@ class TermsAndConditionsBody extends StatelessWidget {
                   const SizedBox(width: 16),
                   Expanded(
                     child: Text(
-                      'I have read and agree to the Terms and Conditions.',
+                      S.of(context).iHaveReadAndAgreeToTheTermsAndConditions,
                       style: Styles.style16,
                     ),
                   ),
@@ -61,8 +60,8 @@ class TermsAndConditionsBody extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: accepted
                       ? () {
-                    GoRouter.of(context).pop(true);
-                  }
+                          GoRouter.of(context).pop(true);
+                        }
                       : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kNavyColor,
@@ -71,7 +70,7 @@ class TermsAndConditionsBody extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'I Accept and Continue',
+                    S.of(context).iAcceptAndContinue,
                     style: Styles.styleWhite20,
                   ),
                 ),

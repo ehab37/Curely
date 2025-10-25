@@ -6,6 +6,7 @@ import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
+import 'package:curely/generated/l10n.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,20 +45,20 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Login", style: Styles.style45),
+                Text(S.of(context).login, style: Styles.style45),
                 const SizedBox(height: 40),
                 CustomTextFormField(
                   controller: emailController,
-                  label: "E-mail",
-                  hint: "Enter your email",
-                  validation: (value) => emailValidator(value),
+                  label: S.of(context).email,
+                  hint: S.of(context).enterYourEmail,
+                  validation: (value) => emailValidator(value, context),
                   keyboard: TextInputType.emailAddress,
                 ),
                 CustomTextFormField(
-                  label: "Password",
-                  hint: "Enter your Password",
+                  label: S.of(context).password,
+                  hint: S.of(context).enterYourPassword,
                   controller: passwordController,
-                  validation: (value) => passwordValidator(value),
+                  validation: (value) => passwordValidator(value, context),
                   isSecure: isSecure,
                   suffixIcon: isSecure
                       ? Icons.visibility_off_outlined
@@ -74,7 +75,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       GoRouter.of(context).push(AppRouter.kResetPasswordView);
                     },
                     child: Text(
-                      'Forgot Password?',
+                      S.of(context).forgotPassword,
                       style: Styles.styleUnderline16,
                     ),
                   ),
@@ -82,7 +83,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 const SizedBox(height: 24),
                 CustomButton(
                   backgroundColor: kDarkBlueColor,
-                  child: const Text("Login", style: Styles.styleWhite20),
+                  child: Text(S.of(context).login, style: Styles.styleWhite20),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       context.read<LoginCubit>().loginUser(
@@ -99,7 +100,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 Row(
                   children: [
                     Expanded(child: Divider(color: kNavyColor)),
-                    const Text("  Or  ", style: Styles.styleBlue25),
+                    Text(" ${S.of(context).or} ", style: Styles.styleBlue25),
                     Expanded(child: Divider(color: kNavyColor)),
                   ],
                 ),
@@ -111,8 +112,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     children: [
                       Image.asset(AssetsData.kGoogleLogo, width: 25),
                       const SizedBox(width: 8),
-                      const Text(
-                        "Login with Google",
+                      Text(
+                        S.of(context).loginWithGoogle,
                         style: Styles.styleBlue20,
                       ),
                     ],
@@ -126,8 +127,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 Text.rich(
                   TextSpan(
                     children: [
-                      const TextSpan(
-                        text: "Don't have account?",
+                      TextSpan(
+                        text: S.of(context).dontHaveAccount,
                         style: Styles.style15,
                       ),
                       const TextSpan(text: "  ", style: Styles.style15),
@@ -138,7 +139,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                               context,
                             ).pushReplacement(AppRouter.kRegisterView);
                           },
-                        text: "Register!",
+                        text: S.of(context).register,
                         style: Styles.styleUnderline16,
                       ),
                     ],

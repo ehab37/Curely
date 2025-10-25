@@ -194,9 +194,69 @@ class S {
     );
   }
 
+  /// `Terms and Conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Terms and Conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I agree to the `
+  String get iAgreeToThe {
+    return Intl.message(
+      'I agree to the ',
+      name: 'iAgreeToThe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I Accept and Continue`
+  String get iAcceptAndContinue {
+    return Intl.message(
+      'I Accept and Continue',
+      name: 'iAcceptAndContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have read and agree to the Terms and Conditions.`
+  String get iHaveReadAndAgreeToTheTermsAndConditions {
+    return Intl.message(
+      'I have read and agree to the Terms and Conditions.',
+      name: 'iHaveReadAndAgreeToTheTermsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms and Conditions must be accepted!`
+  String get TermsAndConditionsMustBeAccepted {
+    return Intl.message(
+      'Terms and Conditions must be accepted!',
+      name: 'TermsAndConditionsMustBeAccepted',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
+
+  /// `Login with Google`
+  String get loginWithGoogle {
+    return Intl.message(
+      'Login with Google',
+      name: 'loginWithGoogle',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Register`
@@ -209,14 +269,169 @@ class S {
     return Intl.message('Name', name: 'name', desc: '', args: []);
   }
 
-  /// `Email`
+  /// `Enter your name`
+  String get enterYourName {
+    return Intl.message(
+      'Enter your name',
+      name: 'enterYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name is required.`
+  String get nameIsRequired {
+    return Intl.message(
+      'Name is required.',
+      name: 'nameIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name must be at least 2 characters long.`
+  String get nameTooShort {
+    return Intl.message(
+      'Name must be at least 2 characters long.',
+      name: 'nameTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name can only contain letters or spaces.`
+  String get nameCanOnlyContainLettersOrSpaces {
+    return Intl.message(
+      'Name can only contain letters or spaces.',
+      name: 'nameCanOnlyContainLettersOrSpaces',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E-mail`
   String get email {
-    return Intl.message('Email', name: 'email', desc: '', args: []);
+    return Intl.message('E-mail', name: 'email', desc: '', args: []);
+  }
+
+  /// `Enter your email`
+  String get enterYourEmail {
+    return Intl.message(
+      'Enter your email',
+      name: 'enterYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email to receive a password reset link.`
+  String get enterYourEmailToReceiveAPasswordResetLink {
+    return Intl.message(
+      'Enter your email to receive a password reset link.',
+      name: 'enterYourEmailToReceiveAPasswordResetLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is required.`
+  String get emailIsRequired {
+    return Intl.message(
+      'Email is required.',
+      name: 'emailIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid email address.`
+  String get invalidEmail {
+    return Intl.message(
+      'Enter a valid email address.',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This email is already in use.`
+  String get thisEmailIsAlreadyInUse {
+    return Intl.message(
+      'This email is already in use.',
+      name: 'thisEmailIsAlreadyInUse',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Password`
   String get password {
     return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Enter your password`
+  String get enterYourPassword {
+    return Intl.message(
+      'Enter your password',
+      name: 'enterYourPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required.`
+  String get passwordIsRequired {
+    return Intl.message(
+      'Password is required.',
+      name: 'passwordIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters and include:`
+  String get passwordTooShort {
+    return Intl.message(
+      'Password must be at least 8 characters and include:',
+      name: 'passwordTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uppercase letter`
+  String get passwordUppercaseLetter {
+    return Intl.message(
+      'Uppercase letter',
+      name: 'passwordUppercaseLetter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lowercase letter`
+  String get passwordLowercaseLetter {
+    return Intl.message(
+      'Lowercase letter',
+      name: 'passwordLowercaseLetter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number`
+  String get passwordNumber {
+    return Intl.message('Number', name: 'passwordNumber', desc: '', args: []);
+  }
+
+  /// `Special character`
+  String get passwordSpecialCharacter {
+    return Intl.message(
+      'Special character',
+      name: 'passwordSpecialCharacter',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Confirm Password`
@@ -229,21 +444,31 @@ class S {
     );
   }
 
-  /// `Already have an account?`
-  String get alreadyHaveAccount {
+  /// `Confirm your password`
+  String get confirmYourPassword {
     return Intl.message(
-      'Already have an account?',
-      name: 'alreadyHaveAccount',
+      'Confirm your password',
+      name: 'confirmYourPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Don't have an account?`
-  String get dontHaveAccount {
+  /// `Confirm password is required.`
+  String get confirmPasswordIsRequired {
     return Intl.message(
-      'Don\'t have an account?',
-      name: 'dontHaveAccount',
+      'Confirm password is required.',
+      name: 'confirmPasswordIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match.`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Passwords do not match.',
+      name: 'passwordsDoNotMatch',
       desc: '',
       args: [],
     );
@@ -279,14 +504,89 @@ class S {
     );
   }
 
-  /// `Enter your email to receive a password reset link.`
-  String get enterYourEmail {
+  /// `Already have an account?`
+  String get alreadyHaveAccount {
     return Intl.message(
-      'Enter your email to receive a password reset link.',
-      name: 'enterYourEmail',
+      'Already have an account?',
+      name: 'alreadyHaveAccount',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Don't have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found.`
+  String get userNotFound {
+    return Intl.message(
+      'User not found.',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email or password.`
+  String get invalidEmailOrPassword {
+    return Intl.message(
+      'Invalid email or password.',
+      name: 'invalidEmailOrPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password provided is too weak.`
+  String get weakPassword {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'weakPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no internet connection.`
+  String get noInternetConnection {
+    return Intl.message(
+      'There is no internet connection.',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Too many requests. Please try again later.`
+  String get tooManyRequests {
+    return Intl.message(
+      'Too many requests. Please try again later.',
+      name: 'tooManyRequests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Authentication failed. Please try again later.`
+  String get authenticationFailed {
+    return Intl.message(
+      'Authentication failed. Please try again later.',
+      name: 'authenticationFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or`
+  String get or {
+    return Intl.message('Or', name: 'or', desc: '', args: []);
   }
 
   /// `Home`

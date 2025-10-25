@@ -24,7 +24,17 @@ const kIsUserLogin = "kIsUserLogin";
 const kIsArabic = "kIsArabic";
 const kArabic = "ar";
 const kEnglish = "en";
-const users = "users";
+
+class DatabaseKeys {
+  static const String users = "users";
+  static const String name = "name";
+  static const String email = "email";
+  static const String profile = "profile";
+  static const String error = "error";
+  static const String uId = "uId";
+  static const String serverClientId =
+      "1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com";
+}
 
 List<OnBoardingModel> onBoardingPages(context) {
   return [
