@@ -3,18 +3,19 @@ import 'package:curely/features/auth/domain/entities/user_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AuthRepo {
-  Future<Either<AuthExceptionHandler, UserEntity>> createAccount({
+  Future<Either<Failure, UserEntity>> createAccount({
     required String name,
     required String email,
     required String password,
   });
 
-  Future<Either<AuthExceptionHandler, UserEntity>> loginUser({
+  Future<Either<Failure, UserEntity>> loginUser({
     required String email,
     required String password,
   });
 
-  Future<Either<AuthExceptionHandler, UserEntity>> loginUserWithGoogle();
+  Future<Either<Failure, UserEntity>> loginUserWithGoogle();
+  Future<Either<Failure, void>> resetPassword({required String email});
 
   Future<void> addUserData({required UserEntity user});
 

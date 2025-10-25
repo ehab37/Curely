@@ -42,6 +42,9 @@ class AuthExceptionHandler extends Failure {
         case 'network-request-failed':
           errorDescription = 'There is no internet connection.';
           break;
+        case 'too-many-requests':
+          errorDescription = 'Too many requests. Please try again later.';
+          break;
         default:
           errorDescription = e.code.toString();
           break;

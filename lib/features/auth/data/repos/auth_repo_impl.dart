@@ -20,7 +20,7 @@ class AuthRepoImpl implements AuthRepo {
   });
 
   @override
-  Future<Either<AuthExceptionHandler, UserEntity>> createAccount({
+  Future<Either<Failure, UserEntity>> createAccount({
     required String name,
     required String email,
     required String password,
@@ -48,12 +48,12 @@ class AuthRepoImpl implements AuthRepo {
         await firebaseAuthServices.deleteUser();
       }
       log(e.toString());
-      throw Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors(e));
     }
   }
 
   @override
-  Future<Either<AuthExceptionHandler, UserEntity>> loginUser({
+  Future<Either<Failure, UserEntity>> loginUser({
     required String email,
     required String password,
   }) async {
@@ -68,12 +68,12 @@ class AuthRepoImpl implements AuthRepo {
       return Left(AuthExceptionHandler.fromAuthException(e));
     } catch (e) {
       log(e.toString());
-      throw Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors(e));
     }
   }
 
   @override
-  Future<Either<AuthExceptionHandler, UserEntity>> loginUserWithGoogle() async {
+  Future<Either<Failure, UserEntity>> loginUserWithGoogle() async {
     User? user;
     try {
       user = await firebaseAuthServices.loginWithGoogle();
@@ -85,7 +85,7 @@ class AuthRepoImpl implements AuthRepo {
       if (isUserExist) {
         await getUserData(uId: user.uid);
       } else {
-        await addUserData(user: userEntity);
+        await addUserData(user: userEntity,);
       }
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
@@ -98,13 +98,17 @@ class AuthRepoImpl implements AuthRepo {
         await firebaseAuthServices.deleteUser();
       }
       log(e.toString());
-      throw Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors(e));
     }
   }
 
   @override
   Future<void> addUserData({required UserEntity user}) async {
-    await databaseService.addData(path: users, data: user.toMap());
+    await databaseService.addData(
+      path: users,
+      data: user.toMap(),
+      docId: user.uId,
+    );
   }
 
   @override
@@ -114,5 +118,19 @@ class AuthRepoImpl implements AuthRepo {
       docId: uId,
     );
     return UserModel.fromJson(data);
+  }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
+    try {
+      await firebaseAuthServices.resetPassword(email: email);
+      return Right(null);
+    } on FirebaseAuthException catch (e) {
+      log(e.toString());
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors(e));
+    }
   }
 }

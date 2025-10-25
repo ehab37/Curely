@@ -67,6 +67,10 @@ class FirebaseAuthServices {
     final User? user = userCredential.user;
     return user!;
   }
+  Future<void> resetPassword({required String email}) async{
+    await _auth
+        .sendPasswordResetEmail(email: email);
+  }
 
   static User? getCurrentUser() {
     return _auth.currentUser;

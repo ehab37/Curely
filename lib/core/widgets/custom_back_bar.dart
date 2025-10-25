@@ -15,18 +15,10 @@ class CustomBackBar extends StatelessWidget {
         onTap: (){
           GoRouter.of(context).pop();
         },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.keyboard_backspace_rounded,
-              size: 50,
-              color: kNavyColor,
-            ),
-            const SizedBox(
-              width: 18,
-            ),
-          ],
+        child: Icon(
+          Icons.keyboard_backspace_rounded,
+          size: 50,
+          color: kNavyColor,
         ),
       ),
     );

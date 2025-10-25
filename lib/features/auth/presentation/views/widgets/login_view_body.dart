@@ -70,7 +70,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.kResetPasswordView);
+                    },
                     child: Text(
                       'Forgot Password?',
                       style: Styles.styleUnderline16,
