@@ -133,9 +133,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       if (isAgreeTerms) {
                         formKey.currentState!.save();
                         context.read<RegisterCubit>().createAccount(
-                          email: emailController.text,
-                          password: passwordController.text,
-                          name: nameController.text,
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                          name: nameController.text.trim(),
                         );
                         FocusScope.of(context).unfocus();
                       } else {

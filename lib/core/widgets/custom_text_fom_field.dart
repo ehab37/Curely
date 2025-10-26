@@ -1,5 +1,6 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/border_functions.dart';
+import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isArabic = CacheHelper.getData(key: kIsArabic) ?? false;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
@@ -57,9 +59,12 @@ class CustomTextFormField extends StatelessWidget {
           prefixIconConstraints: BoxConstraints(minWidth: 40),
           prefixIcon: prefixIcon != null
               ? Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Icon(prefixIcon, color: kNavyColor),
-              )
+                  padding: EdgeInsets.only(
+                    right: isArabic ? 8.0 : 0,
+                    left: isArabic ? 0 : 8,
+                  ),
+                  child: Icon(prefixIcon, color: kNavyColor),
+                )
               : null,
           suffixIcon: suffixIcon != null
               ? IconButton(

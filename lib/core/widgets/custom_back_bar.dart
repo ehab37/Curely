@@ -16,8 +16,8 @@ class CustomBackBar extends StatelessWidget {
           GoRouter.of(context).pop();
         },
         child: Icon(
-          Icons.keyboard_backspace_rounded,
-          size: 50,
+          Icons.arrow_back_ios_new_outlined,
+          size: 40,
           color: kNavyColor,
         ),
       ),

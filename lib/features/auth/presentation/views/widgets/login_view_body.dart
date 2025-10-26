@@ -53,6 +53,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   hint: S.of(context).enterYourEmail,
                   validation: (value) => emailValidator(value, context),
                   keyboard: TextInputType.emailAddress,
+                  prefixIcon: Icons.email_outlined,
                 ),
                 CustomTextFormField(
                   label: S.of(context).password,
@@ -87,8 +88,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       context.read<LoginCubit>().loginUser(
-                        email: emailController.text,
-                        password: passwordController.text,
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
                       );
                       FocusScope.of(context).unfocus();
                     } else {

@@ -2,6 +2,7 @@ import 'package:curely/constants.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/assets.dart';
 import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:curely/features/welcome/presentation/cubits/selection_cubit.dart';
@@ -28,16 +29,7 @@ class LanguageViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: kNavyColor,
-                    size: 33,
-                  ),
-                ),
+                CustomBackBar(),
                 SizedBox(height: 30),
                 Text(S.of(context).chooseLanguage, style: Styles.styleBlue25),
                 Text(

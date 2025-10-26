@@ -1,6 +1,7 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
+import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/reset_password_cubit.dart';
@@ -38,8 +39,15 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           vertical: 12,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomBackBar(),
+            SizedBox(height: 30),
+            Text(S.of(context).resetPassword, style: Styles.styleBlue25),
+            Text(
+              S.of(context).enterYourEmailToReceiveAPasswordResetLink,
+              style: Styles.style18,
+            ),
             Spacer(),
             CustomDoubleMaterial(
               child: Column(
@@ -53,6 +61,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                       hint: S.of(context).enterYourEmail,
                       validation: (value) => emailValidator(value, context),
                       keyboard: TextInputType.emailAddress,
+                      prefixIcon: Icons.email_outlined,
                     ),
                   ),
                   BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
@@ -70,7 +79,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                                   context
                                       .read<ResetPasswordCubit>()
                                       .resetPassword(
-                                        email: emailController.text,
+                                        email: emailController.text.trim(),
                                       );
                                   FocusScope.of(context).unfocus();
                                 } else {
