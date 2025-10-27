@@ -40,8 +40,8 @@ abstract class Styles {
     height: 0,
   );
 
-  static TextStyle style18 = TextStyle(
-    color: kNavyColor.withAlpha(160),
+  static const TextStyle style18 = TextStyle(
+    color: Colors.white,
     fontSize: 18,
     fontWeight: FontWeight.w400,
     wordSpacing: .1,

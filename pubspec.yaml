@@ -52,6 +52,7 @@ dependencies:
   google_sign_in: ^7.2.0
   cloud_firestore: ^6.0.3
   cherry_toast: ^1.13.0
+  font_awesome_flutter: ^10.9.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.4

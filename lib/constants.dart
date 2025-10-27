@@ -18,6 +18,7 @@ const Color kErrorColor = Color(0xffF44336);
 const Color kWarningColor = Color(0xffFFC107);
 const Color kSuccessColor = Color(0xff4CAF50);
 const double kHorizontalPadding = 24;
+const double kTopPadding = 16;
 const double kBottomPadding = 30;
 const kIsOnBoardingViewSeen = "kIsOnBoardingViewSeen";
 const kIsUserLogin = "kIsUserLogin";

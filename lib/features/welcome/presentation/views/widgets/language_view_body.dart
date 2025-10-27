@@ -2,8 +2,8 @@ import 'package:curely/constants.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/assets.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_button.dart';
+import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:curely/features/welcome/presentation/cubits/selection_cubit.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/custom_animated_container.dart';
@@ -27,14 +27,10 @@ class LanguageViewBody extends StatelessWidget {
               vertical: 12,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomBackBar(),
-                SizedBox(height: 30),
-                Text(S.of(context).chooseLanguage, style: Styles.styleBlue25),
-                Text(
-                  S.of(context).chooseLanguageSubTitle,
-                  style: Styles.style18,
+                TitleSubTitleBack(
+                  title: S.of(context).chooseLanguage,
+                  subTitle: S.of(context).chooseLanguageSubTitle,
                 ),
                 Spacer(),
                 CustomAnimatedContainer(
@@ -99,7 +95,10 @@ class LanguageViewBody extends StatelessWidget {
                       ).pushReplacement(AppRouter.kOnBoardingView);
                     },
                     backgroundColor: kDarkBlueColor,
-                    child: Text(S.of(context).confirm, style: Styles.styleWhite20),
+                    child: Text(
+                      S.of(context).confirm,
+                      style: Styles.styleWhite20,
+                    ),
                   ),
                 ),
                 SizedBox(height: kBottomPadding - 12),

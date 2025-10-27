@@ -1,9 +1,8 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
-import 'package:curely/core/utils/styles.dart';
-import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/reset_password_cubit.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -39,14 +38,10 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           vertical: 12,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomBackBar(),
-            SizedBox(height: 30),
-            Text(S.of(context).resetPassword, style: Styles.styleBlue25),
-            Text(
-              S.of(context).enterYourEmailToReceiveAPasswordResetLink,
-              style: Styles.style18,
+            TitleSubTitleBack(
+              title: S.of(context).resetPassword,
+              subTitle: S.of(context).enterYourEmailToReceiveAPasswordResetLink,
             ),
             Spacer(),
             CustomDoubleMaterial(
