@@ -2,7 +2,9 @@ import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
 import 'package:curely/features/auth/presentation/views/reset_password_view.dart';
 import 'package:curely/features/auth/presentation/views/terms_and_conditions_view.dart';
+import 'package:curely/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:curely/features/home/presentation/views/home_view.dart';
+import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
 import 'package:curely/features/welcome/presentation/views/splash_view.dart';
@@ -20,6 +22,8 @@ abstract class AppRouter {
   static const kResetPasswordView = "/resetPasswordView";
   static const kTermsAndConditionsView = "/termsAndConditionsView";
   static const kHomeView = "/homeView";
+  static const kProfileView = "/profileView";
+  static const kDashboardView = "/dashboardView";
 
   static final router = GoRouter(
     observers: [GoTransition.observer],
@@ -58,7 +62,15 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kHomeView,
-        builder: (context, state) => const HomeView (),
+        builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: kProfileView,
+        builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: kDashboardView,
+        builder: (context, state) => const DashboardView(),
       ),
     ],
   );

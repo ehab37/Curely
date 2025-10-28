@@ -2,15 +2,16 @@ import 'package:curely/constants.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class AddRecordsItem extends StatelessWidget {
-  const AddRecordsItem({
+class CustomNavBar extends StatelessWidget {
+  const CustomNavBar({
     super.key,
     required this.text,
     required this.prefixIcon,
     required this.onPressed,
+    required this.suffixIcon,
   });
 
-  final IconData prefixIcon;
+  final IconData prefixIcon, suffixIcon;
   final String text;
   final void Function() onPressed;
 
@@ -41,7 +42,7 @@ class AddRecordsItem extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.add, color: kNavyColor, size: 35),
+            icon: Icon(suffixIcon, color: kNavyColor, size: 35),
             onPressed: onPressed,
           ),
         ],
