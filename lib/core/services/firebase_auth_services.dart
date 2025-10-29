@@ -78,6 +78,9 @@ class FirebaseAuthServices {
   static User? getCurrentUser() {
     return _auth.currentUser;
   }
+  static bool isUserLoggedIn() {
+    return _auth.currentUser != null;
+  }
 
   Future<void> logoutUser() async {
     await _googleSignIn.signOut();

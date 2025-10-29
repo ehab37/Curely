@@ -1,5 +1,6 @@
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'core/utils/assets.dart';
 import 'features/welcome/presentation/view_models/on_boarding_model.dart';
 
@@ -61,3 +62,10 @@ List<OnBoardingModel> onBoardingPages(context) {
     ),
   ];
 }
+
+List<Icon> get bottomNavBarIconsList => const [
+  Icon(Icons.home_filled, color: Colors.white),
+  Icon(Icons.dashboard_outlined, color: Colors.white),
+  Icon(FontAwesomeIcons.magnifyingGlass, color: Colors.white),
+  Icon(FontAwesomeIcons.user, color: Colors.white),
+];

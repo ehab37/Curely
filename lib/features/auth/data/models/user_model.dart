@@ -12,11 +12,24 @@ class UserModel extends UserEntity {
       uId: user.uid,
     );
   }
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       name: json[DatabaseKeys.name],
       email: json[DatabaseKeys.email],
       uId: json[DatabaseKeys.uId],
     );
+  }
+
+  factory UserModel.fromUserEntity(UserEntity user) {
+    return UserModel(name: user.name, email: user.email, uId: user.uId);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      DatabaseKeys.name: name,
+      DatabaseKeys.email: email,
+      DatabaseKeys.uId: uId,
+    };
   }
 }

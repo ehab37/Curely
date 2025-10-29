@@ -1,4 +1,5 @@
 import 'package:curely/constants.dart';
+import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
@@ -31,15 +32,18 @@ class HomeView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: CustomIconButton(onPressed:(){
               GoRouter.of(context).push(AppRouter.kProfileView);
+              // final CurvedNavigationBarState? navBarState =
+              //     _bottomNavigationKey.currentState;
+              // navBarState?.setPage(1);
             },icon: Icons.account_circle,),
           ),
         ],
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Hello", style: Styles.style18),
             SizedBox(height: 5),
-            Text("Ehab Mostafa", style: Styles.styleWhite25),
+            Text(getFinalUserData().name, style: Styles.styleWhite25),
           ],
         ),
       ),

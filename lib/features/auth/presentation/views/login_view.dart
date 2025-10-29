@@ -1,6 +1,4 @@
-import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
@@ -26,7 +24,7 @@ class LoginView extends StatelessWidget {
               listener: (context, state) {
                 if (state is LoginSuccess) {
                   GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
-                  CacheHelper.putBoolData(key: kIsUserLogin, value: true);
+                  // CacheHelper.putBoolData(key: kIsUserLogin, value: true);
                 } else if (state is LoginFailure) {
                   InfoBox().customSnackBar(context, state.errMessage);
                 }

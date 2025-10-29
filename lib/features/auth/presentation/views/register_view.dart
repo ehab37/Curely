@@ -1,6 +1,4 @@
-import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
@@ -25,7 +23,7 @@ class RegisterView extends StatelessWidget {
               listener: (context, state) {
                 if (state is RegisterSuccess) {
                   GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
-                  CacheHelper.putBoolData(key: kIsUserLogin, value: true);
+                  // CacheHelper.putBoolData(key: kIsUserLogin, value: true);
                 } else if (state is RegisterFailure) {
                   InfoBox().customSnackBar(context, state.errMessage);
                 }

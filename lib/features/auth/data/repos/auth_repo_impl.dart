@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:curely/constants.dart';
 import 'package:curely/core/error/failures.dart';
+import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/features/auth/data/models/user_model.dart';
@@ -37,6 +39,7 @@ class AuthRepoImpl implements AuthRepo {
         uId: user.uid,
       );
       await addUserData(user: userEntity);
+      await saveUserData(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {
@@ -63,6 +66,7 @@ class AuthRepoImpl implements AuthRepo {
         password: password,
       );
       UserEntity userEntity = await getUserData(uId: user.uid);
+      await saveUserData(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
@@ -87,6 +91,7 @@ class AuthRepoImpl implements AuthRepo {
       } else {
         await addUserData(user: userEntity);
       }
+      await saveUserData(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {
@@ -106,7 +111,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<void> addUserData({required UserEntity user}) async {
     await databaseService.addData(
       path: DatabaseKeys.users,
-      data: user.toMap(),
+      data: UserModel.fromUserEntity(user).toMap(),
       docId: user.uId,
     );
   }
@@ -132,5 +137,11 @@ class AuthRepoImpl implements AuthRepo {
       log(e.toString());
       return Left(OtherErrors.fromOtherErrors(e));
     }
+  }
+
+  @override
+  Future<void> saveUserData({required UserEntity user}) async {
+    String userData = jsonEncode(UserModel.fromUserEntity(user).toMap());
+    await CacheHelper.saveData(key: DatabaseKeys.users, value: userData);
   }
 }

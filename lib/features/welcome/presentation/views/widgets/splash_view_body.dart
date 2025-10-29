@@ -1,4 +1,5 @@
 import 'package:curely/constants.dart';
+import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/assets.dart';
 import 'package:curely/core/services/cache_helper.dart';
@@ -56,7 +57,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     final bool isOnBoardingViewSeen = CacheHelper.getData(
       key: kIsOnBoardingViewSeen,
     );
-    final bool isUserLogin = CacheHelper.getData(key: kIsUserLogin);
+    // final bool isUserLogin = CacheHelper.getData(key: kIsUserLogin);
+    final bool isUserLogin = FirebaseAuthServices.isUserLoggedIn();
     Future.delayed(const Duration(seconds: 3), () {
       mounted
           ? isOnBoardingViewSeen
