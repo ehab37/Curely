@@ -1,5 +1,6 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
+import 'package:curely/constants.dart';
 import 'package:flutter/material.dart';
 
 class InfoBox {
@@ -10,6 +11,20 @@ class InfoBox {
     return ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+  customImageSnackBar({
+    required BuildContext context,
+    required Widget content,
+  }) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.white,
+        shape: Border(top: BorderSide(color: kBlueColor, width: 2)),
+        content: content,
+      ),
+    );
   }
 
   void successFloatingBox(BuildContext context) {

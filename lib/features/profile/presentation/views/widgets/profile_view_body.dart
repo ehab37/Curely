@@ -1,6 +1,6 @@
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_container.dart';
-import 'package:curely/core/widgets/image_input.dart';
+import 'package:curely/core/widgets/profile_image_input.dart';
 import 'package:curely/features/home/presentation/views/widgets/custom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,7 +21,7 @@ class ProfileViewBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(height: 1,),
-              ImageInputProfile(
+              ProfileImageInput(
                 onSelectedImage: (image) {
                   // BlocProvider.of<ProfileImageCubit>(context)
                   //     .addProfileImage(imageFile: image);
