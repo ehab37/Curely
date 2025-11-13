@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/widgets/icon_text_in_row.dart';
+import 'package:curely/core/widgets/image_input/icon_text_in_row.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

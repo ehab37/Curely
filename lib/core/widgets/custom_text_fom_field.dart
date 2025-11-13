@@ -3,6 +3,7 @@ import 'package:curely/core/helper_functions/border_functions.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function()? suffixPress;
   final int? maxLines;
   final TextCapitalization? textCapitalization;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextFormField({
     super.key,
@@ -32,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixPress,
     this.maxLines,
     this.textCapitalization,
+    this.inputFormatters,
   });
 
   @override
@@ -40,11 +43,14 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        inputFormatters: inputFormatters,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         validator: validation,
         controller: controller,
         decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
           contentPadding: EdgeInsetsDirectional.symmetric(
             vertical: 0,
             horizontal: 12,

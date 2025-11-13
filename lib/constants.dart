@@ -21,6 +21,7 @@ const Color kSuccessColor = Color(0xff4CAF50);
 const double kHorizontalPadding = 24;
 const double kTopPadding = 16;
 const double kBottomPadding = 30;
+const double kBorderRadius = 12;
 const kIsOnBoardingViewSeen = "kIsOnBoardingViewSeen";
 const kIsUserLogin = "kIsUserLogin";
 const kIsArabic = "kIsArabic";

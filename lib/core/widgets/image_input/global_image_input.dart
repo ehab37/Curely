@@ -27,18 +27,17 @@ class _GlobalImageInputState extends State<GlobalImageInput> {
       },
       content: Container(
         alignment: Alignment.center,
-        height: 250,
-        width: double.infinity,
-        margin: const EdgeInsets.all(16),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.width/1.5,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: kBlueColor),
+          border: Border.all(color: kNavyColor),
         ),
         child: imageFile != null
             ? Image.file(
           imageFile!,
-          height: 280,
           width: double.infinity,
           fit: BoxFit.fill,
         )

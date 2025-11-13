@@ -1,4 +1,6 @@
+import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +50,7 @@ class HomeDrawer extends StatelessWidget {
             onTap: () async {
               await FirebaseAuthServices().logoutUser();
               GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
-              // CacheHelper.removeData(key: kIsUserLogin);
+              CacheHelper.removeData(key: DatabaseKeys.users);
               // BlocProvider.of<SignOutCubit>(context).logOut();
             },
           ),

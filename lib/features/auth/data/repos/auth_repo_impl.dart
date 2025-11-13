@@ -51,7 +51,7 @@ class AuthRepoImpl implements AuthRepo {
         await firebaseAuthServices.deleteUser();
       }
       log(e.toString());
-      return Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors("Something went wrong, try again later"));
     }
   }
 
@@ -72,7 +72,7 @@ class AuthRepoImpl implements AuthRepo {
       return Left(AuthExceptionHandler.fromAuthException(e));
     } catch (e) {
       log(e.toString());
-      return Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors("Something went wrong, try again later"));
     }
   }
 
@@ -103,7 +103,7 @@ class AuthRepoImpl implements AuthRepo {
         await firebaseAuthServices.deleteUser();
       }
       log(e.toString());
-      return Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors("Something went wrong, try again later"));
     }
   }
 
@@ -135,7 +135,7 @@ class AuthRepoImpl implements AuthRepo {
       return Left(AuthExceptionHandler.fromAuthException(e));
     } catch (e) {
       log(e.toString());
-      return Left(OtherErrors.fromOtherErrors(e));
+      return Left(OtherErrors.fromOtherErrors("Something went wrong, try again later"));
     }
   }
 

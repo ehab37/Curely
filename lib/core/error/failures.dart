@@ -46,6 +46,9 @@ class AuthExceptionHandler extends Failure {
         case 'too-many-requests':
           errorDescription = S.current.tooManyRequests;
           break;
+        case 'unknown':
+          errorDescription = "Please, check your internet connection";
+          break;
         default:
           errorDescription = e.code.toString();
           break;

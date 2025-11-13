@@ -9,6 +9,11 @@ abstract class Styles {
     letterSpacing: 1.5,
     height: .8,
   );
+  static const TextStyle style33 = TextStyle(
+    color: kNavyColor,
+    fontSize: 33,
+    fontWeight: FontWeight.bold,
+  );
   static const TextStyle style28 = TextStyle(
     color: kNavyColor,
     fontSize: 28,

@@ -1,9 +1,11 @@
 import 'package:curely/constants.dart';
+import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/features/home/presentation/views/widgets/custom_nav_bar.dart';
+import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'circle_card.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -65,7 +67,7 @@ class HomeViewBody extends StatelessWidget {
               prefixIcon: FontAwesomeIcons.pills,
               suffixIcon: Icons.add,
               onPressed: () {
-                // GoRouter.of(context).push(AppRouter.addMedicine);
+                GoRouter.of(context).push(AppRouter.kAddMedicineView);
               },
             ),
             CustomNavBar(
