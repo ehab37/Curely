@@ -88,7 +88,12 @@ class DashboardViewBody extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    CustomSquareNavBar(onTab: () {}, text: "Add Rays"),
+                    CustomSquareNavBar(
+                      onTab: () {
+                        GoRouter.of(context).push(AppRouter.kAddRaysView);
+                      },
+                      text: "Add Rays",
+                    ),
                     CustomSquareNavBar(onTab: () {}, text: "Add Analysis"),
                   ],
                 ),

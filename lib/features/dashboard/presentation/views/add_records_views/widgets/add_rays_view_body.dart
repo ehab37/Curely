@@ -6,31 +6,31 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_menu.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
-import 'package:curely/features/dashboard/entities/prescription_entity.dart';
+import 'package:curely/features/dashboard/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/custom_icon_button_row.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AddPrescriptionViewBody extends StatefulWidget {
-  const AddPrescriptionViewBody({super.key});
+class AddRaysViewBody extends StatefulWidget {
+  const AddRaysViewBody({super.key});
 
   @override
-  State<AddPrescriptionViewBody> createState() => _AddPrescriptionViewBodyState();
+  State<AddRaysViewBody> createState() => _AddRaysViewBodyState();
 }
 
-class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
+class _AddRaysViewBodyState extends State<AddRaysViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController doctorNameController = TextEditingController();
-  final TextEditingController hospitalController = TextEditingController();
+  final TextEditingController radiologyCenterController = TextEditingController();
   final TextEditingController diagnosisController = TextEditingController();
-  late final Specialization? specialization;
+  late final RaysTypes? raysType;
   DateTime? examinationDate;
 
   @override
   void dispose() {
     doctorNameController.dispose();
-    hospitalController.dispose();
+    radiologyCenterController.dispose();
     diagnosisController.dispose();
     super.dispose();
   }
@@ -45,7 +45,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
           Row(
             children: [
               CustomBackBar(),
-              Text("Add Prescription", style: Styles.style33),
+              Text("Add Rays", style: Styles.style33),
             ],
           ),
           SizedBox(height: 8),
@@ -61,9 +61,9 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   validation: (value) => nameValidator(value, context),
                 ),
                 CustomTextFormField(
-                  controller: hospitalController,
-                  label: "Hospital or Clinic",
-                  hint: "Enter the place of examination",
+                  controller: radiologyCenterController,
+                  label: "Radiology Center",
+                  hint: "Enter Radiology Center Name",
                   validation: (value) => nameValidator(value, context),
                 ),
                 CustomTextFormField(
@@ -73,8 +73,8 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   validation: (value) => nameValidator(value, context),
                 ),
                 CustomDropdownMenu(
-                  hint: 'Specialization',
-                  list: Specialization.values.map((e) {
+                  hint: 'Rays Type',
+                  list: RaysTypes.values.map((e) {
                     return DropdownMenuItem(
                       value: e.name,
                       child: Text(e.name.toUpperCase(), style: Styles.style16),
@@ -82,7 +82,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      specialization = value;
+                      raysType = value;
                     });
                   },
                 ),
@@ -127,7 +127,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                 CustomButton(
                   onPressed: () {},
                   backgroundColor: kNavyColor,
-                  child: Text("Add Prescription", style: Styles.styleWhite20),
+                  child: Text("Add Rays", style: Styles.styleWhite20),
                 ),
                 SizedBox(height: kBottomPadding),
               ],

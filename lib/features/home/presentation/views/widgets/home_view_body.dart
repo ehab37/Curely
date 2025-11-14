@@ -83,7 +83,7 @@ class HomeViewBody extends StatelessWidget {
               prefixIcon: FontAwesomeIcons.xRay,
               suffixIcon: Icons.add,
               onPressed: () {
-                // GoRouter.of(context).push(AppRouter.addRays);
+                GoRouter.of(context).push(AppRouter.kAddRaysView);
               },
             ),
             CustomNavBar(
