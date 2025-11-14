@@ -2,6 +2,7 @@ import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
 import 'package:curely/features/auth/presentation/views/reset_password_view.dart';
 import 'package:curely/features/auth/presentation/views/terms_and_conditions_view.dart';
+import 'package:curely/features/dashboard/presentation/views/add_records_views/add_analysis_view.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/add_medicine_view.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/add_prescription_view.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/add_rays_view.dart';
@@ -87,7 +88,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kAddAnalysisView,
-        builder: (context, state) => const DashboardView(),
+        builder: (context, state) => const AddAnalysisView(),
       ),
       GoRoute(
         path: kDisplayMedicineView,

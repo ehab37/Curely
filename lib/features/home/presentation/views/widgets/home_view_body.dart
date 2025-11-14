@@ -58,10 +58,7 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16),
-            Text(
-              " Add Records",
-              style: Styles.style28,
-            ),
+            Text(" Add Records", style: Styles.style28),
             CustomNavBar(
               text: "Add Medicine",
               prefixIcon: FontAwesomeIcons.pills,
@@ -91,7 +88,7 @@ class HomeViewBody extends StatelessWidget {
               prefixIcon: FontAwesomeIcons.flaskVial,
               suffixIcon: Icons.add,
               onPressed: () {
-                // GoRouter.of(context).push(AppRouter.addAnalysis);
+                GoRouter.of(context).push(AppRouter.kAddAnalysisView);
               },
             ),
           ],

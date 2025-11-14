@@ -94,7 +94,12 @@ class DashboardViewBody extends StatelessWidget {
                       },
                       text: "Add Rays",
                     ),
-                    CustomSquareNavBar(onTab: () {}, text: "Add Analysis"),
+                    CustomSquareNavBar(
+                      onTab: () {
+                        GoRouter.of(context).push(AppRouter.kAddAnalysisView);
+                      },
+                      text: "Add Analysis",
+                    ),
                   ],
                 ),
                 SizedBox(height: 16),

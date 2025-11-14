@@ -7,9 +7,8 @@ import 'package:curely/core/widgets/custom_dropdown_menu.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/entities/rays_entity.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/custom_icon_button_row.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'examination_date_box.dart';
 
 class AddRaysViewBody extends StatefulWidget {
   const AddRaysViewBody({super.key});
@@ -87,40 +86,11 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                   },
                 ),
                 SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(kBorderRadius),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withAlpha(25),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: CustomIconButtonRow(
-                    text1: 'Examination date: ',
-                    text2: examinationDate != null
-                        ? DateFormat("dd/MM/yyyy").format(examinationDate!)
-                        : 'Pick a Date',
-                    icon: Icons.date_range_outlined,
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2016),
-                        lastDate: DateTime.now(),
-                      ).then((value) {
-                        setState(() {
-                          examinationDate = value;
-                        });
-                      });
-                    },
-                  ),
-                ),
+                ExaminationDateBox(onChanged: (value){
+                  setState(() {
+                    examinationDate = value;
+                  });
+                }),
                 SizedBox(height: 16),
                 GlobalImageInput(onSelectedImage: (image) {}),
                 SizedBox(height: 32),

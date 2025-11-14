@@ -6,30 +6,30 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_menu.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
-import 'package:curely/features/dashboard/entities/prescription_entity.dart';
+import 'package:curely/features/dashboard/entities/analysis_entity.dart';
+import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/examination_date_box.dart';
 import 'package:flutter/material.dart';
-import 'examination_date_box.dart';
 
-class AddPrescriptionViewBody extends StatefulWidget {
-  const AddPrescriptionViewBody({super.key});
+class AddAnalysisViewBody extends StatefulWidget {
+  const AddAnalysisViewBody({super.key});
 
   @override
-  State<AddPrescriptionViewBody> createState() => _AddPrescriptionViewBodyState();
+  State<AddAnalysisViewBody> createState() => _AddAnalysisViewBodyState();
 }
 
-class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
+class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController doctorNameController = TextEditingController();
-  final TextEditingController hospitalController = TextEditingController();
+  final TextEditingController labController = TextEditingController();
   final TextEditingController diagnosisController = TextEditingController();
-  late final Specialization? specialization;
+  late final AnalysisTypes? analysisType;
   DateTime? examinationDate;
 
   @override
   void dispose() {
     doctorNameController.dispose();
-    hospitalController.dispose();
+    labController.dispose();
     diagnosisController.dispose();
     super.dispose();
   }
@@ -44,7 +44,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
           Row(
             children: [
               CustomBackBar(),
-              Text("Add Prescription", style: Styles.style33),
+              Text("Add Analysis", style: Styles.style33),
             ],
           ),
           SizedBox(height: 8),
@@ -60,9 +60,9 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   validation: (value) => nameValidator(value, context),
                 ),
                 CustomTextFormField(
-                  controller: hospitalController,
-                  label: "Hospital or Clinic",
-                  hint: "Enter the place of examination",
+                  controller: labController,
+                  label: "Lab",
+                  hint: "Enter Lab Name",
                   validation: (value) => nameValidator(value, context),
                 ),
                 CustomTextFormField(
@@ -72,8 +72,8 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   validation: (value) => nameValidator(value, context),
                 ),
                 CustomDropdownMenu(
-                  hint: 'Specialization',
-                  list: Specialization.values.map((e) {
+                  hint: 'Analysis Type',
+                  list: AnalysisTypes.values.map((e) {
                     return DropdownMenuItem(
                       value: e.name,
                       child: Text(e.name.toUpperCase(), style: Styles.style16),
@@ -81,7 +81,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      specialization = value;
+                      analysisType = value;
                     });
                   },
                 ),
@@ -97,7 +97,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                 CustomButton(
                   onPressed: () {},
                   backgroundColor: kNavyColor,
-                  child: Text("Add Prescription", style: Styles.styleWhite20),
+                  child: Text("Add Analysis", style: Styles.styleWhite20),
                 ),
                 SizedBox(height: kBottomPadding),
               ],
