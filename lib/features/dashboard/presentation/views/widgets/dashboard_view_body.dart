@@ -76,16 +76,23 @@ class DashboardViewBody extends StatelessWidget {
                       },
                       text: "Add Medicines",
                     ),
-                    CustomSquareNavBar(onTab: () {}, text: "Add Rays"),
+                    CustomSquareNavBar(
+                      onTab: () {
+                        GoRouter.of(
+                          context,
+                        ).push(AppRouter.kAddPrescriptionView);
+                      },
+                      text: "Add Prescriptions",
+                    ),
                   ],
                 ),
                 Row(
                   children: [
-                    CustomSquareNavBar(onTab: () {}, text: "Add Prescriptions"),
+                    CustomSquareNavBar(onTab: () {}, text: "Add Rays"),
                     CustomSquareNavBar(onTab: () {}, text: "Add Analysis"),
                   ],
                 ),
-                SizedBox(height: 16,),
+                SizedBox(height: 16),
               ],
             ),
           ),

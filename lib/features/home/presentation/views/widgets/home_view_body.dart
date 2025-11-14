@@ -71,19 +71,19 @@ class HomeViewBody extends StatelessWidget {
               },
             ),
             CustomNavBar(
+              text: "Add Prescription",
+              prefixIcon: FontAwesomeIcons.fileMedical,
+              suffixIcon: Icons.add,
+              onPressed: () {
+                GoRouter.of(context).push(AppRouter.kAddPrescriptionView);
+              },
+            ),
+            CustomNavBar(
               text: "Add Rays",
               prefixIcon: FontAwesomeIcons.xRay,
               suffixIcon: Icons.add,
               onPressed: () {
                 // GoRouter.of(context).push(AppRouter.addRays);
-              },
-            ),
-            CustomNavBar(
-              text: "Add Prescription",
-              prefixIcon: FontAwesomeIcons.fileMedical,
-              suffixIcon: Icons.add,
-              onPressed: () {
-                // GoRouter.of(context).push(AppRouter.addPrescription);
               },
             ),
             CustomNavBar(

@@ -25,10 +25,10 @@ class CustomIconButtonRow extends StatelessWidget {
         const Spacer(),
         IconButton(
           onPressed: onPressed,
-          icon: Icon(
-            icon,
-            color: kNavyColor,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(kOffWhiteColor),
           ),
+          icon: Icon(icon, color: kNavyColor),
         ),
       ],
     );

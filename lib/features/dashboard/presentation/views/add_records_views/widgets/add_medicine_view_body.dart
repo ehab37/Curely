@@ -7,7 +7,6 @@ import 'package:curely/core/widgets/custom_dropdown_menu.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/entities/medicine_entity.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/custom_icon_button_row.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -73,7 +72,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(1),
                   ],
-                  validation: medicineTimesValidator,
+                  validation: (value) => medicineTimesValidator(value),
                 ),
                 CustomTextFormField(
                   controller: medicineUsageController,
@@ -116,26 +115,6 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                   onChanged: (newVal) {
                     setState(() {
                       isReminderActive = newVal;
-                    });
-                  },
-                ),
-                SizedBox(height: 16),
-                CustomIconButtonRow(
-                  text1: 'Examination date: ',
-                  text2: pickedDate != null
-                      ? '${pickedDate!.day}/${pickedDate!.month}/${pickedDate!.year}'
-                      : 'Pick a Date',
-                  icon: Icons.date_range_outlined,
-                  onPressed: () {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2016),
-                      lastDate: DateTime.now(),
-                    ).then((value) {
-                      setState(() {
-                        pickedDate = value;
-                      });
                     });
                   },
                 ),
