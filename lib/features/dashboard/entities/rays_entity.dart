@@ -1,34 +1,36 @@
 import 'dart:io';
 
-enum RaysTypes {
-  cardiogram,
-  xRays,
-  deepXray,
-  electrocardiogram,
-  cTScan,
-  mRI,
-  fluoroscopy,
-  mammography,
-  dEXA,
-  isotope,
-  other,
-}
-List<Rays> raysItems = [];
+const List<String> raysTypesList = [
+  'Cardiogram',
+  'X-Rays',
+  'Deep Xray',
+  'Electrocardiogram',
+  'CT Scan',
+  'MRI',
+  'Fluoroscopy',
+  'Mammography',
+  'DEXA',
+  'Isotope',
+  'Other',
+];
+List<RaysEntity> raysItems = [];
 
-class Rays {
-  final RaysTypes raysTypes;
+class RaysEntity {
+  final String raysType;
   final String doctorName;
-  final String radiologyCenter;
-  final String diagnosis;
+  final String? radiologyCenter;
+  final String? diagnosis;
   final DateTime examinationDate;
   final File image;
+  final String? imageUrl;
 
-  Rays({
-    required this.raysTypes,
+  RaysEntity({
+    required this.raysType,
     required this.doctorName,
-    required this.radiologyCenter,
-    required this.diagnosis,
+    this.radiologyCenter,
+    this.diagnosis,
     required this.examinationDate,
     required this.image,
+    this.imageUrl,
   });
 }

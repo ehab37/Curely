@@ -2,80 +2,91 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-enum MedicineUsage {
-  antiBiotic,
-  antiPyretics,
-  painKiller,
-  tranquilizer,
-  laxative,
-  emetic,
-  tonic,
-  hypnotic,
-  appetiser,
-  antiInfammatory,
-  antiAllergic,
-  antiMigraine,
-  antiAnaemic,
-  diuretic,
-  antiFungal,
-  antiDiabetic,
-  antiHypertensive,
-  circulatoryStimulant,
-  antiBacterial,
-  aspirin,
-  other,
-}
+const List<String> medicineTypesList = [
+  "Tablet",
+  "Capsule",
+  "Syrup",
+  "Solution",
+  "Cream",
+  "Ointment",
+  "Gel",
+  "Lotion",
+  "Shampoo/Foam",
+  "Spray",
+  "Inhaler",
+  "Injection",
+  "Supp",
+  "Ampoule",
+  "Vial",
+  "Eye Drop",
+  "Ear Drop",
+  "Nasal Drop",
+  "Oral Drop",
+  "Eye Ointment",
+  "Sachets",
+  "Mouth Wash",
+  "Soap",
+  "Enema",
+  "Vaginal Cream",
+  "Vaginal Supp",
+  "Vaginal Douche",
+  "Medical Supplies",
+  "Other",
+];
 
-enum MedicineTypes {
-  tablets,
-  capsules,
-  inhalation,
-  syrup,
-  supp,
-  ampoule,
-  vial,
-  injection,
-  eyeDrops,
-  earDrops,
-  nasalDrops,
-  oralDrops,
-  cream,
-  oint,
-  gel,
-  eyeOInt,
-  spray,
-  solution,
-  sachets,
-  mouthWash,
-  lotion,
-  soap,
-  enema,
-  vagCream,
-  vagSupp,
-  vagDouche,
-  medicalSupplies,
-  other,
-}
-List<MedicineModel> medicineItems = [];
+const List<String> medicineUsagesList = [
+  'Anti Biotic',
+  'Anti Pyretics',
+  'PainKiller',
+  'Tranquilizer',
+  'Laxative',
+  'Emetic',
+  'Tonic',
+  'Hypnotic',
+  'Appetiser',
+  'Anti Inflammatory',
+  'Anti Allergic',
+  'Anti Migraine',
+  'Anti Anaemic',
+  'Diuretic',
+  'Anti Fungal',
+  'Anti Diabetic',
+  'Anti Hypertensive',
+  'Circulatory Stimulant',
+  'Anti Bacterial',
+  'Aspirin',
+  'Other',
+];
 
-class MedicineModel {
-  final MedicineUsage medicineUsage;
+const List<String> frequencyList = [
+  'Once Daily',
+  'Twice Daily',
+  'Every 8 Hours',
+  'Every 6 Hours',
+];
+
+List<MedicineEntity> medicineItems = [];
+
+class MedicineEntity {
+  final String medicineUsage;
   final String medicineName;
-  final int timesNumber;
-  final String medicineDescription;
-  final MedicineTypes medicineTypes;
+  final String frequency;
+  final String? medicineNotes;
+  final String medicineTypes;
   final bool isReminderActive;
-  final TimeOfDay startReminderTime;
-  final File image;
+  final List<TimeOfDay?>? remindersTime;
+  final File? image;
+  final String? imageUrl;
 
-  MedicineModel({
+  MedicineEntity({
     required this.medicineUsage,
     required this.medicineName,
-    required this.timesNumber,
-    required this.medicineDescription,
+    required this.frequency,
+    this.medicineNotes,
     required this.isReminderActive,
-    required this.startReminderTime,
+    this.remindersTime,
     required this.medicineTypes,
-    required this.image,
+    this.image,
+    this.imageUrl,
   });
 }

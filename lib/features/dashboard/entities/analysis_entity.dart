@@ -1,37 +1,39 @@
 import 'dart:io';
 
-enum AnalysisTypes {
-  cBC,
-  stoolAnalysis,
-  urineTest,
-  randomBloodGlucose,
-  fastingBloodSugar,
-  eSR,
-  bleedingTime,
-  glucose,
-  cholesterol,
-  uricAcid,
-  creatinine,
-  triglycerides,
-  other,
-}
+const List<String> analysisTypesList = [
+  'CBC',
+  'Stool Analysis',
+  'Urine Test',
+  'Random Blood Glucose',
+  'Fasting Blood Sugar',
+  'ESR',
+  'Bleeding Time',
+  'Glucose',
+  'Cholesterol',
+  'Uric Acid',
+  'Creatinine',
+  'Triglycerides',
+  'Other',
+];
 
-List<Analysis> analysisItems = [];
+List<AnalysisEntity> analysisItems = [];
 
-class Analysis {
-  final AnalysisTypes analysisTypes;
+class AnalysisEntity {
+  final String analysisTypes;
   final String doctorName;
-  final String lab;
-  final String diagnosis;
+  final String? lab;
+  final String? diagnosis;
   final DateTime examinationDate;
   final File image;
+  final String? imageUrl;
 
-  Analysis({
+  AnalysisEntity({
     required this.analysisTypes,
     required this.doctorName,
-    required this.lab,
-    required this.diagnosis,
+    this.lab,
+    this.diagnosis,
     required this.examinationDate,
     required this.image,
+    this.imageUrl,
   });
 }

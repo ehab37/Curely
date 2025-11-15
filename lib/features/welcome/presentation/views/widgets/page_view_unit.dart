@@ -1,12 +1,12 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/features/welcome/presentation/view_models/on_boarding_model.dart';
+import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
 import 'package:flutter/material.dart';
 
 class PageViewUnit extends StatelessWidget {
   const PageViewUnit({super.key, required this.onBoardingModel});
 
-  final OnBoardingModel onBoardingModel;
+  final OnBoardingEntity onBoardingModel;
 
   @override
   Widget build(BuildContext context) {

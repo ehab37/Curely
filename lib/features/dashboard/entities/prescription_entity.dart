@@ -1,38 +1,41 @@
 import 'dart:io';
 
-enum Specialization {
-  dentistry,
-  neurology,
-  earNoseThroat,
-  orthopedics,
-  cardiology,
-  dermatology,
-  gastroenterology,
-  surgery,
-  internalMedicine,
-  obstetricsGynecology,
-  ophthalmology,
-  pediatrics,
-  psychiatry,
-  urology,
-  other,
-}
-List<Prescription> prescriptionItems = [];
+const List<String> doctorSpecializationsList = [
+  'Dentistry',
+  'Neurology',
+  'Ear Nose Throat',
+  'Orthopedics',
+  'Cardiology',
+  'Dermatology',
+  'Gastroenterology',
+  'Surgery',
+  'Internal Medicine',
+  'Obstetrics Gynecology',
+  'Ophthalmology',
+  'Pediatrics',
+  'Psychiatry',
+  'Urology',
+  'Other',
+];
 
-class Prescription {
-  final Specialization specialization;
+List<PrescriptionEntity> prescriptionItems = [];
+
+class PrescriptionEntity {
+  final String doctorSpecialization;
   final String doctorName;
-  final String hospital;
-  final String diagnosis;
+  final String? hospital;
+  final String? diagnosis;
   final DateTime examinationDate;
   final File image;
+  final String? imageUrl;
 
-  Prescription({
-    required this.specialization,
+  PrescriptionEntity({
+    required this.doctorSpecialization,
     required this.doctorName,
-    required this.hospital,
-    required this.diagnosis,
+    this.hospital,
+    this.diagnosis,
     required this.examinationDate,
     required this.image,
+    this.imageUrl,
   });
 }

@@ -51,7 +51,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   controller: emailController,
                   label: S.of(context).email,
                   hint: S.of(context).enterYourEmail,
-                  validation: (value) => emailValidator(value, context),
+                  validator: (value) => emailValidator(value, context),
                   keyboard: TextInputType.emailAddress,
                   prefixIcon: Icons.email_outlined,
                 ),
@@ -59,7 +59,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   label: S.of(context).password,
                   hint: S.of(context).enterYourPassword,
                   controller: passwordController,
-                  validation: (value) => passwordValidator(value, context),
+                  validator: (value) => passwordValidator(value, context),
                   isSecure: isSecure,
                   suffixIcon: isSecure
                       ? Icons.visibility_off_outlined
@@ -93,7 +93,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       );
                       FocusScope.of(context).unfocus();
                     } else {
-                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {
+                        autoValidateMode = AutovalidateMode.always;
+                      });
                     }
                   },
                 ),

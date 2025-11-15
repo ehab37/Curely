@@ -54,7 +54,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                       controller: emailController,
                       label: S.of(context).email,
                       hint: S.of(context).enterYourEmail,
-                      validation: (value) => emailValidator(value, context),
+                      validator: (value) => emailValidator(value, context),
                       keyboard: TextInputType.emailAddress,
                       prefixIcon: Icons.email_outlined,
                     ),

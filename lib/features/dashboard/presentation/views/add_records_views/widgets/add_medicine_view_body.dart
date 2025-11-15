@@ -1,15 +1,16 @@
+import 'dart:io';
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_dropdown_menu.dart';
+import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class AddMedicineViewBody extends StatefulWidget {
   const AddMedicineViewBody({super.key});
@@ -19,118 +20,136 @@ class AddMedicineViewBody extends StatefulWidget {
 }
 
 class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
+  final GlobalKey<DropdownSearchState<String>> dropDownKey =
+      GlobalKey<DropdownSearchState<String>>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController medicineNameController = TextEditingController();
-  final TextEditingController medicineUsageController = TextEditingController();
-  final TextEditingController timesNumberController = TextEditingController();
+  final TextEditingController medicineNotesController = TextEditingController();
   bool isReminderActive = false;
-  late final MedicineUsage? medicineUsage;
-  late final MedicineTypes? medicineTypes;
-  DateTime? pickedDate;
-  TimeOfDay? startReminderTime;
+  late String frequency;
+  late String medicineUsage;
+  late String medicineTypes;
+  List<TimeOfDay?> remindersList = [];
+  File? image;
 
   @override
   void dispose() {
     medicineNameController.dispose();
-    medicineUsageController.dispose();
-    timesNumberController.dispose();
+    medicineNotesController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-      child: Column(
-        children: [
-          SizedBox(height: 8),
-          Row(
-            children: [
-              CustomBackBar(),
-              Text("Add Medicine", style: Styles.style33),
-            ],
-          ),
-          SizedBox(height: 8),
-          Expanded(
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                SizedBox(height: 8),
-                CustomTextFormField(
-                  controller: medicineNameController,
-                  label: "Medicine Name",
-                  hint: "Enter Medicine Name",
-                  validation: (value) => nameValidator(value, context),
-                ),
-                CustomTextFormField(
-                  controller: timesNumberController,
-                  label: "Times Number",
-                  hint: "Enter the number of times daily",
-                  keyboard: TextInputType.numberWithOptions(),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(1),
-                  ],
-                  validation: (value) => medicineTimesValidator(value),
-                ),
-                CustomTextFormField(
-                  controller: medicineUsageController,
-                  label: "Medicine Usage",
-                  maxLines: 3,
-                  validation: (value) => nameValidator(value, context),
-                ),
-                CustomDropdownMenu(
-                  hint: 'Use of Medicine',
-                  list: MedicineUsage.values.map((e) {
-                    return DropdownMenuItem(
-                      value: e.name,
-                      child: Text(e.name.toUpperCase(), style: Styles.style16),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      medicineUsage = value;
-                    });
-                  },
-                ),
-                SizedBox(height: 16),
-                CustomDropdownMenu(
-                  hint: 'Medicine Types',
-                  list: MedicineTypes.values.map((e) {
-                    return DropdownMenuItem(
-                      value: e.name,
-                      child: Text(e.name, style: Styles.style16),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      medicineTypes = value;
-                    });
-                  },
-                ),
-                SizedBox(height: 16),
-                ReminderToggleSwitch(
-                  isReminderEnabled: isReminderActive,
-                  onChanged: (newVal) {
-                    setState(() {
-                      isReminderActive = newVal;
-                    });
-                  },
-                ),
-                SizedBox(height: 16),
-                GlobalImageInput(onSelectedImage: (image) {}),
-                SizedBox(height: 32),
-                CustomButton(
-                  onPressed: () {},
-                  backgroundColor: kNavyColor,
-                  child: Text("Add Medicine", style: Styles.styleWhite20),
-                ),
-                SizedBox(height: kBottomPadding),
-              ],
+    return Form(
+      autovalidateMode: autoValidateMode,
+      key: formKey,
+      child: Expanded(
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: [
+            SizedBox(height: 8),
+            CustomTextFormField(
+              controller: medicineNameController,
+              label: "Medicine Name",
+              hint: "Enter Medicine Name",
+              validator: (value) => nameValidator(value, context),
             ),
-          ),
-        ],
+            CustomTextFormField(
+              controller: medicineNotesController,
+              label: "Medicine Notes",
+              maxLines: 3,
+            ),
+            SizedBox(height: 8),
+            CustomDropdownSearch(
+              dropDownKey: dropDownKey,
+              hint: 'How Often?',
+              label: "Frequency",
+              showSearchBox: false,
+              list: frequencyList,
+              onChanged: (value) {
+                setState(() {
+                  frequency = value;
+                });
+              },
+              validator: (selectedValue) => dropdownValidator(selectedValue),
+            ),
+            SizedBox(height: 16),
+            CustomDropdownSearch(
+              label: "Medicine Usage",
+              hint: "Enter Medicine Usage",
+              list: medicineUsagesList,
+              onChanged: (value) {
+                setState(() {
+                  medicineUsage = value;
+                });
+              },
+              validator: (selectedValue) => dropdownValidator(selectedValue),
+            ),
+            SizedBox(height: 16),
+            CustomDropdownSearch(
+              label: 'Medicine Type',
+              hint: 'Enter Medicine Type',
+              list: medicineTypesList,
+              onChanged: (value) {
+                setState(() {
+                  medicineTypes = value;
+                });
+              },
+              validator: (selectedValue) => dropdownValidator(selectedValue),
+            ),
+            SizedBox(height: 16),
+            ReminderToggleSwitch(
+              reminders:
+                  dropDownKey.currentState?.getSelectedItem ?? 'Once Daily',
+              isReminderEnabled: isReminderActive,
+              onChangedToggle: (newVal) {
+                setState(() {
+                  isReminderActive = newVal;
+                });
+              },
+              onChangedReminders: (list) {
+                remindersList = list;
+              },
+            ),
+            SizedBox(height: 16),
+            GlobalImageInput(
+              onSelectedImage: (value) {
+                setState(() {
+                  image = value;
+                });
+              },
+            ),
+            SizedBox(height: 32),
+            CustomButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  formKey.currentState!.save();
+                  MedicineEntity medicine = MedicineEntity(
+                    medicineUsage: medicineUsage,
+                    medicineName: medicineNameController.text,
+                    frequency: frequency,
+                    medicineNotes: medicineNotesController.text,
+                    isReminderActive: isReminderActive,
+                    medicineTypes: medicineTypes,
+                    image: image,
+                    remindersTime: remindersList,
+                  );
+                  medicineItems.add(medicine);
+                  GoRouter.of(context).pop();
+                } else {
+                  setState(() {
+                    autoValidateMode = AutovalidateMode.always;
+                  });
+                }
+              },
+              backgroundColor: kNavyColor,
+              child: Text("Add Medicine", style: Styles.styleWhite20),
+            ),
+            SizedBox(height: kBottomPadding),
+          ],
+        ),
       ),
     );
   }

@@ -75,26 +75,9 @@ String? nameValidator(String? value, BuildContext context) {
   return null;
 }
 
-String? medicineTimesValidator(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'This field is required.';
+String? dropdownValidator(String? selectedValue) {
+  if (selectedValue == null) {
+    return 'Please select an item!';
   }
-
-  final number = int.tryParse(value);
-  if (number == null) {
-    return 'Please enter a valid whole number.';
-  }
-
-  const int minValue = 1;
-  const int maxValue = 8;
-
-  if (number < minValue) {
-    return 'Value must be at least $minValue.';
-  }
-
-  if (number > maxValue) {
-    return 'Value cannot be more than $maxValue.';
-  }
-
   return null;
 }

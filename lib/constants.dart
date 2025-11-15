@@ -1,8 +1,5 @@
-import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'core/utils/assets.dart';
-import 'features/welcome/presentation/view_models/on_boarding_model.dart';
 
 const kTransitionDuration = Duration(milliseconds: 400);
 const Color kPrimaryColor = Color.fromRGBO(122, 122, 255, 1);
@@ -37,31 +34,6 @@ class DatabaseKeys {
   static const String uId = "uId";
   static const String serverClientId =
       "1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com";
-}
-
-List<OnBoardingModel> onBoardingPages(context) {
-  return [
-    OnBoardingModel(
-      image: AssetsData.kTrack,
-      title: S.of(context).onBoardingTitle1,
-      subTitle: S.of(context).onBoardingSubTitle1,
-    ),
-    OnBoardingModel(
-      image: AssetsData.kReminder,
-      title: S.of(context).onBoardingTitle2,
-      subTitle: S.of(context).onBoardingSubTitle2,
-    ),
-    OnBoardingModel(
-      image: AssetsData.kOrganizer,
-      title: S.of(context).onBoardingTitle3,
-      subTitle: S.of(context).onBoardingSubTitle3,
-    ),
-    OnBoardingModel(
-      image: AssetsData.kStay,
-      title: S.of(context).onBoardingTitle4,
-      subTitle: S.of(context).onBoardingSubTitle4,
-    ),
-  ];
 }
 
 List<Icon> get bottomNavBarIconsList => const [

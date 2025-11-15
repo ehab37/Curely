@@ -3,6 +3,7 @@ import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
+import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:dots_indicator/dots_indicator.dart';

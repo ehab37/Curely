@@ -60,14 +60,14 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   hint: S.of(context).enterYourName,
                   keyboard: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
-                  validation: (value) => nameValidator(value, context),
+                  validator: (value) => nameValidator(value, context),
                 ),
                 CustomTextFormField(
                   controller: emailController,
                   label: S.of(context).email,
                   hint: S.of(context).enterYourEmail,
                   keyboard: TextInputType.emailAddress,
-                  validation: (value) => emailValidator(value, context),
+                  validator: (value) => emailValidator(value, context),
                   prefixIcon: Icons.email_outlined,
                 ),
                 CustomTextFormField(
@@ -83,7 +83,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     isSecure = !isSecure;
                     setState(() {});
                   },
-                  validation: (value) => passwordValidator(value, context),
+                  validator: (value) => passwordValidator(value, context),
                 ),
                 CustomTextFormField(
                   controller: password2Controller,
@@ -98,7 +98,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     isSecure2 = !isSecure2;
                     setState(() {});
                   },
-                  validation: (value) => confirmPasswordValidator(
+                  validator: (value) => confirmPasswordValidator(
                     value,
                     passwordController.text,
                     context,

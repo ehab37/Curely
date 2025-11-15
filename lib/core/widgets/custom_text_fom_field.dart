@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType? keyboard;
-  final String? Function(String?)? validation;
+  final String? Function(String?)? validator;
   final String label;
   final String? hint;
   final IconData? prefixIcon;
@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.controller,
     this.keyboard,
-    this.validation,
+    this.validator,
     this.hint,
     required this.label,
     this.prefixIcon,
@@ -46,7 +46,7 @@ class CustomTextFormField extends StatelessWidget {
         inputFormatters: inputFormatters,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
-        validator: validation,
+        validator: validator,
         controller: controller,
         decoration: InputDecoration(
           fillColor: Colors.white,

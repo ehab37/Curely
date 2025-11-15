@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/page_view_unit.dart';
 import 'package:flutter/material.dart';
 
