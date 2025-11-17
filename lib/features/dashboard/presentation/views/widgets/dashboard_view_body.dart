@@ -63,7 +63,7 @@ class DashboardViewBody extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.flaskVial,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
-                    // GoRouter.of(context).push(AppRouter.displayAnalysis);
+                    GoRouter.of(context).push(AppRouter.kDisplayAnalysisView);
                   },
                 ),
                 SizedBox(height: 16),

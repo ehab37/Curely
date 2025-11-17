@@ -19,7 +19,7 @@ const List<String> analysisTypesList = [
 List<AnalysisEntity> analysisItems = [];
 
 class AnalysisEntity {
-  final String analysisTypes;
+  final String analysisType;
   final String doctorName;
   final String? lab;
   final String? diagnosis;
@@ -28,7 +28,7 @@ class AnalysisEntity {
   final String? imageUrl;
 
   AnalysisEntity({
-    required this.analysisTypes,
+    required this.analysisType,
     required this.doctorName,
     this.lab,
     this.diagnosis,

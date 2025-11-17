@@ -103,7 +103,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
                     return;
                   }
                   AnalysisEntity analysis = AnalysisEntity(
-                    analysisTypes: analysisType,
+                    analysisType: analysisType,
                     doctorName: doctorNameController.text,
                     lab: labController.text,
                     diagnosis: diagnosisController.text,
