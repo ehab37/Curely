@@ -9,6 +9,7 @@ import 'package:curely/features/dashboard/presentation/views/add_records_views/a
 import 'package:curely/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_medicines_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_prescriptions_view.dart';
+import 'package:curely/features/dashboard/presentation/views/display_records_views/display_rays_view.dart';
 import 'package:curely/features/home/presentation/views/home_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
@@ -102,7 +103,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kDisplayRaysView,
-        builder: (context, state) => const DashboardView(),
+        builder: (context, state) => const DisplayRaysView(),
       ),
       GoRoute(
         path: kDisplayAnalysisView,

@@ -55,7 +55,7 @@ class DashboardViewBody extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.xRay,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
-                    // GoRouter.of(context).push(AppRouter.displayRays);
+                    GoRouter.of(context).push(AppRouter.kDisplayRaysView);
                   },
                 ),
                 CustomNavBar(
