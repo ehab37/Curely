@@ -51,6 +51,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
               controller: doctorNameController,
               label: "Doctor Name",
               hint: "Enter Doctor Name",
+              keyboard: TextInputType.name,
               validator: (value) => nameValidator(value, context),
             ),
             CustomTextFormField(

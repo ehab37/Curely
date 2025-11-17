@@ -43,6 +43,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        cursorHeight: 18,
         inputFormatters: inputFormatters,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),

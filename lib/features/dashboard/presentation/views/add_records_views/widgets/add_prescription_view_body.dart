@@ -52,6 +52,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               controller: doctorNameController,
               label: "Doctor Name",
               hint: "Enter Doctor Name",
+              keyboard: TextInputType.name,
               validator: (value) => nameValidator(value, context),
             ),
             CustomTextFormField(

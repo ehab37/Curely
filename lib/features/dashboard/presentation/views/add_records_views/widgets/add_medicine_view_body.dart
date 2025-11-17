@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
@@ -54,11 +55,13 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
               controller: medicineNameController,
               label: "Medicine Name",
               hint: "Enter Medicine Name",
+              keyboard: TextInputType.name,
               validator: (value) => nameValidator(value, context),
             ),
             CustomTextFormField(
               controller: medicineNotesController,
               label: "Medicine Notes",
+              hint: "Please, Enter any missing information about the medicine.",
               maxLines: 3,
             ),
             SizedBox(height: 8),
@@ -126,18 +129,25 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  MedicineEntity medicine = MedicineEntity(
-                    medicineUsage: medicineUsage,
-                    medicineName: medicineNameController.text,
-                    frequency: frequency,
-                    medicineNotes: medicineNotesController.text,
-                    isReminderActive: isReminderActive,
-                    medicineTypes: medicineTypes,
-                    image: image,
-                    remindersTime: remindersList,
-                  );
-                  medicineItems.add(medicine);
-                  GoRouter.of(context).pop();
+                  try {
+                    MedicineEntity medicine = MedicineEntity(
+                      medicineUsage: medicineUsage,
+                      medicineName: medicineNameController.text,
+                      frequency: frequency,
+                      medicineNotes: medicineNotesController.text,
+                      isReminderActive: isReminderActive,
+                      medicineTypes: medicineTypes,
+                      image: image,
+                      remindersTime: remindersList,
+                    );
+                    setState(() {
+                      medicineItems.add(medicine);
+                    });
+                    GoRouter.of(context).pop();
+                    log("success");
+                  } catch (e) {
+                    log(e.toString());
+                  }
                 } else {
                   setState(() {
                     autoValidateMode = AutovalidateMode.always;
