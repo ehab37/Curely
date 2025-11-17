@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:curely/constants.dart';
+import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
@@ -98,12 +99,16 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
+                  if (image == null) {
+                    InfoBox().customSnackBar(context, "Please select an image");
+                    return;
+                  }
                   PrescriptionEntity prescription = PrescriptionEntity(
                     doctorName: doctorNameController.text,
                     doctorSpecialization: doctorSpecialization,
                     hospital: hospitalController.text,
                     diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate??DateTime.now(),
+                    examinationDate: examinationDate ?? DateTime.now(),
                     image: image!,
                   );
                   prescriptionItems.add(prescription);

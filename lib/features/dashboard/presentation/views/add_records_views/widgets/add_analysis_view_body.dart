@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:curely/constants.dart';
+import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
@@ -97,6 +98,10 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
+                  if (image == null) {
+                    InfoBox().customSnackBar(context, "Please select an image");
+                    return;
+                  }
                   AnalysisEntity analysis = AnalysisEntity(
                     analysisTypes: analysisType,
                     doctorName: doctorNameController.text,

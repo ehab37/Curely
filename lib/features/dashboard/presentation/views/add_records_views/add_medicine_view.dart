@@ -1,6 +1,5 @@
 import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
-import 'package:curely/core/widgets/custom_back_bar.dart';
+import 'package:curely/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/add_medicine_view_body.dart';
 
@@ -15,14 +14,7 @@ class AddMedicineView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
           child: Column(
             children: [
-              SizedBox(height: 8),
-              Row(
-                children: [
-                  CustomBackBar(),
-                  Text("Add Medicine", style: Styles.style33),
-                ],
-              ),
-              SizedBox(height: 8),
+              CustomAppBar(title: "Add Medicine"),
               AddMedicineViewBody(),
             ],
           ),

@@ -43,19 +43,19 @@ class DashboardViewBody extends StatelessWidget {
                   },
                 ),
                 CustomNavBar(
+                  text: "Display Prescriptions",
+                  prefixIcon: FontAwesomeIcons.fileMedical,
+                  suffixIcon: Icons.arrow_forward_ios,
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kDisplayPrescriptionView);
+                  },
+                ),
+                CustomNavBar(
                   text: "Display Rays",
                   prefixIcon: FontAwesomeIcons.xRay,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
                     // GoRouter.of(context).push(AppRouter.displayRays);
-                  },
-                ),
-                CustomNavBar(
-                  text: "Display Prescriptions",
-                  prefixIcon: FontAwesomeIcons.fileMedical,
-                  suffixIcon: Icons.arrow_forward_ios,
-                  onPressed: () {
-                    // GoRouter.of(context).push(AppRouter.displayPrescription);
                   },
                 ),
                 CustomNavBar(

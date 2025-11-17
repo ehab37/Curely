@@ -10,7 +10,7 @@ class DisplayMedicinesViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return DisplayedListView(
       itemBuilder: (context, index) {
-        return DisplayedMedicineItem(displayedItem: medicineItems[index]);
+        return DisplayedMedicineItem(medicineItem: medicineItems[index]);
       },
       displayedList: medicineItems,
     );

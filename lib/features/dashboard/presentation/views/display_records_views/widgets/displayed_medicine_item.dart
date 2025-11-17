@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DisplayedMedicineItem extends StatelessWidget {
-  const DisplayedMedicineItem({super.key, required this.displayedItem});
+  const DisplayedMedicineItem({super.key, required this.medicineItem});
 
-  final MedicineEntity displayedItem;
+  final MedicineEntity medicineItem;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class DisplayedMedicineItem extends StatelessWidget {
                 child: Icon(
                   Icons.access_alarms_outlined,
                   size: 25,
-                  color: displayedItem.isReminderActive
+                  color: medicineItem.isReminderActive
                       ? kNavyColor
                       : kGrayColor,
                 ),
@@ -36,11 +36,11 @@ class DisplayedMedicineItem extends StatelessWidget {
           ),
           Icon(FontAwesomeIcons.pills, size: 50, color: kNavyColor),
           Spacer(),
-          Text(displayedItem.medicineName, style: Styles.styleBlue20),
+          Text(medicineItem.medicineName, style: Styles.styleBlue20),
           SizedBox(height: 4),
-          Text(displayedItem.medicineTypes, style: Styles.style16),
+          Text(medicineItem.medicineTypes, style: Styles.style16),
           SizedBox(height: 4),
-          Text(displayedItem.medicineUsage, style: Styles.style16),
+          Text(medicineItem.medicineUsage, style: Styles.style16),
           SizedBox(height: 12),
         ],
       ),
