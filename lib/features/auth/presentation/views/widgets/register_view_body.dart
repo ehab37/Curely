@@ -139,7 +139,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         );
                         FocusScope.of(context).unfocus();
                       } else {
-                        InfoBox().customSnackBar(
+                        InfoBox.customSnackBar(
                           context,
                           S.of(context).TermsAndConditionsMustBeAccepted,
                         );

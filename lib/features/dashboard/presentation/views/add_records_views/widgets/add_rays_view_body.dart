@@ -100,7 +100,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   if (image == null) {
-                    InfoBox().customSnackBar(context, "Please select an image");
+                    InfoBox.customSnackBar(context, "Please select an image");
                     return;
                   }
                   RaysEntity rays = RaysEntity(

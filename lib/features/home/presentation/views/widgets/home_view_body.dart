@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:curely/constants.dart';
+import 'package:curely/core/services/current_location.dart';
+import 'package:curely/core/services/url_services.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'circle_card.dart';
 
@@ -38,8 +43,12 @@ class HomeViewBody extends StatelessWidget {
                   text: "Pharmacy",
                   icon: Icons.local_pharmacy_rounded,
                   onPressed: () async {
-                    // await getCurrentLocation();
-                    // await navigateToNearestPharmacy();
+                    final Position? position = await getCurrentUserLocation();
+                    if (position != null) {
+                      await navigateToNearestPharmacy(currentLocation: position);
+                    } else {
+                      log("'Current location is required.'");
+                    }
                   },
                 ),
                 CardCircle(
@@ -47,7 +56,7 @@ class HomeViewBody extends StatelessWidget {
                   icon: FontAwesomeIcons.truckMedical,
                   size: 25,
                   onPressed: () {
-                    // navigateToPhone("123");
+                    navigateToPhone("123");
                   },
                 ),
                 CardCircle(

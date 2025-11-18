@@ -62,7 +62,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                   BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
                     listener: (context, state) {
                       if (state is ResetPasswordFailure) {
-                        InfoBox().customSnackBar(context, state.errMessage);
+                        InfoBox.customSnackBar(context, state.errMessage);
                       }
                     },
                     builder: (context, state) {

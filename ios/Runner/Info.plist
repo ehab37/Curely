@@ -67,5 +67,11 @@
             </array>
         </dict>
     </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>tel</string>
+    </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need access to location to get the nearest pharmacy.</string>
 </dict>
 </plist>

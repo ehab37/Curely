@@ -4,7 +4,7 @@ import 'package:curely/constants.dart';
 import 'package:flutter/material.dart';
 
 class InfoBox {
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customSnackBar(
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customSnackBar(
     BuildContext context,
     String message,
   ) {
@@ -13,7 +13,7 @@ class InfoBox {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
   customImageSnackBar({
     required BuildContext context,
     required Widget content,
@@ -27,7 +27,7 @@ class InfoBox {
     );
   }
 
-  void successFloatingBox(BuildContext context) {
+  static void successFloatingBox(BuildContext context) {
     return CherryToast.success(
       inheritThemeColors: true,
       title: const Text('Logout Successful'),
