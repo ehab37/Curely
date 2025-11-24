@@ -1,4 +1,4 @@
-import 'package:curely/features/dashboard/entities/rays_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'displayed_item.dart';

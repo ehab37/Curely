@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:curely/constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/features/auth/data/models/user_model.dart';

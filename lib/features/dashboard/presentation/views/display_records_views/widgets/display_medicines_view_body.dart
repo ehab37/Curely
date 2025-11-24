@@ -1,4 +1,4 @@
-import 'package:curely/features/dashboard/entities/medicine_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_list_view.dart';
 import 'package:flutter/material.dart';
 import 'displayed_medicine_item.dart';

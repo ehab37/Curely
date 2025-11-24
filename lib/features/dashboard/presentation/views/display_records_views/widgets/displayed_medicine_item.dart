@@ -1,6 +1,6 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/features/dashboard/entities/medicine_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

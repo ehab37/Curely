@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
@@ -7,11 +6,12 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
-import 'package:curely/features/dashboard/entities/medicine_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
+import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddMedicineViewBody extends StatefulWidget {
   const AddMedicineViewBody({super.key});
@@ -126,28 +126,22 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             ),
             SizedBox(height: 32),
             CustomButton(
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  try {
-                    MedicineEntity medicine = MedicineEntity(
-                      medicineUsage: medicineUsage,
-                      medicineName: medicineNameController.text,
-                      frequency: frequency,
-                      medicineNotes: medicineNotesController.text,
-                      isReminderActive: isReminderActive,
-                      medicineTypes: medicineTypes,
-                      image: image,
-                      remindersTime: remindersList,
-                    );
-                    setState(() {
-                      medicineItems.add(medicine);
-                    });
-                    GoRouter.of(context).pop();
-                    log("success");
-                  } catch (e) {
-                    log(e.toString());
-                  }
+                  MedicineEntity medicine = MedicineEntity(
+                    medicineUsage: medicineUsage,
+                    medicineName: medicineNameController.text,
+                    frequency: frequency,
+                    medicineNotes: medicineNotesController.text,
+                    isReminderActive: isReminderActive,
+                    medicineTypes: medicineTypes,
+                    image: image,
+                    remindersTime: remindersList,
+                  );
+                  await context.read<AddMedicineCubit>().addMedicine(
+                    medicine: medicine,
+                  );
                 } else {
                   setState(() {
                     autoValidateMode = AutovalidateMode.always;

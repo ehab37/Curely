@@ -8,12 +8,21 @@ class FirestoreServices implements DatabaseService {
   Future<void> addData({
     required String path,
     required Map<String, dynamic> data,
-    String? docId
+    String? docId,
+    String? subCollectionPath,
   }) async {
-    if (docId != null) {
-      await firestore.collection(path).doc(docId).set(data);
-    }else{
-      await firestore.collection(path).add(data);
+    if (subCollectionPath != null) {
+      await firestore
+          .collection(path)
+          .doc(docId)
+          .collection(subCollectionPath)
+          .add(data);
+    } else {
+      if (docId != null) {
+        await firestore.collection(path).doc(docId).set(data);
+      } else {
+        await firestore.collection(path).add(data);
+      }
     }
   }
 
@@ -25,9 +34,12 @@ class FirestoreServices implements DatabaseService {
     var data = await firestore.collection(path).doc(docId).get();
     return data.data()!;
   }
+
   @override
-  Future<bool> checkIfDataExists(
-      {required String path, required String docId}) async {
+  Future<bool> checkIfDataExists({
+    required String path,
+    required String docId,
+  }) async {
     var data = await firestore.collection(path).doc(docId).get();
     return data.exists;
   }

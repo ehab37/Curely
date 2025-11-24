@@ -76,7 +76,7 @@ class MedicineEntity {
   final bool isReminderActive;
   final List<TimeOfDay?>? remindersTime;
   final File? image;
-  final String? imageUrl;
+  String? imageUrl;
 
   MedicineEntity({
     required this.medicineUsage,

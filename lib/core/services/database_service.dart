@@ -3,6 +3,7 @@ abstract class DatabaseService {
     required String path,
     required Map<String, dynamic> data,
     String? docId,
+    String? subCollectionPath,
   });
 
   Future<Map<String, dynamic>> getData({

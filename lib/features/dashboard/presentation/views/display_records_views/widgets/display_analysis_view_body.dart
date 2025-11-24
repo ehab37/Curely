@@ -1,4 +1,4 @@
-import 'package:curely/features/dashboard/entities/analysis_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

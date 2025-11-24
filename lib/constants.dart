@@ -34,6 +34,12 @@ class DatabaseKeys {
   static const String uId = "uId";
   static const String serverClientId =
       "1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com";
+  static const String imagesPath = "images";
+  static const String profilePath = "profile";
+  static const String medicinePath = "medicine";
+  static const String prescriptionPath = "prescription";
+  static const String raysPath = "rays";
+  static const String analysisPath = "analysis";
 }
 
 List<Icon> get bottomNavBarIconsList => const [

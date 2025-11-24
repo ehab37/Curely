@@ -8,7 +8,7 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
-import 'package:curely/features/dashboard/entities/rays_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'examination_date_box.dart';

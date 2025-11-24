@@ -4,17 +4,13 @@ import 'package:curely/constants.dart';
 import 'package:flutter/material.dart';
 
 class InfoBox {
-  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customSnackBar(
-    BuildContext context,
-    String message,
-  ) {
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customSnackBar(BuildContext context, String message) {
     return ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
-  customImageSnackBar({
+   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customImageSnackBar({
     required BuildContext context,
     required Widget content,
   }) {
@@ -35,7 +31,7 @@ class InfoBox {
     ).show(context);
   }
 
-  void customFloatingBox(BuildContext context) {
+  static void customFloatingBox(BuildContext context) {
     return CherryToast(
       inheritThemeColors: true,
       iconWidget: Icon(Icons.car_repair),
@@ -50,7 +46,7 @@ class InfoBox {
     ).show(context);
   }
 
-  void errorFloatingBox(BuildContext context) {
+  static void errorFloatingBox(BuildContext context) {
     return CherryToast.error(
       enableIconAnimation: false,
       inheritThemeColors: true,
@@ -61,7 +57,7 @@ class InfoBox {
     ).show(context);
   }
 
-  void warningFloatingBox(BuildContext context) {
+  static void warningFloatingBox(BuildContext context) {
     return CherryToast.warning(
       inheritThemeColors: true,
       description: const Text(
@@ -73,7 +69,7 @@ class InfoBox {
     ).show(context);
   }
 
-  void infoFloatingBox(BuildContext context) {
+  static void infoFloatingBox(BuildContext context) {
     return CherryToast.info(
       disableToastAnimation: true,
       title: const Text(
