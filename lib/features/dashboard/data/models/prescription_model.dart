@@ -7,7 +7,7 @@ class PrescriptionModel {
   final String doctorName;
   final String? hospital;
   final String? diagnosis;
-  final DateTime examinationDate;
+  final String examinationDate;
   final File? image;
   String imageUrl;
 
@@ -42,7 +42,7 @@ class PrescriptionModel {
       hospital: hospital,
       diagnosis: diagnosis,
       examinationDate: examinationDate,
-      image: image!,
+      image: image,
       imageUrl: imageUrl,
     );
   }

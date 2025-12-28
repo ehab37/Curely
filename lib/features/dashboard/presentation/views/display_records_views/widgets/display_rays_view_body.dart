@@ -12,7 +12,7 @@ class DisplayRaysViewBody extends StatelessWidget {
     return DisplayedListView(
       itemBuilder: (context, index) {
         return DisplayedItem(
-          file: raysItems[index].image,
+          imageUrl: raysItems[index].image.toString(),
           text1: raysItems[index].doctorName,
           text2: raysItems[index].raysType,
           text3: DateFormat(

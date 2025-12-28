@@ -13,7 +13,7 @@ class DisplayAnalysisViewBody extends StatelessWidget {
     return DisplayedListView(
       itemBuilder: (context, index) {
         return DisplayedItem(
-          file: analysisItems[index].image,
+          imageUrl: analysisItems[index].image.toString(),
           text1: analysisItems[index].doctorName,
           text2: analysisItems[index].analysisType,
           text3: DateFormat(

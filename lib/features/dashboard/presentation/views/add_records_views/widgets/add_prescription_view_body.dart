@@ -108,7 +108,9 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                     doctorSpecialization: doctorSpecialization,
                     hospital: hospitalController.text,
                     diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate ?? DateTime.now(),
+                    examinationDate: examinationDate == null
+                        ? DateTime.now().toString()
+                        : examinationDate.toString(),
                     image: image!,
                   );
                   await context.read<AddPrescriptionCubit>().addPrescription(

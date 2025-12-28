@@ -1,9 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:curely/constants.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'add_prescription_state.dart';
 
@@ -20,7 +20,7 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
   }) async {
     emit(AddPrescriptionLoading());
     var result = await imagesRepo.uploadImage(
-      imageFile: prescription.image,
+      imageFile: prescription.image!,
       path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.prescriptionPath}',
     );
     result.fold(

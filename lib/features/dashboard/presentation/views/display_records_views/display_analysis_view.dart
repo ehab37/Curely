@@ -14,7 +14,7 @@ class DisplayAnalysisView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
           child: Column(
             children: [
-              CustomAppBar(title: "Add Analysis"),
+              CustomAppBar(title: "Analysis"),
                 DisplayAnalysisViewBody(),
             ],
           ),

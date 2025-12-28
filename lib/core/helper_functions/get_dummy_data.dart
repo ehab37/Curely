@@ -1,4 +1,5 @@
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
+import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 
 MedicineEntity medicineEntity() {
   return MedicineEntity(
@@ -17,5 +18,23 @@ List<MedicineEntity> getDummyMedicines (){
     medicineEntity(),
     medicineEntity(),
     medicineEntity(),
+  ];
+}
+
+PrescriptionEntity prescriptionEntity() {
+  return PrescriptionEntity(
+    doctorSpecialization: 'Dentistry',
+    doctorName: 'ehab',
+    examinationDate: DateTime.now().toString(),
+  );
+}
+List<PrescriptionEntity> getDummyPrescriptions (){
+  return [
+    prescriptionEntity(),
+    prescriptionEntity(),
+    prescriptionEntity(),
+    prescriptionEntity(),
+    prescriptionEntity(),
+    prescriptionEntity(),
   ];
 }
