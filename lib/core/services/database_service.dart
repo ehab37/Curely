@@ -6,10 +6,16 @@ abstract class DatabaseService {
     String? subCollectionPath,
   });
 
-  Future<Map<String, dynamic>> getData({
+  Future<dynamic> getData({
     required String path,
     required String docId,
+    String? subCollectionPath,
   });
-  Future<bool> checkIfDataExists(
-      {required String path, required String docId});
+
+  Future<void> deleteData({
+    required String path,
+    required String docId,
+    String? subCollectionPath,
+    String? subDocId,
+  });
 }

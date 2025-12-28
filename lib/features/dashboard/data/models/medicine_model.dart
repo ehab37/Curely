@@ -1,19 +1,20 @@
 import 'dart:io';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
-import 'package:flutter/material.dart';
 
 class MedicineModel {
+  final String? docId;
   final String medicineUsage;
   final String medicineName;
   final String frequency;
   final String? medicineNotes;
   final String medicineTypes;
   final bool isReminderActive;
-  final List<TimeOfDay?>? remindersTime;
+  final List<dynamic>? remindersTime;
   final File? image;
   String? imageUrl;
 
   MedicineModel({
+    this.docId,
     required this.medicineUsage,
     required this.medicineName,
     required this.frequency,
@@ -27,6 +28,7 @@ class MedicineModel {
 
   factory MedicineModel.fromJson(Map<String, dynamic> json) {
     return MedicineModel(
+      docId: json['docId'],
       medicineUsage: json['medicineUsage'],
       medicineName: json['medicineName'],
       frequency: json['frequency'],
@@ -35,6 +37,21 @@ class MedicineModel {
       remindersTime: json['remindersTime'],
       medicineTypes: json['medicineTypes'],
       imageUrl: json['imageUrl'],
+    );
+  }
+
+  MedicineEntity toEntity() {
+    return MedicineEntity(
+      docId: docId!,
+      medicineUsage: medicineUsage,
+      medicineName: medicineName,
+      frequency: frequency,
+      medicineNotes: medicineNotes,
+      isReminderActive: isReminderActive,
+      remindersTime: remindersTime,
+      medicineTypes: medicineTypes,
+      image: image,
+      imageUrl: imageUrl,
     );
   }
 

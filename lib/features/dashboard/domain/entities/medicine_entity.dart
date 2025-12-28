@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-
 const List<String> medicineTypesList = [
   "Tablet",
   "Capsule",
@@ -68,17 +66,19 @@ const List<String> frequencyList = [
 List<MedicineEntity> medicineItems = [];
 
 class MedicineEntity {
+  final String? docId;
   final String medicineUsage;
   final String medicineName;
   final String frequency;
   final String? medicineNotes;
   final String medicineTypes;
   final bool isReminderActive;
-  final List<TimeOfDay?>? remindersTime;
+  final List<dynamic>? remindersTime;
   final File? image;
   String? imageUrl;
 
   MedicineEntity({
+    this.docId,
     required this.medicineUsage,
     required this.medicineName,
     required this.frequency,
