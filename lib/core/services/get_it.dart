@@ -8,7 +8,9 @@ import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/dashboard/data/repos/medicine_repo_impl.dart';
+import 'package:curely/features/dashboard/data/repos/prescription_repo_impl.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
+import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -28,5 +30,8 @@ void setupGetIt() {
   );
   getIt.registerSingleton<MedicineRepo>(
     MedicineRepoImpl(databaseService: getIt<DatabaseService>()),
+  );
+  getIt.registerSingleton<PrescriptionRepo>(
+    PrescriptionRepoImpl(databaseService: getIt<DatabaseService>()),
   );
 }

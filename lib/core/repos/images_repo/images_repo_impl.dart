@@ -25,7 +25,7 @@ class ImagesRepoImpl implements ImagesRepo {
       log(e.toString());
       return Left(
         OtherErrors.fromOtherErrors(
-          "Something went wrong while uploading image, try again later",
+          "Something went wrong while uploading image, try again later.",
         ),
       );
     }

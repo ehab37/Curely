@@ -4,6 +4,7 @@ import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'add_medicine_state.dart';
 
 class AddMedicineCubit extends Cubit<AddMedicineState> {

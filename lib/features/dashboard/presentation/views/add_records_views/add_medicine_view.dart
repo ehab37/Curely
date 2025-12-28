@@ -20,8 +20,7 @@ class AddMedicineView extends StatelessWidget {
       create: (context) => AddMedicineCubit(
         imagesRepo: getIt<ImagesRepo>(),
         medicineRepo: getIt<MedicineRepo>(),
-      ),
-      child: Scaffold(
+      ),      child: Scaffold(
         body: Builder(
           builder: (context) {
             return BlocConsumer<AddMedicineCubit, AddMedicineState>(

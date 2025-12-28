@@ -21,15 +21,17 @@ const List<String> doctorSpecializationsList = [
 List<PrescriptionEntity> prescriptionItems = [];
 
 class PrescriptionEntity {
+  final String? docId;
   final String doctorSpecialization;
   final String doctorName;
   final String? hospital;
   final String? diagnosis;
   final DateTime examinationDate;
   final File image;
-  final String? imageUrl;
+  String? imageUrl;
 
   PrescriptionEntity({
+    this.docId,
     required this.doctorSpecialization,
     required this.doctorName,
     this.hospital,

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
@@ -9,8 +8,9 @@ import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
+import 'package:curely/features/dashboard/presentation/cubits/add_prescription_cubit/add_prescription_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'examination_date_box.dart';
 
 class AddPrescriptionViewBody extends StatefulWidget {
@@ -96,7 +96,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
             ),
             SizedBox(height: 32),
             CustomButton(
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   if (image == null) {
@@ -111,8 +111,9 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                     examinationDate: examinationDate ?? DateTime.now(),
                     image: image!,
                   );
-                  prescriptionItems.add(prescription);
-                  GoRouter.of(context).pop();
+                  await context.read<AddPrescriptionCubit>().addPrescription(
+                    prescription: prescription,
+                  );
                 } else {
                   setState(() {
                     autoValidateMode = AutovalidateMode.always;
