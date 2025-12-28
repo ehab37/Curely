@@ -1,18 +1,92 @@
-import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
+import 'package:curely/constants.dart';
+import 'package:curely/core/helper_functions/get_dummy_data.dart';
+import 'package:curely/core/helper_functions/info_box.dart';
+import 'package:curely/core/utils/styles.dart';
+import 'package:curely/features/dashboard/presentation/cubits/get_delete_medicine_cubit/get_delete_medicines_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'displayed_medicine_item.dart';
 
-class DisplayMedicinesViewBody extends StatelessWidget {
+class DisplayMedicinesViewBody extends StatefulWidget {
   const DisplayMedicinesViewBody({super.key});
 
   @override
+  State<DisplayMedicinesViewBody> createState() =>
+      _DisplayMedicinesViewBodyState();
+}
+
+class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
+  @override
+  void initState() {
+    context.read<GetDeleteMedicinesCubit>().getMedicines();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DisplayedListView(
-      itemBuilder: (context, index) {
-        return DisplayedMedicineItem(medicineItem: medicineItems[index]);
+    return BlocBuilder<GetDeleteMedicinesCubit, GetDeleteMedicinesState>(
+      builder: (context, state) {
+        if (state is GetMedicinesSuccess) {
+          if (state.medicines.isEmpty) {
+            return SliverToBoxAdapter(
+              child: Center(
+                child: Text(
+                  "NO Medicines added yet!...",
+                  style: Styles.styleBlue25,
+                ),
+              ),
+            );
+          }
+          return DisplayedListView(
+            itemBuilder: (context, index) {
+              return Dismissible(
+                key: Key(state.medicines[index].docId!),
+                background: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusGeometry.circular(kBorderRadius),
+                    color: kErrorColor,
+                  ),
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: const Icon(Icons.delete, color: Colors.white),
+                ),
+                direction: DismissDirection.startToEnd,
+                onDismissed: (direction) => context
+                    .read<GetDeleteMedicinesCubit>()
+                    .deleteMedicines(docId: state.medicines[index].docId!),
+                child: DisplayedMedicineItem(
+                  medicineItem: state.medicines[index],
+                ),
+              );
+            },
+            displayedList: state.medicines,
+          );
+        } else if (state is GetMedicinesFailure) {
+          return SliverToBoxAdapter(
+            child: Center(
+              child: Text(state.errMessage, style: Styles.styleBlue25),
+            ),
+          );
+        } else {
+          if (state is DeleteMedicinesFailure) {
+            InfoBox.customSnackBar(context, state.errMessage);
+          } else if (state is DeleteMedicinesSuccess) {
+            InfoBox.customSnackBar(context, "Item deleted successfully.");
+          }
+          return Skeletonizer.sliver(
+            child: DisplayedListView(
+              itemBuilder: (context, index) {
+                return DisplayedMedicineItem(
+                  medicineItem: getDummyMedicines()[index],
+                );
+              },
+              displayedList: getDummyMedicines(),
+            ),
+          );
+        }
       },
-      displayedList: medicineItems,
     );
   }
 }

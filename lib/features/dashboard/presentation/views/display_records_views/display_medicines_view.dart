@@ -1,6 +1,10 @@
 import 'package:curely/constants.dart';
+import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
+import 'package:curely/features/dashboard/presentation/cubits/get_delete_medicine_cubit/get_delete_medicines_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/display_medicines_view_body.dart';
 
 class DisplayMedicinesView extends StatelessWidget {
@@ -8,14 +12,18 @@ class DisplayMedicinesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-          child: Column(
-            children: [
-              CustomAppBar(title: "Display Medicines"),
-              DisplayMedicinesViewBody(),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: CustomAppBar(title: "Display Medicines")),
+              BlocProvider(
+                create: (context) =>
+                    GetDeleteMedicinesCubit(medicineRepo: getIt<MedicineRepo>()),
+                child: DisplayMedicinesViewBody(),
+              ),
             ],
           ),
         ),

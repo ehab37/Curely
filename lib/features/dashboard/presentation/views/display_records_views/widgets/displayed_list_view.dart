@@ -12,18 +12,15 @@ class DisplayedListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1 / 1.3,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-        ),
-        physics: const BouncingScrollPhysics(),
-        itemCount: displayedList.length,
-        itemBuilder: itemBuilder,
+    return SliverGrid.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1 / 1.3,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
       ),
+      itemCount: displayedList.length,
+      itemBuilder: itemBuilder,
     );
   }
 }
