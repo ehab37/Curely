@@ -11,7 +11,7 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_medicines_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_prescriptions_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_rays_view.dart';
-import 'package:curely/features/home/presentation/views/home_view.dart';
+import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
@@ -28,7 +28,9 @@ abstract class AppRouter {
   static const kRegisterView = "/registerView";
   static const kResetPasswordView = "/resetPasswordView";
   static const kTermsAndConditionsView = "/termsAndConditionsView";
+  static const kMainView = "/mainView";
   static const kHomeView = "/homeView";
+  static const kSearchView = "/searchView";
   static const kProfileView = "/profileView";
   static const kDashboardView = "/dashboardView";
   static const kAddMedicineView = "/addMedicineView";
@@ -69,7 +71,12 @@ abstract class AppRouter {
         path: kTermsAndConditionsView,
         builder: (context, state) => const TermsAndConditionsView(),
       ),
-      GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
+      GoRoute(path: kMainView, builder: (context, state) => const MainView()),
+      // GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
+      // GoRoute(
+      //   path: kSearchView,
+      //   builder: (context, state) => const SearchView(),
+      // ),
       GoRoute(
         path: kProfileView,
         builder: (context, state) => const ProfileView(),

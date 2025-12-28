@@ -22,8 +22,7 @@ class RegisterView extends StatelessWidget {
             return BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSuccess) {
-                  GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
-                  // CacheHelper.putBoolData(key: kIsUserLogin, value: true);
+                  GoRouter.of(context).pushReplacement(AppRouter.kMainView);
                 } else if (state is RegisterFailure) {
                   InfoBox.customSnackBar(context, state.errMessage);
                 }

@@ -1,7 +1,6 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/core/widgets/custom_back_bar.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_square_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class DashboardViewBody extends StatelessWidget {
           SizedBox(height: 8),
           const Row(
             children: [
-              CustomBackBar(),
               Text(" Dashboard", style: Styles.style33),
               Spacer(),
               Icon(FontAwesomeIcons.fileMedical, size: 28, color: kNavyColor),

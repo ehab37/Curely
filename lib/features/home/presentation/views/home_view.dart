@@ -1,22 +1,20 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
-import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
 import 'package:curely/features/home/presentation/views/widgets/custom_icon_button.dart';
 import 'package:curely/features/home/presentation/views/widgets/home_drawer.dart';
 import 'package:curely/features/home/presentation/views/widgets/home_view_body.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, required this.bottomNavigationKey});
+  final GlobalKey<CurvedNavigationBarState> bottomNavigationKey;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key,
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
@@ -30,12 +28,12 @@ class HomeView extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CustomIconButton(onPressed:(){
-              GoRouter.of(context).push(AppRouter.kProfileView);
-              // final CurvedNavigationBarState? navBarState =
-              //     _bottomNavigationKey.currentState;
-              // navBarState?.setPage(1);
-            },icon: Icons.account_circle,),
+            child: CustomIconButton(
+              onPressed: () {
+                bottomNavigationKey.currentState?.setPage(3);
+              },
+              icon: Icons.account_circle,
+            ),
           ),
         ],
         title: Column(
@@ -47,8 +45,7 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(),
-      drawer: const HomeDrawer(),
+      drawer: HomeDrawer(bottomNavigationKey: bottomNavigationKey),
       body: const HomeViewBody(),
     );
   }

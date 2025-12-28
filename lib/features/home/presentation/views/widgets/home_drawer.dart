@@ -3,12 +3,15 @@ import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/utils/app_router.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  const HomeDrawer({super.key, required this.bottomNavigationKey});
+
+  final GlobalKey<CurvedNavigationBarState> bottomNavigationKey;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class HomeDrawer extends StatelessWidget {
             title: const Text("Dashboard"),
             leading: const Icon(Icons.dashboard),
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kDashboardView);
+              bottomNavigationKey.currentState?.setPage(1);
             },
           ),
           const ListTile(title: Text("Reminder"), leading: Icon(Icons.alarm)),
@@ -41,7 +44,7 @@ class HomeDrawer extends StatelessWidget {
             title: const Text("Profile"),
             leading: const Icon(FontAwesomeIcons.circleUser),
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kProfileView);
+              bottomNavigationKey.currentState?.setPage(3);
             },
           ),
           ListTile(

@@ -65,7 +65,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
                 ? isUserLogin
                       ? GoRouter.of(
                           context,
-                        ).pushReplacement(AppRouter.kHomeView)
+                        ).pushReplacement(AppRouter.kMainView)
                       : GoRouter.of(
                           context,
                         ).pushReplacement(AppRouter.kWelcomeView)
