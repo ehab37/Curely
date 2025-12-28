@@ -18,4 +18,6 @@ abstract class DatabaseService {
     String? subCollectionPath,
     String? subDocId,
   });
+
+  Future<bool> checkIfDataExists({required String path, required String docId});
 }
