@@ -7,9 +7,11 @@ import 'package:curely/core/services/firestore_services.dart';
 import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
+import 'package:curely/features/dashboard/data/repos/analysis_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/medicine_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/prescription_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/rays_repo_impl.dart';
+import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -38,5 +40,8 @@ void setupGetIt() {
   );
   getIt.registerSingleton<RaysRepo>(
     RaysRepoImpl(databaseService: getIt<DatabaseService>()),
+  );
+  getIt.registerSingleton<AnalysisRepo>(
+    AnalysisRepoImpl(databaseService: getIt<DatabaseService>()),
   );
 }

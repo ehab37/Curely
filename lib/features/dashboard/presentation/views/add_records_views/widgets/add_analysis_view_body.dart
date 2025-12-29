@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
@@ -9,9 +8,10 @@ import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
+import 'package:curely/features/dashboard/presentation/cubits/add_analysis_cubit/add_analysis_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/examination_date_box.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddAnalysisViewBody extends StatefulWidget {
   const AddAnalysisViewBody({super.key});
@@ -95,7 +95,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
             ),
             SizedBox(height: 32),
             CustomButton(
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   if (image == null) {
@@ -107,11 +107,14 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
                     doctorName: doctorNameController.text,
                     lab: labController.text,
                     diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate ?? DateTime.now(),
+                    examinationDate: examinationDate == null
+                        ? DateTime.now().toString()
+                        : examinationDate.toString(),
                     image: image!,
                   );
-                  analysisItems.add(analysis);
-                  GoRouter.of(context).pop();
+                  await context.read<AddAnalysisCubit>().addAnalysis(
+                    analysis: analysis,
+                  );
                 } else {
                   setState(() {
                     autoValidateMode = AutovalidateMode.always;

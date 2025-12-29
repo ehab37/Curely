@@ -16,24 +16,24 @@ const List<String> analysisTypesList = [
   'Other',
 ];
 
-List<AnalysisEntity> analysisItems = [];
-
 class AnalysisEntity {
+  final String? docId;
   final String analysisType;
   final String doctorName;
   final String? lab;
   final String? diagnosis;
-  final DateTime examinationDate;
-  final File image;
-  final String? imageUrl;
+  final String examinationDate;
+  final File? image;
+  String? imageUrl;
 
   AnalysisEntity({
+    this.docId,
     required this.analysisType,
     required this.doctorName,
     this.lab,
     this.diagnosis,
     required this.examinationDate,
-    required this.image,
+     this.image,
     this.imageUrl,
   });
 }

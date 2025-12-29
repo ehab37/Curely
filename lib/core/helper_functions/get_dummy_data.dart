@@ -1,3 +1,4 @@
+import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
@@ -11,7 +12,8 @@ MedicineEntity medicineEntity() {
     medicineTypes: "Tablet",
   );
 }
-List<MedicineEntity> getDummyMedicines (){
+
+List<MedicineEntity> getDummyMedicines() {
   return [
     medicineEntity(),
     medicineEntity(),
@@ -29,7 +31,8 @@ PrescriptionEntity prescriptionEntity() {
     examinationDate: DateTime.now().toString(),
   );
 }
-List<PrescriptionEntity> getDummyPrescriptions (){
+
+List<PrescriptionEntity> getDummyPrescriptions() {
   return [
     prescriptionEntity(),
     prescriptionEntity(),
@@ -47,7 +50,8 @@ RaysEntity raysEntity() {
     examinationDate: DateTime.now().toString(),
   );
 }
-List<RaysEntity> getDummyRays (){
+
+List<RaysEntity> getDummyRays() {
   return [
     raysEntity(),
     raysEntity(),
@@ -55,5 +59,24 @@ List<RaysEntity> getDummyRays (){
     raysEntity(),
     raysEntity(),
     raysEntity(),
+  ];
+}
+
+AnalysisEntity analysisEntity() {
+  return AnalysisEntity(
+    analysisType: 'Cardiogram',
+    doctorName: 'ehab',
+    examinationDate: DateTime.now().toString(),
+  );
+}
+
+List<AnalysisEntity> getDummyAnalysis() {
+  return [
+    analysisEntity(),
+    analysisEntity(),
+    analysisEntity(),
+    analysisEntity(),
+    analysisEntity(),
+    analysisEntity(),
   ];
 }
