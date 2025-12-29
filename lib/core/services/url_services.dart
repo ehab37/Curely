@@ -1,14 +1,15 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> navigateToPhone(String phoneNumber) async {
-  final Uri url = Uri.parse('tel:$phoneNumber');
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
+class UrlServices{
+  Future<void> navigateToPhone({required String phoneNumber}) async {
+    final Uri url = Uri.parse('tel:$phoneNumber');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 
 Future<void> navigateToNearestPharmacy({
   required Position currentLocation,

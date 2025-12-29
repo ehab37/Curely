@@ -5,6 +5,7 @@ import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
 import 'package:curely/core/services/storage_services.dart';
+import 'package:curely/core/services/url_services.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/dashboard/data/repos/analysis_repo_impl.dart';
@@ -15,6 +16,8 @@ import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
+import 'package:curely/features/home/data/repos/home_repo_impl.dart';
+import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -22,6 +25,7 @@ final getIt = GetIt.instance;
 void setupGetIt() {
   getIt.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
   getIt.registerSingleton<DatabaseService>(FirestoreServices());
+  getIt.registerSingleton<UrlServices>(UrlServices());
   getIt.registerSingleton<StorageServices>(FireStorage());
   getIt.registerSingleton<AuthRepo>(
     AuthRepoImpl(
@@ -43,5 +47,11 @@ void setupGetIt() {
   );
   getIt.registerSingleton<AnalysisRepo>(
     AnalysisRepoImpl(databaseService: getIt<DatabaseService>()),
+  );
+  getIt.registerSingleton<HomeRepo>(
+    HomeRepoImpl(
+      urlServices: getIt<UrlServices>(),
+      firebaseAuthServices: getIt<FirebaseAuthServices>(),
+    ),
   );
 }
