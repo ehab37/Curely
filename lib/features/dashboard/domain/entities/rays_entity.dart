@@ -13,24 +13,25 @@ const List<String> raysTypesList = [
   'Isotope',
   'Other',
 ];
-List<RaysEntity> raysItems = [];
 
 class RaysEntity {
+  final String? docId;
   final String raysType;
   final String doctorName;
   final String? radiologyCenter;
   final String? diagnosis;
-  final DateTime examinationDate;
-  final File image;
-  final String? imageUrl;
+  final String examinationDate;
+  final File? image;
+  String? imageUrl;
 
   RaysEntity({
+    this.docId,
     required this.raysType,
     required this.doctorName,
     this.radiologyCenter,
     this.diagnosis,
     required this.examinationDate,
-    required this.image,
+    this.image,
     this.imageUrl,
   });
 }

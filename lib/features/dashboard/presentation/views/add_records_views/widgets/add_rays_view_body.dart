@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:curely/constants.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/helper_functions/validation_functions.dart';
@@ -9,8 +8,9 @@ import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
+import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'examination_date_box.dart';
 
 class AddRaysViewBody extends StatefulWidget {
@@ -96,7 +96,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
             ),
             SizedBox(height: 32),
             CustomButton(
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   if (image == null) {
@@ -108,11 +108,12 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                     doctorName: doctorNameController.text,
                     radiologyCenter: radiologyCenterController.text,
                     diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate ?? DateTime.now(),
+                    examinationDate: examinationDate == null
+                        ? DateTime.now().toString()
+                        : examinationDate.toString(),
                     image: image!,
                   );
-                  raysItems.add(rays);
-                  GoRouter.of(context).pop();
+                  await context.read<AddRaysCubit>().addRays(rays: rays);
                 } else {
                   setState(() {
                     autoValidateMode = AutovalidateMode.always;
