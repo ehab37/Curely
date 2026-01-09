@@ -57,7 +57,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
     final bool isOnBoardingViewSeen = CacheHelper.getData(
       key: kIsOnBoardingViewSeen,
     );
-    // final bool isUserLogin = CacheHelper.getData(key: kIsUserLogin);
     final bool isUserLogin = FirebaseAuthServices.isUserLoggedIn();
     Future.delayed(const Duration(seconds: 3), () {
       mounted

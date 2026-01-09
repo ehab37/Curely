@@ -13,6 +13,12 @@ final class AddMedicineFailure extends AddMedicineState {
   AddMedicineFailure(this.errMessage);
 }
 
+final class AddMedicineNotificationFailure extends AddMedicineState {
+  final String errMessage;
+
+  AddMedicineNotificationFailure(this.errMessage);
+}
+
 final class UploadImageFailure extends AddMedicineState {
   final String errMessage;
 

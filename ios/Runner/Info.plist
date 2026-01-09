@@ -73,5 +73,7 @@
     </array>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>We need access to location to get the nearest pharmacy.</string>
+    <key>PermissionGroupNotification</key>
+    <string>We need to send you reminders for your medicine.</string>
 </dict>
 </plist>

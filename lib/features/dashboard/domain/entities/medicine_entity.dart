@@ -73,7 +73,6 @@ class MedicineEntity {
   final String? medicineNotes;
   final String medicineTypes;
   final bool isReminderActive;
-  final List<dynamic>? remindersTime;
   final File? image;
   String? imageUrl;
 
@@ -84,7 +83,6 @@ class MedicineEntity {
     required this.frequency,
     this.medicineNotes,
     required this.isReminderActive,
-    this.remindersTime,
     required this.medicineTypes,
     this.image,
     this.imageUrl,

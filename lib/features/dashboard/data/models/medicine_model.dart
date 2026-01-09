@@ -9,7 +9,6 @@ class MedicineModel {
   final String? medicineNotes;
   final String medicineTypes;
   final bool isReminderActive;
-  final List<dynamic>? remindersTime;
   final File? image;
   String? imageUrl;
 
@@ -20,7 +19,6 @@ class MedicineModel {
     required this.frequency,
     this.medicineNotes,
     required this.isReminderActive,
-    this.remindersTime,
     required this.medicineTypes,
     this.image,
     this.imageUrl,
@@ -34,7 +32,6 @@ class MedicineModel {
       frequency: json['frequency'],
       medicineNotes: json['medicineNotes'],
       isReminderActive: json['isReminderActive'],
-      remindersTime: json['remindersTime'],
       medicineTypes: json['medicineTypes'],
       imageUrl: json['imageUrl'],
     );
@@ -48,7 +45,6 @@ class MedicineModel {
       frequency: frequency,
       medicineNotes: medicineNotes,
       isReminderActive: isReminderActive,
-      remindersTime: remindersTime,
       medicineTypes: medicineTypes,
       image: image,
       imageUrl: imageUrl,
@@ -62,7 +58,6 @@ class MedicineModel {
       frequency: entity.frequency,
       medicineNotes: entity.medicineNotes,
       isReminderActive: entity.isReminderActive,
-      remindersTime: entity.remindersTime,
       medicineTypes: entity.medicineTypes,
       image: entity.image,
       imageUrl: entity.imageUrl,
@@ -76,7 +71,6 @@ class MedicineModel {
       'frequency': frequency,
       'medicineNotes': medicineNotes,
       'isReminderActive': isReminderActive,
-      'remindersTime': remindersTime,
       'medicineTypes': medicineTypes,
       'imageUrl': imageUrl,
     };

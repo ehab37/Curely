@@ -19,6 +19,12 @@ final class DeleteMedicinesFailure extends GetDeleteMedicinesState {
   DeleteMedicinesFailure(this.errMessage);
 }
 
+final class CancelMedicinesNotificationFailure extends GetDeleteMedicinesState {
+  final String errMessage;
+
+  CancelMedicinesNotificationFailure(this.errMessage);
+}
+
 final class GetMedicinesSuccess extends GetDeleteMedicinesState {
   final List<MedicineEntity> medicines;
 

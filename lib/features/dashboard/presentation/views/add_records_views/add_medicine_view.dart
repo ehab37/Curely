@@ -3,6 +3,7 @@ import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ class AddMedicineView extends StatelessWidget {
       create: (context) => AddMedicineCubit(
         imagesRepo: getIt<ImagesRepo>(),
         medicineRepo: getIt<MedicineRepo>(),
-      ),      child: Scaffold(
+        medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
+      ),
+      child: Scaffold(
         body: Builder(
           builder: (context) {
             return BlocConsumer<AddMedicineCubit, AddMedicineState>(
@@ -29,15 +32,15 @@ class AddMedicineView extends StatelessWidget {
                   GoRouter.of(context).pop();
                 } else if (state is AddMedicineFailure) {
                   InfoBox.customSnackBar(context, state.errMessage);
-                }else if (state is UploadImageFailure){
+                } else if (state is UploadImageFailure) {
+                  InfoBox.customSnackBar(context, state.errMessage);
+                } else if (state is AddMedicineNotificationFailure) {
                   InfoBox.customSnackBar(context, state.errMessage);
                 }
               },
               builder: (context, state) {
                 return ModalProgressHUD(
-                  inAsyncCall: state is AddMedicineLoading
-                      ? true
-                      : false,
+                  inAsyncCall: state is AddMedicineLoading ? true : false,
                   child: SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(

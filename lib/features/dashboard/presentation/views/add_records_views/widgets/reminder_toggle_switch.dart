@@ -6,7 +6,7 @@ import 'switch_header_row.dart';
 class ReminderToggleSwitch extends StatefulWidget {
   final bool isReminderEnabled;
   final ValueChanged<bool> onChangedToggle;
-  final ValueChanged<List<TimeOfDay?>> onChangedReminders;
+  final List<TimeOfDay> remindersList;
   final String reminders;
 
   const ReminderToggleSwitch({
@@ -14,7 +14,7 @@ class ReminderToggleSwitch extends StatefulWidget {
     required this.isReminderEnabled,
     required this.onChangedToggle,
     required this.reminders,
-    required this.onChangedReminders,
+    required this.remindersList,
   });
 
   @override
@@ -51,7 +51,7 @@ class _ReminderToggleSwitchState extends State<ReminderToggleSwitch> {
             opacity: widget.isReminderEnabled ? 1.0 : 0.0,
             child: widget.isReminderEnabled
                 ? AllRemindersWidgets(
-                    onChangedReminders: widget.onChangedReminders,
+                    remindersList: widget.remindersList,
                     reminders: widget.reminders,
                   )
                 : const SizedBox.shrink(), // Empty widget when collapsed

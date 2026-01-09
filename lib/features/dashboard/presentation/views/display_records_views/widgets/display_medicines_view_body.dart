@@ -53,9 +53,11 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 direction: DismissDirection.startToEnd,
-                onDismissed: (direction) => context
-                    .read<GetDeleteMedicinesCubit>()
-                    .deleteMedicines(docId: state.medicines[index].docId!),
+                onDismissed: (direction) async {
+                  await context.read<GetDeleteMedicinesCubit>().deleteMedicines(
+                    medicine: state.medicines[index],
+                  );
+                },
                 child: DisplayedMedicineItem(
                   medicineItem: state.medicines[index],
                 ),

@@ -18,11 +18,13 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = getFinalUserData();
     return BlocConsumer<LogoutUserCubit, LogoutUserState>(
       listener: (context, state) {
         if (state is LogoutUserSuccess) {
-          GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
-          CacheHelper.removeData(key: DatabaseKeys.users);
+          GoRouter.of(context)
+              .pushReplacement(AppRouter.kWelcomeView)
+              .then((value) => CacheHelper.removeData(key: DatabaseKeys.users));
         } else if (state is LogoutUserFailure) {
           InfoBox.customSnackBar(context, state.errMessage);
         }
@@ -40,7 +42,7 @@ class HomeDrawer extends StatelessWidget {
                       Icon(FontAwesomeIcons.solidCircleUser),
                       SizedBox(width: 10),
                       Text(
-                        getFinalUserData().name,
+                        userData.name,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -72,6 +74,7 @@ class HomeDrawer extends StatelessWidget {
                   title: const Text("Log out"),
                   leading: const Icon(Icons.logout_rounded),
                   onTap: () async {
+                    Scaffold.of(context).closeDrawer();
                     await context.read<LogoutUserCubit>().logoutUser();
                   },
                 ),

@@ -1,4 +1,5 @@
 import 'package:curely/core/services/get_it.dart';
+import 'package:curely/core/services/notification_service.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
@@ -9,12 +10,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_transitions/go_transitions.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'constants.dart';
 import 'core/utils/observer.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+  await NotificationService.initNotification();
   await CacheHelper.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(

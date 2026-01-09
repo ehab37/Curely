@@ -15,18 +15,18 @@ class MedicineRepoImpl implements MedicineRepo {
   final DatabaseService databaseService;
 
   @override
-  Future<Either<Failure, void>> addMedicine({
+  Future<Either<Failure, String>> addMedicine({
     required MedicineEntity medicine,
   }) async {
     var userId = getFinalUserData().uId;
     try {
-      await databaseService.addData(
+      String? docId = await databaseService.addData(
         path: DatabaseKeys.users,
         data: MedicineModel.fromEntity(medicine).toMap(),
         docId: userId,
         subCollectionPath: DatabaseKeys.medicinePath,
       );
-      return const Right(null);
+      return Right(docId!);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
     } catch (e) {

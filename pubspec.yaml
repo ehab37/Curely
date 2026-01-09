@@ -61,6 +61,8 @@ dependencies:
   firebase_storage: ^13.0.4
   path: ^1.9.1
   skeletonizer: ^2.1.2
+  timezone: ^0.10.1
+  flutter_local_notifications: ^19.5.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.4
