@@ -76,9 +76,6 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
               showSearchBox: false,
               list: frequencyList,
               onChanged: (value) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  FocusScope.of(context).unfocus();
-                });
                 setState(() {
                   addMedicineCubit.remindersList = getDefaultRemindersList(
                     value,
@@ -94,9 +91,6 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
               hint: "Enter Medicine Usage",
               list: medicineUsagesList,
               onChanged: (value) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  FocusScope.of(context).unfocus();
-                });
                 setState(() {
                   medicineUsage = value;
                 });
@@ -109,9 +103,6 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
               hint: 'Enter Medicine Type',
               list: medicineTypesList,
               onChanged: (value) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  FocusScope.of(context).unfocus();
-                });
                 setState(() {
                   medicineTypes = value;
                 });

@@ -3,13 +3,20 @@ import 'package:curely/features/auth/domain/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel extends UserEntity {
-  UserModel({required super.name, required super.email, required super.uId});
+  UserModel({
+    required super.name,
+    required super.email,
+    required super.uId,
+    super.image,
+    super.imageUrl,
+  });
 
   factory UserModel.fromFirebaseUser(User user) {
     return UserModel(
       name: user.displayName ?? "",
       email: user.email ?? "",
       uId: user.uid,
+      imageUrl: user.photoURL,
     );
   }
 
@@ -18,11 +25,18 @@ class UserModel extends UserEntity {
       name: json[DatabaseKeys.name],
       email: json[DatabaseKeys.email],
       uId: json[DatabaseKeys.uId],
+      imageUrl: json[DatabaseKeys.profileImage],
     );
   }
 
   factory UserModel.fromUserEntity(UserEntity user) {
-    return UserModel(name: user.name, email: user.email, uId: user.uId);
+    return UserModel(
+      name: user.name,
+      email: user.email,
+      uId: user.uId,
+      image: user.image,
+      imageUrl: user.imageUrl,
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -30,6 +44,7 @@ class UserModel extends UserEntity {
       DatabaseKeys.name: name,
       DatabaseKeys.email: email,
       DatabaseKeys.uId: uId,
+      DatabaseKeys.profileImage: imageUrl,
     };
   }
 }

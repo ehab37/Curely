@@ -1,10 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
-
-import 'package:curely/constants.dart';
 import 'package:curely/core/error/failures.dart';
-import 'package:curely/core/services/cache_helper.dart';
-import 'package:curely/core/services/database_service.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/features/auth/data/models/user_model.dart';
 import 'package:curely/features/auth/domain/entities/user_entity.dart';
@@ -14,11 +10,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final FirebaseAuthServices firebaseAuthServices;
-  final DatabaseService databaseService;
+  final UserDataRepo userDataRepo;
 
   const AuthRepoImpl({
     required this.firebaseAuthServices,
-    required this.databaseService,
+    required this.userDataRepo,
   });
 
   @override
@@ -38,8 +34,8 @@ class AuthRepoImpl implements AuthRepo {
         name: name,
         uId: user.uid,
       );
-      await addUserData(user: userEntity);
-      await saveUserData(user: userEntity);
+      await userDataRepo.addUserData(user: userEntity);
+      await userDataRepo.saveUserData(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {
@@ -67,8 +63,8 @@ class AuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
-      UserEntity userEntity = await getUserData(uId: user.uid);
-      await saveUserData(user: userEntity);
+      UserEntity userEntity = await userDataRepo.getUserData(uId: user.uid);
+      await userDataRepo.saveUserData(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
@@ -86,16 +82,13 @@ class AuthRepoImpl implements AuthRepo {
     try {
       user = await firebaseAuthServices.loginWithGoogle();
       UserEntity userEntity = UserModel.fromFirebaseUser(user);
-      bool isUserExist = await databaseService.checkIfDataExists(
-        path: DatabaseKeys.users,
-        docId: user.uid,
-      );
+      bool isUserExist = await userDataRepo.checkIfDataExists(docId: user.uid);
       if (isUserExist) {
-        await getUserData(uId: user.uid);
+        await userDataRepo.getUserData(uId: user.uid);
       } else {
-        await addUserData(user: userEntity);
+        await userDataRepo.addUserData(user: userEntity);
       }
-      await saveUserData(user: userEntity);
+      await userDataRepo.saveUserData(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {
@@ -114,24 +107,6 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> addUserData({required UserEntity user}) async {
-    await databaseService.addData(
-      path: DatabaseKeys.users,
-      data: UserModel.fromUserEntity(user).toMap(),
-      docId: user.uId,
-    );
-  }
-
-  @override
-  Future<UserEntity> getUserData({required String uId}) async {
-    Map<String, dynamic> data = await databaseService.getData(
-      path: DatabaseKeys.users,
-      docId: uId,
-    );
-    return UserModel.fromJson(data);
-  }
-
-  @override
   Future<Either<Failure, void>> resetPassword({required String email}) async {
     try {
       await firebaseAuthServices.resetPassword(email: email);
@@ -145,11 +120,5 @@ class AuthRepoImpl implements AuthRepo {
         OtherErrors.fromOtherErrors("Something went wrong, try again later"),
       );
     }
-  }
-
-  @override
-  Future<void> saveUserData({required UserEntity user}) async {
-    String userData = jsonEncode(UserModel.fromUserEntity(user).toMap());
-    await CacheHelper.saveData(key: DatabaseKeys.users, value: userData);
   }
 }

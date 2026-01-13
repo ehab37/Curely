@@ -1,5 +1,7 @@
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo_impl.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
@@ -31,10 +33,13 @@ void setupGetIt() {
   getIt.registerSingleton<UrlServices>(UrlServices());
   getIt.registerSingleton<NotificationService>(NotificationService());
   getIt.registerSingleton<StorageServices>(FireStorage());
+  getIt.registerSingleton<UserDataRepo>(
+    UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
+  );
   getIt.registerSingleton<AuthRepo>(
     AuthRepoImpl(
       firebaseAuthServices: getIt<FirebaseAuthServices>(),
-      databaseService: getIt<DatabaseService>(),
+      userDataRepo: getIt<UserDataRepo>(),
     ),
   );
   getIt.registerSingleton<ImagesRepo>(

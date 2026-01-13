@@ -6,6 +6,12 @@ abstract class DatabaseService {
     String? subCollectionPath,
   });
 
+  Future<void> updateData({
+    required String path,
+    required String docId,
+    required Map<String, dynamic> data,
+  });
+
   Future<dynamic> getData({
     required String path,
     required String docId,
