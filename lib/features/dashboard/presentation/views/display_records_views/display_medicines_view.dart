@@ -9,7 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/display_medicines_view_body.dart';
 
 class DisplayMedicinesView extends StatelessWidget {
-  const DisplayMedicinesView({super.key});
+  const DisplayMedicinesView({super.key, required this.isRemindersView});
+
+  final bool isRemindersView;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,20 @@ class DisplayMedicinesView extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: CustomAppBar(title: "Display Medicines"),
+                child: CustomAppBar(
+                  title: isRemindersView
+                      ? "Display Reminders"
+                      : "Display Medicines",
+                ),
               ),
               BlocProvider(
                 create: (context) => GetDeleteMedicinesCubit(
                   medicineRepo: getIt<MedicineRepo>(),
                   medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
                 ),
-                child: DisplayMedicinesViewBody(),
+                child: DisplayMedicinesViewBody(
+                  isRemindersView: isRemindersView,
+                ),
               ),
             ],
           ),

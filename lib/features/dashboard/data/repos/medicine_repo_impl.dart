@@ -61,6 +61,30 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
+  Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines() async {
+    var userId = getFinalUserData().uId;
+    try {
+      var data =
+          await databaseService.getData(
+                path: DatabaseKeys.users,
+                docId: userId,
+                subCollectionPath: DatabaseKeys.medicinePath,
+                query: {"field": "isReminderActive", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+      List<MedicineEntity> medicines = data
+          .map((e) => MedicineModel.fromJson(e).toEntity())
+          .toList();
+      return Right(medicines);
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> deleteMedicine({required String docId}) async {
     var userId = getFinalUserData().uId;
     try {

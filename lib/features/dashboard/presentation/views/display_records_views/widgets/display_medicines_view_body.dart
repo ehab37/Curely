@@ -10,7 +10,9 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'displayed_medicine_item.dart';
 
 class DisplayMedicinesViewBody extends StatefulWidget {
-  const DisplayMedicinesViewBody({super.key});
+  const DisplayMedicinesViewBody({super.key, required this.isRemindersView});
+
+  final bool isRemindersView;
 
   @override
   State<DisplayMedicinesViewBody> createState() =>
@@ -20,6 +22,9 @@ class DisplayMedicinesViewBody extends StatefulWidget {
 class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
   @override
   void initState() {
+    if (widget.isRemindersView) {
+      context.read<GetDeleteMedicinesCubit>().isReminderView = true;
+    }
     context.read<GetDeleteMedicinesCubit>().getMedicines();
     super.initState();
   }
@@ -33,7 +38,9 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
             return SliverToBoxAdapter(
               child: Center(
                 child: Text(
-                  "NO Medicines added yet!...",
+                  widget.isRemindersView
+                      ? "NO Reminders added yet!..."
+                      : "NO Medicines added yet!...",
                   style: Styles.styleBlue25,
                 ),
               ),

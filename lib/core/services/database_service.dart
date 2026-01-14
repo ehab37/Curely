@@ -16,6 +16,7 @@ abstract class DatabaseService {
     required String path,
     required String docId,
     String? subCollectionPath,
+    Map<String,dynamic>? query,
   });
 
   Future<void> deleteData({

@@ -103,7 +103,13 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kDisplayMedicineView,
-        builder: (context, state) => const DisplayMedicinesView(),
+        builder: (context, state) {
+          bool isReminderView = false;
+          if (state.extra != null) {
+            isReminderView = true;
+          }
+          return DisplayMedicinesView(isRemindersView: isReminderView);
+        },
       ),
       GoRoute(
         path: kDisplayPrescriptionView,

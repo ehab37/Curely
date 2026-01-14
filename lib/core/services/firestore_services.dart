@@ -43,13 +43,20 @@ class FirestoreServices implements DatabaseService {
     required String path,
     required String docId,
     String? subCollectionPath,
+    Map<String, dynamic>? query,
   }) async {
     if (subCollectionPath != null) {
-      var snapshot = await firestore
+      Query<Map<String, dynamic>> collection = firestore
           .collection(path)
           .doc(docId)
-          .collection(subCollectionPath)
-          .get();
+          .collection(subCollectionPath);
+      if (query != null) {
+        collection = collection.where(
+          query["field"],
+          isEqualTo: query["value"],
+        );
+      }
+      var snapshot = await collection.get();
       return snapshot.docs.map((e) {
         var data = e.data();
         data['docId'] = e.id;

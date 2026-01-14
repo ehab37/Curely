@@ -13,6 +13,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
+        lazy: true,
         create: (context) => EditProfileCubit(
           profileRepo: getIt<ProfileRepo>(),
           imagesRepo: getIt<ImagesRepo>(),

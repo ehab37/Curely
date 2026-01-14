@@ -35,7 +35,9 @@ class HomeViewBody extends StatelessWidget {
                   text: "Reminder",
                   icon: Icons.alarm,
                   size: 35,
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kDisplayMedicineView,extra: true);
+                  },
                 ),
                 CardCircle(
                   text: "Pharmacy",

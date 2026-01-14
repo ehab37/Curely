@@ -13,10 +13,13 @@ class GetDeleteMedicinesCubit extends Cubit<GetDeleteMedicinesState> {
   }) : super(GetDeleteMedicinesInitial());
   final MedicineRepo medicineRepo;
   final MedicineNotificationRepo medicineNotificationRepo;
+  bool isReminderView = false;
 
   Future<void> getMedicines() async {
     emit(GetDeleteMedicinesLoading());
-    var result = await medicineRepo.getMedicines();
+    var result = isReminderView
+        ? await medicineRepo.getReminderMedicines()
+        : await medicineRepo.getMedicines();
     result.fold(
       (failure) {
         emit(GetMedicinesFailure(failure.errMessage));
