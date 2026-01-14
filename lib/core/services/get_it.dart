@@ -23,6 +23,8 @@ import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/home/data/repos/home_repo_impl.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -39,6 +41,11 @@ void setupGetIt() {
   getIt.registerSingleton<AuthRepo>(
     AuthRepoImpl(
       firebaseAuthServices: getIt<FirebaseAuthServices>(),
+      userDataRepo: getIt<UserDataRepo>(),
+    ),
+  );
+  getIt.registerSingleton<ProfileRepo>(
+    ProfileRepoImpl(
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );

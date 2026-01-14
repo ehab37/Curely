@@ -1,4 +1,4 @@
-import 'package:curely/features/auth/domain/entities/user_entity.dart';
+import 'package:curely/core/entities/user_entity.dart';
 
 abstract class UserDataRepo {
   Future<void> addUserData({required UserEntity user});

@@ -1,5 +1,5 @@
 import 'package:curely/core/error/failures.dart';
-import 'package:curely/features/auth/domain/entities/user_entity.dart';
+import 'package:curely/core/entities/user_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AuthRepo {

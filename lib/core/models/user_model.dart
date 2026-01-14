@@ -1,5 +1,5 @@
 import 'package:curely/constants.dart';
-import 'package:curely/features/auth/domain/entities/user_entity.dart';
+import 'package:curely/core/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel extends UserEntity {
@@ -7,7 +7,6 @@ class UserModel extends UserEntity {
     required super.name,
     required super.email,
     required super.uId,
-    super.image,
     super.imageUrl,
   });
 
@@ -34,7 +33,6 @@ class UserModel extends UserEntity {
       name: user.name,
       email: user.email,
       uId: user.uId,
-      image: user.image,
       imageUrl: user.imageUrl,
     );
   }

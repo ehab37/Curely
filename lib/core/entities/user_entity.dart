@@ -4,7 +4,7 @@ class UserEntity {
   final String email;
   final String name;
   final String uId;
-  final File? image;
+  File? image;
   String? imageUrl;
 
   UserEntity({
