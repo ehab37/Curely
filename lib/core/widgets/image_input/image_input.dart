@@ -1,44 +1,32 @@
 import 'dart:io';
-
 import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/widgets/image_input/icon_text_in_row.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImageInput extends StatefulWidget {
+class ImageInput extends StatelessWidget {
   const ImageInput({
     super.key,
     required this.onSelectedImage,
     required this.content,
+    this.imageUrl,
+    this.onRemoveImage,
   });
 
   final ValueChanged<File?> onSelectedImage;
   final Widget content;
+  final String? imageUrl;
+  final void Function()? onRemoveImage;
 
-  @override
-  State<ImageInput> createState() => _ImageInputState();
-}
-
-class _ImageInputState extends State<ImageInput> {
-  File? imageFile;
-  InfoBox infoBox = InfoBox();
-
-  _pickImage(ImageSource imageSource) {
+  void _pickImage(ImageSource imageSource) {
     final ImagePicker imagePicker = ImagePicker();
     imagePicker.pickImage(source: imageSource).then((value) {
-      setState(() {
-        imageFile = File(value!.path);
-        widget.onSelectedImage(imageFile);
-      });
-      return imageFile;
+      onSelectedImage(File(value!.path));
     });
   }
 
   void _removeImage() {
-    setState(() {
-      imageFile = null;
-      widget.onSelectedImage(imageFile);
-    });
+    onSelectedImage(null);
   }
 
   @override
@@ -46,9 +34,9 @@ class _ImageInputState extends State<ImageInput> {
     return GestureDetector(
       onTap: () {
         ScaffoldMessenger.of(context).clearSnackBars();
-        infoBox.customImageSnackBar(
+        InfoBox.customImageSnackBar(
           context: context,
-          content: imageFile == null
+          content: imageUrl == null || imageUrl!.isEmpty
               ? Column(
                   children: [
                     GestureDetector(
@@ -78,7 +66,7 @@ class _ImageInputState extends State<ImageInput> {
                     GestureDetector(
                       onTap: () {
                         ScaffoldMessenger.of(context).clearSnackBars();
-                        infoBox.customImageSnackBar(
+                        InfoBox.customImageSnackBar(
                           context: context,
                           content: Column(
                             children: [
@@ -116,10 +104,12 @@ class _ImageInputState extends State<ImageInput> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).clearSnackBars();
-                        _removeImage();
-                      },
+                      onTap:
+                          onRemoveImage ??
+                          () {
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            _removeImage();
+                          },
                       child: IconTextInRow(
                         text: "Remove Image",
                         icon: Icons.remove_circle_outline,
@@ -129,7 +119,7 @@ class _ImageInputState extends State<ImageInput> {
                 ),
         );
       },
-      child: widget.content,
+      child: content,
     );
   }
 }

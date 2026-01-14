@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:curely/constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/helper_functions/info_box.dart';
 import 'package:curely/core/utils/styles.dart';
 import 'package:curely/core/widgets/custom_container.dart';
 import 'package:curely/core/widgets/image_input/profile_image_input.dart';
@@ -18,7 +20,13 @@ class ProfileViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     UserEntity user = getFinalUserData();
     return BlocConsumer<EditProfileCubit, EditProfileState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is EditProfileFailure) {
+          InfoBox.customSnackBar(context, state.errMessage);
+        } else if (state is UploadImageFailure) {
+          InfoBox.customSnackBar(context, state.errMessage);
+        }
+      },
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: state is EditProfileLoading ? true : false,
@@ -34,17 +42,27 @@ class ProfileViewBody extends StatelessWidget {
                   children: [
                     SizedBox(height: 1),
                     ProfileImageInput(
+                      imageUrl: user.imageUrl,
                       onSelectedImage: (image) {
                         user.image = image;
                         context.read<EditProfileCubit>().editProfile(
                           user: user,
                         );
                       },
+                      onRemoveImage: () {
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        user.imageUrl = null;
+                        context.read<EditProfileCubit>().editProfile(
+                          user: user,
+                        );
+                      },
                       imageWidget: user.imageUrl != null
-                          ? Image.network(
-                              user.imageUrl!,
-                              height: 120,
-                              fit: BoxFit.fill,
+                          ? CachedNetworkImage(
+                              imageUrl: user.imageUrl!,
+                              placeholder: (context, url) =>
+                                  CircularProgressIndicator(color: kNavyColor),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             )
                           : const Center(
                               child: Icon(

@@ -10,7 +10,7 @@ class InfoBox {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customImageSnackBar({
+   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customImageSnackBar({
     required BuildContext context,
     required Widget content,
   }) {
