@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:curely/constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
@@ -12,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'cached_image_widget.dart';
 import 'show_edit_name_bottom_sheet.dart';
 
 class ProfileViewBody extends StatelessWidget {
@@ -56,21 +55,7 @@ class ProfileViewBody extends StatelessWidget {
                           user: user,
                         );
                       },
-                      imageWidget: user.imageUrl != null
-                          ? CachedNetworkImage(
-                              imageUrl: user.imageUrl!,
-                              placeholder: (context, url) =>
-                                  CircularProgressIndicator(color: kNavyColor),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            )
-                          : const Center(
-                              child: Icon(
-                                FontAwesomeIcons.circleUser,
-                                size: 105,
-                                color: kBlueColor,
-                              ),
-                            ),
+                      imageWidget: CachedImageWidget(imageUrl: user.imageUrl),
                     ),
                     ListTile(
                       leading: Row(
@@ -97,12 +82,6 @@ class ProfileViewBody extends StatelessWidget {
                         user.email,
                         style: Styles.style18,
                         overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      "last updated: 5/8 12:15 am",
-                      style: Styles.styleWhite20.copyWith(
-                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ],
