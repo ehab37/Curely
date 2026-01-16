@@ -7,13 +7,11 @@ class ReminderToggleSwitch extends StatefulWidget {
   final bool isReminderEnabled;
   final ValueChanged<bool> onChangedToggle;
   final List<TimeOfDay> remindersList;
-  final String reminders;
 
   const ReminderToggleSwitch({
     super.key,
     required this.isReminderEnabled,
     required this.onChangedToggle,
-    required this.reminders,
     required this.remindersList,
   });
 
@@ -50,11 +48,8 @@ class _ReminderToggleSwitchState extends State<ReminderToggleSwitch> {
             duration: kTransitionDuration,
             opacity: widget.isReminderEnabled ? 1.0 : 0.0,
             child: widget.isReminderEnabled
-                ? AllRemindersWidgets(
-                    remindersList: widget.remindersList,
-                    reminders: widget.reminders,
-                  )
-                : const SizedBox.shrink(), // Empty widget when collapsed
+                ? AllRemindersWidgets(remindersList: widget.remindersList)
+                : const SizedBox.shrink(),
           ),
         ],
       ),

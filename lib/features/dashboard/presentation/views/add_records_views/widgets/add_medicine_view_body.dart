@@ -12,7 +12,6 @@ import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:curely/core/services/notification_service.dart';
@@ -25,8 +24,6 @@ class AddMedicineViewBody extends StatefulWidget {
 }
 
 class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
-  final GlobalKey<DropdownSearchState<String>> dropDownKey =
-      GlobalKey<DropdownSearchState<String>>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController medicineNameController = TextEditingController();
@@ -70,7 +67,6 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             ),
             SizedBox(height: 8),
             CustomDropdownSearch(
-              dropDownKey: dropDownKey,
               hint: 'How Often?',
               label: "Frequency",
               showSearchBox: false,
@@ -111,8 +107,6 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             ),
             SizedBox(height: 16),
             ReminderToggleSwitch(
-              reminders:
-                  dropDownKey.currentState?.getSelectedItem ?? 'Once Daily',
               isReminderEnabled: isReminderActive,
               onChangedToggle: (newVal) async {
                 setState(() {

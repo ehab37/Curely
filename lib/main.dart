@@ -31,7 +31,10 @@ void main() async {
   setupGetIt();
   Bloc.observer = MyBlocObserver();
   runApp(
-    BlocProvider(create: (context) => LanguageCubit(), child: const Curely()),
+    BlocProvider(
+      create: (context) => getIt<LanguageCubit>(),
+      child: const Curely(),
+    ),
   );
 }
 

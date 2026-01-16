@@ -74,8 +74,8 @@ class HomeDrawer extends StatelessWidget {
                   title: const Text("Log out"),
                   leading: const Icon(Icons.logout_rounded),
                   onTap: () async {
-                    Scaffold.of(context).closeDrawer();
                     await context.read<LogoutUserCubit>().logoutUser();
+                    context.mounted ? Scaffold.of(context).closeDrawer() : null;
                   },
                 ),
               ],

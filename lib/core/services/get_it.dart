@@ -25,11 +25,14 @@ import 'package:curely/features/home/data/repos/home_repo_impl.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
+import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
+import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
 void setupGetIt() {
+  getIt.registerSingleton<LanguageCubit>(LanguageCubit());
   getIt.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
   getIt.registerSingleton<DatabaseService>(FirestoreServices());
   getIt.registerSingleton<UrlServices>(UrlServices());
@@ -45,12 +48,16 @@ void setupGetIt() {
     ),
   );
   getIt.registerSingleton<ProfileRepo>(
-    ProfileRepoImpl(
-      userDataRepo: getIt<UserDataRepo>(),
-    ),
+    ProfileRepoImpl(userDataRepo: getIt<UserDataRepo>()),
   );
   getIt.registerSingleton<ImagesRepo>(
     ImagesRepoImpl(storageServices: getIt<StorageServices>()),
+  );
+  getIt.registerSingleton<EditProfileCubit>(
+    EditProfileCubit(
+      profileRepo: getIt<ProfileRepo>(),
+      imagesRepo: getIt<ImagesRepo>(),
+    ),
   );
   getIt.registerSingleton<MedicineNotificationRepo>(
     MedicineNotificationRepoImpl(

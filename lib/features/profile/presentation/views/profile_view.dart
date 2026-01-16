@@ -1,6 +1,4 @@
-import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/profile_view_body.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +12,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         lazy: true,
-        create: (context) => EditProfileCubit(
-          profileRepo: getIt<ProfileRepo>(),
-          imagesRepo: getIt<ImagesRepo>(),
-        ),
+        create: (context) => getIt<EditProfileCubit>(),
         child: ProfileViewBody(),
       ),
     );
