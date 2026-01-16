@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLines;
   final TextCapitalization? textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
+  final bool? autoFocus;
 
   const CustomTextFormField({
     super.key,
@@ -35,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     this.textCapitalization,
     this.inputFormatters,
+    this.autoFocus,
   });
 
   @override
@@ -49,6 +51,7 @@ class CustomTextFormField extends StatelessWidget {
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         validator: validator,
         controller: controller,
+        autofocus: autoFocus ?? false,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,

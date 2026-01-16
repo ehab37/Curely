@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'show_edit_name_bottom_sheet.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
@@ -44,9 +45,8 @@ class ProfileViewBody extends StatelessWidget {
                     ProfileImageInput(
                       imageUrl: user.imageUrl,
                       onSelectedImage: (image) {
-                        user.image = image;
                         context.read<EditProfileCubit>().editProfile(
-                          user: user,
+                          user: user..image = image,
                         );
                       },
                       onRemoveImage: () {
@@ -77,7 +77,16 @@ class ProfileViewBody extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(width: 30),
-                          Icon(Icons.edit, color: Colors.white, size: 35),
+                          GestureDetector(
+                            onTap: () {
+                              showEditNameBottomSheet(context, user);
+                            },
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 35,
+                            ),
+                          ),
                         ],
                       ),
                       title: Text(

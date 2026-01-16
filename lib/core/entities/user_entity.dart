@@ -2,7 +2,7 @@ import 'dart:io';
 
 class UserEntity {
   final String email;
-  final String name;
+  String name;
   final String uId;
   File? image;
   String? imageUrl;
