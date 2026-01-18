@@ -19,16 +19,16 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
     required PrescriptionEntity prescription,
   }) async {
     emit(AddPrescriptionLoading());
-    var result = await imagesRepo.uploadImage(
-      imageFile: prescription.image!,
+    var result = await imagesRepo.uploadImages(
+      imageFiles: prescription.images!,
       path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.prescriptionPath}',
     );
     result.fold(
       (failure) {
         emit(UploadImageFailure(failure.errMessage));
       },
-      (url) async {
-        prescription.imageUrl = url;
+      (urls) async {
+        prescription.imageUrls = urls;
         var result2 = await prescriptionRepo.addPrescription(
           prescription: prescription,
         );

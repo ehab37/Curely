@@ -30,4 +30,25 @@ class ImagesRepoImpl implements ImagesRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, List<String>>> uploadImages({
+    required List<File> imageFiles,
+    required String path,
+  }) async {
+    try {
+      List<String> urls = await storageServices.uploadFiles(
+        files: imageFiles,
+        path: path,
+      );
+      return Right(urls);
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors(
+          "Something went wrong while uploading images, try again later.",
+        ),
+      );
+    }
+  }
 }

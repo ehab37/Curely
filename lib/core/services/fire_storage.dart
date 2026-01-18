@@ -15,4 +15,17 @@ class FireStorage implements StorageServices {
     String url = await result.ref.getDownloadURL();
     return url;
   }
+
+  @override
+  Future<List<String>> uploadFiles({
+    required List<File> files,
+    required String path,
+  }) async {
+    List<String> urls = [];
+    for (var file in files) {
+      String url = await uploadFile(file: file, path: path);
+      urls.add(url);
+    }
+    return urls;
+  }
 }

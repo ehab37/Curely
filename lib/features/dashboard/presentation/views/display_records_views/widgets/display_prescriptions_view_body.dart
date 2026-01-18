@@ -63,7 +63,7 @@ class _DisplayPrescriptionsViewBodyState
                       docId: state.prescriptions[index].docId!,
                     ),
                 child: DisplayedItem(
-                  imageUrl: state.prescriptions[index].imageUrl!,
+                  imageUrl: state.prescriptions[index].imageUrls![0],
                   text1: state.prescriptions[index].doctorName,
                   text2: state.prescriptions[index].doctorSpecialization,
                   text3: state.prescriptions[index].examinationDate,

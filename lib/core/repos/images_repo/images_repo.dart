@@ -7,4 +7,9 @@ abstract class ImagesRepo {
     required File imageFile,
     required String path,
   });
+
+  Future<Either<Failure, List<String>>> uploadImages({
+    required List<File> imageFiles,
+    required String path,
+  });
 }
