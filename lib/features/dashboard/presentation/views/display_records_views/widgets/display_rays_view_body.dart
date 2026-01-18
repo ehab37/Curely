@@ -58,7 +58,7 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
                   docId: state.rays[index].docId!,
                 ),
                 child: DisplayedItem(
-                  imageUrl: state.rays[index].imageUrl!,
+                  imageUrl: state.rays[index].imageUrls![0],
                   text1: state.rays[index].doctorName,
                   text2: state.rays[index].raysType,
                   text3: state.rays[index].examinationDate,

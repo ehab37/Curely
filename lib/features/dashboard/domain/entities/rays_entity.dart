@@ -21,8 +21,8 @@ class RaysEntity {
   final String? radiologyCenter;
   final String? diagnosis;
   final String examinationDate;
-  final File? image;
-  String? imageUrl;
+  final List<File>? images;
+  List<String>? imageUrls;
 
   RaysEntity({
     this.docId,
@@ -31,7 +31,7 @@ class RaysEntity {
     this.radiologyCenter,
     this.diagnosis,
     required this.examinationDate,
-    this.image,
-    this.imageUrl,
+    this.images,
+    this.imageUrls,
   });
 }

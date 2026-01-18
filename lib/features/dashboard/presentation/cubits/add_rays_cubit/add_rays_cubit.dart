@@ -15,16 +15,16 @@ class AddRaysCubit extends Cubit<AddRaysState> {
 
   Future<void> addRays({required RaysEntity rays}) async {
     emit(AddRaysLoading());
-    var result = await imagesRepo.uploadImage(
-      imageFile: rays.image!,
+    var result = await imagesRepo.uploadImages(
+      imageFiles: rays.images!,
       path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.raysPath}',
     );
     result.fold(
       (failure) {
         emit(UploadImageFailure(failure.errMessage));
       },
-      (url) async {
-        rays.imageUrl = url;
+      (urls) async {
+        rays.imageUrls = urls;
         var result2 = await raysRepo.addRays(rays: rays);
         result2.fold(
           (failure) {

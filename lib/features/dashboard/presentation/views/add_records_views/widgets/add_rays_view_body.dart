@@ -7,6 +7,7 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
+import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
   final TextEditingController diagnosisController = TextEditingController();
   late String raysType;
   DateTime? examinationDate;
-  File? image;
+  List<File> images = [];
 
   @override
   void dispose() {
@@ -87,10 +88,12 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
               },
             ),
             SizedBox(height: 16),
+            ImagesListViewWidget(images: images),
             GlobalImageInput(
+              isMultiple: true,
               onSelectedImage: (value) {
                 setState(() {
-                  image = value;
+                  images.add(value!);
                 });
               },
             ),
@@ -99,7 +102,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  if (image == null) {
+                  if (images.isEmpty) {
                     InfoBox.customSnackBar(context, "Please select an image");
                     return;
                   }
@@ -111,7 +114,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                     examinationDate: examinationDate == null
                         ? DateTime.now().toString()
                         : examinationDate.toString(),
-                    image: image!,
+                    images: images,
                   );
                   await context.read<AddRaysCubit>().addRays(rays: rays);
                 } else {
