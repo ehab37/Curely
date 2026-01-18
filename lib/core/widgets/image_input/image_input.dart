@@ -18,11 +18,12 @@ class ImageInput extends StatelessWidget {
   final String? imageUrl;
   final void Function()? onRemoveImage;
 
-  void _pickImage(ImageSource imageSource) {
+  void _pickImage(ImageSource imageSource) async {
     final ImagePicker imagePicker = ImagePicker();
-    imagePicker.pickImage(source: imageSource).then((value) {
-      onSelectedImage(File(value!.path));
-    });
+    final XFile? image = await imagePicker.pickImage(source: imageSource);
+    if (image != null) {
+      onSelectedImage(File(image.path));
+    }
   }
 
   void _removeImage() {

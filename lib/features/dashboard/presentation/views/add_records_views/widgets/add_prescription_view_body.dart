@@ -9,6 +9,7 @@ import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_prescription_cubit/add_prescription_cubit.dart';
+import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/images_list_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'examination_date_box.dart';
@@ -29,7 +30,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
   final TextEditingController diagnosisController = TextEditingController();
   late String doctorSpecialization;
   DateTime? examinationDate;
-  File? image;
+  List<File> images = [];
 
   @override
   void dispose() {
@@ -48,7 +49,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             CustomTextFormField(
               controller: doctorNameController,
               label: "Doctor Name",
@@ -66,7 +67,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               label: "Diagnosis",
               maxLines: 3,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             CustomDropdownSearch(
               hint: 'Doctor Specialization',
               label: 'Doctor Specialization',
@@ -78,7 +79,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               },
               validator: (selectedValue) => dropdownValidator(selectedValue),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ExaminationDateBox(
               onChanged: (value) {
                 setState(() {
@@ -86,20 +87,22 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                 });
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            ImagesListViewWidget(images: images),
             GlobalImageInput(
+              isMultiple: true,
               onSelectedImage: (value) {
                 setState(() {
-                  image = value;
+                  images.add(value!);
                 });
               },
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             CustomButton(
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  if (image == null) {
+                  if (images.isEmpty) {
                     InfoBox.customSnackBar(context, "Please select an image");
                     return;
                   }
@@ -111,7 +114,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                     examinationDate: examinationDate == null
                         ? DateTime.now().toString()
                         : examinationDate.toString(),
-                    image: image!,
+                    images: images,
                   );
                   await context.read<AddPrescriptionCubit>().addPrescription(
                     prescription: prescription,

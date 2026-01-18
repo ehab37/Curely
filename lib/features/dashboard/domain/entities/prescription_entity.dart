@@ -25,8 +25,8 @@ class PrescriptionEntity {
   final String? hospital;
   final String? diagnosis;
   final String examinationDate;
-  final File? image;
-  String? imageUrl;
+  final List<File>? images;
+  List<String>? imageUrls;
 
   PrescriptionEntity({
     this.docId,
@@ -35,7 +35,7 @@ class PrescriptionEntity {
     this.hospital,
     this.diagnosis,
     required this.examinationDate,
-    this.image,
-    this.imageUrl,
+    this.images,
+    this.imageUrls,
   });
 }
