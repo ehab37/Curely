@@ -7,6 +7,7 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
+import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_analysis_cubit/add_analysis_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/examination_date_box.dart';
@@ -28,7 +29,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
   final TextEditingController diagnosisController = TextEditingController();
   late String analysisType;
   DateTime? examinationDate;
-  File? image;
+  List<File> images = [];
 
   @override
   void dispose() {
@@ -86,10 +87,12 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
               },
             ),
             SizedBox(height: 16),
+            ImagesListViewWidget(images: images),
             GlobalImageInput(
+              isMultiple: true,
               onSelectedImage: (value) {
                 setState(() {
-                  image = value;
+                  images.add(value!);
                 });
               },
             ),
@@ -98,7 +101,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  if (image == null) {
+                  if (images.isEmpty) {
                     InfoBox.customSnackBar(context, "Please select an image");
                     return;
                   }
@@ -110,7 +113,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
                     examinationDate: examinationDate == null
                         ? DateTime.now().toString()
                         : examinationDate.toString(),
-                    image: image!,
+                    images: images,
                   );
                   await context.read<AddAnalysisCubit>().addAnalysis(
                     analysis: analysis,

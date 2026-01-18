@@ -8,8 +8,8 @@ class AnalysisModel {
   final String? lab;
   final String? diagnosis;
   final String examinationDate;
-  final File? image;
-  String imageUrl;
+  final List<File>? images;
+  List<String> imageUrls;
 
   AnalysisModel({
     this.docId,
@@ -18,8 +18,8 @@ class AnalysisModel {
     this.lab,
     this.diagnosis,
     required this.examinationDate,
-    this.image,
-    required this.imageUrl,
+    this.images,
+    required this.imageUrls,
   });
 
   factory AnalysisModel.fromJson(Map<String, dynamic> json) {
@@ -30,7 +30,7 @@ class AnalysisModel {
       lab: json['lab'],
       diagnosis: json['diagnosis'],
       examinationDate: json['examinationDate'],
-      imageUrl:json['imageUrl'],
+      imageUrls: List<String>.from(json['imageUrls']),
     );
   }
 
@@ -42,8 +42,8 @@ class AnalysisModel {
       lab: lab,
       diagnosis: diagnosis,
       examinationDate: examinationDate,
-      image: image,
-      imageUrl: imageUrl,
+      images: images,
+      imageUrls: imageUrls,
     );
   }
 
@@ -54,8 +54,8 @@ class AnalysisModel {
       lab: entity.lab,
       diagnosis: entity.diagnosis,
       examinationDate: entity.examinationDate,
-      image: entity.image,
-      imageUrl: entity.imageUrl!,
+      images: entity.images,
+      imageUrls: entity.imageUrls!,
     );
   }
 
@@ -66,7 +66,7 @@ class AnalysisModel {
       'lab': lab,
       'diagnosis': diagnosis,
       'examinationDate': examinationDate,
-      'imageUrl': imageUrl,
+      'imageUrls': imageUrls,
     };
   }
 }

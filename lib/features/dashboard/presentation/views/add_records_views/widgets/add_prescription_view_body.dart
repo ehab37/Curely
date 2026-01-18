@@ -9,7 +9,7 @@ import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_prescription_cubit/add_prescription_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/images_list_view_widget.dart';
+import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'examination_date_box.dart';

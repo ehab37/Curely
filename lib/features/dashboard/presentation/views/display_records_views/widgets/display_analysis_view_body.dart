@@ -57,7 +57,7 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
                     .read<GetDeleteAnalysisCubit>()
                     .deleteAnalysis(docId: state.analysis[index].docId!),
                 child: DisplayedItem(
-                  imageUrl: state.analysis[index].imageUrl!,
+                  imageUrl: state.analysis[index].imageUrls![0],
                   text1: state.analysis[index].doctorName,
                   text2: state.analysis[index].analysisType,
                   text3: state.analysis[index].examinationDate,

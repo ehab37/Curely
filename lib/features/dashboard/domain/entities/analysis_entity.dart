@@ -23,8 +23,8 @@ class AnalysisEntity {
   final String? lab;
   final String? diagnosis;
   final String examinationDate;
-  final File? image;
-  String? imageUrl;
+  final List<File>? images;
+  List<String>? imageUrls;
 
   AnalysisEntity({
     this.docId,
@@ -33,7 +33,7 @@ class AnalysisEntity {
     this.lab,
     this.diagnosis,
     required this.examinationDate,
-     this.image,
-    this.imageUrl,
+    this.images,
+    this.imageUrls,
   });
 }

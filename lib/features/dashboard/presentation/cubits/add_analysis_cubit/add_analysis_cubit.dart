@@ -15,16 +15,16 @@ class AddAnalysisCubit extends Cubit<AddAnalysisState> {
 
   Future<void> addAnalysis({required AnalysisEntity analysis}) async {
     emit(AddAnalysisLoading());
-    var result = await imagesRepo.uploadImage(
-      imageFile: analysis.image!,
+    var result = await imagesRepo.uploadImages(
+      imageFiles: analysis.images!,
       path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.analysisPath}',
     );
     result.fold(
       (failure) {
         emit(UploadImageFailure(failure.errMessage));
       },
-      (url) async {
-        analysis.imageUrl = url;
+      (urls) async {
+        analysis.imageUrls = urls;
         var result2 = await analysisRepo.addAnalysis(analysis: analysis);
         result2.fold(
           (failure) {
