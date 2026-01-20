@@ -10,10 +10,12 @@ class GlobalImageInput extends StatefulWidget {
     super.key,
     required this.onSelectedImage,
     this.isMultiple = false,
+    this.imageFile,
   });
 
   final ValueChanged<File?> onSelectedImage;
   final bool isMultiple;
+  final File? imageFile;
 
   @override
   State<GlobalImageInput> createState() => _GlobalImageInputState();
@@ -25,6 +27,7 @@ class _GlobalImageInputState extends State<GlobalImageInput> {
   @override
   Widget build(BuildContext context) {
     return ImageInput(
+      imageFile: widget.imageFile,
       onSelectedImage: (value) {
         imageFile = value;
         widget.onSelectedImage(value);
@@ -57,56 +60,3 @@ class _GlobalImageInputState extends State<GlobalImageInput> {
     );
   }
 }
-
-// class GlobalImageInput extends StatefulWidget {
-//   const GlobalImageInput({
-//     super.key,
-//     required this.onSelectedImages,
-//     this.isMultiple = false,
-//     this.showSelectedImages = false,
-//   });
-//
-//   final ValueChanged<List<File>> onSelectedImages;
-//   final bool isMultiple;
-//   final bool showSelectedImages;
-//
-//   @override
-//   State<GlobalImageInput> createState() => _GlobalImageInputState();
-// }
-//
-// class _GlobalImageInputState extends State<GlobalImageInput> {
-//   List<File> imageFiles = [];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ImageInput(
-//       isMultiple: widget.isMultiple,
-//       selectedImages: imageFiles,
-//       showSelectedImages: widget.showSelectedImages,
-//       onSelectedImages: (value) {
-//         imageFiles.addAll(value);
-//         widget.onSelectedImages(imageFiles);
-//         setState(() {});
-//       },
-//       content: Container(
-//         alignment: Alignment.center,
-//         width: MediaQuery.of(context).size.width,
-//         padding: const EdgeInsets.all(16),
-//         decoration: BoxDecoration(
-//           color: Colors.white,
-//           borderRadius: BorderRadius.circular(16),
-//           border: Border.all(color: kNavyColor),
-//         ),
-//         child: Center(
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Icon(Icons.add, color: kNavyColor, size: 28),
-//               Text(' Pick Image', style: Styles.styleBlue20),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

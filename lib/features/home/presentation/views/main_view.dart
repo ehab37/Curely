@@ -23,6 +23,7 @@ class _MainViewState extends State<MainView> {
       bottomNavigationBar: CustomBottomNavBar(
         bottomNavigationKey: _bottomNavigationKey,
         onTap: (index) {
+          ScaffoldMessenger.of(context).clearSnackBars();
           setState(() {
             currentViewIndex = index;
           });

@@ -11,12 +11,14 @@ class ImageInput extends StatelessWidget {
     required this.content,
     this.imageUrl,
     this.onRemoveImage,
+    this.imageFile,
   });
 
   final ValueChanged<File?> onSelectedImage;
   final Widget content;
   final String? imageUrl;
   final void Function()? onRemoveImage;
+  final File? imageFile;
 
   void _pickImage(ImageSource imageSource) async {
     final ImagePicker imagePicker = ImagePicker();
@@ -37,7 +39,7 @@ class ImageInput extends StatelessWidget {
         ScaffoldMessenger.of(context).clearSnackBars();
         InfoBox.customImageSnackBar(
           context: context,
-          content: imageUrl == null || imageUrl!.isEmpty
+          content: (imageUrl == null || imageUrl!.isEmpty) && imageFile == null
               ? Column(
                   children: [
                     GestureDetector(

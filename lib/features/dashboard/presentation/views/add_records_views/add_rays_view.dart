@@ -21,39 +21,43 @@ class AddRaysView extends StatelessWidget {
         imagesRepo: getIt<ImagesRepo>(),
         raysRepo: getIt<RaysRepo>(),
       ),
-      child: Scaffold(
-        body: Builder(
-          builder: (context) {
-            return BlocConsumer<AddRaysCubit, AddRaysState>(
-              listener: (context, state) {
-                if (state is AddRaysSuccess) {
-                  GoRouter.of(context).pop();
-                } else if (state is AddRaysFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                } else if (state is UploadImageFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                }
-              },
-              builder: (context, state) {
-                return ModalProgressHUD(
-                  inAsyncCall: state is AddRaysLoading ? true : false,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kHorizontalPadding,
-                      ),
-                      child: Column(
-                        children: [
-                          CustomAppBar(title: "Add Rays"),
-                          AddRaysViewBody(),
-                        ],
+      child: PopScope(
+        onPopInvokedWithResult: (didPop, result) =>
+            didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
+        child: Scaffold(
+          body: Builder(
+            builder: (context) {
+              return BlocConsumer<AddRaysCubit, AddRaysState>(
+                listener: (context, state) {
+                  if (state is AddRaysSuccess) {
+                    GoRouter.of(context).pop();
+                  } else if (state is AddRaysFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  } else if (state is UploadImageFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  }
+                },
+                builder: (context, state) {
+                  return ModalProgressHUD(
+                    inAsyncCall: state is AddRaysLoading ? true : false,
+                    child: SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: kHorizontalPadding,
+                        ),
+                        child: Column(
+                          children: [
+                            CustomAppBar(title: "Add Rays"),
+                            AddRaysViewBody(),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            );
-          },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

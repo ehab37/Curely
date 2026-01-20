@@ -6,20 +6,19 @@ class CustomContainer extends StatelessWidget {
     super.key,
     required this.border,
     required this.child,
+    this.height,
   });
 
   final BorderRadiusGeometry border;
   final Widget child;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.39,
-      decoration: BoxDecoration(
-        color: kBrightBlueColor,
-        borderRadius: border,
-      ),
+      height: height ?? MediaQuery.of(context).size.height * 0.39,
+      decoration: BoxDecoration(color: kNavyColor, borderRadius: border),
       child: child,
     );
   }

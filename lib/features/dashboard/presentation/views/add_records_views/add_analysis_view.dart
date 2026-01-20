@@ -21,39 +21,43 @@ class AddAnalysisView extends StatelessWidget {
         imagesRepo: getIt<ImagesRepo>(),
         analysisRepo: getIt<AnalysisRepo>(),
       ),
-      child: Scaffold(
-        body: Builder(
-          builder: (context) {
-            return BlocConsumer<AddAnalysisCubit, AddAnalysisState>(
-              listener: (context, state) {
-                if (state is AddAnalysisSuccess) {
-                  GoRouter.of(context).pop();
-                } else if (state is AddAnalysisFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                } else if (state is UploadImageFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                }
-              },
-              builder: (context, state) {
-                return ModalProgressHUD(
-                  inAsyncCall: state is AddAnalysisLoading ? true : false,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kHorizontalPadding,
-                      ),
-                      child: Column(
-                        children: [
-                          CustomAppBar(title: "Add Analysis"),
-                          AddAnalysisViewBody(),
-                        ],
+      child: PopScope(
+        onPopInvokedWithResult: (didPop, result) =>
+            didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
+        child: Scaffold(
+          body: Builder(
+            builder: (context) {
+              return BlocConsumer<AddAnalysisCubit, AddAnalysisState>(
+                listener: (context, state) {
+                  if (state is AddAnalysisSuccess) {
+                    GoRouter.of(context).pop();
+                  } else if (state is AddAnalysisFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  } else if (state is UploadImageFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  }
+                },
+                builder: (context, state) {
+                  return ModalProgressHUD(
+                    inAsyncCall: state is AddAnalysisLoading ? true : false,
+                    child: SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: kHorizontalPadding,
+                        ),
+                        child: Column(
+                          children: [
+                            CustomAppBar(title: "Add Analysis"),
+                            AddAnalysisViewBody(),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            );
-          },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

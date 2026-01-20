@@ -23,41 +23,45 @@ class AddMedicineView extends StatelessWidget {
         medicineRepo: getIt<MedicineRepo>(),
         medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
       ),
-      child: Scaffold(
-        body: Builder(
-          builder: (context) {
-            return BlocConsumer<AddMedicineCubit, AddMedicineState>(
-              listener: (context, state) {
-                if (state is AddMedicineSuccess) {
-                  GoRouter.of(context).pop();
-                } else if (state is AddMedicineFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                } else if (state is UploadImageFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                } else if (state is AddMedicineNotificationFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
-                }
-              },
-              builder: (context, state) {
-                return ModalProgressHUD(
-                  inAsyncCall: state is AddMedicineLoading ? true : false,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: kHorizontalPadding,
-                      ),
-                      child: Column(
-                        children: [
-                          CustomAppBar(title: "Add Medicine"),
-                          AddMedicineViewBody(),
-                        ],
+      child: PopScope(
+        onPopInvokedWithResult: (didPop, result) =>
+            didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
+        child: Scaffold(
+          body: Builder(
+            builder: (context) {
+              return BlocConsumer<AddMedicineCubit, AddMedicineState>(
+                listener: (context, state) {
+                  if (state is AddMedicineSuccess) {
+                    GoRouter.of(context).pop();
+                  } else if (state is AddMedicineFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  } else if (state is UploadImageFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  } else if (state is AddMedicineNotificationFailure) {
+                    InfoBox.customSnackBar(context, state.errMessage);
+                  }
+                },
+                builder: (context, state) {
+                  return ModalProgressHUD(
+                    inAsyncCall: state is AddMedicineLoading ? true : false,
+                    child: SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: kHorizontalPadding,
+                        ),
+                        child: Column(
+                          children: [
+                            CustomAppBar(title: "Add Medicine"),
+                            AddMedicineViewBody(),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            );
-          },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );

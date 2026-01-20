@@ -127,6 +127,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             ),
             SizedBox(height: 16),
             GlobalImageInput(
+              imageFile: image,
               onSelectedImage: (value) {
                 setState(() {
                   image = value;

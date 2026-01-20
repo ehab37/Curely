@@ -1,17 +1,13 @@
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/utils/styles.dart';
-import 'package:curely/core/widgets/custom_container.dart';
-import 'package:curely/core/widgets/image_input/profile_image_input.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'cached_image_widget.dart';
-import 'show_edit_name_bottom_sheet.dart';
+import 'personal_details_section.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
@@ -32,73 +28,26 @@ class ProfileViewBody extends StatelessWidget {
           inAsyncCall: state is EditProfileLoading ? true : false,
           child: Column(
             children: [
-              CustomContainer(
-                border: const BorderRadius.only(
-                  bottomLeft: Radius.circular(80),
-                  bottomRight: Radius.circular(80),
-                ),
+              PersonalDetailsSection(user: user),
+              const SizedBox(height: 40),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(height: 1),
-                    ProfileImageInput(
-                      imageUrl: user.imageUrl,
-                      onSelectedImage: (image) {
-                        context.read<EditProfileCubit>().editProfile(
-                          user: user..image = image,
-                        );
-                      },
-                      onRemoveImage: () {
-                        ScaffoldMessenger.of(context).clearSnackBars();
-                        user.imageUrl = null;
-                        context.read<EditProfileCubit>().editProfile(
-                          user: user,
-                        );
-                      },
-                      imageWidget: CachedImageWidget(imageUrl: user.imageUrl),
+                    CustomNavBar(
+                      text: "My Health Record",
+                      prefixIcon: FontAwesomeIcons.notesMedical,
+                      suffixIcon: Icons.arrow_forward_ios,
+                      onPressed: () {},
                     ),
-                    ListTile(
-                      leading: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(width: 30),
-                          GestureDetector(
-                            onTap: () {
-                              showEditNameBottomSheet(context, user);
-                            },
-                            child: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 35,
-                            ),
-                          ),
-                        ],
-                      ),
-                      title: Text(
-                        user.name,
-                        style: Styles.style28.copyWith(color: Colors.white),
-                      ),
-                      subtitle: Text(
-                        user.email,
-                        style: Styles.style18,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    CustomNavBar(
+                      text: "My Medications",
+                      prefixIcon: FontAwesomeIcons.pills,
+                      suffixIcon: Icons.arrow_forward_ios,
+                      onPressed: () {},
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 40),
-              CustomNavBar(
-                text: "My Health Record",
-                prefixIcon: FontAwesomeIcons.notesMedical,
-                suffixIcon: Icons.arrow_forward_ios,
-                onPressed: () {},
-              ),
-              CustomNavBar(
-                text: "My Medications",
-                prefixIcon: FontAwesomeIcons.pills,
-                suffixIcon: Icons.arrow_forward_ios,
-                onPressed: () {},
               ),
             ],
           ),
