@@ -1,10 +1,11 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/widgets/custom_date_box.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'custom_icon_button_row.dart';
 
 class ExaminationDateBox extends StatefulWidget {
   const ExaminationDateBox({super.key, required this.onChanged});
+
   final ValueChanged<DateTime> onChanged;
 
   @override
@@ -16,20 +17,7 @@ class _ExaminationDateBoxState extends State<ExaminationDateBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(kBorderRadius),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(25),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
+    return CustomDateBox(
       child: CustomIconButtonRow(
         text1: 'Examination date: ',
         text2: examinationDate != null
@@ -39,13 +27,13 @@ class _ExaminationDateBoxState extends State<ExaminationDateBox> {
         onPressed: () {
           showDatePicker(
             context: context,
-            initialDate: DateTime.now(),
+            initialDate: examinationDate ?? DateTime.now(),
             firstDate: DateTime(2016),
             lastDate: DateTime.now(),
           ).then((value) {
             setState(() {
               examinationDate = value;
-              widget.onChanged(value??DateTime.now());
+              widget.onChanged(examinationDate ?? DateTime.now());
             });
           });
         },

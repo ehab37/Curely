@@ -44,8 +44,8 @@ class WelcomeViewBody extends StatelessWidget {
           const Spacer(),
           CustomContainer(
             border: const BorderRadius.only(
-              topLeft: Radius.circular(80),
-              topRight: Radius.circular(80),
+              topLeft: Radius.circular(50),
+              topRight: Radius.circular(50),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
@@ -53,10 +53,10 @@ class WelcomeViewBody extends StatelessWidget {
                 children: [
                   const SizedBox(height: 80),
                   CustomButton(
-                    backgroundColor: kDarkBlueColor,
+                    backgroundColor: kSkyBlueColor,
                     child: Text(
                       S.of(context).login,
-                      style: Styles.styleWhite20,
+                      style: Styles.styleBlue20,
                     ),
                     onPressed: () {
                       GoRouter.of(
@@ -68,10 +68,10 @@ class WelcomeViewBody extends StatelessWidget {
                     height: 25,
                   ),
                   CustomButton(
-                    backgroundColor: kDarkBlueColor,
+                    backgroundColor: kSkyBlueColor,
                     child: Text(
                       S.of(context).register,
-                      style: Styles.styleWhite20,
+                      style: Styles.styleBlue20,
                     ),
                     onPressed: () {
                       GoRouter.of(

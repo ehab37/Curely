@@ -1,5 +1,6 @@
 import 'package:curely/constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
+import 'package:curely/core/helper_functions/calculate_age.dart';
 import 'package:curely/core/widgets/custom_container.dart';
 import 'package:curely/core/widgets/image_input/cached_image_widget.dart';
 import 'package:curely/core/widgets/image_input/profile_image_input.dart';
@@ -16,11 +17,12 @@ class PersonalDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int? age = calculateAge(user.dateOfBirth);
     return CustomContainer(
       height: MediaQuery.of(context).size.height * 0.48,
       border: const BorderRadius.only(
-        bottomLeft: Radius.circular(80),
-        bottomRight: Radius.circular(80),
+        bottomLeft: Radius.circular(50),
+        bottomRight: Radius.circular(50),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -50,14 +52,16 @@ class PersonalDetailsSection extends StatelessWidget {
               children: [
                 PersonalDetailWidget(
                   title: "Blood",
-                  subTitle: "A+",
+                  subTitle: user.blood == null || user.blood!.isEmpty
+                      ? "TBD"
+                      : user.blood!,
                   icon: Icons.water_drop_outlined,
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 16),
                 PersonalDetailWidget(
                   title: "Height",
-                  subTitle: "175 CM",
-                  icon: Icons.access_alarms,
+                  subTitle: "${user.height ?? "TBD"} CM",
+                  icon: Icons.height,
                 ),
               ],
             ),
@@ -65,14 +69,14 @@ class PersonalDetailsSection extends StatelessWidget {
               children: [
                 PersonalDetailWidget(
                   title: "Weight",
-                  subTitle: "110 KG",
-                  icon: Icons.access_alarms,
+                  subTitle: "${user.weight ?? "TBD"} KG",
+                  icon: Icons.monitor_weight_outlined,
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 16),
                 PersonalDetailWidget(
                   title: "Age",
-                  subTitle: "25 Years",
-                  icon: Icons.access_alarms,
+                  subTitle: "${age ?? "TBD"} Years",
+                  icon: Icons.cake_outlined,
                 ),
               ],
             ),

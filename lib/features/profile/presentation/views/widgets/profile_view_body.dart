@@ -25,31 +25,33 @@ class ProfileViewBody extends StatelessWidget {
       },
       builder: (context, state) {
         return ModalProgressHUD(
-          inAsyncCall: state is EditProfileLoading ? true : false,
-          child: Column(
-            children: [
-              PersonalDetailsSection(user: user),
-              const SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    CustomNavBar(
-                      text: "My Health Record",
-                      prefixIcon: FontAwesomeIcons.notesMedical,
-                      suffixIcon: Icons.arrow_forward_ios,
-                      onPressed: () {},
-                    ),
-                    CustomNavBar(
-                      text: "My Medications",
-                      prefixIcon: FontAwesomeIcons.pills,
-                      suffixIcon: Icons.arrow_forward_ios,
-                      onPressed: () {},
-                    ),
-                  ],
+          inAsyncCall: state is EditProfileLoading,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                PersonalDetailsSection(user: user),
+                const SizedBox(height: 40),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    children: [
+                      CustomNavBar(
+                        text: "My Health Record",
+                        prefixIcon: FontAwesomeIcons.notesMedical,
+                        suffixIcon: Icons.arrow_forward_ios,
+                        onPressed: () {},
+                      ),
+                      CustomNavBar(
+                        text: "My Medications",
+                        prefixIcon: FontAwesomeIcons.pills,
+                        suffixIcon: Icons.arrow_forward_ios,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

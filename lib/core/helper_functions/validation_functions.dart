@@ -81,3 +81,25 @@ String? dropdownValidator(String? selectedValue) {
   }
   return null;
 }
+
+String? numberLengthValidator(String? value, String fieldName) {
+  if (value == null || value.trim().isEmpty) {
+    return null;
+  }
+  final validNumberRegex = RegExp(r'^\d{2,3}$');
+  if (!validNumberRegex.hasMatch(value.trim())) {
+    return 'Please enter a valid $fieldName (2-3 digits).';
+  }
+  return null;
+}
+
+String? bloodTypeValidator(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return null;
+  }
+  final validBloodTypeRegex = RegExp(r'^(A|B|AB|O)[+-]$', caseSensitive: false);
+  if (!validBloodTypeRegex.hasMatch(value.trim())) {
+    return 'Invalid blood type (e.g., A+, O-).';
+  }
+  return null;
+}

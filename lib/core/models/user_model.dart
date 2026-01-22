@@ -7,6 +7,10 @@ class UserModel extends UserEntity {
     required super.name,
     required super.email,
     required super.uId,
+    super.blood,
+    super.height,
+    super.weight,
+    super.dateOfBirth,
     super.imageUrl,
   });
 
@@ -15,7 +19,6 @@ class UserModel extends UserEntity {
       name: user.displayName ?? "",
       email: user.email ?? "",
       uId: user.uid,
-      imageUrl: user.photoURL,
     );
   }
 
@@ -24,6 +27,10 @@ class UserModel extends UserEntity {
       name: json[DatabaseKeys.name],
       email: json[DatabaseKeys.email],
       uId: json[DatabaseKeys.uId],
+      blood: json['blood'],
+      height: json['height'],
+      weight: json['weight'],
+      dateOfBirth: json['dateOfBirth'],
       imageUrl: json[DatabaseKeys.profileImage],
     );
   }
@@ -33,6 +40,10 @@ class UserModel extends UserEntity {
       name: user.name,
       email: user.email,
       uId: user.uId,
+      blood: user.blood,
+      height: user.height,
+      weight: user.weight,
+      dateOfBirth: user.dateOfBirth,
       imageUrl: user.imageUrl,
     );
   }
@@ -42,6 +53,10 @@ class UserModel extends UserEntity {
       DatabaseKeys.name: name,
       DatabaseKeys.email: email,
       DatabaseKeys.uId: uId,
+      'blood': blood,
+      'height': height,
+      'weight': weight,
+      'dateOfBirth': dateOfBirth,
       DatabaseKeys.profileImage: imageUrl,
     };
   }
