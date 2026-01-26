@@ -31,22 +31,25 @@ class NotificationService {
     );
   }
 
-  static Future<bool> requestPermissions() async {
-    // if (Theme.of(context).platform == TargetPlatform.android) {
-    final androidImplementation = FlutterLocalNotificationsPlugin()
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >();
-    await androidImplementation?.requestNotificationsPermission();
-    return await androidImplementation?.requestExactAlarmsPermission() ?? false;
-    // } else {
-    //   return await notificationsPlugin
-    //           .resolvePlatformSpecificImplementation<
-    //             IOSFlutterLocalNotificationsPlugin
-    //           >()
-    //           ?.requestPermissions(alert: true, badge: true, sound: true) ??
-    //       false;
-    // }
+  static Future<bool> requestPermissions(BuildContext context) async {
+    final FlutterLocalNotificationsPlugin notificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+    if (Theme.of(context).platform == TargetPlatform.android) {
+      final androidImplementation = FlutterLocalNotificationsPlugin()
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >();
+      await androidImplementation?.requestNotificationsPermission();
+      return await androidImplementation?.requestExactAlarmsPermission() ??
+          false;
+    } else {
+      return await notificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                IOSFlutterLocalNotificationsPlugin
+              >()
+              ?.requestPermissions(alert: true, badge: true, sound: true) ??
+          false;
+    }
   }
 
   Future<void> scheduleDailyReminder({

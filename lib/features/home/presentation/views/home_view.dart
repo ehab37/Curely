@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        toolbarHeight: 80,
+        toolbarHeight: 70,
         backgroundColor: kNavyColor,
         leading: Builder(
           builder: (context) => CustomIconButton(

@@ -119,7 +119,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                   }
                   isReminderActive = newVal;
                 });
-                if (await NotificationService.requestPermissions()) {
+                if (await NotificationService.requestPermissions(context)) {
                   log('permission approved');
                 }
               },

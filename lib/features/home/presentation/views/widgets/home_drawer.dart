@@ -59,9 +59,14 @@ class HomeDrawer extends StatelessWidget {
                     bottomNavigationKey.currentState?.setPage(1);
                   },
                 ),
-                const ListTile(
+                ListTile(
                   title: Text("Reminder"),
                   leading: Icon(Icons.alarm),
+                  onTap: () {
+                    GoRouter.of(
+                      context,
+                    ).push(AppRouter.kDisplayMedicineView, extra: true);
+                  },
                 ),
                 ListTile(
                   title: const Text("Profile"),

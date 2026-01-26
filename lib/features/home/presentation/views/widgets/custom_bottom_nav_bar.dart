@@ -21,7 +21,7 @@ class CustomBottomNavBar extends StatelessWidget {
       color: kNavyColor,
       animationDuration: kTransitionDuration,
       backgroundColor: Colors.transparent,
-      height: 60,
+      height: 70,
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 const kTransitionDuration = Duration(milliseconds: 400);
 const Color kPrimaryColor = Color.fromRGBO(122, 122, 255, 1);
 const Color kBrightBlueColor = Color(0xff347AF0);
+const Color kSkyBlueColor = Color(0xffcae8ff);
 const Color kBlueColor = Color(0xff0D47A1);
 const Color kClaimingTealColor = Color(0xff00C4B8);
 const Color kOffWhiteColor = Color(0xffF7F8FC);
@@ -30,6 +31,7 @@ class DatabaseKeys {
   static const String name = "name";
   static const String email = "email";
   static const String profile = "profile";
+  static const String profileImage = "profileImage";
   static const String error = "error";
   static const String uId = "uId";
   static const String serverClientId =

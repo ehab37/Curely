@@ -36,19 +36,23 @@ class HomeViewBody extends StatelessWidget {
                   icon: Icons.alarm,
                   size: 35,
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kDisplayMedicineView,extra: true);
+                    GoRouter.of(
+                      context,
+                    ).push(AppRouter.kDisplayMedicineView, extra: true);
                   },
                 ),
                 CardCircle(
                   text: "Pharmacy",
                   icon: Icons.local_pharmacy_rounded,
                   onPressed: () async {
-                    final Position? position = await getCurrentUserLocation();
-                    if (position != null) {
-                      await navigateToNearestPharmacy(currentLocation: position);
-                    } else {
-                      log("'Current location is required.'");
-                    }
+                    // final Position? position = await getCurrentUserLocation();
+                    // if (position != null) {
+                    //   await navigateToNearestPharmacy(
+                    //     currentLocation: position,
+                    //   );
+                    // } else {
+                    //   log("Current location is required.");
+                    // }
                   },
                 ),
                 CardCircle(
