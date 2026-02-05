@@ -24,15 +24,7 @@ class ProfileImageInput extends StatelessWidget {
         onSelectedImage(value);
       },
       onRemoveImage: onRemoveImage,
-      content: ClipRRect(
-        borderRadius: BorderRadius.circular(60),
-        clipBehavior: Clip.hardEdge,
-        child: CircleAvatar(
-          radius: 60,
-          backgroundColor: Colors.white,
-          child: imageWidget,
-        ),
-      ),
+      content: imageWidget,
     );
   }
 }

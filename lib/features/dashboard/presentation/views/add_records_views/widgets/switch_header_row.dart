@@ -46,7 +46,7 @@ class SwitchHeaderRow extends StatelessWidget {
           // Use .adaptive for native look on iOS/Android
           value: isReminderEnabled,
           onChanged: onChangedToggle,
-          activeColor: kNavyColor,
+          activeThumbColor: kNavyColor,
           inactiveThumbColor: kGrayColor,
           inactiveTrackColor: Colors.grey.shade200,
           activeTrackColor: kNavyColor.withAlpha(110),

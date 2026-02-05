@@ -20,7 +20,14 @@ class CustomIconButtonRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(text1, style: Styles.style16),
+        SizedBox(
+          width: MediaQuery.of(context).size.width / 2.25,
+          child: Text(
+            text1,
+            style: Styles.style16,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
         Text(text2, style: Styles.style16),
         const Spacer(),
         IconButton(

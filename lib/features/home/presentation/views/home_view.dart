@@ -3,6 +3,7 @@ import 'package:curely/core/cubits/logout_user_cubit.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/widgets/image_input/cached_image_widget.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/home/presentation/views/widgets/custom_icon_button.dart';
 import 'package:curely/features/home/presentation/views/widgets/home_drawer.dart';
@@ -19,6 +20,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = getFinalUserData();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -32,13 +34,8 @@ class HomeView extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomIconButton(
-              onPressed: () {
-                bottomNavigationKey.currentState?.setPage(3);
-              },
-              icon: Icons.account_circle,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: CachedImageWidget(imageUrl: user.imageUrl, isProfile: false),
           ),
         ],
         title: Column(
@@ -46,7 +43,7 @@ class HomeView extends StatelessWidget {
           children: [
             Text("Hello", style: Styles.style18),
             SizedBox(height: 5),
-            Text(getFinalUserData().name, style: Styles.styleWhite25),
+            Text(user.name, style: Styles.styleWhite25),
           ],
         ),
       ),
