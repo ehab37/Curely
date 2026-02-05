@@ -52,7 +52,7 @@ class AddMedicineView extends StatelessWidget {
                         child: Column(
                           children: [
                             CustomAppBar(title: "Add Medicine"),
-                            AddMedicineViewBody(),
+                            Expanded(child: AddMedicineViewBody()),
                           ],
                         ),
                       ),

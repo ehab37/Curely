@@ -1,25 +1,29 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/constants.dart';
+import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/services/database_service.dart';
+import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/dashboard/data/models/rays_model.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:dartz/dartz.dart';
 
 class RaysRepoImpl implements RaysRepo {
-  RaysRepoImpl({required this.databaseService});
+  RaysRepoImpl({required this.databaseService, required this.networkManager});
 
   final DatabaseService databaseService;
+  final NetworkManager networkManager;
 
   @override
-  Future<Either<Failure, void>> addRays({
-    required RaysEntity rays,
-  }) async {
+  Future<Either<Failure, void>> addRays({required RaysEntity rays}) async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       await databaseService.addData(
         path: DatabaseKeys.users,
         data: RaysModel.fromEntity(rays).toMap(),
@@ -29,6 +33,8 @@ class RaysRepoImpl implements RaysRepo {
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -41,17 +47,24 @@ class RaysRepoImpl implements RaysRepo {
   Future<Either<Failure, List<RaysEntity>>> getRays() async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       var data =
-      await databaseService.getData(
-        path: DatabaseKeys.users,
-        docId: userId,
-        subCollectionPath: DatabaseKeys.raysPath,
-      )
-      as List<Map<String, dynamic>>;
+          await databaseService.getData(
+                path: DatabaseKeys.users,
+                docId: userId,
+                subCollectionPath: DatabaseKeys.raysPath,
+              )
+              as List<Map<String, dynamic>>;
       List<RaysEntity> rays = data
           .map((e) => RaysModel.fromJson(e).toEntity())
           .toList();
       return Right(rays);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -61,11 +74,12 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteRays({
-    required String docId,
-  }) async {
+  Future<Either<Failure, void>> deleteRays({required String docId}) async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       await databaseService.deleteData(
         path: DatabaseKeys.users,
         docId: userId,
@@ -75,6 +89,8 @@ class RaysRepoImpl implements RaysRepo {
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(

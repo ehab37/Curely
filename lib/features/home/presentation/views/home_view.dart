@@ -3,7 +3,7 @@ import 'package:curely/core/cubits/logout_user_cubit.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/styles.dart';
-import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/home/presentation/views/widgets/custom_icon_button.dart';
 import 'package:curely/features/home/presentation/views/widgets/home_drawer.dart';
 import 'package:curely/features/home/presentation/views/widgets/home_view_body.dart';
@@ -51,9 +51,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       drawer: BlocProvider(
-        create: (context) => LogoutUserCubit(
-          homeRepo: getIt<HomeRepo>(),
-        ),
+        create: (context) => LogoutUserCubit(authRepo: getIt<AuthRepo>()),
         child: HomeDrawer(bottomNavigationKey: bottomNavigationKey),
       ),
       body: const HomeViewBody(),

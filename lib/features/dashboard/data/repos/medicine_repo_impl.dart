@@ -1,18 +1,24 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/constants.dart';
+import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/services/database_service.dart';
+import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/dashboard/data/models/medicine_model.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:dartz/dartz.dart';
 
 class MedicineRepoImpl implements MedicineRepo {
-  MedicineRepoImpl({required this.databaseService});
+  MedicineRepoImpl({
+    required this.databaseService,
+    required this.networkManager,
+  });
 
   final DatabaseService databaseService;
+  final NetworkManager networkManager;
 
   @override
   Future<Either<Failure, String>> addMedicine({
@@ -20,6 +26,9 @@ class MedicineRepoImpl implements MedicineRepo {
   }) async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       String? docId = await databaseService.addData(
         path: DatabaseKeys.users,
         data: MedicineModel.fromEntity(medicine).toMap(),
@@ -29,6 +38,8 @@ class MedicineRepoImpl implements MedicineRepo {
       return Right(docId!);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -41,6 +52,9 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, List<MedicineEntity>>> getMedicines() async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       var data =
           await databaseService.getData(
                 path: DatabaseKeys.users,
@@ -52,6 +66,10 @@ class MedicineRepoImpl implements MedicineRepo {
           .map((e) => MedicineModel.fromJson(e).toEntity())
           .toList();
       return Right(medicines);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -64,6 +82,9 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines() async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       var data =
           await databaseService.getData(
                 path: DatabaseKeys.users,
@@ -76,6 +97,10 @@ class MedicineRepoImpl implements MedicineRepo {
           .map((e) => MedicineModel.fromJson(e).toEntity())
           .toList();
       return Right(medicines);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -88,6 +113,9 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, void>> deleteMedicine({required String docId}) async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       await databaseService.deleteData(
         path: DatabaseKeys.users,
         docId: userId,
@@ -97,6 +125,8 @@ class MedicineRepoImpl implements MedicineRepo {
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(

@@ -31,10 +31,7 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
           if (state.rays.isEmpty) {
             return SliverToBoxAdapter(
               child: Center(
-                child: Text(
-                  "NO Rays added yet!...",
-                  style: Styles.styleBlue25,
-                ),
+                child: Text("NO Rays added yet!...", style: Styles.styleBlue25),
               ),
             );
           }
@@ -54,9 +51,7 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
                 direction: DismissDirection.startToEnd,
                 onDismissed: (direction) => context
                     .read<GetDeleteRaysCubit>()
-                    .deleteRays(
-                  docId: state.rays[index].docId!,
-                ),
+                    .deleteRays(docId: state.rays[index].docId!),
                 child: DisplayedItem(
                   imageUrl: state.rays[index].imageUrls![0],
                   text1: state.rays[index].doctorName,

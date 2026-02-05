@@ -1,18 +1,24 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/constants.dart';
+import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
 import 'package:curely/core/services/database_service.dart';
+import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/dashboard/data/models/analysis_model.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:dartz/dartz.dart';
 
 class AnalysisRepoImpl implements AnalysisRepo {
-  AnalysisRepoImpl({required this.databaseService});
+  AnalysisRepoImpl({
+    required this.databaseService,
+    required this.networkManager,
+  });
 
   final DatabaseService databaseService;
+  final NetworkManager networkManager;
 
   @override
   Future<Either<Failure, void>> addAnalysis({
@@ -20,6 +26,9 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }) async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       await databaseService.addData(
         path: DatabaseKeys.users,
         data: AnalysisModel.fromEntity(analysis).toMap(),
@@ -29,6 +38,8 @@ class AnalysisRepoImpl implements AnalysisRepo {
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -41,6 +52,9 @@ class AnalysisRepoImpl implements AnalysisRepo {
   Future<Either<Failure, List<AnalysisEntity>>> getAnalysis() async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       var data =
           await databaseService.getData(
                 path: DatabaseKeys.users,
@@ -52,6 +66,10 @@ class AnalysisRepoImpl implements AnalysisRepo {
           .map((e) => AnalysisModel.fromJson(e).toEntity())
           .toList();
       return Right(analysis);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(
@@ -64,6 +82,9 @@ class AnalysisRepoImpl implements AnalysisRepo {
   Future<Either<Failure, void>> deleteAnalysis({required String docId}) async {
     var userId = getFinalUserData().uId;
     try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
       await databaseService.deleteData(
         path: DatabaseKeys.users,
         docId: userId,
@@ -73,6 +94,8 @@ class AnalysisRepoImpl implements AnalysisRepo {
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
       return Left(

@@ -47,120 +47,116 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
     return Form(
       autovalidateMode: autoValidateMode,
       key: formKey,
-      child: Expanded(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            SizedBox(height: 8),
-            CustomTextFormField(
-              controller: medicineNameController,
-              label: "Medicine Name",
-              hint: "Enter Medicine Name",
-              keyboard: TextInputType.name,
-              validator: (value) => nameValidator(value, context),
-            ),
-            CustomTextFormField(
-              controller: medicineNotesController,
-              label: "Medicine Notes",
-              hint: "Please, Enter any missing information about the medicine.",
-              maxLines: 3,
-            ),
-            SizedBox(height: 8),
-            CustomDropdownSearch(
-              hint: 'How Often?',
-              label: "Frequency",
-              showSearchBox: false,
-              list: frequencyList,
-              onChanged: (value) {
-                setState(() {
-                  addMedicineCubit.remindersList = getDefaultRemindersList(
-                    value,
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          SizedBox(height: 8),
+          CustomTextFormField(
+            controller: medicineNameController,
+            label: "Medicine Name",
+            hint: "Enter Medicine Name",
+            keyboard: TextInputType.name,
+            validator: (value) => nameValidator(value, context),
+          ),
+          CustomTextFormField(
+            controller: medicineNotesController,
+            label: "Medicine Notes",
+            hint: "Please, Enter any missing information about the medicine.",
+            maxLines: 3,
+          ),
+          SizedBox(height: 8),
+          CustomDropdownSearch(
+            hint: 'How Often?',
+            label: "Frequency",
+            showSearchBox: false,
+            list: frequencyList,
+            onChanged: (value) {
+              setState(() {
+                addMedicineCubit.remindersList = getDefaultRemindersList(value);
+                frequency = value;
+              });
+            },
+            validator: (selectedValue) => dropdownValidator(selectedValue),
+          ),
+          SizedBox(height: 16),
+          CustomDropdownSearch(
+            label: "Medicine Usage",
+            hint: "Enter Medicine Usage",
+            list: medicineUsagesList,
+            onChanged: (value) {
+              setState(() {
+                medicineUsage = value;
+              });
+            },
+            validator: (selectedValue) => dropdownValidator(selectedValue),
+          ),
+          SizedBox(height: 16),
+          CustomDropdownSearch(
+            label: 'Medicine Type',
+            hint: 'Enter Medicine Type',
+            list: medicineTypesList,
+            onChanged: (value) {
+              setState(() {
+                medicineTypes = value;
+              });
+            },
+            validator: (selectedValue) => dropdownValidator(selectedValue),
+          ),
+          SizedBox(height: 16),
+          ReminderToggleSwitch(
+            isReminderEnabled: isReminderActive,
+            onChangedToggle: (newVal) async {
+              setState(() {
+                if (frequency == null) {
+                  InfoBox.customSnackBar(
+                    context,
+                    "Please, Choose the frequency first.",
                   );
-                  frequency = value;
-                });
-              },
-              validator: (selectedValue) => dropdownValidator(selectedValue),
-            ),
-            SizedBox(height: 16),
-            CustomDropdownSearch(
-              label: "Medicine Usage",
-              hint: "Enter Medicine Usage",
-              list: medicineUsagesList,
-              onChanged: (value) {
-                setState(() {
-                  medicineUsage = value;
-                });
-              },
-              validator: (selectedValue) => dropdownValidator(selectedValue),
-            ),
-            SizedBox(height: 16),
-            CustomDropdownSearch(
-              label: 'Medicine Type',
-              hint: 'Enter Medicine Type',
-              list: medicineTypesList,
-              onChanged: (value) {
-                setState(() {
-                  medicineTypes = value;
-                });
-              },
-              validator: (selectedValue) => dropdownValidator(selectedValue),
-            ),
-            SizedBox(height: 16),
-            ReminderToggleSwitch(
-              isReminderEnabled: isReminderActive,
-              onChangedToggle: (newVal) async {
-                setState(() {
-                  if (frequency == null) {
-                    InfoBox.customSnackBar(
-                      context,
-                      "Please, Choose the frequency first.",
-                    );
-                    return;
-                  }
-                  isReminderActive = newVal;
-                });
-                if (await NotificationService.requestPermissions(context)) {
-                  log('permission approved');
+                  return;
                 }
-              },
-              remindersList: addMedicineCubit.remindersList,
-            ),
-            SizedBox(height: 16),
-            GlobalImageInput(
-              imageFile: image,
-              onSelectedImage: (value) {
+                isReminderActive = newVal;
+              });
+              if (await NotificationService.requestPermissions(context)) {
+                log('permission approved');
+              }
+            },
+            remindersList: addMedicineCubit.remindersList,
+          ),
+          SizedBox(height: 16),
+          GlobalImageInput(
+            imageFile: image,
+            onSelectedImage: (value) {
+              setState(() {
+                image = value;
+              });
+            },
+          ),
+          SizedBox(height: 32),
+          CustomButton(
+            onPressed: () async {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                MedicineEntity medicine = MedicineEntity(
+                  medicineUsage: medicineUsage,
+                  medicineName: medicineNameController.text,
+                  frequency: frequency!,
+                  medicineNotes: medicineNotesController.text,
+                  isReminderActive: isReminderActive,
+                  medicineTypes: medicineTypes,
+                  image: image,
+                );
+                await addMedicineCubit.addMedicine(medicine: medicine);
+              } else {
                 setState(() {
-                  image = value;
+                  autoValidateMode = AutovalidateMode.always;
                 });
-              },
-            ),
-            SizedBox(height: 32),
-            CustomButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  MedicineEntity medicine = MedicineEntity(
-                    medicineUsage: medicineUsage,
-                    medicineName: medicineNameController.text,
-                    frequency: frequency!,
-                    medicineNotes: medicineNotesController.text,
-                    isReminderActive: isReminderActive,
-                    medicineTypes: medicineTypes,
-                    image: image,
-                  );
-                  await addMedicineCubit.addMedicine(medicine: medicine);
-                } else {
-                  setState(() {
-                    autoValidateMode = AutovalidateMode.always;
-                  });
-                }
-              },
-              backgroundColor: kNavyColor,
-              child: Text("Add Medicine", style: Styles.styleWhite20),
-            ),
-            SizedBox(height: kBottomPadding),
-          ],
-        ),
+              }
+            },
+            backgroundColor: kNavyColor,
+            child: Text("Add Medicine", style: Styles.styleWhite20),
+          ),
+          SizedBox(height: kBottomPadding),
+        ],
       ),
     );
   }

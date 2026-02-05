@@ -44,92 +44,89 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
     return Form(
       autovalidateMode: autoValidateMode,
       key: formKey,
-      child: Expanded(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            SizedBox(height: 8),
-            CustomTextFormField(
-              controller: doctorNameController,
-              label: "Doctor Name",
-              hint: "Enter Doctor Name",
-              keyboard: TextInputType.name,
-              validator: (value) => nameValidator(value, context),
-            ),
-            CustomTextFormField(
-              controller: labController,
-              label: "Lab",
-              hint: "Enter Lab Name",
-            ),
-            CustomTextFormField(
-              controller: diagnosisController,
-              label: "Diagnosis",
-              maxLines: 3,
-            ),
-            SizedBox(height: 8),
-            CustomDropdownSearch(
-              hint: 'Analysis Type',
-              label: 'Analysis Type',
-              list: analysisTypesList,
-              onChanged: (value) {
-                setState(() {
-                  analysisType = value;
-                });
-              },
-              validator: (selectedValue) => dropdownValidator(selectedValue),
-            ),
-            SizedBox(height: 16),
-            ExaminationDateBox(
-              onChanged: (value) {
-                setState(() {
-                  examinationDate = value;
-                });
-              },
-            ),
-            SizedBox(height: 16),
-            ImagesListViewWidget(images: images),
-            GlobalImageInput(
-              isMultiple: true,
-              onSelectedImage: (value) {
-                setState(() {
-                  images.add(value!);
-                });
-              },
-            ),
-            SizedBox(height: 32),
-            CustomButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  if (images.isEmpty) {
-                    InfoBox.customSnackBar(context, "Please select an image");
-                    return;
-                  }
-                  AnalysisEntity analysis = AnalysisEntity(
-                    analysisType: analysisType,
-                    doctorName: doctorNameController.text,
-                    lab: labController.text,
-                    diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate == null
-                        ? DateTime.now().toString()
-                        : examinationDate.toString(),
-                    images: images,
-                  );
-                  await context.read<AddAnalysisCubit>().addAnalysis(
-                    analysis: analysis,
-                  );
-                } else {
-                  setState(() {
-                    autoValidateMode = AutovalidateMode.always;
-                  });
+      child: Column(
+        children: [
+          SizedBox(height: 8),
+          CustomTextFormField(
+            controller: doctorNameController,
+            label: "Doctor Name",
+            hint: "Enter Doctor Name",
+            keyboard: TextInputType.name,
+            validator: (value) => nameValidator(value, context),
+          ),
+          CustomTextFormField(
+            controller: labController,
+            label: "Lab",
+            hint: "Enter Lab Name",
+          ),
+          CustomTextFormField(
+            controller: diagnosisController,
+            label: "Diagnosis",
+            maxLines: 3,
+          ),
+          SizedBox(height: 8),
+          CustomDropdownSearch(
+            hint: 'Analysis Type',
+            label: 'Analysis Type',
+            list: analysisTypesList,
+            onChanged: (value) {
+              setState(() {
+                analysisType = value;
+              });
+            },
+            validator: (selectedValue) => dropdownValidator(selectedValue),
+          ),
+          SizedBox(height: 16),
+          ExaminationDateBox(
+            onChanged: (value) {
+              setState(() {
+                examinationDate = value;
+              });
+            },
+          ),
+          SizedBox(height: 16),
+          ImagesListViewWidget(images: images),
+          GlobalImageInput(
+            isMultiple: true,
+            onSelectedImage: (value) {
+              setState(() {
+                images.add(value!);
+              });
+            },
+          ),
+          SizedBox(height: 32),
+          CustomButton(
+            onPressed: () async {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                if (images.isEmpty) {
+                  InfoBox.customSnackBar(context, "Please select an image");
+                  return;
                 }
-              },
-              backgroundColor: kNavyColor,
-              child: Text("Add Analysis", style: Styles.styleWhite20),
-            ),
-            SizedBox(height: kBottomPadding),
-          ],
-        ),
+                AnalysisEntity analysis = AnalysisEntity(
+                  analysisType: analysisType,
+                  doctorName: doctorNameController.text,
+                  lab: labController.text,
+                  diagnosis: diagnosisController.text,
+                  examinationDate: examinationDate == null
+                      ? DateTime.now().toString()
+                      : examinationDate.toString(),
+                  images: images,
+                );
+                await context.read<AddAnalysisCubit>().addAnalysis(
+                  analysis: analysis,
+                );
+              } else {
+                setState(() {
+                  autoValidateMode = AutovalidateMode.always;
+                });
+              }
+            },
+            backgroundColor: kNavyColor,
+            child: Text("Add Analysis", style: Styles.styleWhite20),
+          ),
+          SizedBox(height: kBottomPadding),
+        ],
       ),
     );
   }

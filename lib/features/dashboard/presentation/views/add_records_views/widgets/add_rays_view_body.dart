@@ -45,90 +45,87 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
     return Form(
       autovalidateMode: autoValidateMode,
       key: formKey,
-      child: Expanded(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            SizedBox(height: 8),
-            CustomTextFormField(
-              controller: doctorNameController,
-              label: "Doctor Name",
-              hint: "Enter Doctor Name",
-              keyboard: TextInputType.name,
-              validator: (value) => nameValidator(value, context),
-            ),
-            CustomTextFormField(
-              controller: radiologyCenterController,
-              label: "Radiology Center",
-              hint: "Enter Radiology Center Name",
-            ),
-            CustomTextFormField(
-              controller: diagnosisController,
-              label: "Diagnosis",
-              maxLines: 3,
-            ),
-            SizedBox(height: 8),
-            CustomDropdownSearch(
-              hint: 'Rays Type',
-              label: 'Rays Type',
-              list: raysTypesList,
-              onChanged: (value) {
-                setState(() {
-                  raysType = value;
-                });
-              },
-              validator: (selectedValue) => dropdownValidator(selectedValue),
-            ),
-            SizedBox(height: 16),
-            ExaminationDateBox(
-              onChanged: (value) {
-                setState(() {
-                  examinationDate = value;
-                });
-              },
-            ),
-            SizedBox(height: 16),
-            ImagesListViewWidget(images: images),
-            GlobalImageInput(
-              isMultiple: true,
-              onSelectedImage: (value) {
-                setState(() {
-                  images.add(value!);
-                });
-              },
-            ),
-            SizedBox(height: 32),
-            CustomButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  if (images.isEmpty) {
-                    InfoBox.customSnackBar(context, "Please select an image");
-                    return;
-                  }
-                  RaysEntity rays = RaysEntity(
-                    raysType: raysType,
-                    doctorName: doctorNameController.text,
-                    radiologyCenter: radiologyCenterController.text,
-                    diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate == null
-                        ? DateTime.now().toString()
-                        : examinationDate.toString(),
-                    images: images,
-                  );
-                  await context.read<AddRaysCubit>().addRays(rays: rays);
-                } else {
-                  setState(() {
-                    autoValidateMode = AutovalidateMode.always;
-                  });
+      child: Column(
+        children: [
+          SizedBox(height: 8),
+          CustomTextFormField(
+            controller: doctorNameController,
+            label: "Doctor Name",
+            hint: "Enter Doctor Name",
+            keyboard: TextInputType.name,
+            validator: (value) => nameValidator(value, context),
+          ),
+          CustomTextFormField(
+            controller: radiologyCenterController,
+            label: "Radiology Center",
+            hint: "Enter Radiology Center Name",
+          ),
+          CustomTextFormField(
+            controller: diagnosisController,
+            label: "Diagnosis",
+            maxLines: 3,
+          ),
+          SizedBox(height: 8),
+          CustomDropdownSearch(
+            hint: 'Rays Type',
+            label: 'Rays Type',
+            list: raysTypesList,
+            onChanged: (value) {
+              setState(() {
+                raysType = value;
+              });
+            },
+            validator: (selectedValue) => dropdownValidator(selectedValue),
+          ),
+          SizedBox(height: 16),
+          ExaminationDateBox(
+            onChanged: (value) {
+              setState(() {
+                examinationDate = value;
+              });
+            },
+          ),
+          SizedBox(height: 16),
+          ImagesListViewWidget(images: images),
+          GlobalImageInput(
+            isMultiple: true,
+            onSelectedImage: (value) {
+              setState(() {
+                images.add(value!);
+              });
+            },
+          ),
+          SizedBox(height: 32),
+          CustomButton(
+            onPressed: () async {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                if (images.isEmpty) {
+                  InfoBox.customSnackBar(context, "Please select an image");
+                  return;
                 }
-              },
-              backgroundColor: kNavyColor,
-              child: Text("Add Rays", style: Styles.styleWhite20),
-            ),
-            SizedBox(height: kBottomPadding),
-          ],
-        ),
+                RaysEntity rays = RaysEntity(
+                  raysType: raysType,
+                  doctorName: doctorNameController.text,
+                  radiologyCenter: radiologyCenterController.text,
+                  diagnosis: diagnosisController.text,
+                  examinationDate: examinationDate == null
+                      ? DateTime.now().toString()
+                      : examinationDate.toString(),
+                  images: images,
+                );
+                await context.read<AddRaysCubit>().addRays(rays: rays);
+              } else {
+                setState(() {
+                  autoValidateMode = AutovalidateMode.always;
+                });
+              }
+            },
+            backgroundColor: kNavyColor,
+            child: Text("Add Rays", style: Styles.styleWhite20),
+          ),
+          SizedBox(height: kBottomPadding),
+        ],
       ),
     );
   }

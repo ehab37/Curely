@@ -49,7 +49,9 @@ class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
     required MedicineEntity medicine,
   }) async {
     try {
-      int remindersListLength = getDefaultRemindersList(medicine.frequency).length;
+      int remindersListLength = getDefaultRemindersList(
+        medicine.frequency,
+      ).length;
       if (medicine.isReminderActive) {
         for (int i = 0; i < remindersListLength; i++) {
           final int notificationId = medicine.docId.hashCode + i;

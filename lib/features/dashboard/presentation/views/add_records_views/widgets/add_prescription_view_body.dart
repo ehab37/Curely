@@ -45,92 +45,89 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
     return Form(
       autovalidateMode: autoValidateMode,
       key: formKey,
-      child: Expanded(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            const SizedBox(height: 8),
-            CustomTextFormField(
-              controller: doctorNameController,
-              label: "Doctor Name",
-              hint: "Enter Doctor Name",
-              keyboard: TextInputType.name,
-              validator: (value) => nameValidator(value, context),
-            ),
-            CustomTextFormField(
-              controller: hospitalController,
-              label: "Hospital or Clinic",
-              hint: "Enter the place of examination",
-            ),
-            CustomTextFormField(
-              controller: diagnosisController,
-              label: "Diagnosis",
-              maxLines: 3,
-            ),
-            const SizedBox(height: 8),
-            CustomDropdownSearch(
-              hint: 'Doctor Specialization',
-              label: 'Doctor Specialization',
-              list: doctorSpecializationsList,
-              onChanged: (value) {
-                setState(() {
-                  doctorSpecialization = value;
-                });
-              },
-              validator: (selectedValue) => dropdownValidator(selectedValue),
-            ),
-            const SizedBox(height: 16),
-            ExaminationDateBox(
-              onChanged: (value) {
-                setState(() {
-                  examinationDate = value;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            ImagesListViewWidget(images: images),
-            GlobalImageInput(
-              isMultiple: true,
-              onSelectedImage: (value) {
-                setState(() {
-                  images.add(value!);
-                });
-              },
-            ),
-            const SizedBox(height: 32),
-            CustomButton(
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-                  if (images.isEmpty) {
-                    InfoBox.customSnackBar(context, "Please select an image");
-                    return;
-                  }
-                  PrescriptionEntity prescription = PrescriptionEntity(
-                    doctorName: doctorNameController.text,
-                    doctorSpecialization: doctorSpecialization,
-                    hospital: hospitalController.text,
-                    diagnosis: diagnosisController.text,
-                    examinationDate: examinationDate == null
-                        ? DateTime.now().toString()
-                        : examinationDate.toString(),
-                    images: images,
-                  );
-                  await context.read<AddPrescriptionCubit>().addPrescription(
-                    prescription: prescription,
-                  );
-                } else {
-                  setState(() {
-                    autoValidateMode = AutovalidateMode.always;
-                  });
+      child: Column(
+        children: [
+          const SizedBox(height: 8),
+          CustomTextFormField(
+            controller: doctorNameController,
+            label: "Doctor Name",
+            hint: "Enter Doctor Name",
+            keyboard: TextInputType.name,
+            validator: (value) => nameValidator(value, context),
+          ),
+          CustomTextFormField(
+            controller: hospitalController,
+            label: "Hospital or Clinic",
+            hint: "Enter the place of examination",
+          ),
+          CustomTextFormField(
+            controller: diagnosisController,
+            label: "Diagnosis",
+            maxLines: 3,
+          ),
+          const SizedBox(height: 8),
+          CustomDropdownSearch(
+            hint: 'Doctor Specialization',
+            label: 'Doctor Specialization',
+            list: doctorSpecializationsList,
+            onChanged: (value) {
+              setState(() {
+                doctorSpecialization = value;
+              });
+            },
+            validator: (selectedValue) => dropdownValidator(selectedValue),
+          ),
+          const SizedBox(height: 16),
+          ExaminationDateBox(
+            onChanged: (value) {
+              setState(() {
+                examinationDate = value;
+              });
+            },
+          ),
+          const SizedBox(height: 16),
+          ImagesListViewWidget(images: images),
+          GlobalImageInput(
+            isMultiple: true,
+            onSelectedImage: (value) {
+              setState(() {
+                images.add(value!);
+              });
+            },
+          ),
+          const SizedBox(height: 32),
+          CustomButton(
+            onPressed: () async {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                if (images.isEmpty) {
+                  InfoBox.customSnackBar(context, "Please select an image");
+                  return;
                 }
-              },
-              backgroundColor: kNavyColor,
-              child: Text("Add Prescription", style: Styles.styleWhite20),
-            ),
-            SizedBox(height: kBottomPadding),
-          ],
-        ),
+                PrescriptionEntity prescription = PrescriptionEntity(
+                  doctorName: doctorNameController.text,
+                  doctorSpecialization: doctorSpecialization,
+                  hospital: hospitalController.text,
+                  diagnosis: diagnosisController.text,
+                  examinationDate: examinationDate == null
+                      ? DateTime.now().toString()
+                      : examinationDate.toString(),
+                  images: images,
+                );
+                await context.read<AddPrescriptionCubit>().addPrescription(
+                  prescription: prescription,
+                );
+              } else {
+                setState(() {
+                  autoValidateMode = AutovalidateMode.always;
+                });
+              }
+            },
+            backgroundColor: kNavyColor,
+            child: Text("Add Prescription", style: Styles.styleWhite20),
+          ),
+          SizedBox(height: kBottomPadding),
+        ],
       ),
     );
   }

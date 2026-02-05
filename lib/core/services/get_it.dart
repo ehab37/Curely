@@ -6,6 +6,7 @@ import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
+import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/notification_service.dart';
 import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/core/services/url_services.dart';
@@ -38,6 +39,7 @@ void setupGetIt() {
   getIt.registerSingleton<UrlServices>(UrlServices());
   getIt.registerSingleton<NotificationService>(NotificationService());
   getIt.registerSingleton<StorageServices>(FireStorage());
+  getIt.registerSingleton<NetworkManager>(NetworkManager());
   getIt.registerSingleton<UserDataRepo>(
     UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
   );
@@ -45,13 +47,20 @@ void setupGetIt() {
     AuthRepoImpl(
       firebaseAuthServices: getIt<FirebaseAuthServices>(),
       userDataRepo: getIt<UserDataRepo>(),
+      networkManager: getIt<NetworkManager>(),
     ),
   );
   getIt.registerSingleton<ProfileRepo>(
-    ProfileRepoImpl(userDataRepo: getIt<UserDataRepo>()),
+    ProfileRepoImpl(
+      userDataRepo: getIt<UserDataRepo>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
   getIt.registerSingleton<ImagesRepo>(
-    ImagesRepoImpl(storageServices: getIt<StorageServices>()),
+    ImagesRepoImpl(
+      storageServices: getIt<StorageServices>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
   getIt.registerSingleton<EditProfileCubit>(
     EditProfileCubit(
@@ -65,21 +74,30 @@ void setupGetIt() {
     ),
   );
   getIt.registerSingleton<MedicineRepo>(
-    MedicineRepoImpl(databaseService: getIt<DatabaseService>()),
+    MedicineRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
   getIt.registerSingleton<PrescriptionRepo>(
-    PrescriptionRepoImpl(databaseService: getIt<DatabaseService>()),
+    PrescriptionRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
   getIt.registerSingleton<RaysRepo>(
-    RaysRepoImpl(databaseService: getIt<DatabaseService>()),
+    RaysRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
   getIt.registerSingleton<AnalysisRepo>(
-    AnalysisRepoImpl(databaseService: getIt<DatabaseService>()),
+    AnalysisRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
   getIt.registerSingleton<HomeRepo>(
-    HomeRepoImpl(
-      urlServices: getIt<UrlServices>(),
-      firebaseAuthServices: getIt<FirebaseAuthServices>(),
-    ),
+    HomeRepoImpl(urlServices: getIt<UrlServices>()),
   );
 }
