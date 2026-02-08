@@ -20,7 +20,7 @@ class ProfileRepoImpl implements ProfileRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await userDataRepo.editUserData(user: user);
-      await userDataRepo.saveUserData(user: user);
+      await userDataRepo.saveUserDataLocally(user: user);
       return Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

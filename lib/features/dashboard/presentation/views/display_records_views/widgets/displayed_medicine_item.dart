@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/helper_functions/show_stop_reminder_dialog.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/spacing.dart';
@@ -26,14 +27,17 @@ class DisplayedMedicineItem extends StatelessWidget {
         children: [
           Align(
             alignment: AlignmentDirectional.centerStart,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8),
-              child: Icon(
-                Icons.access_alarms_outlined,
-                size: 25,
-                color: medicineItem.isReminderActive
-                    ? AppColors.primary
-                    : AppColors.unActive,
+            child: GestureDetector(
+              onTap: () => showStopReminderDialog(context, medicineItem),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, left: 8),
+                child: Icon(
+                  Icons.access_alarms_outlined,
+                  size: 25,
+                  color: medicineItem.isReminderActive
+                      ? AppColors.primary
+                      : AppColors.unActive,
+                ),
               ),
             ),
           ),

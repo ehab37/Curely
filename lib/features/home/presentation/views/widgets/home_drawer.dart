@@ -1,6 +1,8 @@
 import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/cubits/logout_user_cubit.dart';
-import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/entities/user_entity.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
+import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
@@ -19,7 +21,7 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData = getFinalUserData();
+    final UserEntity user = getIt<UserDataRepo>().getUserDataLocally();
     return BlocConsumer<LogoutUserCubit, LogoutUserState>(
       listener: (context, state) {
         if (state is LogoutUserSuccess) {
@@ -45,7 +47,7 @@ class HomeDrawer extends StatelessWidget {
                       Icon(FontAwesomeIcons.solidCircleUser),
                       10.horizontalSpacing,
                       Text(
-                        userData.name,
+                        user.name,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

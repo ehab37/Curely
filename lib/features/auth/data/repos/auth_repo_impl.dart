@@ -44,7 +44,7 @@ class AuthRepoImpl implements AuthRepo {
         uId: user.uid,
       );
       await userDataRepo.addUserData(user: userEntity);
-      await userDataRepo.saveUserData(user: userEntity);
+      await userDataRepo.saveUserDataLocally(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {
@@ -78,7 +78,7 @@ class AuthRepoImpl implements AuthRepo {
         password: password,
       );
       UserEntity userEntity = await userDataRepo.getUserData(uId: user.uid);
-      await userDataRepo.saveUserData(user: userEntity);
+      await userDataRepo.saveUserDataLocally(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
@@ -107,7 +107,7 @@ class AuthRepoImpl implements AuthRepo {
       } else {
         await userDataRepo.addUserData(user: userEntity);
       }
-      await userDataRepo.saveUserData(user: userEntity);
+      await userDataRepo.saveUserDataLocally(user: userEntity);
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {

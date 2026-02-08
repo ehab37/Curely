@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
-import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/dashboard/data/models/rays_model.dart';
@@ -12,14 +13,20 @@ import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:dartz/dartz.dart';
 
 class RaysRepoImpl implements RaysRepo {
-  RaysRepoImpl({required this.databaseService, required this.networkManager});
+  RaysRepoImpl({
+    required this.databaseService,
+    required this.networkManager,
+    required this.userDataRepo,
+  });
 
   final DatabaseService databaseService;
   final NetworkManager networkManager;
+  final UserDataRepo userDataRepo;
+
+  UserEntity get user => userDataRepo.getUserDataLocally();
 
   @override
   Future<Either<Failure, void>> addRays({required RaysEntity rays}) async {
-    var userId = getFinalUserData().uId;
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -27,7 +34,7 @@ class RaysRepoImpl implements RaysRepo {
       await databaseService.addData(
         path: DatabaseConstants.users,
         data: RaysModel.fromEntity(rays).toMap(),
-        docId: userId,
+        docId: user.uId,
         subCollectionPath: DatabaseConstants.raysPath,
       );
       return const Right(null);
@@ -45,7 +52,6 @@ class RaysRepoImpl implements RaysRepo {
 
   @override
   Future<Either<Failure, List<RaysEntity>>> getRays() async {
-    var userId = getFinalUserData().uId;
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -53,7 +59,7 @@ class RaysRepoImpl implements RaysRepo {
       var data =
           await databaseService.getData(
                 path: DatabaseConstants.users,
-                docId: userId,
+                docId: user.uId,
                 subCollectionPath: DatabaseConstants.raysPath,
               )
               as List<Map<String, dynamic>>;
@@ -75,14 +81,13 @@ class RaysRepoImpl implements RaysRepo {
 
   @override
   Future<Either<Failure, void>> deleteRays({required String docId}) async {
-    var userId = getFinalUserData().uId;
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
-        docId: userId,
+        docId: user.uId,
         subCollectionPath: DatabaseConstants.raysPath,
         subDocId: docId,
       );

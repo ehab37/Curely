@@ -1,5 +1,6 @@
 import 'package:curely/core/cubits/logout_user_cubit.dart';
-import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/entities/user_entity.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
@@ -21,7 +22,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = getFinalUserData();
+    final UserEntity user = getIt<UserDataRepo>().getUserDataLocally();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

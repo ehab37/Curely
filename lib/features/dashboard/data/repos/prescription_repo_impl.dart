@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
-import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/dashboard/data/models/prescription_model.dart';
@@ -15,16 +16,19 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   PrescriptionRepoImpl({
     required this.databaseService,
     required this.networkManager,
+    required this.userDataRepo,
   });
 
   final DatabaseService databaseService;
   final NetworkManager networkManager;
+  final UserDataRepo userDataRepo;
+
+  UserEntity get user => userDataRepo.getUserDataLocally();
 
   @override
   Future<Either<Failure, void>> addPrescription({
     required PrescriptionEntity prescription,
   }) async {
-    var userId = getFinalUserData().uId;
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -32,7 +36,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       await databaseService.addData(
         path: DatabaseConstants.users,
         data: PrescriptionModel.fromEntity(prescription).toMap(),
-        docId: userId,
+        docId: user.uId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
       );
       return const Right(null);
@@ -50,7 +54,6 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
 
   @override
   Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions() async {
-    var userId = getFinalUserData().uId;
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -58,7 +61,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       var data =
           await databaseService.getData(
                 path: DatabaseConstants.users,
-                docId: userId,
+                docId: user.uId,
                 subCollectionPath: DatabaseConstants.prescriptionPath,
               )
               as List<Map<String, dynamic>>;
@@ -82,14 +85,13 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   Future<Either<Failure, void>> deletePrescription({
     required String docId,
   }) async {
-    var userId = getFinalUserData().uId;
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
-        docId: userId,
+        docId: user.uId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
         subDocId: docId,
       );

@@ -5,9 +5,11 @@ abstract class UserDataRepo {
 
   Future<void> editUserData({required UserEntity user});
 
-  Future<void> saveUserData({required UserEntity user});
-
   Future<UserEntity> getUserData({required String uId});
+
+  Future<void> saveUserDataLocally({required UserEntity user});
+
+  UserEntity getUserDataLocally();
 
   Future<bool> checkIfDataExists({required String docId});
 }

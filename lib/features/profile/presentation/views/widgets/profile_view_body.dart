@@ -1,5 +1,6 @@
 import 'package:curely/core/entities/user_entity.dart';
-import 'package:curely/core/helper_functions/get_user.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
+import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/spacing.dart';
@@ -15,7 +16,7 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserEntity user = getFinalUserData();
+    final UserEntity user = getIt<UserDataRepo>().getUserDataLocally();
     return BlocConsumer<EditProfileCubit, EditProfileState>(
       listener: (context, state) {
         if (state is EditProfileFailure) {

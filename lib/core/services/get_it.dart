@@ -77,24 +77,28 @@ void setupGetIt() {
     MedicineRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
     ),
   );
   getIt.registerSingleton<PrescriptionRepo>(
     PrescriptionRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
     ),
   );
   getIt.registerSingleton<RaysRepo>(
     RaysRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
     ),
   );
   getIt.registerSingleton<AnalysisRepo>(
     AnalysisRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
     ),
   );
   getIt.registerSingleton<HomeRepo>(

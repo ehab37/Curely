@@ -40,7 +40,7 @@ class UserDataRepoImpl implements UserDataRepo {
   }
 
   @override
-  Future<void> saveUserData({required UserEntity user}) async {
+  Future<void> saveUserDataLocally({required UserEntity user}) async {
     String userData = jsonEncode(UserModel.fromUserEntity(user).toMap());
     await CacheHelper.saveData(key: CacheConstants.user, value: userData);
   }
@@ -52,5 +52,12 @@ class UserDataRepoImpl implements UserDataRepo {
       docId: docId,
     );
     return value;
+  }
+
+  @override
+  UserEntity getUserDataLocally() {
+    var data = CacheHelper.getData(key: CacheConstants.user);
+    UserEntity userEntity = UserModel.fromJson(jsonDecode(data));
+    return userEntity;
   }
 }
