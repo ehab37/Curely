@@ -1,9 +1,10 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/cubits/logout_user_cubit.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
+import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/services/cache_helper.dart';
-import 'package:curely/core/utils/app_router.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,10 @@ class HomeDrawer extends StatelessWidget {
       listener: (context, state) {
         if (state is LogoutUserSuccess) {
           GoRouter.of(context)
-              .pushReplacement(AppRouter.kWelcomeView)
-              .then((value) => CacheHelper.removeData(key: DatabaseKeys.users));
+              .pushReplacement(AppRoutesConstants.kWelcomeView)
+              .then(
+                (value) => CacheHelper.removeData(key: CacheConstants.user),
+              );
         } else if (state is LogoutUserFailure) {
           InfoBox.customSnackBar(context, state.errMessage);
         }
@@ -40,7 +43,7 @@ class HomeDrawer extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(FontAwesomeIcons.solidCircleUser),
-                      SizedBox(width: 10),
+                      10.horizontalSpacing,
                       Text(
                         userData.name,
                         style: TextStyle(
@@ -63,9 +66,10 @@ class HomeDrawer extends StatelessWidget {
                   title: Text("Reminder"),
                   leading: Icon(Icons.alarm),
                   onTap: () {
-                    GoRouter.of(
-                      context,
-                    ).push(AppRouter.kDisplayMedicineView, extra: true);
+                    GoRouter.of(context).push(
+                      AppRoutesConstants.kDisplayMedicineView,
+                      extra: true,
+                    );
                   },
                 ),
                 ListTile(

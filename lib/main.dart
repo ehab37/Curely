@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
-import 'constants.dart';
+import 'core/constants/app_text_constants.dart';
 import 'core/utils/observer.dart';
 import 'firebase_options.dart';
 
@@ -44,10 +44,11 @@ class Curely extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GoTransition.defaultCurve = Curves.easeInOut;
-    GoTransition.defaultDuration = kTransitionDuration;
+    GoTransition.defaultDuration = Duration(milliseconds: 400);
     return BlocBuilder<LanguageCubit, Locale>(
       builder: (context, locale) {
-        final TextDirection textDirection = locale.languageCode == kArabic
+        final TextDirection textDirection =
+            locale.languageCode == AppTextConstants.kArabic
             ? TextDirection.rtl
             : TextDirection.ltr;
         return MaterialApp.router(

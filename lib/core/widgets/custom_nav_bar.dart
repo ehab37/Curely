@@ -1,5 +1,6 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -22,7 +23,7 @@ class CustomNavBar extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       height: MediaQuery.of(context).size.height / 15,
       decoration: BoxDecoration(
-        color: kLightGrayColor,
+        color: AppColors.lightGray,
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           bottomRight: Radius.circular(20),
@@ -31,9 +32,9 @@ class CustomNavBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const SizedBox(width: 16),
-          Icon(prefixIcon, color: kNavyColor),
-          const SizedBox(width: 16),
+          16.horizontalSpacing,
+          Icon(prefixIcon, color: AppColors.primary),
+          16.horizontalSpacing,
           Expanded(
             child: Text(
               text,
@@ -42,7 +43,7 @@ class CustomNavBar extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(suffixIcon, color: kNavyColor, size: 35),
+            icon: Icon(suffixIcon, color: AppColors.primary, size: 35),
             onPressed: onPressed,
           ),
         ],

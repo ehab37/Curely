@@ -1,5 +1,7 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -22,27 +24,29 @@ class DisplayedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(kBorderRadius),
-        side: BorderSide(color: kNavyColor),
+        borderRadius: BorderRadiusGeometry.circular(
+          SpacingConstants.borderRadius,
+        ),
+        side: BorderSide(color: AppColors.borderMedium),
       ),
-      color: Colors.white,
+      color: AppColors.background,
       elevation: 8,
       child: Column(
         children: [
           Spacer(),
           imageUrl == null
-              ? Icon(FontAwesomeIcons.pills, size: 50, color: kNavyColor)
+              ? Icon(FontAwesomeIcons.pills, size: 50, color: AppColors.primary)
               : Image.network(imageUrl!, width: 60, height: 60),
           Spacer(),
           Text(text1, style: Styles.styleBlue20),
-          Align(child: SizedBox(height: 4)),
+          Align(child: 4.verticalSpacing),
           Text(text2, style: Styles.style16),
-          SizedBox(height: 4),
+          4.verticalSpacing,
           Text(
             DateFormat("dd/MM/yyyy").format(DateTime.parse(text3)).toString(),
             style: Styles.style16,
           ),
-          SizedBox(height: 12),
+          12.verticalSpacing,
         ],
       ),
     );

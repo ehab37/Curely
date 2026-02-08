@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
@@ -25,10 +25,10 @@ class RaysRepoImpl implements RaysRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.addData(
-        path: DatabaseKeys.users,
+        path: DatabaseConstants.users,
         data: RaysModel.fromEntity(rays).toMap(),
         docId: userId,
-        subCollectionPath: DatabaseKeys.raysPath,
+        subCollectionPath: DatabaseConstants.raysPath,
       );
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -52,9 +52,9 @@ class RaysRepoImpl implements RaysRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseKeys.users,
+                path: DatabaseConstants.users,
                 docId: userId,
-                subCollectionPath: DatabaseKeys.raysPath,
+                subCollectionPath: DatabaseConstants.raysPath,
               )
               as List<Map<String, dynamic>>;
       List<RaysEntity> rays = data
@@ -81,9 +81,9 @@ class RaysRepoImpl implements RaysRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.deleteData(
-        path: DatabaseKeys.users,
+        path: DatabaseConstants.users,
         docId: userId,
-        subCollectionPath: DatabaseKeys.raysPath,
+        subCollectionPath: DatabaseConstants.raysPath,
         subDocId: docId,
       );
       return const Right(null);

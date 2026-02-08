@@ -1,4 +1,5 @@
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_back_bar.dart';
@@ -12,14 +13,14 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 8),
+        8.verticalSpacing,
         Row(
           children: [
             CustomBackBar(),
             Text(title, style: Styles.style33),
           ],
         ),
-        SizedBox(height: 8),
+        8.verticalSpacing,
       ],
     );
   }

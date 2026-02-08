@@ -1,9 +1,10 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helper_functions/calculate_age.dart';
 import 'package:curely/core/widgets/custom_container.dart';
 import 'package:curely/core/widgets/image_input/cached_image_widget.dart';
 import 'package:curely/core/widgets/image_input/profile_image_input.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,13 +27,13 @@ class PersonalDetailsSection extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: kHorizontalPadding,
+          horizontal: SpacingConstants.horizontalPadding,
           vertical: 16,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(height: 1),
+            1.verticalSpacing,
             ProfileImageInput(
               imageUrl: user.imageUrl,
               onSelectedImage: (image) {
@@ -57,7 +58,7 @@ class PersonalDetailsSection extends StatelessWidget {
                       : user.blood!,
                   icon: Icons.water_drop_outlined,
                 ),
-                SizedBox(width: 16),
+                16.horizontalSpacing,
                 PersonalDetailWidget(
                   title: "Height",
                   subTitle: "${user.height ?? "TBD"} CM",
@@ -72,7 +73,7 @@ class PersonalDetailsSection extends StatelessWidget {
                   subTitle: "${user.weight ?? "TBD"} KG",
                   icon: Icons.monitor_weight_outlined,
                 ),
-                SizedBox(width: 16),
+                16.horizontalSpacing,
                 PersonalDetailWidget(
                   title: "Age",
                   subTitle: "${age ?? "TBD"} Years",

@@ -1,4 +1,4 @@
-import 'package:curely/core/utils/assets.dart';
+import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/generated/l10n.dart';
 
 class OnBoardingEntity {
@@ -16,22 +16,22 @@ class OnBoardingEntity {
 List<OnBoardingEntity> onBoardingPages(context) {
   return [
     OnBoardingEntity(
-      image: AssetsData.kTrack,
+      image: AssetsConstants.kTrack,
       title: S.of(context).onBoardingTitle1,
       subTitle: S.of(context).onBoardingSubTitle1,
     ),
     OnBoardingEntity(
-      image: AssetsData.kReminder,
+      image: AssetsConstants.kReminder,
       title: S.of(context).onBoardingTitle2,
       subTitle: S.of(context).onBoardingSubTitle2,
     ),
     OnBoardingEntity(
-      image: AssetsData.kOrganizer,
+      image: AssetsConstants.kOrganizer,
       title: S.of(context).onBoardingTitle3,
       subTitle: S.of(context).onBoardingSubTitle3,
     ),
     OnBoardingEntity(
-      image: AssetsData.kStay,
+      image: AssetsConstants.kStay,
       title: S.of(context).onBoardingTitle4,
       subTitle: S.of(context).onBoardingSubTitle4,
     ),

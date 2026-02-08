@@ -1,6 +1,7 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helper_functions/border_functions.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class CustomDropdownSearch extends StatelessWidget {
       decoratorProps: DropDownDecoratorProps(
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppColors.background,
           labelStyle: Styles.style16,
           hintStyle: Styles.style15,
           labelText: label,
@@ -49,7 +50,7 @@ class CustomDropdownSearch extends StatelessWidget {
         // itemBuilder: (context, item, isSelected,isSelected2) {
         //   return Container(
         //     // Custom styling for the entire row
-        //     color: isSelected ? Colors.blue.withOpacity(0.1) : Colors.white,
+        //     color: isSelected ? AppColors.blue.withOpacity(0.1) : AppColors.background,
         //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         //
         //     child: Text(
@@ -57,21 +58,21 @@ class CustomDropdownSearch extends StatelessWidget {
         //       style: TextStyle(
         //         fontSize: 18,
         //         fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-        //         color: isSelected ? kNavyColor : Colors.black87,
+        //         color: isSelected ? AppColors.primary : Colors.black87,
         //       ),
         //     ),
         //   );
         // },
         menuProps: MenuProps(
-          borderRadius: BorderRadius.circular(kBorderRadius),
-          backgroundColor: kOffWhiteColor.withAlpha(200),
+          borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
+          backgroundColor: AppColors.offWhite.withAlpha(200),
         ),
         fit: FlexFit.loose,
         showSearchBox: showSearchBox,
         searchFieldProps: TextFieldProps(
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white,
+            fillColor: AppColors.background,
             enabledBorder: customBorder(),
             border: customBorder(),
             focusedBorder: customBorder(),

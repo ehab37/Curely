@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class CustomAnimatedContainer extends StatelessWidget {
@@ -25,7 +25,7 @@ class CustomAnimatedContainer extends StatelessWidget {
       child: GestureDetector(
         onTap: onTab,
         child: AnimatedContainer(
-          duration: kTransitionDuration,
+          duration: Duration(milliseconds: 400),
           decoration: BoxDecoration(
             boxShadow: boxShadow,
             color: backgroundColor,
@@ -36,10 +36,10 @@ class CustomAnimatedContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: 12),
+              12.verticalSpacing,
               Image.asset(languageFlag, height: 70),
               Text(languageName, style: style),
-              SizedBox(height: 12),
+              12.verticalSpacing,
             ],
           ),
         ),

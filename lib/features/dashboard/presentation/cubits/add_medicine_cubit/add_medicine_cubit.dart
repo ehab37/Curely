@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
@@ -24,7 +24,8 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
     if (medicine.image != null) {
       var result = await imagesRepo.uploadImage(
         imageFile: medicine.image!,
-        path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.medicinePath}',
+        path:
+            '${DatabaseConstants.imagesPath}/${DatabaseConstants.medicinePath}',
       );
       result.fold(
         (failure) {

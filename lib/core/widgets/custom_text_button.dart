@@ -1,4 +1,4 @@
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {

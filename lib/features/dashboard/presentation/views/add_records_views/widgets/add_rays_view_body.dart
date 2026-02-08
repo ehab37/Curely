@@ -1,13 +1,15 @@
 import 'dart:io';
-import 'package:curely/constants.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/helper_functions/validation_functions.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/utils/info_box.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +49,13 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
       key: formKey,
       child: Column(
         children: [
-          SizedBox(height: 8),
+          8.verticalSpacing,
           CustomTextFormField(
             controller: doctorNameController,
             label: "Doctor Name",
             hint: "Enter Doctor Name",
             keyboard: TextInputType.name,
-            validator: (value) => nameValidator(value, context),
+            validator: (value) => AppValidators.validateName(value),
           ),
           CustomTextFormField(
             controller: radiologyCenterController,
@@ -65,7 +67,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
             label: "Diagnosis",
             maxLines: 3,
           ),
-          SizedBox(height: 8),
+          8.verticalSpacing,
           CustomDropdownSearch(
             hint: 'Rays Type',
             label: 'Rays Type',
@@ -75,9 +77,9 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                 raysType = value;
               });
             },
-            validator: (selectedValue) => dropdownValidator(selectedValue),
+            validator: (value) => AppValidators.validateRequired(value),
           ),
-          SizedBox(height: 16),
+          16.verticalSpacing,
           ExaminationDateBox(
             onChanged: (value) {
               setState(() {
@@ -85,7 +87,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
               });
             },
           ),
-          SizedBox(height: 16),
+          16.verticalSpacing,
           ImagesListViewWidget(images: images),
           GlobalImageInput(
             isMultiple: true,
@@ -95,7 +97,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
               });
             },
           ),
-          SizedBox(height: 32),
+          32.verticalSpacing,
           CustomButton(
             onPressed: () async {
               if (formKey.currentState!.validate()) {
@@ -121,10 +123,10 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                 });
               }
             },
-            backgroundColor: kNavyColor,
+            backgroundColor: AppColors.buttonAccent,
             child: Text("Add Rays", style: Styles.styleWhite20),
           ),
-          SizedBox(height: kBottomPadding),
+          SizedBox(height: SpacingConstants.bottomPadding),
         ],
       ),
     );

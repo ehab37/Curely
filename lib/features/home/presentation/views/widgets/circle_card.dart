@@ -1,5 +1,6 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class CardCircle extends StatelessWidget {
@@ -22,21 +23,16 @@ class CardCircle extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 30,
-          backgroundColor: kLightGrayColor,
+          backgroundColor: AppColors.lightGray,
           child: Center(
             child: IconButton(
-              icon: Icon(icon, size: size ?? 30, color: kNavyColor),
+              icon: Icon(icon, size: size ?? 30, color: AppColors.primary),
               onPressed: onPressed,
             ),
           ),
         ),
-        const SizedBox(height: 6),
-        Text(
-          text,
-          style: Styles.style18.copyWith(
-            color: kNavyColor,
-          ),
-        ),
+        6.verticalSpacing,
+        Text(text, style: Styles.style18.copyWith(color: AppColors.primary)),
       ],
     );
   }

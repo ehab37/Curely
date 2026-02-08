@@ -1,10 +1,12 @@
 import 'dart:developer';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
-import 'package:curely/core/helper_functions/validation_functions.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/birth_date_box.dart';
 import 'package:curely/generated/l10n.dart';
@@ -73,41 +75,47 @@ class _UpdateDetailsBottomSheetBodyState
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Edit Your Details', style: Styles.styleBlue20),
-              const SizedBox(height: 20),
+              20.verticalSpacing,
               CustomTextFormField(
                 controller: nameController,
                 label: S.of(context).name,
                 hint: S.of(context).enterYourName,
                 keyboard: TextInputType.name,
                 textCapitalization: TextCapitalization.words,
-                validator: (value) => nameValidator(value, context),
+                validator: (value) => AppValidators.validateName(value),
                 autoFocus: true,
               ),
-              const SizedBox(height: 8),
+              8.verticalSpacing,
               CustomTextFormField(
                 controller: bloodController,
                 label: 'Blood Type',
                 hint: 'e.g., A+',
                 textCapitalization: TextCapitalization.characters,
-                validator: (value) => bloodTypeValidator(value),
+                validator: (value) => AppValidators.validateBloodType(value),
               ),
-              const SizedBox(height: 8),
+              8.verticalSpacing,
               CustomTextFormField(
                 controller: heightController,
                 label: 'Height (cm)',
                 hint: 'e.g., 175',
                 keyboard: TextInputType.number,
-                validator: (value) => numberLengthValidator(value, 'Height'),
+                validator: (value) => AppValidators.validateNumberLength(
+                  value,
+                  AppTextConstants.height,
+                ),
               ),
-              const SizedBox(height: 8),
+              8.verticalSpacing,
               CustomTextFormField(
                 controller: weightController,
                 label: 'Weight (kg)',
                 hint: 'e.g., 70',
                 keyboard: TextInputType.number,
-                validator: (value) => numberLengthValidator(value, 'Weight'),
+                validator: (value) => AppValidators.validateNumberLength(
+                  value,
+                  AppTextConstants.weight,
+                ),
               ),
-              const SizedBox(height: 8),
+              8.verticalSpacing,
               BirthDateBox(
                 onChanged: (value) {
                   setState(() {
@@ -115,9 +123,9 @@ class _UpdateDetailsBottomSheetBodyState
                   });
                 },
               ),
-              const SizedBox(height: 20),
+              20.verticalSpacing,
               CustomButton(
-                backgroundColor: kNavyColor,
+                backgroundColor: AppColors.buttonAccent,
                 child: Text('Save', style: Styles.styleWhite20),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
@@ -136,7 +144,7 @@ class _UpdateDetailsBottomSheetBodyState
                   }
                 },
               ),
-              const SizedBox(height: 20),
+              20.verticalSpacing,
             ],
           ),
         ),

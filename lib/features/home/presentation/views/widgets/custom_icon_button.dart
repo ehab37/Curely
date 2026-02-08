@@ -1,3 +1,4 @@
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
@@ -10,7 +11,7 @@ class CustomIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: Icon(icon, size: 33, color: Colors.white),
+      icon: Icon(icon, size: 33, color: AppColors.background),
     );
   }
 }

@@ -1,10 +1,8 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomIndicatorWidget extends StatelessWidget {
-  const CustomIndicatorWidget({
-    super.key,
-  });
+  const CustomIndicatorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +13,8 @@ class CustomIndicatorWidget extends StatelessWidget {
         padding: EdgeInsets.all(6.0),
         child: CircularProgressIndicator(
           strokeWidth: 3.5,
-          color: kNavyColor,
-          backgroundColor: Colors.transparent,
+          color: AppColors.primary,
+          backgroundColor: AppColors.transparent,
         ),
       ),
     );

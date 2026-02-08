@@ -1,5 +1,6 @@
 import 'package:curely/core/helper_functions/pick_time.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'custom_icon_button_row.dart';
 
@@ -19,7 +20,7 @@ class _AllRemindersWidgetsState extends State<AllRemindersWidgets> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(),
-        const SizedBox(height: 4.0),
+        4.verticalSpacing,
         Text('Reminder Time', style: Styles.style16),
         CustomIconButtonRow(
           text1: widget.remindersList.length == 1

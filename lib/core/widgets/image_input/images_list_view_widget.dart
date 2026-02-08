@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:flutter/material.dart';
 
 class ImagesListViewWidget extends StatefulWidget {
   const ImagesListViewWidget({super.key, required this.images});
+
   final List<File> images;
 
   @override
@@ -27,7 +28,9 @@ class _ImagesListViewWidgetState extends State<ImagesListViewWidget> {
                   margin: const EdgeInsets.all(8),
                   width: MediaQuery.of(context).size.width / 3,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(kBorderRadius),
+                    borderRadius: BorderRadius.circular(
+                      SpacingConstants.borderRadius,
+                    ),
                     image: DecorationImage(
                       image: FileImage(widget.images[index]),
                       fit: BoxFit.cover,
@@ -38,10 +41,7 @@ class _ImagesListViewWidgetState extends State<ImagesListViewWidget> {
                   top: 0,
                   right: 0,
                   child: IconButton(
-                    icon: const Icon(
-                      Icons.remove_circle,
-                      color: Colors.red,
-                    ),
+                    icon: const Icon(Icons.remove_circle, color: Colors.red),
                     onPressed: () {
                       widget.images.removeAt(index);
                       setState(() {});

@@ -1,9 +1,10 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/utils/app_router.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_search_field.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,14 +21,14 @@ class HomeViewBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: kHorizontalPadding,
-          vertical: kTopPadding,
+          horizontal: SpacingConstants.horizontalPadding,
+          vertical: SpacingConstants.topPadding,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomSearchField(text: "Search at records"),
-            SizedBox(height: 16),
+            16.verticalSpacing,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -36,9 +37,10 @@ class HomeViewBody extends StatelessWidget {
                   icon: Icons.alarm,
                   size: 35,
                   onPressed: () {
-                    GoRouter.of(
-                      context,
-                    ).push(AppRouter.kDisplayMedicineView, extra: true);
+                    GoRouter.of(context).push(
+                      AppRoutesConstants.kDisplayMedicineView,
+                      extra: true,
+                    );
                   },
                 ),
                 CardCircle(
@@ -70,14 +72,14 @@ class HomeViewBody extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            16.verticalSpacing,
             Text(" Add Records", style: Styles.style28),
             CustomNavBar(
               text: "Add Medicine",
               prefixIcon: FontAwesomeIcons.pills,
               suffixIcon: Icons.add,
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAddMedicineView);
+                GoRouter.of(context).push(AppRoutesConstants.kAddMedicineView);
               },
             ),
             CustomNavBar(
@@ -85,7 +87,9 @@ class HomeViewBody extends StatelessWidget {
               prefixIcon: FontAwesomeIcons.fileMedical,
               suffixIcon: Icons.add,
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAddPrescriptionView);
+                GoRouter.of(
+                  context,
+                ).push(AppRoutesConstants.kAddPrescriptionView);
               },
             ),
             CustomNavBar(
@@ -93,7 +97,7 @@ class HomeViewBody extends StatelessWidget {
               prefixIcon: FontAwesomeIcons.xRay,
               suffixIcon: Icons.add,
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAddRaysView);
+                GoRouter.of(context).push(AppRoutesConstants.kAddRaysView);
               },
             ),
             CustomNavBar(
@@ -101,7 +105,7 @@ class HomeViewBody extends StatelessWidget {
               prefixIcon: FontAwesomeIcons.flaskVial,
               suffixIcon: Icons.add,
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAddAnalysisView);
+                GoRouter.of(context).push(AppRoutesConstants.kAddAnalysisView);
               },
             ),
           ],

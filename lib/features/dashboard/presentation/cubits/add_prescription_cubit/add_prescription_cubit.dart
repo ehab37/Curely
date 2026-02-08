@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
@@ -21,7 +21,8 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
     emit(AddPrescriptionLoading());
     var result = await imagesRepo.uploadImages(
       imageFiles: prescription.images!,
-      path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.prescriptionPath}',
+      path:
+          '${DatabaseConstants.imagesPath}/${DatabaseConstants.prescriptionPath}',
     );
     result.fold(
       (failure) {

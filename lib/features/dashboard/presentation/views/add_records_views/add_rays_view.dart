@@ -1,5 +1,5 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/custom_app_bar.dart';
@@ -43,7 +43,7 @@ class AddRaysView extends StatelessWidget {
                     child: SafeArea(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: kHorizontalPadding,
+                          horizontal: SpacingConstants.horizontalPadding,
                         ),
                         child: Column(
                           children: [

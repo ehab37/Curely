@@ -1,5 +1,7 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,21 +15,21 @@ class TermsAndConditionsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final isAccepted = ValueNotifier<bool>(false);
     return Padding(
-      padding: const EdgeInsets.all(kHorizontalPadding),
+      padding: const EdgeInsets.all(SpacingConstants.horizontalPadding),
       child: Column(
         children: [
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: kLightGrayColor),
+                border: Border.all(color: AppColors.borderLight),
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+                color: AppColors.background,
               ),
               padding: const EdgeInsets.all(15.0),
               child: const SingleChildScrollView(child: TermsDetails()),
             ),
           ),
-          const SizedBox(height: 15),
+          15.verticalSpacing,
           ValueListenableBuilder<bool>(
             valueListenable: isAccepted,
             builder: (context, accepted, child) {
@@ -39,7 +41,7 @@ class TermsAndConditionsBody extends StatelessWidget {
                     },
                     isChecked: accepted,
                   ),
-                  const SizedBox(width: 16),
+                  16.horizontalSpacing,
                   Expanded(
                     child: Text(
                       S.of(context).iHaveReadAndAgreeToTheTermsAndConditions,
@@ -50,7 +52,7 @@ class TermsAndConditionsBody extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 20),
+          20.verticalSpacing,
           ValueListenableBuilder<bool>(
             valueListenable: isAccepted,
             builder: (context, accepted, child) {
@@ -64,7 +66,7 @@ class TermsAndConditionsBody extends StatelessWidget {
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: kNavyColor,
+                    backgroundColor: AppColors.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

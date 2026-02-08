@@ -1,8 +1,10 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/app_router.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_square_nav_bar.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -13,31 +15,39 @@ class DashboardViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+      padding: const EdgeInsets.symmetric(
+        horizontal: SpacingConstants.horizontalPadding,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 8),
+          8.verticalSpacing,
           const Row(
             children: [
               Text(" Dashboard", style: Styles.style33),
               Spacer(),
-              Icon(FontAwesomeIcons.fileMedical, size: 28, color: kNavyColor),
+              Icon(
+                FontAwesomeIcons.fileMedical,
+                size: 28,
+                color: AppColors.primary,
+              ),
             ],
           ),
-          SizedBox(height: 8),
+          8.verticalSpacing,
           Expanded(
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                SizedBox(height: 8),
+                8.verticalSpacing,
                 Text(" Display Record", style: Styles.styleBlue25),
                 CustomNavBar(
                   text: "Display Medicines",
                   prefixIcon: FontAwesomeIcons.pills,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kDisplayMedicineView);
+                    GoRouter.of(
+                      context,
+                    ).push(AppRoutesConstants.kDisplayMedicineView);
                   },
                 ),
                 CustomNavBar(
@@ -45,7 +55,9 @@ class DashboardViewBody extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.fileMedical,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kDisplayPrescriptionView);
+                    GoRouter.of(
+                      context,
+                    ).push(AppRoutesConstants.kDisplayPrescriptionView);
                   },
                 ),
                 CustomNavBar(
@@ -53,7 +65,9 @@ class DashboardViewBody extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.xRay,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kDisplayRaysView);
+                    GoRouter.of(
+                      context,
+                    ).push(AppRoutesConstants.kDisplayRaysView);
                   },
                 ),
                 CustomNavBar(
@@ -61,16 +75,20 @@ class DashboardViewBody extends StatelessWidget {
                   prefixIcon: FontAwesomeIcons.flaskVial,
                   suffixIcon: Icons.arrow_forward_ios,
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kDisplayAnalysisView);
+                    GoRouter.of(
+                      context,
+                    ).push(AppRoutesConstants.kDisplayAnalysisView);
                   },
                 ),
-                SizedBox(height: 16),
+                16.verticalSpacing,
                 Text(" Add Record", style: Styles.styleBlue25),
                 Row(
                   children: [
                     CustomSquareNavBar(
                       onTab: () {
-                        GoRouter.of(context).push(AppRouter.kAddMedicineView);
+                        GoRouter.of(
+                          context,
+                        ).push(AppRoutesConstants.kAddMedicineView);
                       },
                       text: "Add Medicines",
                     ),
@@ -78,7 +96,7 @@ class DashboardViewBody extends StatelessWidget {
                       onTab: () {
                         GoRouter.of(
                           context,
-                        ).push(AppRouter.kAddPrescriptionView);
+                        ).push(AppRoutesConstants.kAddPrescriptionView);
                       },
                       text: "Add Prescriptions",
                     ),
@@ -88,19 +106,23 @@ class DashboardViewBody extends StatelessWidget {
                   children: [
                     CustomSquareNavBar(
                       onTab: () {
-                        GoRouter.of(context).push(AppRouter.kAddRaysView);
+                        GoRouter.of(
+                          context,
+                        ).push(AppRoutesConstants.kAddRaysView);
                       },
                       text: "Add Rays",
                     ),
                     CustomSquareNavBar(
                       onTab: () {
-                        GoRouter.of(context).push(AppRouter.kAddAnalysisView);
+                        GoRouter.of(
+                          context,
+                        ).push(AppRoutesConstants.kAddAnalysisView);
                       },
                       text: "Add Analysis",
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                16.verticalSpacing,
               ],
             ),
           ),

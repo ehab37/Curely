@@ -1,5 +1,5 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButtonRow extends StatelessWidget {
@@ -33,9 +33,9 @@ class CustomIconButtonRow extends StatelessWidget {
         IconButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(kOffWhiteColor),
+            backgroundColor: WidgetStatePropertyAll(AppColors.background2),
           ),
-          icon: Icon(icon, color: kNavyColor),
+          icon: Icon(icon, color: AppColors.primary),
         ),
       ],
     );

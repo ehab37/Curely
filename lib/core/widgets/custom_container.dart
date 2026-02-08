@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomContainer extends StatelessWidget {
@@ -18,7 +18,7 @@ class CustomContainer extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: height ?? MediaQuery.of(context).size.height * 0.39,
-      decoration: BoxDecoration(color: kNavyColor, borderRadius: border),
+      decoration: BoxDecoration(color: AppColors.primary, borderRadius: border),
       child: child,
     );
   }

@@ -1,4 +1,5 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class IconTextInRow extends StatelessWidget {
@@ -14,9 +15,9 @@ class IconTextInRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: kBlueColor),
-          const SizedBox(width: 10),
-          Text(text, style: TextStyle(color: kBlueColor)),
+          Icon(icon, color: AppColors.blue),
+          10.horizontalSpacing,
+          Text(text, style: TextStyle(color: AppColors.blue)),
         ],
       ),
     );

@@ -1,4 +1,5 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomDoubleMaterial extends StatelessWidget {
@@ -11,17 +12,17 @@ class CustomDoubleMaterial extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
       child: Material(
-        color: Colors.white,
+        color: AppColors.background,
         elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Material(
-            color: Colors.white,
+            color: AppColors.background,
             elevation: 5,
             borderRadius: BorderRadius.circular(20),
             child: Padding(
-              padding: const EdgeInsets.all(kHorizontalPadding),
+              padding: const EdgeInsets.all(SpacingConstants.horizontalPadding),
               child: child,
             ),
           ),

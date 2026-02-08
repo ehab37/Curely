@@ -1,6 +1,8 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_search_field.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,7 +15,9 @@ class SearchView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+          padding: EdgeInsets.symmetric(
+            horizontal: SpacingConstants.horizontalPadding,
+          ),
           child: Column(
             children: [
               const Row(
@@ -23,11 +27,11 @@ class SearchView extends StatelessWidget {
                   Icon(
                     FontAwesomeIcons.magnifyingGlass,
                     size: 28,
-                    color: kNavyColor,
+                    color: AppColors.primary,
                   ),
                 ],
               ),
-              SizedBox(height: 8),
+              8.verticalSpacing,
               Row(
                 children: [
                   Expanded(
@@ -35,7 +39,7 @@ class SearchView extends StatelessWidget {
                       margin: EdgeInsets.all(4),
                       height: 35,
                       decoration: BoxDecoration(
-                        color: kNavyColor,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -48,7 +52,7 @@ class SearchView extends StatelessWidget {
                       margin: EdgeInsets.all(4),
                       height: 35,
                       decoration: BoxDecoration(
-                        color: kSkyBlueColor,
+                        color: AppColors.skyBlue,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -65,7 +69,7 @@ class SearchView extends StatelessWidget {
                       margin: EdgeInsets.all(4),
                       height: 35,
                       decoration: BoxDecoration(
-                        color: kSkyBlueColor,
+                        color: AppColors.skyBlue,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(child: Text("Rays", style: Styles.style16)),
@@ -76,7 +80,7 @@ class SearchView extends StatelessWidget {
                       margin: EdgeInsets.all(4),
                       height: 35,
                       decoration: BoxDecoration(
-                        color: kSkyBlueColor,
+                        color: AppColors.skyBlue,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
@@ -86,13 +90,13 @@ class SearchView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
+              12.verticalSpacing,
               CustomSearchField(text: "Search about user's record"),
-              SizedBox(height: 12),
+              12.verticalSpacing,
               Row(
                 children: [
                   Icon(CupertinoIcons.exclamationmark_circle),
-                  SizedBox(width: 10),
+                  10.horizontalSpacing,
                   Text(
                     "Please, Search by National Id",
                     style: TextStyle(fontSize: 20),

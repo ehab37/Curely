@@ -1,5 +1,6 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class CustomSquareNavBar extends StatelessWidget {
@@ -23,21 +24,21 @@ class CustomSquareNavBar extends StatelessWidget {
           alignment: AlignmentDirectional.center,
           height: MediaQuery.of(context).size.height / 4.2,
           decoration: BoxDecoration(
-            color: kLightGrayColor,
+            color: AppColors.lightGray,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             shape: BoxShape.rectangle,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add, color: kNavyColor,size: 28,),
-              const SizedBox(height: 6),
+              Icon(Icons.add, color: AppColors.primary, size: 28),
+              6.verticalSpacing,
               Text(
                 text,
                 style: Styles.styleBlue20,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 12),
+              12.verticalSpacing,
             ],
           ),
         ),

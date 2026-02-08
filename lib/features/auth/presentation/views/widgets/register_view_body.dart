@@ -1,10 +1,12 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/helper_functions/validation_functions.dart';
-import 'package:curely/core/utils/app_router.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/utils/info_box.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:curely/features/auth/presentation/views/widgets/terms_and_conditions_widget.dart';
 import 'package:curely/generated/l10n.dart';
@@ -45,7 +47,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(kHorizontalPadding),
+          padding: const EdgeInsets.all(SpacingConstants.horizontalPadding),
           child: Form(
             autovalidateMode: autoValidateMode,
             key: formKey,
@@ -53,21 +55,21 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(S.of(context).register, style: Styles.style45),
-                const SizedBox(height: 40),
+                40.verticalSpacing,
                 CustomTextFormField(
                   controller: nameController,
                   label: S.of(context).name,
                   hint: S.of(context).enterYourName,
                   keyboard: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
-                  validator: (value) => nameValidator(value, context),
+                  validator: (value) => AppValidators.validateName(value),
                 ),
                 CustomTextFormField(
                   controller: emailController,
                   label: S.of(context).email,
                   hint: S.of(context).enterYourEmail,
                   keyboard: TextInputType.emailAddress,
-                  validator: (value) => emailValidator(value, context),
+                  validator: (value) => AppValidators.validateEmail(value),
                   prefixIcon: Icons.email_outlined,
                 ),
                 CustomTextFormField(
@@ -83,7 +85,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     isSecure = !isSecure;
                     setState(() {});
                   },
-                  validator: (value) => passwordValidator(value, context),
+                  validator: (value) => AppValidators.validatePassword(value),
                 ),
                 CustomTextFormField(
                   controller: password2Controller,
@@ -98,10 +100,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     isSecure2 = !isSecure2;
                     setState(() {});
                   },
-                  validator: (value) => confirmPasswordValidator(
+                  validator: (value) => AppValidators.validateConfirmPassword(
                     value,
                     passwordController.text,
-                    context,
                   ),
                 ),
                 TermsAndConditionsWidget(
@@ -113,7 +114,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   onTermsPressed: () async {
                     final result = await GoRouter.of(
                       context,
-                    ).push(AppRouter.kTermsAndConditionsView);
+                    ).push(AppRoutesConstants.kTermsAndConditionsView);
                     if (result != null && result is bool && result == true) {
                       setState(() {
                         isAgreeTerms = true;
@@ -121,9 +122,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     }
                   },
                 ),
-                const SizedBox(height: 25),
+                24.verticalSpacing,
                 CustomButton(
-                  backgroundColor: kDarkBlueColor,
+                  backgroundColor: AppColors.darkBlue,
                   child: Text(
                     S.of(context).register,
                     style: Styles.styleWhite20,
@@ -150,7 +151,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     }
                   },
                 ),
-                const SizedBox(height: 15),
+                15.verticalSpacing,
                 Text.rich(
                   TextSpan(
                     children: [
@@ -164,7 +165,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                           ..onTap = () {
                             GoRouter.of(
                               context,
-                            ).pushReplacement(AppRouter.kLoginView);
+                            ).pushReplacement(AppRoutesConstants.kLoginView);
                           },
                         text: '${S.of(context).login}!',
                         style: Styles.styleUnderline16,

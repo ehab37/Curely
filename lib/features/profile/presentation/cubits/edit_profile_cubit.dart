@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
@@ -18,7 +18,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     if (user.image != null) {
       var result = await imagesRepo.uploadImage(
         imageFile: user.image!,
-        path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.profilePath}',
+        path:
+            '${DatabaseConstants.imagesPath}/${DatabaseConstants.profilePath}',
       );
       result.fold(
         (failure) {

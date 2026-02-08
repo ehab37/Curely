@@ -1,7 +1,7 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
-import 'package:curely/core/utils/app_router.dart';
-import 'package:curely/core/utils/assets.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -38,7 +38,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         animation: animation,
         builder: (context, child) => FadeTransition(
           opacity: animation,
-          child: Image.asset(AssetsData.kSplashLogo),
+          child: Image.asset(AssetsConstants.kSplashLogo),
         ),
       ),
     );
@@ -55,7 +55,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateHome() {
     final bool isOnBoardingViewSeen = CacheHelper.getData(
-      key: kIsOnBoardingViewSeen,
+      key: CacheConstants.kIsOnBoardingViewSeen,
     );
     final bool isUserLogin = FirebaseAuthServices.isUserLoggedIn();
     Future.delayed(const Duration(seconds: 3), () {
@@ -64,13 +64,13 @@ class _SplashViewBodyState extends State<SplashViewBody>
                 ? isUserLogin
                       ? GoRouter.of(
                           context,
-                        ).pushReplacement(AppRouter.kMainView)
+                        ).pushReplacement(AppRoutesConstants.kMainView)
                       : GoRouter.of(
                           context,
-                        ).pushReplacement(AppRouter.kWelcomeView)
+                        ).pushReplacement(AppRoutesConstants.kWelcomeView)
                 : GoRouter.of(
                     context,
-                  ).pushReplacement(AppRouter.kOnBoardingView)
+                  ).pushReplacement(AppRoutesConstants.kOnBoardingView)
           : null;
     });
   }

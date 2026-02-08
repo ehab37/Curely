@@ -1,6 +1,6 @@
-import 'package:curely/core/helper_functions/info_box.dart';
+import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/utils/app_router.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
@@ -23,7 +23,9 @@ class LoginView extends StatelessWidget {
             return BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {
-                  GoRouter.of(context).pushReplacement(AppRouter.kMainView);
+                  GoRouter.of(
+                    context,
+                  ).pushReplacement(AppRoutesConstants.kMainView);
                 } else if (state is LoginFailure) {
                   InfoBox.customSnackBar(context, state.errMessage);
                 }

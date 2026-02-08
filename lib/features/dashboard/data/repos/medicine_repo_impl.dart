@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
@@ -30,10 +30,10 @@ class MedicineRepoImpl implements MedicineRepo {
         throw CustomException(message: "No Internet Connection");
       }
       String? docId = await databaseService.addData(
-        path: DatabaseKeys.users,
+        path: DatabaseConstants.users,
         data: MedicineModel.fromEntity(medicine).toMap(),
         docId: userId,
-        subCollectionPath: DatabaseKeys.medicinePath,
+        subCollectionPath: DatabaseConstants.medicinePath,
       );
       return Right(docId!);
     } on FirebaseException catch (e) {
@@ -57,9 +57,9 @@ class MedicineRepoImpl implements MedicineRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseKeys.users,
+                path: DatabaseConstants.users,
                 docId: userId,
-                subCollectionPath: DatabaseKeys.medicinePath,
+                subCollectionPath: DatabaseConstants.medicinePath,
               )
               as List<Map<String, dynamic>>;
       List<MedicineEntity> medicines = data
@@ -87,9 +87,9 @@ class MedicineRepoImpl implements MedicineRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseKeys.users,
+                path: DatabaseConstants.users,
                 docId: userId,
-                subCollectionPath: DatabaseKeys.medicinePath,
+                subCollectionPath: DatabaseConstants.medicinePath,
                 query: {"field": "isReminderActive", "value": true},
               )
               as List<Map<String, dynamic>>;
@@ -117,9 +117,9 @@ class MedicineRepoImpl implements MedicineRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.deleteData(
-        path: DatabaseKeys.users,
+        path: DatabaseConstants.users,
         docId: userId,
-        subCollectionPath: DatabaseKeys.medicinePath,
+        subCollectionPath: DatabaseConstants.medicinePath,
         subDocId: docId,
       );
       return const Right(null);

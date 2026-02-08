@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -155,7 +155,7 @@ class AuthRepoImpl implements AuthRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await firebaseAuthServices.logoutUser();
-      await CacheHelper.removeData(key: DatabaseKeys.users);
+      await CacheHelper.removeData(key: CacheConstants.user);
       return Right(null);
     } on FirebaseAuthException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

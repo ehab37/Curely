@@ -1,7 +1,9 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helper_functions/get_dummy_data.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/utils/info_box.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/features/dashboard/presentation/cubits/get_delete_medicine_cubit/get_delete_medicines_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_list_view.dart';
 import 'package:flutter/material.dart';
@@ -52,12 +54,14 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
                 key: Key(state.medicines[index].docId!),
                 background: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadiusGeometry.circular(kBorderRadius),
-                    color: kErrorColor,
+                    borderRadius: BorderRadiusGeometry.circular(
+                      SpacingConstants.borderRadius,
+                    ),
+                    color: AppColors.error,
                   ),
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 20.0),
-                  child: const Icon(Icons.delete, color: Colors.white),
+                  child: const Icon(Icons.delete, color: AppColors.background),
                 ),
                 direction: DismissDirection.startToEnd,
                 onDismissed: (direction) async {
@@ -74,8 +78,11 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
           );
         } else if (state is GetMedicinesFailure) {
           return SliverToBoxAdapter(
-            child: Center(
-              child: Text(state.errMessage, style: Styles.styleBlue25),
+            child: CustomErrorWidget(
+              error: state.errMessage,
+              onTryAgain: () {
+                context.read<GetDeleteMedicinesCubit>().getMedicines();
+              },
             ),
           );
         } else {

@@ -1,6 +1,7 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/helper_functions/validation_functions.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/utils/info_box.dart';
+import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/reset_password_cubit.dart';
@@ -34,7 +35,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: kHorizontalPadding,
+          horizontal: SpacingConstants.horizontalPadding,
           vertical: 12,
         ),
         child: Column(
@@ -54,7 +55,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                       controller: emailController,
                       label: S.of(context).email,
                       hint: S.of(context).enterYourEmail,
-                      validator: (value) => emailValidator(value, context),
+                      validator: (value) => AppValidators.validateEmail(value),
                       keyboard: TextInputType.emailAddress,
                       prefixIcon: Icons.email_outlined,
                     ),
@@ -83,7 +84,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                               }
                             : null,
                         child: Material(
-                          color: Colors.white,
+                          color: AppColors.background,
                           elevation: 3,
                           type: MaterialType.circle,
                           child: Container(
@@ -99,7 +100,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                                         : state is ResetPasswordInitial
                                         ? Icons.arrow_forward_outlined
                                         : Icons.restart_alt,
-                                    color: kNavyColor,
+                                    color: AppColors.primary,
                                     size: 40,
                                   ),
                           ),

@@ -1,5 +1,7 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,10 +15,12 @@ class DisplayedMedicineItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadiusGeometry.circular(kBorderRadius),
-        side: BorderSide(color: kNavyColor),
+        borderRadius: BorderRadiusGeometry.circular(
+          SpacingConstants.borderRadius,
+        ),
+        side: BorderSide(color: AppColors.borderMedium),
       ),
-      color: Colors.white,
+      color: AppColors.background,
       elevation: 8,
       child: Column(
         children: [
@@ -27,24 +31,22 @@ class DisplayedMedicineItem extends StatelessWidget {
               child: Icon(
                 Icons.access_alarms_outlined,
                 size: 25,
-                color: medicineItem.isReminderActive ? kNavyColor : kGrayColor,
+                color: medicineItem.isReminderActive
+                    ? AppColors.primary
+                    : AppColors.unActive,
               ),
             ),
           ),
           medicineItem.imageUrl == null
-              ? Icon(FontAwesomeIcons.pills, size: 50, color: kNavyColor)
-              : Image.network(
-                medicineItem.imageUrl!,
-                width: 60,
-                height: 60,
-              ),
+              ? Icon(FontAwesomeIcons.pills, size: 50, color: AppColors.primary)
+              : Image.network(medicineItem.imageUrl!, width: 60, height: 60),
           Spacer(),
           Text(medicineItem.medicineName, style: Styles.styleBlue20),
-          SizedBox(height: 4),
+          4.verticalSpacing,
           Text(medicineItem.medicineTypes, style: Styles.style16),
-          SizedBox(height: 4),
+          4.verticalSpacing,
           Text(medicineItem.medicineUsage, style: Styles.style16),
-          SizedBox(height: 12),
+          12.verticalSpacing,
         ],
       ),
     );

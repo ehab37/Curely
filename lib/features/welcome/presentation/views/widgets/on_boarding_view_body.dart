@@ -1,8 +1,11 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/app_router.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:curely/generated/l10n.dart';
@@ -56,8 +59,8 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             dotsCount: onBoardingPages(context).length,
             position: pageController.hasClients ? pageController.page! : 0,
             decorator: DotsDecorator(
-              activeColor: kNavyColor,
-              color: kGrayColor,
+              activeColor: AppColors.primary,
+              color: AppColors.unActive,
               size: Size(8, 8),
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusDirectional.circular(25),
@@ -65,28 +68,35 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               activeSize: Size(20, 8),
             ),
           ),
-          SizedBox(height: 10),
+          10.verticalSpacing,
           Visibility(
             visible: (pageController.hasClients ? currentPage : 0) == 3,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+              padding: const EdgeInsets.symmetric(
+                horizontal: SpacingConstants.horizontalPadding,
+              ),
               child: CustomButton(
                 onPressed: () {
-                  GoRouter.of(context).pushReplacement(AppRouter.kWelcomeView);
+                  GoRouter.of(
+                    context,
+                  ).pushReplacement(AppRoutesConstants.kWelcomeView);
                   CacheHelper.putBoolData(
-                    key: kIsOnBoardingViewSeen,
+                    key: CacheConstants.kIsOnBoardingViewSeen,
                     value: true,
                   );
                 },
-                backgroundColor: kDarkBlueColor,
-                child: Text(S.of(context).getStarted, style: Styles.styleWhite20),
+                backgroundColor: AppColors.darkBlue,
+                child: Text(
+                  S.of(context).getStarted,
+                  style: Styles.styleWhite20,
+                ),
               ),
             ),
           ),
-          SizedBox(height: kBottomPadding),
+          SizedBox(height: SpacingConstants.bottomPadding),
         ],
       ),
     );

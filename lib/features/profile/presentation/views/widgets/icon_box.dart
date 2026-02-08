@@ -1,4 +1,5 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class IconBox extends StatelessWidget {
@@ -12,10 +13,10 @@ class IconBox extends StatelessWidget {
       height: 40,
       width: 40,
       decoration: BoxDecoration(
-        color: kSkyBlueColor,
-        borderRadius: BorderRadius.circular(kBorderRadius),
+        color: AppColors.skyBlue,
+        borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
       ),
-      child: Icon(icon, color: kNavyColor),
+      child: Icon(icon, color: AppColors.primary),
     );
   }
 }

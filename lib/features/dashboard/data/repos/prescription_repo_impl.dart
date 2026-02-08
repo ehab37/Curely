@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
@@ -30,10 +30,10 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.addData(
-        path: DatabaseKeys.users,
+        path: DatabaseConstants.users,
         data: PrescriptionModel.fromEntity(prescription).toMap(),
         docId: userId,
-        subCollectionPath: DatabaseKeys.prescriptionPath,
+        subCollectionPath: DatabaseConstants.prescriptionPath,
       );
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -57,9 +57,9 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseKeys.users,
+                path: DatabaseConstants.users,
                 docId: userId,
-                subCollectionPath: DatabaseKeys.prescriptionPath,
+                subCollectionPath: DatabaseConstants.prescriptionPath,
               )
               as List<Map<String, dynamic>>;
       List<PrescriptionEntity> prescriptions = data
@@ -88,9 +88,9 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await databaseService.deleteData(
-        path: DatabaseKeys.users,
+        path: DatabaseConstants.users,
         docId: userId,
-        subCollectionPath: DatabaseKeys.prescriptionPath,
+        subCollectionPath: DatabaseConstants.prescriptionPath,
         subDocId: docId,
       );
       return const Right(null);

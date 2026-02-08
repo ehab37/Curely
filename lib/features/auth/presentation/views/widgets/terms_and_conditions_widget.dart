@@ -1,5 +1,6 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'custom_check_box.dart';
@@ -26,13 +27,13 @@ class TermsAndConditionsWidget extends StatelessWidget {
           },
           isChecked: isChecked,
         ),
-        const SizedBox(width: 16),
+        16.horizontalSpacing,
         Expanded(
           child: Text.rich(
             TextSpan(
               text: S.of(context).iAgreeToThe,
               style: Styles.style15.copyWith(
-                color: kDarkGrayColor.withAlpha(160),
+                color: AppColors.darkGray.withAlpha(160),
               ),
               children: [
                 WidgetSpan(

@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -15,7 +15,9 @@ class DisplayRaysView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+          padding: EdgeInsets.symmetric(
+            horizontal: SpacingConstants.horizontalPadding,
+          ),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(child: CustomAppBar(title: "Rays")),

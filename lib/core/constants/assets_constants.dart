@@ -1,4 +1,6 @@
-class AssetsData {
+abstract class AssetsConstants {
+  AssetsConstants._();
+
   static const kSplashLogo = 'assets/images/splash2.png';
   static const kLogo = 'assets/images/logo2.png';
   static const kTrack = 'assets/images/track2.png';

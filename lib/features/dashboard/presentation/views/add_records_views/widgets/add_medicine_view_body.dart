@@ -1,14 +1,16 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helper_functions/get_default_reminders_list.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
-import 'package:curely/core/helper_functions/validation_functions.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/utils/info_box.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
@@ -50,13 +52,13 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          SizedBox(height: 8),
+          8.verticalSpacing,
           CustomTextFormField(
             controller: medicineNameController,
             label: "Medicine Name",
             hint: "Enter Medicine Name",
             keyboard: TextInputType.name,
-            validator: (value) => nameValidator(value, context),
+            validator: (value) => AppValidators.validateName(value),
           ),
           CustomTextFormField(
             controller: medicineNotesController,
@@ -64,7 +66,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             hint: "Please, Enter any missing information about the medicine.",
             maxLines: 3,
           ),
-          SizedBox(height: 8),
+          8.verticalSpacing,
           CustomDropdownSearch(
             hint: 'How Often?',
             label: "Frequency",
@@ -76,9 +78,9 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 frequency = value;
               });
             },
-            validator: (selectedValue) => dropdownValidator(selectedValue),
+            validator: (value) => AppValidators.validateRequired(value),
           ),
-          SizedBox(height: 16),
+          16.verticalSpacing,
           CustomDropdownSearch(
             label: "Medicine Usage",
             hint: "Enter Medicine Usage",
@@ -88,9 +90,9 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 medicineUsage = value;
               });
             },
-            validator: (selectedValue) => dropdownValidator(selectedValue),
+            validator: (value) => AppValidators.validateRequired(value),
           ),
-          SizedBox(height: 16),
+          16.verticalSpacing,
           CustomDropdownSearch(
             label: 'Medicine Type',
             hint: 'Enter Medicine Type',
@@ -100,9 +102,9 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 medicineTypes = value;
               });
             },
-            validator: (selectedValue) => dropdownValidator(selectedValue),
+            validator: (value) => AppValidators.validateRequired(value),
           ),
-          SizedBox(height: 16),
+          16.verticalSpacing,
           ReminderToggleSwitch(
             isReminderEnabled: isReminderActive,
             onChangedToggle: (newVal) async {
@@ -122,7 +124,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             },
             remindersList: addMedicineCubit.remindersList,
           ),
-          SizedBox(height: 16),
+          16.verticalSpacing,
           GlobalImageInput(
             imageFile: image,
             onSelectedImage: (value) {
@@ -131,7 +133,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
               });
             },
           ),
-          SizedBox(height: 32),
+          32.verticalSpacing,
           CustomButton(
             onPressed: () async {
               if (formKey.currentState!.validate()) {
@@ -152,10 +154,10 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 });
               }
             },
-            backgroundColor: kNavyColor,
+            backgroundColor: AppColors.buttonAccent,
             child: Text("Add Medicine", style: Styles.styleWhite20),
           ),
-          SizedBox(height: kBottomPadding),
+          SizedBox(height: SpacingConstants.bottomPadding),
         ],
       ),
     );

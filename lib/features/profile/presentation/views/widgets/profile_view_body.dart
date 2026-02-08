@@ -1,7 +1,8 @@
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helper_functions/get_user.dart';
-import 'package:curely/core/helper_functions/info_box.dart';
+import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +31,7 @@ class ProfileViewBody extends StatelessWidget {
             child: Column(
               children: [
                 PersonalDetailsSection(user: user),
-                const SizedBox(height: 40),
+                40.verticalSpacing,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(

@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -24,14 +24,14 @@ class UserModel extends UserEntity {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      name: json[DatabaseKeys.name],
-      email: json[DatabaseKeys.email],
-      uId: json[DatabaseKeys.uId],
-      blood: json['blood'],
-      height: json['height'],
-      weight: json['weight'],
-      dateOfBirth: json['dateOfBirth'],
-      imageUrl: json[DatabaseKeys.profileImage],
+      name: json[DatabaseConstants.name],
+      email: json[DatabaseConstants.email],
+      uId: json[DatabaseConstants.uId],
+      blood: json[DatabaseConstants.blood],
+      height: json[DatabaseConstants.height],
+      weight: json[DatabaseConstants.weight],
+      dateOfBirth: json[DatabaseConstants.dateOfBirth],
+      imageUrl: json[DatabaseConstants.profileImage],
     );
   }
 
@@ -50,14 +50,14 @@ class UserModel extends UserEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      DatabaseKeys.name: name,
-      DatabaseKeys.email: email,
-      DatabaseKeys.uId: uId,
-      'blood': blood,
-      'height': height,
-      'weight': weight,
-      'dateOfBirth': dateOfBirth,
-      DatabaseKeys.profileImage: imageUrl,
+      DatabaseConstants.name: name,
+      DatabaseConstants.email: email,
+      DatabaseConstants.uId: uId,
+      DatabaseConstants.blood: blood,
+      DatabaseConstants.height: height,
+      DatabaseConstants.weight: weight,
+      DatabaseConstants.dateOfBirth: dateOfBirth,
+      DatabaseConstants.profileImage: imageUrl,
     };
   }
 }

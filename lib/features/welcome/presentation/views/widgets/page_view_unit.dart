@@ -1,5 +1,5 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,9 @@ class PageViewUnit extends StatelessWidget {
           Text(onBoardingModel.title, style: Styles.style28),
           Text(
             onBoardingModel.subTitle,
-            style: Styles.style18.copyWith(color: kNavyColor.withAlpha(160)),
+            style: Styles.style18.copyWith(
+              color: AppColors.primary.withAlpha(160),
+            ),
             textAlign: TextAlign.center,
           ),
         ],

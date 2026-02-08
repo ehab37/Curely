@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -33,7 +33,7 @@ class FirebaseAuthServices {
   static Future<void> initSignIn() async {
     if (!isInitialize) {
       await _googleSignIn.initialize(
-        serverClientId: DatabaseKeys.serverClientId,
+        serverClientId: DatabaseConstants.serverClientId,
       );
     }
     isInitialize = true;
@@ -45,18 +45,18 @@ class FirebaseAuthServices {
     final idToken = googleUser.authentication.idToken;
     final authorizationClient = googleUser.authorizationClient;
     GoogleSignInClientAuthorization? authorization = await authorizationClient
-        .authorizationForScopes([DatabaseKeys.email, DatabaseKeys.profile]);
+        .authorizationForScopes([
+          DatabaseConstants.email,
+          DatabaseConstants.profile,
+        ]);
     final accessToken = authorization?.accessToken;
     if (accessToken == null) {
       final authorization2 = await authorizationClient.authorizationForScopes([
-        DatabaseKeys.email,
-        DatabaseKeys.profile,
+        DatabaseConstants.email,
+        DatabaseConstants.profile,
       ]);
       if (authorization2?.accessToken == null) {
-        throw FirebaseAuthException(
-          code: DatabaseKeys.error,
-          message: DatabaseKeys.error,
-        );
+        throw FirebaseAuthException(code: DatabaseConstants.error);
       }
       authorization = authorization2;
     }
@@ -78,6 +78,7 @@ class FirebaseAuthServices {
   static User? getCurrentUser() {
     return _auth.currentUser;
   }
+
   static bool isUserLoggedIn() {
     return _auth.currentUser != null;
   }

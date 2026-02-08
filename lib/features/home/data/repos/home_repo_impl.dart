@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:curely/core/helper_functions/info_box.dart';
+import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/services/url_services.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:curely/constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -17,7 +17,7 @@ class AddRaysCubit extends Cubit<AddRaysState> {
     emit(AddRaysLoading());
     var result = await imagesRepo.uploadImages(
       imageFiles: rays.images!,
-      path: '${DatabaseKeys.imagesPath}/${DatabaseKeys.raysPath}',
+      path: '${DatabaseConstants.imagesPath}/${DatabaseConstants.raysPath}',
     );
     result.fold(
       (failure) {

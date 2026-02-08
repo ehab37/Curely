@@ -1,5 +1,7 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/features/profile/presentation/views/widgets/icon_box.dart';
 import 'package:flutter/material.dart';
 
@@ -21,13 +23,13 @@ class PersonalDetailWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsetsDirectional.all(12),
         decoration: BoxDecoration(
-          color: kSkyBlueColor.withAlpha(100),
-          borderRadius: BorderRadius.circular(kBorderRadius),
+          color: AppColors.skyBlue.withAlpha(100),
+          borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
         ),
         child: Row(
           children: [
             IconBox(icon: icon),
-            SizedBox(width: 12),
+            12.horizontalSpacing,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -37,7 +39,7 @@ class PersonalDetailWidget extends StatelessWidget {
                 ),
                 Text(
                   subTitle,
-                  style: Styles.style15.copyWith(color: Colors.white),
+                  style: Styles.style15.copyWith(color: AppColors.background),
                 ),
               ],
             ),

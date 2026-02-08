@@ -1,5 +1,6 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class SwitchHeaderRow extends StatelessWidget {
@@ -23,10 +24,10 @@ class SwitchHeaderRow extends StatelessWidget {
               isReminderEnabled
                   ? Icons.notifications_active
                   : Icons.notifications_off,
-              color: isReminderEnabled ? kNavyColor : kGrayColor,
+              color: isReminderEnabled ? AppColors.primary : AppColors.unActive,
               size: 28,
             ),
-            const SizedBox(width: 12.0),
+            12.horizontalSpacing,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -35,7 +36,9 @@ class SwitchHeaderRow extends StatelessWidget {
                   isReminderEnabled ? 'Reminders are ON' : 'Reminders are OFF',
                   style: TextStyle(
                     fontSize: 12.0,
-                    color: isReminderEnabled ? kBrightBlueColor : kGrayColor,
+                    color: isReminderEnabled
+                        ? AppColors.brightBlue
+                        : AppColors.unActive,
                   ),
                 ),
               ],
@@ -46,10 +49,10 @@ class SwitchHeaderRow extends StatelessWidget {
           // Use .adaptive for native look on iOS/Android
           value: isReminderEnabled,
           onChanged: onChangedToggle,
-          activeThumbColor: kNavyColor,
-          inactiveThumbColor: kGrayColor,
-          inactiveTrackColor: Colors.grey.shade200,
-          activeTrackColor: kNavyColor.withAlpha(110),
+          activeThumbColor: AppColors.primary,
+          inactiveThumbColor: AppColors.unActive,
+          inactiveTrackColor: AppColors.gray200,
+          activeTrackColor: AppColors.primary.withAlpha(110),
         ),
       ],
     );

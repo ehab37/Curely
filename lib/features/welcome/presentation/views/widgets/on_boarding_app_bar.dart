@@ -1,6 +1,7 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/app_router.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/widgets/custom_text_button.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,9 @@ class OnBoardingAppBar extends StatelessWidget {
             onPressed: () {
               GoRouter.of(
                 context,
-              ).pushReplacement(AppRouter.kWelcomeView);
+              ).pushReplacement(AppRoutesConstants.kWelcomeView);
               CacheHelper.putBoolData(
-                key: kIsOnBoardingViewSeen,
+                key: CacheConstants.kIsOnBoardingViewSeen,
                 value: true,
               );
             },
@@ -41,13 +42,11 @@ class OnBoardingAppBar extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            GoRouter.of(
-              context,
-            ).push(AppRouter.kLanguageView);
+            GoRouter.of(context).push(AppRoutesConstants.kLanguageView);
           },
           icon: Icon(
             Icons.language_outlined,
-            color: kNavyColor,
+            color: AppColors.primary,
             size: 33,
           ),
         ),

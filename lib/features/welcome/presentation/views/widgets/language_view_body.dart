@@ -1,8 +1,11 @@
-import 'package:curely/constants.dart';
-import 'package:curely/core/utils/app_router.dart';
-import 'package:curely/core/utils/assets.dart';
-import 'package:curely/core/utils/styles.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/app_text_constants.dart';
+import 'package:curely/core/constants/assets_constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
+import 'package:curely/core/widgets/spacing.dart';
 import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:curely/features/welcome/presentation/cubits/selection_cubit.dart';
@@ -19,11 +22,12 @@ class LanguageViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SelectionCubit, String>(
       builder: (context, selectedLanguageCode) {
-        final bool isArabicSelected = selectedLanguageCode == kArabic;
+        final bool isArabicSelected =
+            selectedLanguageCode == AppTextConstants.kArabic;
         return SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: kHorizontalPadding,
+              horizontal: SpacingConstants.horizontalPadding,
               vertical: 12,
             ),
             child: Column(
@@ -35,14 +39,16 @@ class LanguageViewBody extends StatelessWidget {
                 Spacer(),
                 CustomAnimatedContainer(
                   languageName: S.of(context).english,
-                  languageFlag: AssetsData.kUK,
+                  languageFlag: AssetsConstants.kUK,
                   onTab: () {
-                    context.read<SelectionCubit>().selectLanguage(kEnglish);
+                    context.read<SelectionCubit>().selectLanguage(
+                      AppTextConstants.kEnglish,
+                    );
                   },
                   boxShadow: !isArabicSelected
                       ? [
                           BoxShadow(
-                            color: kNavyColor.withAlpha(130),
+                            color: AppColors.primary.withAlpha(130),
                             spreadRadius: 2,
                             blurRadius: 10,
                             offset: const Offset(10, 10),
@@ -50,8 +56,8 @@ class LanguageViewBody extends StatelessWidget {
                         ]
                       : null,
                   backgroundColor: !isArabicSelected
-                      ? kNavyColor
-                      : kLightGrayColor,
+                      ? AppColors.primary
+                      : AppColors.lightGray,
                   style: !isArabicSelected
                       ? Styles.styleWhite25
                       : Styles.styleBlue25,
@@ -59,14 +65,16 @@ class LanguageViewBody extends StatelessWidget {
                 Spacer(),
                 CustomAnimatedContainer(
                   languageName: S.of(context).arabic,
-                  languageFlag: AssetsData.kEgypt,
+                  languageFlag: AssetsConstants.kEgypt,
                   onTab: () {
-                    context.read<SelectionCubit>().selectLanguage(kArabic);
+                    context.read<SelectionCubit>().selectLanguage(
+                      AppTextConstants.kArabic,
+                    );
                   },
                   boxShadow: isArabicSelected
                       ? [
                           BoxShadow(
-                            color: kNavyColor.withAlpha(130),
+                            color: AppColors.primary.withAlpha(130),
                             spreadRadius: 2,
                             blurRadius: 10,
                             offset: const Offset(10, 10),
@@ -74,14 +82,14 @@ class LanguageViewBody extends StatelessWidget {
                         ]
                       : null,
                   backgroundColor: isArabicSelected
-                      ? kNavyColor
-                      : kLightGrayColor,
+                      ? AppColors.primary
+                      : AppColors.lightGray,
                   style: isArabicSelected
                       ? Styles.styleWhite25
                       : Styles.styleBlue25,
                 ),
                 Spacer(),
-                SizedBox(height: 40),
+                40.verticalSpacing,
                 Center(
                   child: CustomButton(
                     onPressed: () {
@@ -92,16 +100,16 @@ class LanguageViewBody extends StatelessWidget {
                       localeCubit.changeLanguage(finalLanguageCode);
                       GoRouter.of(
                         context,
-                      ).pushReplacement(AppRouter.kOnBoardingView);
+                      ).pushReplacement(AppRoutesConstants.kOnBoardingView);
                     },
-                    backgroundColor: kDarkBlueColor,
+                    backgroundColor: AppColors.darkBlue,
                     child: Text(
                       S.of(context).confirm,
                       style: Styles.styleWhite20,
                     ),
                   ),
                 ),
-                SizedBox(height: kBottomPadding - 12),
+                SizedBox(height: SpacingConstants.bottomPadding - 12),
               ],
             ),
           ),

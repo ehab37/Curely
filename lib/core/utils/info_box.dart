@@ -1,23 +1,25 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
-import 'package:curely/constants.dart';
+import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class InfoBox {
-  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customSnackBar(BuildContext context, String message) {
+abstract class InfoBox {
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+  customSnackBar(BuildContext context, String message) {
     return ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> customImageSnackBar({
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+  customImageSnackBar({
     required BuildContext context,
     required Widget content,
   }) {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Colors.white,
-        shape: Border(top: BorderSide(color: kBlueColor, width: 2)),
+        backgroundColor: AppColors.background,
+        shape: Border(top: BorderSide(color: AppColors.borderMedium, width: 2)),
         content: content,
       ),
     );
@@ -36,11 +38,11 @@ class InfoBox {
       inheritThemeColors: true,
       iconWidget: Icon(Icons.car_repair),
       description: const Text('This is a description message'),
-      themeColor: Colors.green,
+      themeColor: AppColors.success,
       toastPosition: Position.bottom,
       textDirection: TextDirection.rtl,
       animationType: AnimationType.fromRight,
-      action: const Text('انقر هنا', style: TextStyle(color: Colors.green)),
+      action: Text('انقر هنا', style: TextStyle(color: AppColors.success)),
       animationDuration: const Duration(milliseconds: 1000),
       autoDismiss: true,
     ).show(context);
