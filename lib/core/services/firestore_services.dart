@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/services/database_service.dart';
 
 class FirestoreServices implements DatabaseService {
@@ -11,6 +12,7 @@ class FirestoreServices implements DatabaseService {
     String? docId,
     String? subCollectionPath,
   }) async {
+    data[DatabaseConstants.createdAt] = FieldValue.serverTimestamp();
     if (subCollectionPath != null) {
       var snapshot = await firestore
           .collection(path)
@@ -34,8 +36,19 @@ class FirestoreServices implements DatabaseService {
     required String path,
     required String docId,
     required Map<String, dynamic> data,
+    String? subCollectionPath,
+    String? subDocId,
   }) async {
-    await firestore.collection(path).doc(docId).update(data);
+    if (subCollectionPath != null && subDocId != null) {
+      await firestore
+          .collection(path)
+          .doc(docId)
+          .collection(subCollectionPath)
+          .doc(subDocId)
+          .update(data);
+    } else {
+      await firestore.collection(path).doc(docId).update(data);
+    }
   }
 
   @override

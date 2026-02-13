@@ -70,9 +70,9 @@ class MedicineEntity {
   final String medicineUsage;
   final String medicineName;
   final String frequency;
-  final String? medicineNotes;
+  String? medicineNotes;
   final String medicineTypes;
-  final bool isReminderActive;
+  bool isReminderActive;
   final File? image;
   String? imageUrl;
 

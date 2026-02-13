@@ -9,7 +9,7 @@ import 'package:curely/core/widgets/custom_dropdown_search.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
 import 'package:flutter/material.dart';

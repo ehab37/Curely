@@ -4,7 +4,7 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_search_field.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -19,4 +19,6 @@ abstract class AppRoutesConstants {
   static const kDisplayPrescriptionView = "/displayPrescriptionView";
   static const kDisplayRaysView = "/displayRaysView";
   static const kDisplayAnalysisView = "/displayAnalysisView";
+  static const kMedicineDetailsView = "/medicineDetailsView";
+  static const kImageView = "/imageView";
 }

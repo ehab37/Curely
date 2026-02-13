@@ -1,6 +1,7 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   const CustomAlertDialog({
@@ -28,7 +29,7 @@ class CustomAlertDialog extends StatelessWidget {
         TextButton(
           child: Text('No', style: TextStyle(color: AppColors.textPrimary)),
           onPressed: () {
-            Navigator.of(dialogContext).pop();
+            GoRouter.of(dialogContext).pop(false);
           },
         ),
         TextButton(

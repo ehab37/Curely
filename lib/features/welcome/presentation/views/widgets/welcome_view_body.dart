@@ -5,7 +5,7 @@ import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_container.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

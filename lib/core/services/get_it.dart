@@ -26,7 +26,6 @@ import 'package:curely/features/home/data/repos/home_repo_impl.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
-import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -60,12 +59,6 @@ void setupGetIt() {
     ImagesRepoImpl(
       storageServices: getIt<StorageServices>(),
       networkManager: getIt<NetworkManager>(),
-    ),
-  );
-  getIt.registerSingleton<EditProfileCubit>(
-    EditProfileCubit(
-      profileRepo: getIt<ProfileRepo>(),
-      imagesRepo: getIt<ImagesRepo>(),
     ),
   );
   getIt.registerSingleton<MedicineNotificationRepo>(

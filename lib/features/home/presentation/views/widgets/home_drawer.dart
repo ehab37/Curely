@@ -1,12 +1,12 @@
 import 'package:curely/core/constants/cache_constants.dart';
-import 'package:curely/core/cubits/logout_user_cubit.dart';
 import 'package:curely/core/entities/user_entity.dart';
+import 'package:curely/core/global_cubits/logout_cubit/logout_user_cubit.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

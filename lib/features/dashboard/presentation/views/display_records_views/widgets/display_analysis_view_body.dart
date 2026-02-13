@@ -1,5 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/helper_functions/get_dummy_data.dart';
+import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/theme/styles.dart';
