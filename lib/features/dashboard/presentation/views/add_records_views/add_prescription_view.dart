@@ -48,7 +48,7 @@ class AddPrescriptionView extends StatelessWidget {
                         child: Column(
                           children: [
                             CustomAppBar(title: "Add Prescription"),
-                            AddPrescriptionViewBody(),
+                            Expanded(child: AddPrescriptionViewBody()),
                           ],
                         ),
                       ),
