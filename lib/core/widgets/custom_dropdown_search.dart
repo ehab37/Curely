@@ -1,5 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/helper_functions/border_functions.dart';
+import 'package:curely/core/helpers/border_functions.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:dropdown_search/dropdown_search.dart';

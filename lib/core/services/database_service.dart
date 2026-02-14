@@ -10,13 +10,15 @@ abstract class DatabaseService {
     required String path,
     required String docId,
     required Map<String, dynamic> data,
+    String? subCollectionPath,
+    String? subDocId,
   });
 
   Future<dynamic> getData({
     required String path,
     required String docId,
     String? subCollectionPath,
-    Map<String,dynamic>? query,
+    Map<String, dynamic>? query,
   });
 
   Future<void> deleteData({

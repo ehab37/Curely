@@ -1,8 +1,11 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/widgets/image_input/image_view.dart';
 import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
 import 'package:curely/features/auth/presentation/views/reset_password_view.dart';
 import 'package:curely/features/auth/presentation/views/terms_and_conditions_view.dart';
+import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
+import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/add_analysis_view.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/add_medicine_view.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/add_prescription_view.dart';
@@ -12,6 +15,7 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_medicines_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_prescriptions_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/display_rays_view.dart';
+import 'package:curely/features/dashboard/presentation/views/display_records_views/medicine_details_view.dart';
 import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
@@ -19,6 +23,7 @@ import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
 import 'package:curely/features/welcome/presentation/views/splash_view.dart';
 import 'package:curely/features/welcome/presentation/views/welcome_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 
@@ -108,6 +113,19 @@ abstract class AppRouter {
       GoRoute(
         path: AppRoutesConstants.kDisplayAnalysisView,
         builder: (context, state) => const DisplayAnalysisView(),
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kMedicineDetailsView,
+        builder: (context, state) => BlocProvider.value(
+          value: (state.extra! as List)[1] as ManageMedicinesCubit,
+          child: MedicineDetailsView(
+            medicine: (state.extra! as List)[0] as MedicineEntity,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kImageView,
+        builder: (context, state) => ImageView(image: state.extra as String),
       ),
     ],
   );

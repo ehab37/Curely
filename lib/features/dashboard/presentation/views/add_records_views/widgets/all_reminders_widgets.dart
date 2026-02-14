@@ -1,6 +1,6 @@
-import 'package:curely/core/helper_functions/pick_time.dart';
+import 'package:curely/core/helpers/pick_time.dart';
 import 'package:curely/core/theme/styles.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'custom_icon_button_row.dart';
 

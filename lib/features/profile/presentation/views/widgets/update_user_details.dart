@@ -6,25 +6,25 @@ import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/birth_date_box.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UpdateDetailsBottomSheetBody extends StatefulWidget {
-  const UpdateDetailsBottomSheetBody({super.key, required this.user});
+class UpdateUserDetails extends StatefulWidget {
+  const UpdateUserDetails({super.key, required this.user});
 
   final UserEntity user;
 
   @override
-  State<UpdateDetailsBottomSheetBody> createState() =>
-      _UpdateDetailsBottomSheetBodyState();
+  State<UpdateUserDetails> createState() =>
+      _UpdateUserDetailsState();
 }
 
-class _UpdateDetailsBottomSheetBodyState
-    extends State<UpdateDetailsBottomSheetBody> {
+class _UpdateUserDetailsState
+    extends State<UpdateUserDetails> {
   late final TextEditingController nameController;
   late final TextEditingController bloodController;
   late final TextEditingController heightController;
@@ -136,7 +136,6 @@ class _UpdateDetailsBottomSheetBodyState
                       ..height = int.tryParse(heightController.text)
                       ..weight = int.tryParse(weightController.text)
                       ..dateOfBirth = dateOfBirth.toString();
-                    log(dateOfBirth.toString());
                     context.read<EditProfileCubit>().editProfile(
                       user: updatedUser,
                     );

@@ -5,7 +5,7 @@ import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:curely/features/welcome/presentation/cubits/selection_cubit.dart';

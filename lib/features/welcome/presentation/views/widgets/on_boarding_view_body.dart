@@ -5,7 +5,7 @@ import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
 import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:curely/generated/l10n.dart';

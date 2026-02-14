@@ -2,6 +2,7 @@ class DatabaseConstants {
   DatabaseConstants._();
 
   static const String users = "users";
+  static const String createdAt = "createdAt";
 
   static const String name = "name";
   static const String email = "email";

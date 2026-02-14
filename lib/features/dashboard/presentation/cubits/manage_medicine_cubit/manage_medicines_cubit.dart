@@ -4,19 +4,19 @@ import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'get_delete_medicines_state.dart';
+part 'manage_medicines_state.dart';
 
-class GetDeleteMedicinesCubit extends Cubit<GetDeleteMedicinesState> {
-  GetDeleteMedicinesCubit({
+class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
+  ManageMedicinesCubit({
     required this.medicineRepo,
     required this.medicineNotificationRepo,
-  }) : super(GetDeleteMedicinesInitial());
+  }) : super(ManageMedicinesInitial());
   final MedicineRepo medicineRepo;
   final MedicineNotificationRepo medicineNotificationRepo;
   bool isReminderView = false;
 
   Future<void> getMedicines() async {
-    emit(GetDeleteMedicinesLoading());
+    emit(ManageMedicinesLoading());
     var result = isReminderView
         ? await medicineRepo.getReminderMedicines()
         : await medicineRepo.getMedicines();
@@ -30,8 +30,23 @@ class GetDeleteMedicinesCubit extends Cubit<GetDeleteMedicinesState> {
     );
   }
 
+  Future<void> updateMedicines({required MedicineEntity medicine}) async {
+    emit(ManageMedicinesLoading());
+    var result = await medicineRepo.updateMedicine(medicine: medicine);
+    result.fold(
+      (failure) {
+        emit(UpdateMedicinesFailure(failure.errMessage));
+        getMedicines();
+      },
+      (success) {
+        emit(UpdateMedicinesSuccess());
+        getMedicines();
+      },
+    );
+  }
+
   Future<void> deleteMedicines({required MedicineEntity medicine}) async {
-    emit(GetDeleteMedicinesLoading());
+    emit(ManageMedicinesLoading());
     var result = await medicineRepo.deleteMedicine(docId: medicine.docId!);
     result.fold(
       (failure) {

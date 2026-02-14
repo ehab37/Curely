@@ -1,11 +1,11 @@
-import 'package:curely/core/cubits/logout_user_cubit.dart';
 import 'package:curely/core/entities/user_entity.dart';
+import 'package:curely/core/global_cubits/logout_cubit/logout_user_cubit.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/image_input/cached_image_widget.dart';
-import 'package:curely/core/widgets/spacing.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/home/presentation/views/widgets/custom_icon_button.dart';
 import 'package:curely/features/home/presentation/views/widgets/home_drawer.dart';
