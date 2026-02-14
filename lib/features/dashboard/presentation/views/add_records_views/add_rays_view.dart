@@ -48,7 +48,7 @@ class AddRaysView extends StatelessWidget {
                         child: Column(
                           children: [
                             CustomAppBar(title: "Add Rays"),
-                            AddRaysViewBody(),
+                            Expanded(child: AddRaysViewBody()),
                           ],
                         ),
                       ),

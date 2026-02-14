@@ -48,7 +48,7 @@ class AddAnalysisView extends StatelessWidget {
                         child: Column(
                           children: [
                             CustomAppBar(title: "Add Analysis"),
-                            AddAnalysisViewBody(),
+                            Expanded(child: AddAnalysisViewBody()),
                           ],
                         ),
                       ),
