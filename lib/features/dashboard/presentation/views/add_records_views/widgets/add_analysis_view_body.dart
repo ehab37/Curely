@@ -46,7 +46,8 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
     return Form(
       autovalidateMode: autoValidateMode,
       key: formKey,
-      child: Column(
+      child: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           8.verticalSpacing,
           CustomTextFormField(
