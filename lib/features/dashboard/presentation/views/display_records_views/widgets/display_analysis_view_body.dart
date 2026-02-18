@@ -1,15 +1,16 @@
-import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/get_dummy_data.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
-import 'package:curely/features/dashboard/presentation/cubits/get_delete_analysis_cubit/get_delete_analysis_cubit.dart';
+import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'displayed_item.dart';
 import 'displayed_list_view.dart';
+import 'records_dismissible_widget.dart';
 
 class DisplayAnalysisViewBody extends StatefulWidget {
   const DisplayAnalysisViewBody({super.key});
@@ -22,13 +23,13 @@ class DisplayAnalysisViewBody extends StatefulWidget {
 class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
   @override
   void initState() {
-    context.read<GetDeleteAnalysisCubit>().getAnalysis();
+    context.read<ManageAnalysisCubit>().getAnalysis();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetDeleteAnalysisCubit, GetDeleteAnalysisState>(
+    return BlocBuilder<ManageAnalysisCubit, ManageAnalysisState>(
       builder: (context, state) {
         if (state is GetAnalysisSuccess) {
           if (state.analysis.isEmpty) {
@@ -43,28 +44,29 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
           }
           return DisplayedListView(
             itemBuilder: (context, index) {
-              return Dismissible(
-                key: Key(state.analysis[index].docId!),
-                background: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadiusGeometry.circular(
-                      SpacingConstants.borderRadius,
-                    ),
-                    color: AppColors.error,
+              return RecordsDismissibleWidget(
+                recordKey: state.analysis[index].docId!,
+                onDismissed: (direction) {
+                  context.read<ManageAnalysisCubit>().deleteAnalysis(
+                    docId: state.analysis[index].docId!,
+                  );
+                  InfoBox.customSnackBar(context, 'Analysis deleted.');
+                },
+                content: GestureDetector(
+                  onTap: () {
+                    ManageAnalysisCubit cubit = context
+                        .read<ManageAnalysisCubit>();
+                    GoRouter.of(context).push(
+                      AppRoutesConstants.kAnalysisDetailsView,
+                      extra: [state.analysis[index], cubit],
+                    );
+                  },
+                  child: DisplayedItem(
+                    imageUrl: state.analysis[index].imageUrls![0],
+                    text1: state.analysis[index].doctorName,
+                    text2: state.analysis[index].analysisType,
+                    text3: state.analysis[index].examinationDate,
                   ),
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: const Icon(Icons.delete, color: AppColors.background),
-                ),
-                direction: DismissDirection.startToEnd,
-                onDismissed: (direction) => context
-                    .read<GetDeleteAnalysisCubit>()
-                    .deleteAnalysis(docId: state.analysis[index].docId!),
-                child: DisplayedItem(
-                  imageUrl: state.analysis[index].imageUrls![0],
-                  text1: state.analysis[index].doctorName,
-                  text2: state.analysis[index].analysisType,
-                  text3: state.analysis[index].examinationDate,
                 ),
               );
             },
@@ -75,7 +77,7 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
             child: CustomErrorWidget(
               error: state.errMessage,
               onTryAgain: () {
-                context.read<GetDeleteAnalysisCubit>().getAnalysis();
+                context.read<ManageAnalysisCubit>().getAnalysis();
               },
             ),
           );

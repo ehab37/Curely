@@ -23,7 +23,7 @@ class PrescriptionEntity {
   final String doctorSpecialization;
   final String doctorName;
   final String? hospital;
-  final String? diagnosis;
+  String? diagnosis;
   final String examinationDate;
   final List<File>? images;
   List<String>? imageUrls;

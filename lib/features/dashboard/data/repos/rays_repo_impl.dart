@@ -103,4 +103,30 @@ class RaysRepoImpl implements RaysRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateRays({required RaysEntity rays}) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
+      await databaseService.updateData(
+        path: DatabaseConstants.users,
+        docId: user.uId,
+        subCollectionPath: DatabaseConstants.raysPath,
+        subDocId: rays.docId,
+        data: RaysModel.fromEntity(rays).toMap(),
+      );
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
 }

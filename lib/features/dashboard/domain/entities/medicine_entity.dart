@@ -63,8 +63,6 @@ const List<String> frequencyList = [
   'Every 6 Hours',
 ];
 
-List<MedicineEntity> medicineItems = [];
-
 class MedicineEntity {
   final String? docId;
   final String medicineUsage;

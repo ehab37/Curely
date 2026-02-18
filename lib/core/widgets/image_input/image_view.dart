@@ -1,5 +1,4 @@
 import 'package:curely/core/services/file_downloader.dart';
-import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:flutter/material.dart';
@@ -46,13 +45,15 @@ class _ImageViewState extends State<ImageView> {
           ),
         ],
       ),
-      body: GestureDetector(
-        onTap: () {
-          GoRouter.of(context).pop();
-        },
-        child: Hero(
-          tag: AppTextConstants.imageTag,
-          child: Image.network(widget.image, fit: BoxFit.contain),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            GoRouter.of(context).pop();
+          },
+          child: Hero(
+            tag: widget.image,
+            child: Image.network(widget.image, fit: BoxFit.contain),
+          ),
         ),
       ),
     );

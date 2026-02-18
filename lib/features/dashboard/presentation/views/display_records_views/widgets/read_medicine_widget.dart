@@ -1,5 +1,4 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
@@ -33,7 +32,7 @@ class ReadMedicineWidget extends StatelessWidget {
                       );
                     },
                     child: Hero(
-                      tag: AppTextConstants.imageTag,
+                      tag: medicine.imageUrl!,
                       child: Image.network(
                         medicine.imageUrl!,
                         width: 150,

@@ -3,14 +3,14 @@ import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'get_delete_rays_state.dart';
+part 'manage_rays_state.dart';
 
-class GetDeleteRaysCubit extends Cubit<GetDeleteRaysState> {
-  GetDeleteRaysCubit({required this.raysRepo}) : super(GetDeleteRaysInitial());
+class ManageRaysCubit extends Cubit<ManageRaysState> {
+  ManageRaysCubit({required this.raysRepo}) : super(ManageRaysInitial());
   final RaysRepo raysRepo;
 
   Future<void> getRays() async {
-    emit(GetDeleteRaysLoading());
+    emit(ManageRaysLoading());
     var result = await raysRepo.getRays();
     result.fold(
       (failure) {
@@ -22,8 +22,23 @@ class GetDeleteRaysCubit extends Cubit<GetDeleteRaysState> {
     );
   }
 
+  Future<void> updateRays({required RaysEntity rays}) async {
+    emit(ManageRaysLoading());
+    var result = await raysRepo.updateRays(rays: rays);
+    result.fold(
+      (failure) {
+        emit(UpdateRaysFailure(failure.errMessage));
+        getRays();
+      },
+      (success) {
+        emit(UpdateRaysSuccess());
+        getRays();
+      },
+    );
+  }
+
   Future<void> deleteRays({required String docId}) async {
-    emit(GetDeleteRaysLoading());
+    emit(ManageRaysLoading());
     var result = await raysRepo.deleteRays(docId: docId);
     result.fold(
       (failure) {

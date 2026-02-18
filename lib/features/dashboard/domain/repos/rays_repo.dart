@@ -4,6 +4,10 @@ import 'package:dartz/dartz.dart';
 
 abstract class RaysRepo {
   Future<Either<Failure, void>> addRays({required RaysEntity rays});
+
   Future<Either<Failure, List<RaysEntity>>> getRays();
+
   Future<Either<Failure, void>> deleteRays({required String docId});
+
+  Future<Either<Failure, void>> updateRays({required RaysEntity rays});
 }

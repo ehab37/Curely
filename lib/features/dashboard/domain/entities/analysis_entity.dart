@@ -21,7 +21,7 @@ class AnalysisEntity {
   final String analysisType;
   final String doctorName;
   final String? lab;
-  final String? diagnosis;
+  String? diagnosis;
   final String examinationDate;
   final List<File>? images;
   List<String>? imageUrls;
