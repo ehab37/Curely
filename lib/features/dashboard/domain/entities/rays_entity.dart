@@ -19,7 +19,7 @@ class RaysEntity {
   final String raysType;
   final String doctorName;
   final String? radiologyCenter;
-  final String? diagnosis;
+  String? diagnosis;
   final String examinationDate;
   final List<File>? images;
   List<String>? imageUrls;
