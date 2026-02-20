@@ -1,8 +1,8 @@
 abstract class AssetsConstants {
   AssetsConstants._();
 
-  static const kSplashLogo = 'assets/images/splash2.png';
-  static const kLogo = 'assets/images/logo2.png';
+  static const kSplashLogo = 'assets/images/splash.png';
+  static const kLogo = 'assets/images/logo.png';
   static const kTrack = 'assets/images/track2.png';
   static const kStay = 'assets/images/stay.jpg';
   static const kReminder = 'assets/images/reminder.jpg';

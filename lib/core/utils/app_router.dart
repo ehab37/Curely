@@ -1,4 +1,7 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/cache_constants.dart';
+import 'package:curely/core/services/cache_helper.dart';
+import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/widgets/image_input/image_view.dart';
 import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
@@ -30,17 +33,29 @@ import 'package:curely/features/home/presentation/views/search_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
-import 'package:curely/features/welcome/presentation/views/splash_view.dart';
 import 'package:curely/features/welcome/presentation/views/welcome_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_transitions/go_transitions.dart';
 
 abstract class AppRouter {
+  static Widget initialView() {
+    final bool isOnBoardingViewSeen = CacheHelper.getData(
+      key: CacheConstants.kIsOnBoardingViewSeen,
+    );
+    final bool isUserLogin = FirebaseAuthServices.isUserLoggedIn();
+    return isOnBoardingViewSeen
+        ? isUserLogin
+              ? MainView()
+              : WelcomeView()
+        : OnBoardingView();
+  }
+
   static final router = GoRouter(
     observers: [GoTransition.observer],
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SplashView()),
+      GoRoute(path: '/', builder: (context, state) => initialView()),
       GoRoute(
         path: AppRoutesConstants.kLanguageView,
         builder: (context, state) => const LanguageView(),

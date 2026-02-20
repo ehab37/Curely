@@ -2,7 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helpers/calculate_age.dart';
 import 'package:curely/core/widgets/custom_container.dart';
-import 'package:curely/core/widgets/image_input/cached_image_widget.dart';
+import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart';
 import 'package:curely/core/widgets/image_input/profile_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
@@ -46,7 +46,7 @@ class PersonalDetailsSection extends StatelessWidget {
                 user.imageUrl = null;
                 context.read<EditProfileCubit>().editProfile(user: user);
               },
-              imageWidget: CachedImageWidget(imageUrl: user.imageUrl),
+              imageWidget: ProfileCachedImageWidget(imageUrl: user.imageUrl),
             ),
             NameAndGmailSection(user: user),
             Row(

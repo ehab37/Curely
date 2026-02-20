@@ -3,8 +3,12 @@ import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CachedImageWidget extends StatelessWidget {
-  const CachedImageWidget({super.key, this.imageUrl, this.isProfile = true});
+class ProfileCachedImageWidget extends StatelessWidget {
+  const ProfileCachedImageWidget({
+    super.key,
+    this.imageUrl,
+    this.isProfile = true,
+  });
 
   final String? imageUrl;
   final bool isProfile;
