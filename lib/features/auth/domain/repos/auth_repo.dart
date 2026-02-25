@@ -19,4 +19,6 @@ abstract class AuthRepo {
   Future<Either<Failure, void>> resetPassword({required String email});
 
   Future<Either<Failure, void>> logoutUser();
+
+  Future<Either<Failure, void>> deleteAccount({required String uId});
 }

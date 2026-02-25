@@ -7,7 +7,7 @@ import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
+import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/birth_date_box.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +19,10 @@ class UpdateUserDetails extends StatefulWidget {
   final UserEntity user;
 
   @override
-  State<UpdateUserDetails> createState() =>
-      _UpdateUserDetailsState();
+  State<UpdateUserDetails> createState() => _UpdateUserDetailsState();
 }
 
-class _UpdateUserDetailsState
-    extends State<UpdateUserDetails> {
+class _UpdateUserDetailsState extends State<UpdateUserDetails> {
   late final TextEditingController nameController;
   late final TextEditingController bloodController;
   late final TextEditingController heightController;
@@ -136,7 +134,7 @@ class _UpdateUserDetailsState
                       ..height = int.tryParse(heightController.text)
                       ..weight = int.tryParse(weightController.text)
                       ..dateOfBirth = dateOfBirth.toString();
-                    context.read<EditProfileCubit>().editProfile(
+                    context.read<ManageProfileCubit>().editProfile(
                       user: updatedUser,
                     );
                     Navigator.pop(context);

@@ -7,9 +7,13 @@ abstract class UserDataRepo {
 
   Future<UserEntity> getUserData({required String uId});
 
+  Future<void> deleteUserData({required String uId});
+
   Future<void> saveUserDataLocally({required UserEntity user});
 
   UserEntity getUserDataLocally();
+
+  Future<void> deleteUserDataLocally();
 
   Future<bool> checkIfDataExists({required String docId});
 }

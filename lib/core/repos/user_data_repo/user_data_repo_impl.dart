@@ -40,9 +40,26 @@ class UserDataRepoImpl implements UserDataRepo {
   }
 
   @override
+  Future<void> deleteUserData({required String uId}) async {
+    await databaseService.deleteData(path: DatabaseConstants.users, docId: uId);
+  }
+
+  @override
   Future<void> saveUserDataLocally({required UserEntity user}) async {
     String userData = jsonEncode(UserModel.fromUserEntity(user).toMap());
     await CacheHelper.saveData(key: CacheConstants.user, value: userData);
+  }
+
+  @override
+  UserEntity getUserDataLocally() {
+    var data = CacheHelper.getData(key: CacheConstants.user);
+    UserEntity userEntity = UserModel.fromJson(jsonDecode(data));
+    return userEntity;
+  }
+
+  @override
+  Future<void> deleteUserDataLocally() async {
+    await CacheHelper.removeData(key: CacheConstants.user);
   }
 
   @override
@@ -52,12 +69,5 @@ class UserDataRepoImpl implements UserDataRepo {
       docId: docId,
     );
     return value;
-  }
-
-  @override
-  UserEntity getUserDataLocally() {
-    var data = CacheHelper.getData(key: CacheConstants.user);
-    UserEntity userEntity = UserModel.fromJson(jsonDecode(data));
-    return userEntity;
   }
 }

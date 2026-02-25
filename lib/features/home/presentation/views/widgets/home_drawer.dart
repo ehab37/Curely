@@ -1,10 +1,8 @@
-import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/global_cubits/logout_cubit/logout_user_cubit.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -25,11 +23,7 @@ class HomeDrawer extends StatelessWidget {
     return BlocConsumer<LogoutUserCubit, LogoutUserState>(
       listener: (context, state) {
         if (state is LogoutUserSuccess) {
-          GoRouter.of(context)
-              .pushReplacement(AppRoutesConstants.kWelcomeView)
-              .then(
-                (value) => CacheHelper.removeData(key: CacheConstants.user),
-              );
+          GoRouter.of(context).pushReplacement(AppRoutesConstants.kLoginView);
         } else if (state is LogoutUserFailure) {
           InfoBox.customSnackBar(context, state.errMessage);
         }
@@ -61,6 +55,7 @@ class HomeDrawer extends StatelessWidget {
                   title: const Text("Dashboard"),
                   leading: const Icon(Icons.dashboard),
                   onTap: () {
+                    Scaffold.of(context).closeDrawer();
                     bottomNavigationKey.currentState?.setPage(1);
                   },
                 ),
@@ -68,6 +63,7 @@ class HomeDrawer extends StatelessWidget {
                   title: Text("Reminder"),
                   leading: Icon(Icons.alarm),
                   onTap: () {
+                    Scaffold.of(context).closeDrawer();
                     GoRouter.of(context).push(
                       AppRoutesConstants.kDisplayMedicineView,
                       extra: true,
@@ -78,6 +74,7 @@ class HomeDrawer extends StatelessWidget {
                   title: const Text("Profile"),
                   leading: const Icon(FontAwesomeIcons.circleUser),
                   onTap: () {
+                    Scaffold.of(context).closeDrawer();
                     bottomNavigationKey.currentState?.setPage(3);
                   },
                 ),
