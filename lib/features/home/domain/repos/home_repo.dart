@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:curely/core/error/failures.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class HomeRepo {
-  Future callEmergency({required BuildContext context});
+  Future<void> callEmergency();
+
+  Future<Either<Failure, void>> nearestPharmacy();
 }
