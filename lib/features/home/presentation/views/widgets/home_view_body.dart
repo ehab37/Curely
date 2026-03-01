@@ -2,6 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_search_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
@@ -47,14 +48,11 @@ class HomeViewBody extends StatelessWidget {
                   text: "Pharmacy",
                   icon: Icons.local_pharmacy_rounded,
                   onPressed: () async {
-                    // final Position? position = await getCurrentUserLocation();
-                    // if (position != null) {
-                    //   await navigateToNearestPharmacy(
-                    //     currentLocation: position,
-                    //   );
-                    // } else {
-                    //   log("Current location is required.");
-                    // }
+                    var result = await homeRepo.nearestPharmacy();
+                    result.fold(
+                      (l) => InfoBox.customSnackBar(context, l.errMessage),
+                      (r) => null,
+                    );
                   },
                 ),
                 CardCircle(
@@ -62,7 +60,7 @@ class HomeViewBody extends StatelessWidget {
                   icon: FontAwesomeIcons.truckMedical,
                   size: 25,
                   onPressed: () async {
-                    await homeRepo.callEmergency(context: context);
+                    await homeRepo.callEmergency();
                   },
                 ),
                 CardCircle(

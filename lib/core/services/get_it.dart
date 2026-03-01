@@ -6,10 +6,11 @@ import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
+import 'package:curely/core/services/location_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/notification_service.dart';
 import 'package:curely/core/services/storage_services.dart';
-import 'package:curely/core/services/url_services.dart';
+import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/dashboard/data/repos/analysis_repo_impl.dart';
@@ -35,10 +36,11 @@ void setupGetIt() {
   getIt.registerSingleton<LanguageCubit>(LanguageCubit());
   getIt.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
   getIt.registerSingleton<DatabaseService>(FirestoreServices());
-  getIt.registerSingleton<UrlServices>(UrlServices());
+  getIt.registerSingleton<UrlService>(UrlService());
   getIt.registerSingleton<NotificationService>(NotificationService());
   getIt.registerSingleton<StorageServices>(FireStorage());
   getIt.registerSingleton<NetworkManager>(NetworkManager());
+  getIt.registerSingleton<LocationService>(LocationService());
   getIt.registerSingleton<UserDataRepo>(
     UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
   );
@@ -95,6 +97,10 @@ void setupGetIt() {
     ),
   );
   getIt.registerSingleton<HomeRepo>(
-    HomeRepoImpl(urlServices: getIt<UrlServices>()),
+    HomeRepoImpl(
+      urlService: getIt<UrlService>(),
+      locationService: getIt<LocationService>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
 }
