@@ -6,6 +6,7 @@ import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_alert_dialog.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,7 @@ class DisplayedMedicineItem extends StatelessWidget {
                     size: 50,
                     color: AppColors.primary,
                   )
-                : Image.network(medicineItem.imageUrl!, width: 60, height: 60),
+                : CustomCachedImage(height: 60, url: medicineItem.imageUrl!),
             Spacer(),
             Text(medicineItem.medicineName, style: Styles.styleBlue20),
             4.verticalSpacing,

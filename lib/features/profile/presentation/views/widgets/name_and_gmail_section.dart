@@ -1,8 +1,8 @@
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
-import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
+import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'icon_box.dart';
@@ -21,7 +21,7 @@ class NameAndGmailSection extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              final cubit = context.read<EditProfileCubit>();
+              final cubit = context.read<ManageProfileCubit>();
               showCustomBottomSheet(
                 context,
                 BlocProvider.value(

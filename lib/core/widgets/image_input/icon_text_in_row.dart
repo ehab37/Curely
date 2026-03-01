@@ -15,9 +15,9 @@ class IconTextInRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: AppColors.blue),
+          Icon(icon, color: AppColors.primary),
           10.horizontalSpacing,
-          Text(text, style: TextStyle(color: AppColors.blue)),
+          Text(text, style: TextStyle(color: AppColors.textPrimary)),
         ],
       ),
     );

@@ -1,9 +1,7 @@
 import 'dart:developer';
-import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
-import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/models/user_model.dart';
 import 'package:curely/core/entities/user_entity.dart';
@@ -155,7 +153,31 @@ class AuthRepoImpl implements AuthRepo {
         throw CustomException(message: "No Internet Connection");
       }
       await firebaseAuthServices.logoutUser();
-      await CacheHelper.removeData(key: CacheConstants.user);
+      await userDataRepo.deleteUserDataLocally();
+      return Right(null);
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors(
+          "Something wrong happened, please try again later.",
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteAccount({required String uId}) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
+      await userDataRepo.deleteUserData(uId: uId);
+      await userDataRepo.deleteUserDataLocally();
+      await firebaseAuthServices.deleteUser();
       return Right(null);
     } on FirebaseAuthException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

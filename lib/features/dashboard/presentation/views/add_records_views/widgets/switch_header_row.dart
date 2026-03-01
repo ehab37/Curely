@@ -37,7 +37,7 @@ class SwitchHeaderRow extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.0,
                     color: isReminderEnabled
-                        ? AppColors.brightBlue
+                        ? AppColors.secondary
                         : AppColors.unActive,
                   ),
                 ),

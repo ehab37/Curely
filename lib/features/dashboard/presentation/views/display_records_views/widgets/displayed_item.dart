@@ -2,6 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -35,8 +36,14 @@ class DisplayedItem extends StatelessWidget {
         children: [
           Spacer(),
           imageUrl == null
-              ? Icon(FontAwesomeIcons.pills, size: 50, color: AppColors.primary)
-              : Image.network(imageUrl!, width: 60, height: 60),
+              ? Icon(FontAwesomeIcons.pills, size: 80)
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: CustomCachedImage(height: 90, url: imageUrl!),
+                  ),
+                ),
           Spacer(),
           Text(text1, style: Styles.styleBlue20),
           Align(child: 4.verticalSpacing),

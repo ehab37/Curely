@@ -2,10 +2,10 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/helpers/calculate_age.dart';
 import 'package:curely/core/widgets/custom_container.dart';
-import 'package:curely/core/widgets/image_input/cached_image_widget.dart';
+import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart';
 import 'package:curely/core/widgets/image_input/profile_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/features/profile/presentation/cubits/edit_profile_cubit.dart';
+import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'name_and_gmail_section.dart';
@@ -37,16 +37,16 @@ class PersonalDetailsSection extends StatelessWidget {
             ProfileImageInput(
               imageUrl: user.imageUrl,
               onSelectedImage: (image) {
-                context.read<EditProfileCubit>().editProfile(
+                context.read<ManageProfileCubit>().editProfile(
                   user: user..image = image,
                 );
               },
               onRemoveImage: () {
                 ScaffoldMessenger.of(context).clearSnackBars();
                 user.imageUrl = null;
-                context.read<EditProfileCubit>().editProfile(user: user);
+                context.read<ManageProfileCubit>().editProfile(user: user);
               },
-              imageWidget: CachedImageWidget(imageUrl: user.imageUrl),
+              imageWidget: ProfileCachedImageWidget(imageUrl: user.imageUrl),
             ),
             NameAndGmailSection(user: user),
             Row(

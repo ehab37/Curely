@@ -1,6 +1,7 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,10 +34,9 @@ class ReadMedicineWidget extends StatelessWidget {
                     },
                     child: Hero(
                       tag: medicine.imageUrl!,
-                      child: Image.network(
-                        medicine.imageUrl!,
-                        width: 150,
+                      child: CustomCachedImage(
                         height: 150,
+                        url: medicine.imageUrl!,
                       ),
                     ),
                   ),

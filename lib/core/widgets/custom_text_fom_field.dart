@@ -55,10 +55,11 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         autofocus: autoFocus ?? false,
         decoration: InputDecoration(
+          isDense: true,
           fillColor: AppColors.background,
           filled: true,
           contentPadding: EdgeInsetsDirectional.symmetric(
-            vertical: 0,
+            vertical: 12,
             horizontal: 12,
           ),
           hintText: hint,

@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,10 +30,9 @@ class ReadAnalysisWidget extends StatelessWidget {
                     },
                     child: Hero(
                       tag: analysis.imageUrls![0],
-                      child: Image.network(
-                        analysis.imageUrls![0],
-                        width: 150,
+                      child: CustomCachedImage(
                         height: 150,
+                        url: analysis.imageUrls![0],
                       ),
                     ),
                   ),
