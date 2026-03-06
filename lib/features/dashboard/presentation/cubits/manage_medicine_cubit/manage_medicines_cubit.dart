@@ -15,11 +15,11 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
   final MedicineNotificationRepo medicineNotificationRepo;
   bool isReminderView = false;
 
-  Future<void> getMedicines() async {
+  Future<void> getMedicines({String? searchText}) async {
     emit(ManageMedicinesLoading());
     var result = isReminderView
         ? await medicineRepo.getReminderMedicines()
-        : await medicineRepo.getMedicines();
+        : await medicineRepo.getMedicines(searchText: searchText);
     result.fold(
       (failure) {
         emit(GetMedicinesFailure(failure.errMessage));

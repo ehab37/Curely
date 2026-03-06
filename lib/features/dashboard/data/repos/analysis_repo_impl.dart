@@ -53,7 +53,9 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }
 
   @override
-  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis() async {
+  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis({
+    String? searchText,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -65,6 +67,12 @@ class AnalysisRepoImpl implements AnalysisRepo {
                 subCollectionPath: DatabaseConstants.analysisPath,
               )
               as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
       List<AnalysisEntity> analysis = data
           .map((e) => AnalysisModel.fromJson(e).toEntity())
           .toList();

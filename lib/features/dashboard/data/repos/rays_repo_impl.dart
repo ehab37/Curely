@@ -51,7 +51,9 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
-  Future<Either<Failure, List<RaysEntity>>> getRays() async {
+  Future<Either<Failure, List<RaysEntity>>> getRays({
+    String? searchText,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -63,6 +65,12 @@ class RaysRepoImpl implements RaysRepo {
                 subCollectionPath: DatabaseConstants.raysPath,
               )
               as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
       List<RaysEntity> rays = data
           .map((e) => RaysModel.fromJson(e).toEntity())
           .toList();

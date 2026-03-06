@@ -5,7 +5,7 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:curely/features/auth/presentation/views/widgets/terms_and_conditions_widget.dart';

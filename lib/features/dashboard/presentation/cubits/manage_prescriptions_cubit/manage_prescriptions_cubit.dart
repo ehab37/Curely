@@ -10,9 +10,11 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
     : super(ManagePrescriptionsInitial());
   final PrescriptionRepo prescriptionRepo;
 
-  Future<void> getPrescriptions() async {
+  Future<void> getPrescriptions({String? searchText}) async {
     emit(ManagePrescriptionsLoading());
-    var result = await prescriptionRepo.getPrescriptions();
+    var result = await prescriptionRepo.getPrescriptions(
+      searchText: searchText,
+    );
     result.fold(
       (failure) {
         emit(GetPrescriptionsFailure(failure.errMessage));

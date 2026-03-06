@@ -10,9 +10,9 @@ class ManageAnalysisCubit extends Cubit<ManageAnalysisState> {
     : super(ManageAnalysisInitial());
   final AnalysisRepo analysisRepo;
 
-  Future<void> getAnalysis() async {
+  Future<void> getAnalysis({String? searchText}) async {
     emit(ManageAnalysisLoading());
-    var result = await analysisRepo.getAnalysis();
+    var result = await analysisRepo.getAnalysis(searchText: searchText);
     result.fold(
       (failure) {
         emit(GetAnalysisFailure(failure.errMessage));

@@ -13,7 +13,9 @@ import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayRaysViewBody extends StatefulWidget {
-  const DisplayRaysViewBody({super.key});
+  const DisplayRaysViewBody({super.key, this.searchText});
+
+  final String? searchText;
 
   @override
   State<DisplayRaysViewBody> createState() => _DisplayRaysViewBodyState();
@@ -22,7 +24,7 @@ class DisplayRaysViewBody extends StatefulWidget {
 class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
   @override
   void initState() {
-    context.read<ManageRaysCubit>().getRays();
+    context.read<ManageRaysCubit>().getRays(searchText: widget.searchText);
     super.initState();
   }
 

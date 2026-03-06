@@ -13,7 +13,9 @@ import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayAnalysisViewBody extends StatefulWidget {
-  const DisplayAnalysisViewBody({super.key});
+  const DisplayAnalysisViewBody({super.key, this.searchText});
+
+  final String? searchText;
 
   @override
   State<DisplayAnalysisViewBody> createState() =>
@@ -23,7 +25,9 @@ class DisplayAnalysisViewBody extends StatefulWidget {
 class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
   @override
   void initState() {
-    context.read<ManageAnalysisCubit>().getAnalysis();
+    context.read<ManageAnalysisCubit>().getAnalysis(
+      searchText: widget.searchText,
+    );
     super.initState();
   }
 

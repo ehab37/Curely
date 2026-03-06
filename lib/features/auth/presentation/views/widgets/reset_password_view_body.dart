@@ -2,7 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/validators/app_validators.dart';
-import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/reset_password_cubit.dart';
 import 'package:curely/generated/l10n.dart';

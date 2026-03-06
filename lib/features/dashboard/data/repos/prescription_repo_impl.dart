@@ -53,7 +53,9 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }
 
   @override
-  Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions() async {
+  Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions({
+    String? searchText,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -65,6 +67,12 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
                 subCollectionPath: DatabaseConstants.prescriptionPath,
               )
               as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
       List<PrescriptionEntity> prescriptions = data
           .map((e) => PrescriptionModel.fromJson(e).toEntity())
           .toList();

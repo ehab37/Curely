@@ -7,7 +7,9 @@ abstract class PrescriptionRepo {
     required PrescriptionEntity prescription,
   });
 
-  Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions();
+  Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions({
+    String? searchText,
+  });
 
   Future<Either<Failure, void>> deletePrescription({required String docId});
 

@@ -11,9 +11,14 @@ import 'displayed_medicine_item.dart';
 import 'medicine_dismissible_widget.dart';
 
 class DisplayMedicinesViewBody extends StatefulWidget {
-  const DisplayMedicinesViewBody({super.key, required this.isRemindersView});
+  const DisplayMedicinesViewBody({
+    super.key,
+    required this.isRemindersView,
+    this.searchText,
+  });
 
   final bool isRemindersView;
+  final String? searchText;
 
   @override
   State<DisplayMedicinesViewBody> createState() =>
@@ -26,7 +31,9 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
     if (widget.isRemindersView) {
       context.read<ManageMedicinesCubit>().isReminderView = true;
     }
-    context.read<ManageMedicinesCubit>().getMedicines();
+    context.read<ManageMedicinesCubit>().getMedicines(
+      searchText: widget.searchText,
+    );
     super.initState();
   }
 

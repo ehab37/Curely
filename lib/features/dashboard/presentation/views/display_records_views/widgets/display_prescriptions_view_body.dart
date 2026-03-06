@@ -13,7 +13,9 @@ import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayPrescriptionsViewBody extends StatefulWidget {
-  const DisplayPrescriptionsViewBody({super.key});
+  const DisplayPrescriptionsViewBody({super.key, this.searchText});
+
+  final String? searchText;
 
   @override
   State<DisplayPrescriptionsViewBody> createState() =>
@@ -24,7 +26,9 @@ class _DisplayPrescriptionsViewBodyState
     extends State<DisplayPrescriptionsViewBody> {
   @override
   void initState() {
-    context.read<ManagePrescriptionsCubit>().getPrescriptions();
+    context.read<ManagePrescriptionsCubit>().getPrescriptions(
+      searchText: widget.searchText,
+    );
     super.initState();
   }
 
