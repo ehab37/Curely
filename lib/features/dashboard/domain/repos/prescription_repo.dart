@@ -11,6 +11,8 @@ abstract class PrescriptionRepo {
     String? searchText,
   });
 
+  Future<Either<Failure, List<PrescriptionEntity>>> getFavoritePrescriptions();
+
   Future<Either<Failure, void>> deletePrescription({required String docId});
 
   Future<Either<Failure, void>> updatePrescription({

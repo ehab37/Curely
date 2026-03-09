@@ -90,6 +90,37 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }
 
   @override
+  Future<Either<Failure, List<PrescriptionEntity>>>
+  getFavoritePrescriptions() async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
+      var data =
+          await databaseService.getData(
+                path: DatabaseConstants.users,
+                docId: user.uId,
+                subCollectionPath: DatabaseConstants.prescriptionPath,
+                query: {"field": "isFavorite", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+      List<PrescriptionEntity> prescriptions = data
+          .map((e) => PrescriptionModel.fromJson(e).toEntity())
+          .toList();
+      return Right(prescriptions);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> deletePrescription({
     required String docId,
   }) async {

@@ -7,6 +7,8 @@ abstract class RaysRepo {
 
   Future<Either<Failure, List<RaysEntity>>> getRays({String? searchText});
 
+  Future<Either<Failure, List<RaysEntity>>> getFavoriteRays();
+
   Future<Either<Failure, void>> deleteRays({required String docId});
 
   Future<Either<Failure, void>> updateRays({required RaysEntity rays});

@@ -90,6 +90,36 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }
 
   @override
+  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis() async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
+      var data =
+          await databaseService.getData(
+                path: DatabaseConstants.users,
+                docId: user.uId,
+                subCollectionPath: DatabaseConstants.analysisPath,
+                query: {"field": "isFavorite", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+      List<AnalysisEntity> analysis = data
+          .map((e) => AnalysisModel.fromJson(e).toEntity())
+          .toList();
+      return Right(analysis);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> deleteAnalysis({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {

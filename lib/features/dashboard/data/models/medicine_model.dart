@@ -9,6 +9,7 @@ class MedicineModel {
   final String? medicineNotes;
   final String medicineTypes;
   final bool isReminderActive;
+  final bool isFavorite;
   final File? image;
   String? imageUrl;
 
@@ -20,6 +21,7 @@ class MedicineModel {
     this.medicineNotes,
     required this.isReminderActive,
     required this.medicineTypes,
+    required this.isFavorite,
     this.image,
     this.imageUrl,
   });
@@ -31,8 +33,9 @@ class MedicineModel {
       medicineName: json['medicineName'],
       frequency: json['frequency'],
       medicineNotes: json['medicineNotes'],
-      isReminderActive: json['isReminderActive'],
       medicineTypes: json['medicineTypes'],
+      isReminderActive: json['isReminderActive'],
+      isFavorite: json['isFavorite'],
       imageUrl: json['imageUrl'],
     );
   }
@@ -44,8 +47,9 @@ class MedicineModel {
       medicineName: medicineName,
       frequency: frequency,
       medicineNotes: medicineNotes,
-      isReminderActive: isReminderActive,
       medicineTypes: medicineTypes,
+      isReminderActive: isReminderActive,
+      isFavorite: isFavorite,
       image: image,
       imageUrl: imageUrl,
     );
@@ -57,8 +61,9 @@ class MedicineModel {
       medicineName: entity.medicineName,
       frequency: entity.frequency,
       medicineNotes: entity.medicineNotes,
-      isReminderActive: entity.isReminderActive,
       medicineTypes: entity.medicineTypes,
+      isReminderActive: entity.isReminderActive,
+      isFavorite: entity.isFavorite,
       image: entity.image,
       imageUrl: entity.imageUrl,
     );
@@ -70,8 +75,9 @@ class MedicineModel {
       'medicineName': medicineName,
       'frequency': frequency,
       'medicineNotes': medicineNotes,
-      'isReminderActive': isReminderActive,
       'medicineTypes': medicineTypes,
+      'isReminderActive': isReminderActive,
+      'isFavorite': isFavorite,
       'imageUrl': imageUrl,
     };
   }

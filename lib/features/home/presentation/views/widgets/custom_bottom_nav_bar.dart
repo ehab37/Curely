@@ -17,6 +17,7 @@ class CustomBottomNavBar extends StatelessWidget {
     Icon(Icons.home_filled, color: Colors.white),
     Icon(Icons.dashboard_outlined, color: Colors.white),
     Icon(FontAwesomeIcons.magnifyingGlass, color: Colors.white),
+    Icon(Icons.favorite_border_outlined, color: Colors.white),
     Icon(FontAwesomeIcons.user, color: Colors.white),
   ];
 

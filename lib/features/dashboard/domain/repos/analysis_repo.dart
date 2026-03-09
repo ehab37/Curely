@@ -9,6 +9,8 @@ abstract class AnalysisRepo {
     String? searchText,
   });
 
+  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis();
+
   Future<Either<Failure, void>> deleteAnalysis({required String docId});
 
   Future<Either<Failure, void>> updateAnalysis({

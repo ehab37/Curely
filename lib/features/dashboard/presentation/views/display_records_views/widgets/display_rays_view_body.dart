@@ -13,8 +13,13 @@ import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayRaysViewBody extends StatefulWidget {
-  const DisplayRaysViewBody({super.key, this.searchText});
+  const DisplayRaysViewBody({
+    super.key,
+    required this.isFavoriteView,
+    this.searchText,
+  });
 
+  final bool isFavoriteView;
   final String? searchText;
 
   @override
@@ -24,6 +29,9 @@ class DisplayRaysViewBody extends StatefulWidget {
 class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
   @override
   void initState() {
+    if (widget.isFavoriteView) {
+      context.read<ManageRaysCubit>().isFavoriteView = true;
+    }
     context.read<ManageRaysCubit>().getRays(searchText: widget.searchText);
     super.initState();
   }
@@ -36,7 +44,12 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
           if (state.rays.isEmpty) {
             return SliverToBoxAdapter(
               child: Center(
-                child: Text("NO Rays added yet!...", style: Styles.styleBlue25),
+                child: Text(
+                  widget.isFavoriteView
+                      ? "NO Favorite Rays added yet!..."
+                      : "NO Rays added yet!...",
+                  style: Styles.styleBlue25,
+                ),
               ),
             );
           }
@@ -63,6 +76,13 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
                     text1: state.rays[index].doctorName,
                     text2: state.rays[index].raysType,
                     text3: state.rays[index].examinationDate,
+                    isFavorite: state.rays[index].isFavorite,
+                    onTap: () {
+                      context.read<ManageRaysCubit>().updateRays(
+                        rays: state.rays[index]
+                          ..isFavorite = !state.rays[index].isFavorite,
+                      );
+                    },
                   ),
                 ),
               );

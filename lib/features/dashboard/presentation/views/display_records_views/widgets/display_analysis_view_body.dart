@@ -13,8 +13,13 @@ import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayAnalysisViewBody extends StatefulWidget {
-  const DisplayAnalysisViewBody({super.key, this.searchText});
+  const DisplayAnalysisViewBody({
+    super.key,
+    required this.isFavoriteView,
+    this.searchText,
+  });
 
+  final bool isFavoriteView;
   final String? searchText;
 
   @override
@@ -25,6 +30,9 @@ class DisplayAnalysisViewBody extends StatefulWidget {
 class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
   @override
   void initState() {
+    if (widget.isFavoriteView) {
+      context.read<ManageAnalysisCubit>().isFavoriteView = true;
+    }
     context.read<ManageAnalysisCubit>().getAnalysis(
       searchText: widget.searchText,
     );
@@ -40,7 +48,9 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
             return SliverToBoxAdapter(
               child: Center(
                 child: Text(
-                  "NO Analysis added yet!...",
+                  widget.isFavoriteView
+                      ? "NO Favorite Analysis added yet!..."
+                      : "NO Analysis added yet!...",
                   style: Styles.styleBlue25,
                 ),
               ),
@@ -70,6 +80,13 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
                     text1: state.analysis[index].doctorName,
                     text2: state.analysis[index].analysisType,
                     text3: state.analysis[index].examinationDate,
+                    isFavorite: state.analysis[index].isFavorite,
+                    onTap: () {
+                      context.read<ManageAnalysisCubit>().updateAnalysis(
+                        analysis: state.analysis[index]
+                          ..isFavorite = !state.analysis[index].isFavorite,
+                      );
+                    },
                   ),
                 ),
               );

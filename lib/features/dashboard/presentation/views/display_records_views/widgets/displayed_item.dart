@@ -6,6 +6,7 @@ import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'custom_fav_icon.dart';
 
 class DisplayedItem extends StatelessWidget {
   const DisplayedItem({
@@ -14,12 +15,14 @@ class DisplayedItem extends StatelessWidget {
     required this.text2,
     required this.text3,
     this.imageUrl,
+    this.isFavorite = false,
+    this.onTap,
   });
 
   final String? imageUrl;
-  final String text1;
-  final String text2;
-  final String text3;
+  final String text1, text2, text3;
+  final bool isFavorite;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +37,22 @@ class DisplayedItem extends StatelessWidget {
       elevation: 8,
       child: Column(
         children: [
-          Spacer(),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: GestureDetector(
+              onTap: onTap,
+              child: CustomFavIcon(isFav: isFavorite),
+            ),
+          ),
           imageUrl == null
               ? Icon(FontAwesomeIcons.pills, size: 80)
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: CustomCachedImage(height: 90, url: imageUrl!),
-                  ),
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: CustomCachedImage(height: 80, url: imageUrl!),
                 ),
           Spacer(),
           Text(text1, style: Styles.styleBlue20),
-          Align(child: 4.verticalSpacing),
+          4.verticalSpacing,
           Text(text2, style: Styles.style16),
           4.verticalSpacing,
           Text(

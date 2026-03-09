@@ -19,9 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchResult extends StatelessWidget {
-  const SearchResult({
-    super.key,
-  });
+  const SearchResult({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +35,7 @@ class SearchResult extends StatelessWidget {
                 ),
                 child: DisplayMedicinesViewBody(
                   isRemindersView: false,
+                  isFavoriteView: false,
                   searchText: context.read<SearchCubit>().searchController.text,
                 ),
               );
@@ -46,6 +45,7 @@ class SearchResult extends StatelessWidget {
                   prescriptionRepo: getIt<PrescriptionRepo>(),
                 ),
                 child: DisplayPrescriptionsViewBody(
+                  isFavoriteView: false,
                   searchText: context.read<SearchCubit>().searchController.text,
                 ),
               );
@@ -54,6 +54,7 @@ class SearchResult extends StatelessWidget {
                 create: (context) =>
                     ManageRaysCubit(raysRepo: getIt<RaysRepo>()),
                 child: DisplayRaysViewBody(
+                  isFavoriteView: false,
                   searchText: context.read<SearchCubit>().searchController.text,
                 ),
               );
@@ -62,6 +63,7 @@ class SearchResult extends StatelessWidget {
                 create: (context) =>
                     ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
                 child: DisplayAnalysisViewBody(
+                  isFavoriteView: false,
                   searchText: context.read<SearchCubit>().searchController.text,
                 ),
               );

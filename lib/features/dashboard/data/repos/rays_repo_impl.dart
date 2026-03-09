@@ -88,6 +88,37 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
+  Future<Either<Failure, List<RaysEntity>>> getFavoriteRays() async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
+      var data =
+          await databaseService.getData(
+                path: DatabaseConstants.users,
+                docId: user.uId,
+                subCollectionPath: DatabaseConstants.raysPath,
+                query: {"field": "isFavorite", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+
+      List<RaysEntity> rays = data
+          .map((e) => RaysModel.fromJson(e).toEntity())
+          .toList();
+      return Right(rays);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> deleteRays({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {

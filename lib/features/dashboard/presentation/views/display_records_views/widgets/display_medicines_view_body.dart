@@ -14,10 +14,12 @@ class DisplayMedicinesViewBody extends StatefulWidget {
   const DisplayMedicinesViewBody({
     super.key,
     required this.isRemindersView,
+    required this.isFavoriteView,
     this.searchText,
   });
 
   final bool isRemindersView;
+  final bool isFavoriteView;
   final String? searchText;
 
   @override
@@ -30,6 +32,9 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
   void initState() {
     if (widget.isRemindersView) {
       context.read<ManageMedicinesCubit>().isReminderView = true;
+    }
+    if (widget.isFavoriteView) {
+      context.read<ManageMedicinesCubit>().isFavoriteView = true;
     }
     context.read<ManageMedicinesCubit>().getMedicines(
       searchText: widget.searchText,
@@ -48,6 +53,8 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
                 child: Text(
                   widget.isRemindersView
                       ? "NO Reminders added yet!..."
+                      : widget.isFavoriteView
+                      ? "NO Favorite Medicines added yet!..."
                       : "NO Medicines added yet!...",
                   style: Styles.styleBlue25,
                 ),

@@ -9,10 +9,13 @@ class ManageAnalysisCubit extends Cubit<ManageAnalysisState> {
   ManageAnalysisCubit({required this.analysisRepo})
     : super(ManageAnalysisInitial());
   final AnalysisRepo analysisRepo;
+  bool isFavoriteView = false;
 
   Future<void> getAnalysis({String? searchText}) async {
     emit(ManageAnalysisLoading());
-    var result = await analysisRepo.getAnalysis(searchText: searchText);
+    var result = isFavoriteView
+        ? await analysisRepo.getFavoriteAnalysis()
+        : await analysisRepo.getAnalysis(searchText: searchText);
     result.fold(
       (failure) {
         emit(GetAnalysisFailure(failure.errMessage));

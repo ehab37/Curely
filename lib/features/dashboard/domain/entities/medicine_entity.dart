@@ -71,6 +71,7 @@ class MedicineEntity {
   String? medicineNotes;
   final String medicineTypes;
   bool isReminderActive;
+  bool isFavorite;
   final File? image;
   String? imageUrl;
 
@@ -81,6 +82,7 @@ class MedicineEntity {
     required this.frequency,
     this.medicineNotes,
     required this.isReminderActive,
+    this.isFavorite = false,
     required this.medicineTypes,
     this.image,
     this.imageUrl,
