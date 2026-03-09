@@ -1,4 +1,5 @@
 import 'package:curely/core/theme/app_colors.dart';
+import 'package:curely/core/theme/font_weight_helper.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,9 @@ class CategoryItem extends StatelessWidget {
       child: Center(
         child: Text(
           name,
-          style: isSelected ? Styles.styleWhite20 : Styles.style16,
+          style: isSelected
+              ? Styles.style18.copyWith(fontWeight: FontWeightHelper.bold)
+              : Styles.style16,
         ),
       ),
     );

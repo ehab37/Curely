@@ -40,7 +40,7 @@ class HomeViewBody extends StatelessWidget {
                   onPressed: () {
                     GoRouter.of(context).push(
                       AppRoutesConstants.kDisplayMedicineView,
-                      extra: true,
+                      extra: {'isReminderView': true, 'isFavoriteView': false},
                     );
                   },
                 ),

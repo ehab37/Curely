@@ -13,7 +13,14 @@ import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayPrescriptionsViewBody extends StatefulWidget {
-  const DisplayPrescriptionsViewBody({super.key});
+  const DisplayPrescriptionsViewBody({
+    super.key,
+    required this.isFavoriteView,
+    this.searchText,
+  });
+
+  final bool isFavoriteView;
+  final String? searchText;
 
   @override
   State<DisplayPrescriptionsViewBody> createState() =>
@@ -24,7 +31,12 @@ class _DisplayPrescriptionsViewBodyState
     extends State<DisplayPrescriptionsViewBody> {
   @override
   void initState() {
-    context.read<ManagePrescriptionsCubit>().getPrescriptions();
+    if (widget.isFavoriteView) {
+      context.read<ManagePrescriptionsCubit>().isFavoriteView = true;
+    }
+    context.read<ManagePrescriptionsCubit>().getPrescriptions(
+      searchText: widget.searchText,
+    );
     super.initState();
   }
 
@@ -37,7 +49,9 @@ class _DisplayPrescriptionsViewBodyState
             return SliverToBoxAdapter(
               child: Center(
                 child: Text(
-                  "NO Prescriptions added yet!...",
+                  widget.isFavoriteView
+                      ? "NO Favorite Prescriptions added yet!..."
+                      : "NO Prescriptions added yet!...",
                   style: Styles.styleBlue25,
                 ),
               ),
@@ -67,6 +81,16 @@ class _DisplayPrescriptionsViewBodyState
                     text1: state.prescriptions[index].doctorName,
                     text2: state.prescriptions[index].doctorSpecialization,
                     text3: state.prescriptions[index].examinationDate,
+                    isFavorite: state.prescriptions[index].isFavorite,
+                    onTap: () {
+                      context
+                          .read<ManagePrescriptionsCubit>()
+                          .updatePrescriptions(
+                            prescription: state.prescriptions[index]
+                              ..isFavorite =
+                                  !state.prescriptions[index].isFavorite,
+                          );
+                    },
                   ),
                 ),
               );

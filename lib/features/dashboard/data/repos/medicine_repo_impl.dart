@@ -53,7 +53,9 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
-  Future<Either<Failure, List<MedicineEntity>>> getMedicines() async {
+  Future<Either<Failure, List<MedicineEntity>>> getMedicines({
+    String? searchText,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "No Internet Connection");
@@ -65,6 +67,12 @@ class MedicineRepoImpl implements MedicineRepo {
                 subCollectionPath: DatabaseConstants.medicinePath,
               )
               as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
       List<MedicineEntity> medicines = data
           .map((e) => MedicineModel.fromJson(e).toEntity())
           .toList();
@@ -93,6 +101,36 @@ class MedicineRepoImpl implements MedicineRepo {
                 docId: user.uId,
                 subCollectionPath: DatabaseConstants.medicinePath,
                 query: {"field": "isReminderActive", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+      List<MedicineEntity> medicines = data
+          .map((e) => MedicineModel.fromJson(e).toEntity())
+          .toList();
+      return Right(medicines);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines() async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "No Internet Connection");
+      }
+      var data =
+          await databaseService.getData(
+                path: DatabaseConstants.users,
+                docId: user.uId,
+                subCollectionPath: DatabaseConstants.medicinePath,
+                query: {"field": "isFavorite", "value": true},
               )
               as List<Map<String, dynamic>>;
       List<MedicineEntity> medicines = data

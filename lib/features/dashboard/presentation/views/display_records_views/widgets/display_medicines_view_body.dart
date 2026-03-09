@@ -11,9 +11,16 @@ import 'displayed_medicine_item.dart';
 import 'medicine_dismissible_widget.dart';
 
 class DisplayMedicinesViewBody extends StatefulWidget {
-  const DisplayMedicinesViewBody({super.key, required this.isRemindersView});
+  const DisplayMedicinesViewBody({
+    super.key,
+    required this.isRemindersView,
+    required this.isFavoriteView,
+    this.searchText,
+  });
 
   final bool isRemindersView;
+  final bool isFavoriteView;
+  final String? searchText;
 
   @override
   State<DisplayMedicinesViewBody> createState() =>
@@ -26,7 +33,12 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
     if (widget.isRemindersView) {
       context.read<ManageMedicinesCubit>().isReminderView = true;
     }
-    context.read<ManageMedicinesCubit>().getMedicines();
+    if (widget.isFavoriteView) {
+      context.read<ManageMedicinesCubit>().isFavoriteView = true;
+    }
+    context.read<ManageMedicinesCubit>().getMedicines(
+      searchText: widget.searchText,
+    );
     super.initState();
   }
 
@@ -41,6 +53,8 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
                 child: Text(
                   widget.isRemindersView
                       ? "NO Reminders added yet!..."
+                      : widget.isFavoriteView
+                      ? "NO Favorite Medicines added yet!..."
                       : "NO Medicines added yet!...",
                   style: Styles.styleBlue25,
                 ),

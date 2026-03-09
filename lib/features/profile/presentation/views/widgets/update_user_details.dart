@@ -5,7 +5,7 @@ import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/birth_date_box.dart';

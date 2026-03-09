@@ -15,9 +15,9 @@ class DisplayedListView extends StatelessWidget {
     return SliverGrid.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 1 / 1.3,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
+        childAspectRatio: 1 / 1.35,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
       ),
       itemCount: displayedList.length,
       itemBuilder: itemBuilder,

@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DisplayPrescriptionsView extends StatelessWidget {
-  const DisplayPrescriptionsView({super.key});
+  const DisplayPrescriptionsView({super.key, required this.isFavoriteView});
+
+  final bool isFavoriteView;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +22,20 @@ class DisplayPrescriptionsView extends StatelessWidget {
           ),
           child: CustomScrollView(
             slivers: [
-              const SliverToBoxAdapter(
-                child: CustomAppBar(title: "Prescription"),
+              SliverToBoxAdapter(
+                child: CustomAppBar(
+                  title: isFavoriteView
+                      ? "Favorite Prescriptions"
+                      : "Prescriptions",
+                ),
               ),
               BlocProvider(
                 create: (context) => ManagePrescriptionsCubit(
                   prescriptionRepo: getIt<PrescriptionRepo>(),
                 ),
-                child: const DisplayPrescriptionsViewBody(),
+                child: DisplayPrescriptionsViewBody(
+                  isFavoriteView: isFavoriteView,
+                ),
               ),
             ],
           ),

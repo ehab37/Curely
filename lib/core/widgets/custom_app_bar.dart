@@ -1,7 +1,6 @@
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
-
 import 'custom_back_bar.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -17,7 +16,13 @@ class CustomAppBar extends StatelessWidget {
         Row(
           children: [
             CustomBackBar(),
-            Text(title, style: Styles.style33),
+            Expanded(
+              child: Text(
+                title,
+                style: Styles.style33,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         8.verticalSpacing,

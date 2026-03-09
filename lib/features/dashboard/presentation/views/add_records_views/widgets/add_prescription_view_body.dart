@@ -6,7 +6,7 @@ import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
-import 'package:curely/core/widgets/custom_text_fom_field.dart';
+import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';

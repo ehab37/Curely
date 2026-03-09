@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/display_rays_view_body.dart';
 
 class DisplayRaysView extends StatelessWidget {
-  const DisplayRaysView({super.key});
+  const DisplayRaysView({super.key, required this.isFavoriteView});
+
+  final bool isFavoriteView;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,15 @@ class DisplayRaysView extends StatelessWidget {
           ),
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: CustomAppBar(title: "Rays")),
+              SliverToBoxAdapter(
+                child: CustomAppBar(
+                  title: isFavoriteView ? "Favorite Rays" : "Rays",
+                ),
+              ),
               BlocProvider(
                 create: (context) =>
                     ManageRaysCubit(raysRepo: getIt<RaysRepo>()),
-                child: DisplayRaysViewBody(),
+                child: DisplayRaysViewBody(isFavoriteView: isFavoriteView),
               ),
             ],
           ),

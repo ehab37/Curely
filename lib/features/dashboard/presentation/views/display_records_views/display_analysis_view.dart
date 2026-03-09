@@ -8,7 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/display_analysis_view_body.dart';
 
 class DisplayAnalysisView extends StatelessWidget {
-  const DisplayAnalysisView({super.key});
+  const DisplayAnalysisView({super.key, required this.isFavoriteView});
+
+  final bool isFavoriteView;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,15 @@ class DisplayAnalysisView extends StatelessWidget {
           ),
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: CustomAppBar(title: "Analysis")),
+              SliverToBoxAdapter(
+                child: CustomAppBar(
+                  title: isFavoriteView ? "Favorite Analysis" : "Analysis",
+                ),
+              ),
               BlocProvider(
                 create: (context) =>
                     ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
-                child: DisplayAnalysisViewBody(),
+                child: DisplayAnalysisViewBody(isFavoriteView: isFavoriteView),
               ),
             ],
           ),

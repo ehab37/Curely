@@ -23,6 +23,7 @@ class AnalysisEntity {
   final String? lab;
   String? diagnosis;
   final String examinationDate;
+  bool isFavorite;
   final List<File>? images;
   List<String>? imageUrls;
 
@@ -33,6 +34,7 @@ class AnalysisEntity {
     this.lab,
     this.diagnosis,
     required this.examinationDate,
+    this.isFavorite = false,
     this.images,
     this.imageUrls,
   });

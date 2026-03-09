@@ -21,6 +21,7 @@ class RaysEntity {
   final String? radiologyCenter;
   String? diagnosis;
   final String examinationDate;
+  bool isFavorite;
   final List<File>? images;
   List<String>? imageUrls;
 
@@ -31,6 +32,7 @@ class RaysEntity {
     this.radiologyCenter,
     this.diagnosis,
     required this.examinationDate,
+    this.isFavorite = false,
     this.images,
     this.imageUrls,
   });

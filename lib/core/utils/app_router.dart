@@ -120,23 +120,51 @@ abstract class AppRouter {
         path: AppRoutesConstants.kDisplayMedicineView,
         builder: (context, state) {
           bool isReminderView = false;
+          bool isFavoriteView = false;
           if (state.extra != null) {
-            isReminderView = true;
+            var data = state.extra as Map<String, bool>;
+            if (data['isReminderView'] as bool) {
+              isReminderView = true;
+            }
+            if (data['isFavoriteView'] as bool) {
+              isFavoriteView = true;
+            }
           }
-          return DisplayMedicinesView(isRemindersView: isReminderView);
+          return DisplayMedicinesView(
+            isRemindersView: isReminderView,
+            isFavoriteView: isFavoriteView,
+          );
         },
       ),
       GoRoute(
         path: AppRoutesConstants.kDisplayPrescriptionView,
-        builder: (context, state) => const DisplayPrescriptionsView(),
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return DisplayPrescriptionsView(isFavoriteView: isFavoriteView);
+        },
       ),
       GoRoute(
         path: AppRoutesConstants.kDisplayRaysView,
-        builder: (context, state) => const DisplayRaysView(),
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return DisplayRaysView(isFavoriteView: isFavoriteView);
+        },
       ),
       GoRoute(
         path: AppRoutesConstants.kDisplayAnalysisView,
-        builder: (context, state) => const DisplayAnalysisView(),
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return DisplayAnalysisView(isFavoriteView: isFavoriteView);
+        },
       ),
       GoRoute(
         path: AppRoutesConstants.kMedicineDetailsView,

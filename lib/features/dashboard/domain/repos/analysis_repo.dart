@@ -5,7 +5,11 @@ import 'package:dartz/dartz.dart';
 abstract class AnalysisRepo {
   Future<Either<Failure, void>> addAnalysis({required AnalysisEntity analysis});
 
-  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis();
+  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis({
+    String? searchText,
+  });
+
+  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis();
 
   Future<Either<Failure, void>> deleteAnalysis({required String docId});
 

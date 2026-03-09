@@ -1,48 +1,35 @@
+import 'package:curely/features/home/presentation/cubits/search_cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'category_item.dart';
 
-class CategoryGridView extends StatefulWidget {
+class CategoryGridView extends StatelessWidget {
   const CategoryGridView({super.key});
 
   @override
-  State<CategoryGridView> createState() => _CategoryGridViewState();
-}
-
-class _CategoryGridViewState extends State<CategoryGridView> {
-  final List<String> categories = [
-    "Medicines",
-    "Prescriptions",
-    "Rays",
-    "Analysis",
-  ];
-
-  int selectedIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 4 / 1,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: categories.length,
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () {
-          if (selectedIndex != index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          }
-        },
-        child: CategoryItem(
-          isSelected: selectedIndex == index,
-          name: categories[index],
-        ),
-      ),
+    final cubit = context.read<SearchCubit>();
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        return SliverGrid.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 5 / 1,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount: cubit.categories.length,
+          itemBuilder: (context, index) => GestureDetector(
+            onTap: () {
+              cubit.changeCategory(index: index);
+            },
+            child: CategoryItem(
+              isSelected: cubit.currentCategoryIndex == index,
+              name: cubit.categories[index],
+            ),
+          ),
+        );
+      },
     );
   }
 }

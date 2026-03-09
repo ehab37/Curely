@@ -25,6 +25,7 @@ class PrescriptionEntity {
   final String? hospital;
   String? diagnosis;
   final String examinationDate;
+  bool isFavorite;
   final List<File>? images;
   List<String>? imageUrls;
 
@@ -35,6 +36,7 @@ class PrescriptionEntity {
     this.hospital,
     this.diagnosis,
     required this.examinationDate,
+    this.isFavorite = false,
     this.images,
     this.imageUrls,
   });

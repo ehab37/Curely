@@ -9,9 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/display_medicines_view_body.dart';
 
 class DisplayMedicinesView extends StatelessWidget {
-  const DisplayMedicinesView({super.key, required this.isRemindersView});
+  const DisplayMedicinesView({
+    super.key,
+    required this.isRemindersView,
+    required this.isFavoriteView,
+  });
 
   final bool isRemindersView;
+  final bool isFavoriteView;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +31,10 @@ class DisplayMedicinesView extends StatelessWidget {
               SliverToBoxAdapter(
                 child: CustomAppBar(
                   title: isRemindersView
-                      ? "Display Reminders"
-                      : "Display Medicines",
+                      ? "Reminders"
+                      : isFavoriteView
+                      ? "Favorite Medicines"
+                      : "Medicines",
                 ),
               ),
               BlocProvider(
@@ -37,6 +44,7 @@ class DisplayMedicinesView extends StatelessWidget {
                 ),
                 child: DisplayMedicinesViewBody(
                   isRemindersView: isRemindersView,
+                  isFavoriteView: isFavoriteView,
                 ),
               ),
             ],
