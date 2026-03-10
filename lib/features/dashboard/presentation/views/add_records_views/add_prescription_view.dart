@@ -2,7 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_prescription_cubit/add_prescription_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,10 @@ class AddPrescriptionView extends StatelessWidget {
         onPopInvokedWithResult: (didPop, result) =>
             didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
         child: Scaffold(
+          appBar: buildCustomAppBar(
+            title: "Add Prescription",
+            isBackable: true,
+          ),
           body: Builder(
             builder: (context) {
               return BlocConsumer<AddPrescriptionCubit, AddPrescriptionState>(
@@ -45,12 +49,7 @@ class AddPrescriptionView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: SpacingConstants.horizontalPadding,
                         ),
-                        child: Column(
-                          children: [
-                            CustomAppBar(title: "Add Prescription"),
-                            Expanded(child: AddPrescriptionViewBody()),
-                          ],
-                        ),
+                        child: AddPrescriptionViewBody(),
                       ),
                     ),
                   );

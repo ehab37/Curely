@@ -12,13 +12,10 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          (MediaQuery.of(context).size.height / 4).verticalSpacing,
           Icon(Icons.error_outline, color: AppColors.error, size: 80),
           16.verticalSpacing,
           Text(

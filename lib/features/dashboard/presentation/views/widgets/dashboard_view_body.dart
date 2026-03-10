@@ -1,6 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/widgets/custom_square_nav_bar.dart';
@@ -21,25 +20,12 @@ class DashboardViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          8.verticalSpacing,
-          const Row(
-            children: [
-              Text(" Dashboard", style: Styles.style33),
-              Spacer(),
-              Icon(
-                FontAwesomeIcons.fileMedical,
-                size: 28,
-                color: AppColors.primary,
-              ),
-            ],
-          ),
-          8.verticalSpacing,
           Expanded(
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
+                Text(" Display Record", style: Styles.styleBlue20),
                 8.verticalSpacing,
-                Text(" Display Record", style: Styles.styleBlue25),
                 CustomNavBar(
                   text: "Display Medicines",
                   prefixIcon: FontAwesomeIcons.pills,
@@ -81,7 +67,8 @@ class DashboardViewBody extends StatelessWidget {
                   },
                 ),
                 16.verticalSpacing,
-                Text(" Add Record", style: Styles.styleBlue25),
+                Text(" Add Record", style: Styles.styleBlue20),
+                8.verticalSpacing,
                 Row(
                   children: [
                     CustomSquareNavBar(

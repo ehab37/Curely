@@ -4,13 +4,13 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
-import 'package:curely/core/widgets/custom_search_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'circle_card.dart';
+import 'package:curely/features/home/presentation/views/widgets/circle_card.dart';
+import 'package:curely/features/home/presentation/views/widgets/home_search_widget.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -28,8 +28,8 @@ class HomeViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomSearchField(text: "Search at records"),
-            16.verticalSpacing,
+            HomeSearchWidget(),
+            24.verticalSpacing,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -71,7 +71,7 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
             16.verticalSpacing,
-            Text(" Add Records", style: Styles.style28),
+            Text(" Add Records", style: Styles.styleBlue25),
             CustomNavBar(
               text: "Add Medicine",
               prefixIcon: FontAwesomeIcons.pills,

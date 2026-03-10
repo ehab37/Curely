@@ -2,7 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_analysis_cubit/add_analysis_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,7 @@ class AddAnalysisView extends StatelessWidget {
         onPopInvokedWithResult: (didPop, result) =>
             didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
         child: Scaffold(
+          appBar: buildCustomAppBar(title: "Add Analysis", isBackable: true),
           body: Builder(
             builder: (context) {
               return BlocConsumer<AddAnalysisCubit, AddAnalysisState>(
@@ -45,12 +46,7 @@ class AddAnalysisView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: SpacingConstants.horizontalPadding,
                         ),
-                        child: Column(
-                          children: [
-                            CustomAppBar(title: "Add Analysis"),
-                            Expanded(child: AddAnalysisViewBody()),
-                          ],
-                        ),
+                        child: AddAnalysisViewBody(),
                       ),
                     ),
                   );

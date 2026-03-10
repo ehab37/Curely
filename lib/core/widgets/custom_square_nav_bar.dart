@@ -35,7 +35,7 @@ class CustomSquareNavBar extends StatelessWidget {
               6.verticalSpacing,
               Text(
                 text,
-                style: Styles.styleBlue20,
+                style: Styles.style16,
                 overflow: TextOverflow.ellipsis,
               ),
               12.verticalSpacing,

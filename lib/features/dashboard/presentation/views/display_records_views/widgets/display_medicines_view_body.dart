@@ -48,16 +48,14 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
       builder: (context, state) {
         if (state is GetMedicinesSuccess) {
           if (state.medicines.isEmpty) {
-            return SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  widget.isRemindersView
-                      ? "NO Reminders added yet!..."
-                      : widget.isFavoriteView
-                      ? "NO Favorite Medicines added yet!..."
-                      : "NO Medicines added yet!...",
-                  style: Styles.styleBlue25,
-                ),
+            return Center(
+              child: Text(
+                widget.isRemindersView
+                    ? "NO Reminders added yet!..."
+                    : widget.isFavoriteView
+                    ? "NO Favorite Medicines added yet!..."
+                    : "NO Medicines added yet!...",
+                style: Styles.styleBlue25,
               ),
             );
           }
@@ -70,13 +68,11 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
             displayedList: state.medicines,
           );
         } else if (state is GetMedicinesFailure) {
-          return SliverToBoxAdapter(
-            child: CustomErrorWidget(
-              error: state.errMessage,
-              onTryAgain: () {
-                context.read<ManageMedicinesCubit>().getMedicines();
-              },
-            ),
+          return CustomErrorWidget(
+            error: state.errMessage,
+            onTryAgain: () {
+              context.read<ManageMedicinesCubit>().getMedicines();
+            },
           );
         } else {
           if (state is DeleteMedicinesFailure) {
@@ -84,7 +80,7 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
           } else if (state is DeleteMedicinesSuccess) {
             InfoBox.customSnackBar(context, "Item deleted successfully.");
           }
-          return Skeletonizer.sliver(
+          return Skeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedMedicineItem(

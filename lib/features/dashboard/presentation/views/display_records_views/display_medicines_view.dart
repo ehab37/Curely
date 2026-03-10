@@ -1,6 +1,6 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
@@ -21,33 +21,28 @@ class DisplayMedicinesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildCustomAppBar(
+        title: isRemindersView
+            ? "Reminders"
+            : isFavoriteView
+            ? "Favorite Medicines"
+            : "Medicines",
+        isBackable: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SpacingConstants.horizontalPadding,
           ),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: CustomAppBar(
-                  title: isRemindersView
-                      ? "Reminders"
-                      : isFavoriteView
-                      ? "Favorite Medicines"
-                      : "Medicines",
-                ),
-              ),
-              BlocProvider(
-                create: (context) => ManageMedicinesCubit(
-                  medicineRepo: getIt<MedicineRepo>(),
-                  medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
-                ),
-                child: DisplayMedicinesViewBody(
-                  isRemindersView: isRemindersView,
-                  isFavoriteView: isFavoriteView,
-                ),
-              ),
-            ],
+          child: BlocProvider(
+            create: (context) => ManageMedicinesCubit(
+              medicineRepo: getIt<MedicineRepo>(),
+              medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
+            ),
+            child: DisplayMedicinesViewBody(
+              isRemindersView: isRemindersView,
+              isFavoriteView: isFavoriteView,
+            ),
           ),
         ),
       ),

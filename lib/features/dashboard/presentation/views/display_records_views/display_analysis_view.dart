@@ -1,6 +1,6 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
 import 'package:flutter/material.dart';
@@ -15,24 +15,19 @@ class DisplayAnalysisView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildCustomAppBar(
+        title: isFavoriteView ? "Favorite Analysis" : "Analysis",
+        isBackable: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SpacingConstants.horizontalPadding,
           ),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: CustomAppBar(
-                  title: isFavoriteView ? "Favorite Analysis" : "Analysis",
-                ),
-              ),
-              BlocProvider(
-                create: (context) =>
-                    ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
-                child: DisplayAnalysisViewBody(isFavoriteView: isFavoriteView),
-              ),
-            ],
+          child: BlocProvider(
+            create: (context) =>
+                ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
+            child: DisplayAnalysisViewBody(isFavoriteView: isFavoriteView),
           ),
         ),
       ),
