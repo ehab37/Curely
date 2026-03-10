@@ -50,7 +50,6 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          8.verticalSpacing,
           CustomTextFormField(
             controller: doctorNameController,
             label: "Doctor Name",

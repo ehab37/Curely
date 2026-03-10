@@ -21,7 +21,7 @@ class CustomNavBar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(8),
       alignment: AlignmentDirectional.center,
-      height: MediaQuery.of(context).size.height / 15,
+      height: 50,
       decoration: BoxDecoration(
         color: AppColors.lightGray,
         borderRadius: const BorderRadius.only(
@@ -38,12 +38,12 @@ class CustomNavBar extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: Styles.styleBlue20,
+              style: Styles.style16,
               overflow: TextOverflow.ellipsis,
             ),
           ),
           IconButton(
-            icon: Icon(suffixIcon, color: AppColors.primary, size: 35),
+            icon: Icon(suffixIcon, color: AppColors.primary, size: 30),
             onPressed: onPressed,
           ),
         ],

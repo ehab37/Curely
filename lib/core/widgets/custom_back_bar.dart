@@ -13,10 +13,13 @@ class CustomBackBar extends StatelessWidget {
         onTap: () {
           GoRouter.of(context).pop();
         },
-        child: Icon(
-          Icons.arrow_back_ios_new_outlined,
-          size: 40,
-          color: AppColors.primary,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            size: 30,
+            color: AppColors.primary,
+          ),
         ),
       ),
     );

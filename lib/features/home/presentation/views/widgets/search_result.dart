@@ -69,19 +69,17 @@ class SearchResult extends StatelessWidget {
               );
           }
         } else if (state is SearchLoading) {
-          return SliverToBoxAdapter(child: CustomLoadingIndicator());
+          return CustomLoadingIndicator();
         }
-        return SliverToBoxAdapter(
-          child: Row(
-            children: [
-              Icon(CupertinoIcons.exclamationmark_circle),
-              10.horizontalSpacing,
-              Text(
-                "Please, Select a category to search",
-                style: TextStyle(fontSize: 18),
-              ),
-            ],
-          ),
+        return Row(
+          children: [
+            Icon(CupertinoIcons.exclamationmark_circle),
+            10.horizontalSpacing,
+            Text(
+              "Please, Select a category to search",
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
         );
       },
     );

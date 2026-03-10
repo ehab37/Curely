@@ -42,14 +42,12 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
       builder: (context, state) {
         if (state is GetRaysSuccess) {
           if (state.rays.isEmpty) {
-            return SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  widget.isFavoriteView
-                      ? "NO Favorite Rays added yet!..."
-                      : "NO Rays added yet!...",
-                  style: Styles.styleBlue25,
-                ),
+            return Center(
+              child: Text(
+                widget.isFavoriteView
+                    ? "NO Favorite Rays added yet!..."
+                    : "NO Rays added yet!...",
+                style: Styles.styleBlue25,
               ),
             );
           }
@@ -90,13 +88,11 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
             displayedList: state.rays,
           );
         } else if (state is GetRaysFailure) {
-          return SliverToBoxAdapter(
-            child: CustomErrorWidget(
-              error: state.errMessage,
-              onTryAgain: () {
-                context.read<ManageRaysCubit>().getRays();
-              },
-            ),
+          return CustomErrorWidget(
+            error: state.errMessage,
+            onTryAgain: () {
+              context.read<ManageRaysCubit>().getRays();
+            },
           );
         } else {
           if (state is DeleteRaysFailure) {
@@ -104,7 +100,7 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
           } else if (state is DeleteRaysSuccess) {
             InfoBox.customSnackBar(context, "Item deleted successfully.");
           }
-          return Skeletonizer.sliver(
+          return Skeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedItem(

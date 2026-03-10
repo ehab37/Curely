@@ -46,14 +46,12 @@ class _DisplayPrescriptionsViewBodyState
       builder: (context, state) {
         if (state is GetPrescriptionsSuccess) {
           if (state.prescriptions.isEmpty) {
-            return SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  widget.isFavoriteView
-                      ? "NO Favorite Prescriptions added yet!..."
-                      : "NO Prescriptions added yet!...",
-                  style: Styles.styleBlue25,
-                ),
+            return Center(
+              child: Text(
+                widget.isFavoriteView
+                    ? "NO Favorite Prescriptions added yet!..."
+                    : "NO Prescriptions added yet!...",
+                style: Styles.styleBlue25,
               ),
             );
           }
@@ -98,13 +96,11 @@ class _DisplayPrescriptionsViewBodyState
             displayedList: state.prescriptions,
           );
         } else if (state is GetPrescriptionsFailure) {
-          return SliverToBoxAdapter(
-            child: CustomErrorWidget(
-              error: state.errMessage,
-              onTryAgain: () {
-                context.read<ManagePrescriptionsCubit>().getPrescriptions();
-              },
-            ),
+          return CustomErrorWidget(
+            error: state.errMessage,
+            onTryAgain: () {
+              context.read<ManagePrescriptionsCubit>().getPrescriptions();
+            },
           );
         } else {
           if (state is DeletePrescriptionsFailure) {
@@ -112,7 +108,7 @@ class _DisplayPrescriptionsViewBodyState
           } else if (state is DeletePrescriptionsSuccess) {
             InfoBox.customSnackBar(context, "Item deleted successfully.");
           }
-          return Skeletonizer.sliver(
+          return Skeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedItem(

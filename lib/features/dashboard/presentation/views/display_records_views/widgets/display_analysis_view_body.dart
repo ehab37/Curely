@@ -45,14 +45,12 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
       builder: (context, state) {
         if (state is GetAnalysisSuccess) {
           if (state.analysis.isEmpty) {
-            return SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  widget.isFavoriteView
-                      ? "NO Favorite Analysis added yet!..."
-                      : "NO Analysis added yet!...",
-                  style: Styles.styleBlue25,
-                ),
+            return Center(
+              child: Text(
+                widget.isFavoriteView
+                    ? "NO Favorite Analysis added yet!..."
+                    : "NO Analysis added yet!...",
+                style: Styles.styleBlue25,
               ),
             );
           }
@@ -94,13 +92,11 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
             displayedList: state.analysis,
           );
         } else if (state is GetAnalysisFailure) {
-          return SliverToBoxAdapter(
-            child: CustomErrorWidget(
-              error: state.errMessage,
-              onTryAgain: () {
-                context.read<ManageAnalysisCubit>().getAnalysis();
-              },
-            ),
+          return CustomErrorWidget(
+            error: state.errMessage,
+            onTryAgain: () {
+              context.read<ManageAnalysisCubit>().getAnalysis();
+            },
           );
         } else {
           if (state is DeleteAnalysisFailure) {
@@ -108,7 +104,7 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
           } else if (state is DeleteAnalysisSuccess) {
             InfoBox.customSnackBar(context, "Item deleted successfully.");
           }
-          return Skeletonizer.sliver(
+          return Skeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedItem(

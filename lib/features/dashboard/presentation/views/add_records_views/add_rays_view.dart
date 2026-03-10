@@ -2,7 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/widgets/custom_app_bar.dart';
+import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,7 @@ class AddRaysView extends StatelessWidget {
         onPopInvokedWithResult: (didPop, result) =>
             didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
         child: Scaffold(
+          appBar: buildCustomAppBar(title: "Add Rays", isBackable: true),
           body: Builder(
             builder: (context) {
               return BlocConsumer<AddRaysCubit, AddRaysState>(
@@ -45,12 +46,7 @@ class AddRaysView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: SpacingConstants.horizontalPadding,
                         ),
-                        child: Column(
-                          children: [
-                            CustomAppBar(title: "Add Rays"),
-                            Expanded(child: AddRaysViewBody()),
-                          ],
-                        ),
+                        child: AddRaysViewBody(),
                       ),
                     ),
                   );

@@ -11,13 +11,15 @@ class CategoryGridView extends StatelessWidget {
     final cubit = context.read<SearchCubit>();
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
-        return SliverGrid.builder(
+        return GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 5 / 1,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemCount: cubit.categories.length,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () {
