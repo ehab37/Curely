@@ -15,6 +15,9 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/display_prescriptions_view_body.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/display_rays_view_body.dart';
 import 'package:curely/features/home/presentation/cubits/search_cubit/search_cubit.dart';
+import 'package:curely/features/profile/domain/repos/notes_repo.dart';
+import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
+import 'package:curely/features/profile/presentation/views/widgets/notes_view_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,6 +66,15 @@ class SearchResult extends StatelessWidget {
                 create: (context) =>
                     ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
                 child: DisplayAnalysisViewBody(
+                  isFavoriteView: false,
+                  searchText: context.read<SearchCubit>().searchController.text,
+                ),
+              );
+            case 4:
+              return BlocProvider(
+                create: (context) =>
+                    ManageNotesCubit(notesRepo: getIt<NotesRepo>()),
+                child: NotesViewBody(
                   isFavoriteView: false,
                   searchText: context.read<SearchCubit>().searchController.text,
                 ),

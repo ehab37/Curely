@@ -24,4 +24,5 @@ class DatabaseConstants {
   static const String prescriptionPath = "prescription";
   static const String raysPath = "rays";
   static const String analysisPath = "analysis";
+  static const String notesPath = "notes";
 }

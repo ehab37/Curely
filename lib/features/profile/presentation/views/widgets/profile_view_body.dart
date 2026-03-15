@@ -48,16 +48,14 @@ class ProfileViewBody extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomNavBar(
-                        text: "My Health Record",
+                        text: "My Health Notes",
                         prefixIcon: FontAwesomeIcons.notesMedical,
                         suffixIcon: Icons.arrow_forward_ios,
-                        onPressed: () {},
-                      ),
-                      CustomNavBar(
-                        text: "My Medications",
-                        prefixIcon: FontAwesomeIcons.pills,
-                        suffixIcon: Icons.arrow_forward_ios,
-                        onPressed: () {},
+                        onPressed: () {
+                          GoRouter.of(
+                            context,
+                          ).push(AppRoutesConstants.kNotesView);
+                        },
                       ),
                       CustomNavBar(
                         text: "Language",

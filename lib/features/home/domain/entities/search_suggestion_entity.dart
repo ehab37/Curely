@@ -125,6 +125,23 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
+        title: 'Health Notes',
+        icon: FontAwesomeIcons.notesMedical,
+        onTap: (context) {
+          GoRouter.of(context).push(AppRoutesConstants.kNotesView);
+        },
+      ),
+      SearchSuggestionEntity(
+        title: 'Favorite Health Notes',
+        icon: Icons.bookmark_border,
+        onTap: (context) {
+          GoRouter.of(context).push(
+            AppRoutesConstants.kNotesView,
+            extra: {'isReminderView': false, 'isFavoriteView': true},
+          );
+        },
+      ),
+      SearchSuggestionEntity(
         title: 'Language',
         icon: FontAwesomeIcons.language,
         onTap: (context) {
