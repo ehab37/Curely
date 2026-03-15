@@ -89,4 +89,37 @@ abstract class InfoBox {
       textDirection: TextDirection.rtl,
     ).show(context);
   }
+
+  static void showTopSnackBar(BuildContext context, String message) {
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlayEntry;
+
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).padding.top + 10,
+        left: 20,
+        right: 20,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE8FF),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black26)],
+            ),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlayState.insert(overlayEntry);
+    // Remove it after 2 seconds
+    Future.delayed(Duration(seconds: 2), () => overlayEntry.remove());
+  }
 }

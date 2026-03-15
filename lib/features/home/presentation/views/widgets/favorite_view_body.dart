@@ -55,6 +55,17 @@ class FavoriteViewBody extends StatelessWidget {
           },
           suffixIcon: Icons.arrow_forward_ios_rounded,
         ),
+        CustomNavBar(
+          text: 'Health Notes',
+          prefixIcon: FontAwesomeIcons.noteSticky,
+          onPressed: () {
+            GoRouter.of(context).push(
+              AppRoutesConstants.kNotesView,
+              extra: {'isReminderView': false, 'isFavoriteView': true},
+            );
+          },
+          suffixIcon: Icons.arrow_forward_ios_rounded,
+        ),
       ],
     );
   }
