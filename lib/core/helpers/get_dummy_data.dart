@@ -2,6 +2,7 @@ import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
+import 'package:curely/features/profile/domain/entities/note_entity.dart';
 
 MedicineEntity medicineEntity() {
   return MedicineEntity(
@@ -78,5 +79,27 @@ List<AnalysisEntity> getDummyAnalysis() {
     analysisEntity(),
     analysisEntity(),
     analysisEntity(),
+  ];
+}
+
+NoteEntity noteEntity() {
+  return NoteEntity(
+    title: 'title title',
+    description: 'description description',
+    createdAt: 'createdAt createdAt',
+  );
+}
+
+List<NoteEntity> getDummyNotes() {
+  return [
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
+    noteEntity(),
   ];
 }

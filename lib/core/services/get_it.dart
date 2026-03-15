@@ -25,7 +25,9 @@ import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/home/data/repos/home_repo_impl.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:curely/features/profile/data/repos/notes_repo_impl.dart';
 import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -91,6 +93,13 @@ void setupGetIt() {
   );
   getIt.registerSingleton<AnalysisRepo>(
     AnalysisRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
+    ),
+  );
+  getIt.registerSingleton<NotesRepo>(
+    NotesRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),

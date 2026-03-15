@@ -12,6 +12,7 @@ class SearchCubit extends Cubit<SearchState> {
     "Prescriptions",
     "Rays",
     "Analysis",
+    "Health Notes",
   ];
 
   changeCategory({int? index}) async {

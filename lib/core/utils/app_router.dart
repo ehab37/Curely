@@ -30,6 +30,7 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/dashboard/presentation/views/display_records_views/rays_details_view.dart';
 import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
+import 'package:curely/features/profile/presentation/views/notes_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
@@ -203,6 +204,16 @@ abstract class AppRouter {
       GoRoute(
         path: AppRoutesConstants.kImageView,
         builder: (context, state) => ImageView(image: state.extra as String),
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kNotesView,
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return NotesView(isFavoriteView: isFavoriteView);
+        },
       ),
     ],
   );

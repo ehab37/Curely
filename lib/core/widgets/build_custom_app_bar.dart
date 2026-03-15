@@ -7,6 +7,7 @@ AppBar buildCustomAppBar({
   required String title,
   IconData? icon,
   bool isBackable = false,
+  void Function()? onTap,
 }) {
   return AppBar(
     leading: isBackable ? CustomBackBar() : null,
@@ -15,7 +16,10 @@ AppBar buildCustomAppBar({
       ?icon != null
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Icon(icon, color: AppColors.primary),
+              child: GestureDetector(
+                onTap: onTap,
+                child: Icon(icon, color: AppColors.primary),
+              ),
             )
           : null,
     ],
