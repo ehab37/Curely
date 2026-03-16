@@ -1,7 +1,7 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
 import 'package:flutter/material.dart';
@@ -45,14 +45,12 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
       builder: (context, state) {
         if (state is GetAnalysisSuccess) {
           if (state.analysis.isEmpty) {
-            return Center(
-              child: Text(
-                widget.isFavoriteView
-                    ? "NO Favorite Analysis added yet!..."
-                    : "NO Analysis added yet!...",
-                style: Styles.styleBlue25,
-              ),
-            );
+            return widget.isFavoriteView
+                ? CustomEmptyWidget(title: "NO Favorite Analysis Yet !...")
+                : CustomEmptyWidget(
+                    title: "No Analysis Found",
+                    subTitle: "You haven't added any analysis yet!...",
+                  );
           }
           return DisplayedListView(
             itemBuilder: (context, index) {

@@ -18,7 +18,7 @@ class SearchSuggestionEntity {
     return [
       SearchSuggestionEntity(
         title: 'Add Medicine',
-        icon: FontAwesomeIcons.pills,
+        icon: Icons.medication_liquid_rounded,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kAddMedicineView);
         },

@@ -1,7 +1,7 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_rays_cubit/manage_rays_cubit.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +42,12 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
       builder: (context, state) {
         if (state is GetRaysSuccess) {
           if (state.rays.isEmpty) {
-            return Center(
-              child: Text(
-                widget.isFavoriteView
-                    ? "NO Favorite Rays added yet!..."
-                    : "NO Rays added yet!...",
-                style: Styles.styleBlue25,
-              ),
-            );
+            return widget.isFavoriteView
+                ? CustomEmptyWidget(title: "NO Favorite Rays Yet !...")
+                : CustomEmptyWidget(
+                    title: "No Rays Found",
+                    subTitle: "You haven't added any rays yet!...",
+                  );
           }
           return DisplayedListView(
             itemBuilder: (context, index) {

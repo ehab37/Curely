@@ -32,7 +32,7 @@ class CardCircle extends StatelessWidget {
           ),
         ),
         6.verticalSpacing,
-        Text(text, style: Styles.style18.copyWith(color: AppColors.primary)),
+        Text(text, style: Styles.style15),
       ],
     );
   }

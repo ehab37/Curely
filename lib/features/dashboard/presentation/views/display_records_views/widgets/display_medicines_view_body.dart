@@ -1,6 +1,6 @@
 import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_list_view.dart';
@@ -48,16 +48,14 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
       builder: (context, state) {
         if (state is GetMedicinesSuccess) {
           if (state.medicines.isEmpty) {
-            return Center(
-              child: Text(
-                widget.isRemindersView
-                    ? "NO Reminders added yet!..."
-                    : widget.isFavoriteView
-                    ? "NO Favorite Medicines added yet!..."
-                    : "NO Medicines added yet!...",
-                style: Styles.styleBlue25,
-              ),
-            );
+            return widget.isFavoriteView
+                ? CustomEmptyWidget(title: "NO Favorite Medicines Yet !...")
+                : widget.isRemindersView
+                ? CustomEmptyWidget(title: "NO Reminders Yet !...")
+                : CustomEmptyWidget(
+                    title: "No Medicines Found",
+                    subTitle: "You haven't added any medicines yet!...",
+                  );
           }
           return DisplayedListView(
             itemBuilder: (context, index) {
