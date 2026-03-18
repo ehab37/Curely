@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class DatabaseConstants {
   DatabaseConstants._();
 
@@ -15,8 +17,8 @@ class DatabaseConstants {
 
   static const String profile = "profile";
   static const String error = "error";
-  static const String serverClientId =
-      "1032297134307-d3mek0oinmva229aardj3s9n30t6kflq.apps.googleusercontent.com";
+  static final String serverClientId =
+      dotenv.get('GOOGLE_SERVER_CLIENT_ID', fallback: '');
 
   static const String imagesPath = "images";
   static const String profilePath = "profile";
