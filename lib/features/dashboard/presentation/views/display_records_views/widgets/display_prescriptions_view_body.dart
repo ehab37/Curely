@@ -1,7 +1,7 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_item.dart';
@@ -46,14 +46,12 @@ class _DisplayPrescriptionsViewBodyState
       builder: (context, state) {
         if (state is GetPrescriptionsSuccess) {
           if (state.prescriptions.isEmpty) {
-            return Center(
-              child: Text(
-                widget.isFavoriteView
-                    ? "NO Favorite Prescriptions added yet!..."
-                    : "NO Prescriptions added yet!...",
-                style: Styles.styleBlue25,
-              ),
-            );
+            return widget.isFavoriteView
+                ? CustomEmptyWidget(title: "NO Favorite Prescriptions Yet !...")
+                : CustomEmptyWidget(
+                    title: "No Prescriptions Found",
+                    subTitle: "You haven't added any prescriptions yet!...",
+                  );
           }
           return DisplayedListView(
             itemBuilder: (context, index) {

@@ -1,5 +1,5 @@
-import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/services/get_it.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_loading_indicator.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
@@ -18,7 +18,7 @@ import 'package:curely/features/home/presentation/cubits/search_cubit/search_cub
 import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/notes_view_body.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchResult extends StatelessWidget {
@@ -83,15 +83,9 @@ class SearchResult extends StatelessWidget {
         } else if (state is SearchLoading) {
           return CustomLoadingIndicator();
         }
-        return Row(
-          children: [
-            Icon(CupertinoIcons.exclamationmark_circle),
-            10.horizontalSpacing,
-            Text(
-              "Please, Select a category to search",
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
+        return CustomEmptyWidget(
+          title: "Please, Select a category to search",
+          icon: Icons.manage_search,
         );
       },
     );

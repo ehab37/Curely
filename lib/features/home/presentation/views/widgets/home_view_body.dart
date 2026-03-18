@@ -64,8 +64,8 @@ class HomeViewBody extends StatelessWidget {
                   },
                 ),
                 CardCircle(
-                  text: "Pill",
-                  icon: FontAwesomeIcons.pills,
+                  text: "Doctor Ai",
+                  icon: FontAwesomeIcons.userDoctor,
                   onPressed: () {},
                 ),
               ],

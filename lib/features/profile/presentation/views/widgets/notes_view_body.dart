@@ -1,6 +1,6 @@
 import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/records_dismissible_widget.dart';
@@ -42,14 +42,12 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       builder: (context, state) {
         if (state is GetNotesSuccess) {
           if (state.notes.isEmpty) {
-            return Center(
-              child: Text(
-                widget.isFavoriteView
-                    ? "NO Favorite Notes added yet!..."
-                    : "NO Notes added yet!...",
-                style: Styles.styleBlue25,
-              ),
-            );
+            return widget.isFavoriteView
+                ? CustomEmptyWidget(title: "NO Favorite Notes Yet !...")
+                : CustomEmptyWidget(
+                    title: "No Notes Found",
+                    subTitle: "You haven't added any notes yet!...",
+                  );
           }
           return NotesListView(
             notesList: state.notes,
