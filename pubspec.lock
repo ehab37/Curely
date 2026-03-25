@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "2.13.0"
   bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: bloc
       sha256: a48653a82055a900b88cd35f92429f068c5a8057ae9b136d197b3d56c57efb81
@@ -257,14 +257,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
-  equatable:
-    dependency: "direct main"
-    description:
-      name: equatable
-      sha256: "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.8"
   fake_async:
     dependency: transitive
     description:
@@ -491,6 +483,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_markdown_plus:
+    dependency: "direct main"
+    description:
+      name: flutter_markdown_plus
+      sha256: "039177906850278e8fb1cd364115ee0a46281135932fa8ecea8455522166d2de"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.7"
   flutter_native_splash:
     dependency: "direct dev"
     description:
@@ -541,6 +541,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.9.1"
+  gemini_ai:
+    dependency: "direct main"
+    description:
+      name: gemini_ai
+      sha256: "3a14f7b68750255fca099e207aa76bae0356179a03d8f26bf6a65b31f42c61be"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   geoclue:
     dependency: transitive
     description:
@@ -837,6 +845,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      sha256: ee85086ad7698b42522c6ad42fe195f1b9898e4d974a1af4576c1a3a176cada9
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.3.1"
   matcher:
     dependency: transitive
     description:
@@ -1371,5 +1387,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.8.1 <4.0.0"
+  dart: ">=3.9.0 <4.0.0"
   flutter: ">=3.32.0"

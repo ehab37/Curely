@@ -28,6 +28,7 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/dashboard/presentation/views/display_records_views/medicine_details_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/prescription_details_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/rays_details_view.dart';
+import 'package:curely/features/home/presentation/views/doctor_ai_view.dart';
 import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
 import 'package:curely/features/profile/presentation/views/notes_view.dart';
@@ -214,6 +215,10 @@ abstract class AppRouter {
           }
           return NotesView(isFavoriteView: isFavoriteView);
         },
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kDoctorAiView,
+        builder: (context, state) => DoctorAiView(),
       ),
     ],
   );

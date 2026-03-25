@@ -25,4 +25,5 @@ abstract class AppRoutesConstants {
   static const kAnalysisDetailsView = "/analysisDetailsView";
   static const kImageView = "/imageView";
   static const kNotesView = "/notesView";
+  static const kDoctorAiView = "/doctorAiView";
 }
