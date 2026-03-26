@@ -31,7 +31,6 @@ import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
 import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
-import 'package:gemini_ai/gemini_ai.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -46,7 +45,6 @@ void setupGetIt() {
   getIt.registerSingleton<NetworkManager>(NetworkManager());
   getIt.registerSingleton<LocationService>(LocationService());
   getIt.registerSingleton<GeminiChatService>(GeminiChatService());
-  getIt.registerSingleton<GeminiAi>(GeminiAi());
   getIt.registerSingleton<UserDataRepo>(
     UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
   );
@@ -114,7 +112,6 @@ void setupGetIt() {
       urlService: getIt<UrlService>(),
       locationService: getIt<LocationService>(),
       geminiChatService: getIt<GeminiChatService>(),
-      geminiAi: getIt<GeminiAi>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );

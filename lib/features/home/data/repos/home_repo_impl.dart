@@ -8,7 +8,6 @@ import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/home/domain/entities/chat_message.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:gemini_ai/gemini_ai.dart';
 import 'package:geolocator/geolocator.dart';
 
 class HomeRepoImpl implements HomeRepo {
@@ -16,14 +15,12 @@ class HomeRepoImpl implements HomeRepo {
     required this.urlService,
     required this.locationService,
     required this.geminiChatService,
-    required this.geminiAi,
     required this.networkManager,
   });
 
   final UrlService urlService;
   final LocationService locationService;
   final GeminiChatService geminiChatService;
-  final GeminiAi geminiAi;
   final NetworkManager networkManager;
 
   @override
@@ -65,7 +62,6 @@ class HomeRepoImpl implements HomeRepo {
         throw CustomException(message: "No Internet Connection");
       }
       final response = await geminiChatService.sendMessage(
-        geminiAi,
         prompt: prompt,
         messagesHistory: messagesHistory,
       );

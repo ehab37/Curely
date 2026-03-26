@@ -10,8 +10,9 @@ import 'package:gemini_ai/model/generative_model.dart';
 import 'package:gemini_ai/model/safety_setting.dart';
 
 class GeminiChatService {
-  Future<String?> sendMessage(
-    GeminiAi geminiAi, {
+  GeminiAi geminiAi = GeminiAi();
+
+  Future<String?> sendMessage({
     required String prompt,
     List<ChatMessage>? messagesHistory,
   }) {
