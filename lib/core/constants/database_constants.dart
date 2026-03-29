@@ -17,8 +17,10 @@ class DatabaseConstants {
 
   static const String profile = "profile";
   static const String error = "error";
-  static final String serverClientId =
-      dotenv.get('GOOGLE_SERVER_CLIENT_ID', fallback: '');
+  static final String serverClientId = dotenv.get(
+    'GOOGLE_SERVER_CLIENT_ID',
+    fallback: '',
+  );
 
   static const String imagesPath = "images";
   static const String profilePath = "profile";
@@ -27,4 +29,6 @@ class DatabaseConstants {
   static const String raysPath = "rays";
   static const String analysisPath = "analysis";
   static const String notesPath = "notes";
+
+  static final String geminiApiKey = dotenv.get("GEMINI_API_KEY");
 }

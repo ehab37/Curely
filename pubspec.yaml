@@ -88,7 +88,12 @@ dependencies:
   path: ^1.9.1
   # Time zone databases and time zone aware `DateTime`.
   timezone: ^0.10.1
-  flutter_dotenv: ^6.0.
+  # Easily configure any flutter application with global variables using a `.env` file.
+  flutter_dotenv: ^6.0.0
+  # Plugin for Google Gemini AI Library.
+  gemini_ai: ^1.0.1
+  # Create rich text output, including text styles, tables, links, and more, from plain text data formatted with simple Markdown tags.
+  flutter_markdown_plus: ^1.0.7
 
 dev_dependencies:
   # App Icon

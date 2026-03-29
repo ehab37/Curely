@@ -6,6 +6,7 @@ import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
+import 'package:curely/core/services/gemini_chat_service.dart';
 import 'package:curely/core/services/location_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/notification_service.dart';
@@ -43,6 +44,7 @@ void setupGetIt() {
   getIt.registerSingleton<StorageServices>(FireStorage());
   getIt.registerSingleton<NetworkManager>(NetworkManager());
   getIt.registerSingleton<LocationService>(LocationService());
+  getIt.registerSingleton<GeminiChatService>(GeminiChatService());
   getIt.registerSingleton<UserDataRepo>(
     UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
   );
@@ -109,6 +111,7 @@ void setupGetIt() {
     HomeRepoImpl(
       urlService: getIt<UrlService>(),
       locationService: getIt<LocationService>(),
+      geminiChatService: getIt<GeminiChatService>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
