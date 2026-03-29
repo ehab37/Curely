@@ -1,4 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/features/auth/presentation/views/widgets/terms_and_conditions_body.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +10,14 @@ class TermsAndConditionsView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(S.of(context).termsAndConditions),
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.background,
+        title: Text(
+          S.of(context).termsAndConditions,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
       ),
       body: TermsAndConditionsBody(),
     );

@@ -1,3 +1,5 @@
+import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
+import 'package:curely/core/theme/app_themes.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/services/notification_service.dart';
 import 'package:curely/core/utils/app_router.dart';
@@ -33,8 +35,11 @@ void main() async {
   setupGetIt();
   Bloc.observer = MyBlocObserver();
   runApp(
-    BlocProvider(
-      create: (context) => getIt<LanguageCubit>(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<LanguageCubit>()),
+        BlocProvider(create: (context) => getIt<ThemeCubit>()),
+      ],
       child: const Curely(),
     ),
   );
@@ -46,36 +51,33 @@ class Curely extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GoTransition.defaultCurve = Curves.easeInOut;
-    GoTransition.defaultDuration = Duration(milliseconds: 400);
-    return BlocBuilder<LanguageCubit, Locale>(
-      builder: (context, locale) {
-        final TextDirection textDirection =
-            locale.languageCode == AppTextConstants.kArabic
-            ? TextDirection.rtl
-            : TextDirection.ltr;
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData().copyWith(
-            textTheme: Theme.of(context).textTheme.apply(fontSizeFactor: 1),
-            pageTransitionsTheme: PageTransitionsTheme(
-              builders: {
-                TargetPlatform.android: GoTransitions.fade,
-                TargetPlatform.iOS: GoTransitions.cupertino,
-                TargetPlatform.macOS: GoTransitions.cupertino,
-              },
-            ),
-          ),
-          locale: locale,
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          routerConfig: AppRouter.router,
-          builder: (context, child) =>
-              Directionality(textDirection: textDirection, child: child!),
+    GoTransition.defaultDuration = const Duration(milliseconds: 400);
+    return BlocBuilder<ThemeCubit, ThemeMode>(
+      builder: (context, themeMode) {
+        return BlocBuilder<LanguageCubit, Locale>(
+          builder: (context, locale) {
+            final TextDirection textDirection =
+                locale.languageCode == AppTextConstants.kArabic
+                ? TextDirection.rtl
+                : TextDirection.ltr;
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              theme: AppThemes.lightTheme,
+              darkTheme: AppThemes.darkTheme,
+              themeMode: themeMode,
+              locale: locale,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              routerConfig: AppRouter.router,
+              builder: (context, child) =>
+                  Directionality(textDirection: textDirection, child: child!),
+            );
+          },
         );
       },
     );

@@ -22,11 +22,15 @@ class RegisterView extends StatelessWidget {
             return BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSuccess) {
+                  InfoBox.successFloatingBox(
+                    context,
+                    "Registered Successfully",
+                  );
                   GoRouter.of(
                     context,
                   ).pushReplacement(AppRoutesConstants.kMainView);
                 } else if (state is RegisterFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
+                  InfoBox.errorFloatingBox(context, state.errMessage);
                 }
               },
               builder: (context, state) {

@@ -1,3 +1,4 @@
+import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -37,6 +38,7 @@ final getIt = GetIt.instance;
 
 void setupGetIt() {
   getIt.registerSingleton<LanguageCubit>(LanguageCubit());
+  getIt.registerSingleton<ThemeCubit>(ThemeCubit());
   getIt.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
   getIt.registerSingleton<DatabaseService>(FirestoreServices());
   getIt.registerSingleton<UrlService>(UrlService());
