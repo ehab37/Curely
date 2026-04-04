@@ -11,4 +11,8 @@ abstract class AssetsConstants {
   static const kUK = 'assets/images/united_kingdom.png';
   static const kCheck = 'assets/images/Check.svg';
   static const kGoogleLogo = 'assets/images/google_logo.png';
+  static const kAddFile = 'assets/images/add_file_ill.svg';
+  static const kNotify = 'assets/images/notify_ill.svg';
+  static const kLogout = 'assets/images/logout.svg';
+  static const kSettings = 'assets/images/settings.svg';
 }

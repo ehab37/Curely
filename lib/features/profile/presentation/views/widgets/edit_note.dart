@@ -1,15 +1,12 @@
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/core/helpers/show_alert_dialog.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
-import 'package:curely/core/validators/app_validators.dart';
-import 'package:curely/core/widgets/custom_alert_dialog.dart';
-import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'delete_note_icon.dart';
+import 'description_field.dart';
+import 'title_field.dart';
 
 class EditNote extends StatefulWidget {
   const EditNote({super.key, required this.note});
@@ -61,24 +58,24 @@ class _EditNoteState extends State<EditNote> {
                 children: [
                   Text(
                     isEditable ? 'Edit Health Note' : 'My Health Note',
-                    style: Styles.styleBlue20,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Spacer(),
                   IconButton(
-                    icon: Icon(
-                      isEditable ? Icons.save : Icons.edit,
-                      color: AppColors.primary,
-                    ),
+                    icon: Icon(isEditable ? Icons.save : Icons.edit),
                     onPressed: () {
                       if (isEditable) {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                          final updatedNote = widget.note
-                            ..description = descriptionController.text;
-                          context.read<ManageNotesCubit>().updateNote(
-                            note: updatedNote,
-                          );
-                          GoRouter.of(context).pop();
+                          if (widget.note.description !=
+                              descriptionController.text) {
+                            final updatedNote = widget.note
+                              ..description = descriptionController.text;
+                            context.read<ManageNotesCubit>().updateNote(
+                              note: updatedNote,
+                            );
+                            GoRouter.of(context).pop();
+                          }
                         }
                       }
                       setState(() {
@@ -86,41 +83,15 @@ class _EditNoteState extends State<EditNote> {
                       });
                     },
                   ),
-                  IconButton(
-                    icon: Icon(Icons.delete_outlined, color: AppColors.primary),
-                    onPressed: () {
-                      showAlertDialog(
-                        context: context,
-                        content: CustomAlertDialog(
-                          dialogContext: context,
-                          title: 'Delete Note?',
-                          content: 'Are you sure you want to delete this Note?',
-                          onDone: () {
-                            context.read<ManageNotesCubit>().deleteNote(
-                              docId: widget.note.docId!,
-                            );
-                            GoRouter.of(context).pop();
-                            GoRouter.of(context).pop();
-                          },
-                        ),
-                      );
-                    },
-                  ),
+                  DeleteNoteIcon(note: widget.note),
                 ],
               ),
               20.verticalSpacing,
-              CustomTextFormField(
-                controller: titleController,
-                label: 'Title',
-                enabled: false,
-              ),
+              TitleField(titleController: titleController),
               8.verticalSpacing,
-              CustomTextFormField(
-                controller: descriptionController,
-                label: 'Description',
-                validator: (value) => AppValidators.validateRequired(value),
-                enabled: isEditable,
-                maxLines: 8,
+              DescriptionField(
+                descriptionController: descriptionController,
+                isEditable: isEditable,
               ),
               20.verticalSpacing,
             ],

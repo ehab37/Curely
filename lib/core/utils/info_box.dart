@@ -1,6 +1,5 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class InfoBox {
@@ -18,23 +17,23 @@ abstract class InfoBox {
   }) {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.background,
-        shape: Border(top: BorderSide(color: AppColors.borderMedium, width: 2)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        shape: Border(
+          top: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+            width: 2,
+          ),
+        ),
         content: content,
       ),
     );
   }
 
-  static void customFloatingBox(BuildContext context, String message) {
-    return CherryToast(
+  static void infoFloatingBox(BuildContext context, String message) {
+    return CherryToast.info(
       inheritThemeColors: true,
-      iconWidget: Icon(Icons.car_repair),
       description: Text(message),
-      themeColor: AppColors.success,
-      // toastPosition: Position.bottom,
-      // action: Text('Press here', style: TextStyle(color: AppColors.success)),
-      // animationDuration: const Duration(milliseconds: 1000),
-      // autoDismiss: true,
+      displayCloseButton: false,
     ).show(context);
   }
 

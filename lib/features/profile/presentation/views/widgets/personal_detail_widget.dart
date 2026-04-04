@@ -39,7 +39,7 @@ class PersonalDetailWidget extends StatelessWidget {
                 ),
                 Text(
                   subTitle,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),

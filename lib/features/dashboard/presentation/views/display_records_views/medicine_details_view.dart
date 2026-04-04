@@ -49,7 +49,7 @@ class MedicineDetailsView extends StatelessWidget {
                     context.read<ManageMedicinesCubit>().deleteMedicines(
                       medicine: medicine,
                     );
-                    InfoBox.customSnackBar(
+                    InfoBox.successFloatingBox(
                       context,
                       '${medicine.medicineName} medicine deleted.',
                     );
@@ -64,7 +64,7 @@ class MedicineDetailsView extends StatelessWidget {
       body: BlocConsumer<ManageMedicinesCubit, ManageMedicinesState>(
         listener: (context, state) {
           if (state is GetMedicinesFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteMedicinesSuccess) {
             GoRouter.of(context).pop();
           }

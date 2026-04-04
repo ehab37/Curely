@@ -1,5 +1,4 @@
 import 'package:curely/core/helpers/show_alert_dialog.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_alert_dialog.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
@@ -28,7 +27,7 @@ class MedicineReminderIcon extends StatelessWidget {
                   context.read<ManageMedicinesCubit>().updateMedicines(
                     medicine: medicineItem..isReminderActive = false,
                   );
-                  InfoBox.customSnackBar(
+                  InfoBox.successFloatingBox(
                     context,
                     'Reminder for ${medicineItem.medicineName} stopped.',
                   );
@@ -43,8 +42,8 @@ class MedicineReminderIcon extends StatelessWidget {
           Icons.access_alarms_outlined,
           size: 25,
           color: medicineItem.isReminderActive
-              ? AppColors.primary
-              : AppColors.unActive,
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).colorScheme.surfaceContainerHigh,
         ),
       ),
     );

@@ -1,5 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -24,18 +22,18 @@ class CustomSquareNavBar extends StatelessWidget {
           alignment: AlignmentDirectional.center,
           height: MediaQuery.of(context).size.height / 4.2,
           decoration: BoxDecoration(
-            color: AppColors.lightGray,
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             shape: BoxShape.rectangle,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add, color: AppColors.primary, size: 28),
+              Icon(Icons.add, size: 28),
               6.verticalSpacing,
               Text(
                 text,
-                style: Styles.style16,
+                style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
               12.verticalSpacing,

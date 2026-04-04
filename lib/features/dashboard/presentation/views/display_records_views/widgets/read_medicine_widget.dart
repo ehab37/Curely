@@ -1,6 +1,5 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +19,7 @@ class ReadMedicineWidget extends StatelessWidget {
         children: [
           Center(
             child: medicine.imageUrl == null
-                ? Icon(
-                    FontAwesomeIcons.pills,
-                    size: 100,
-                    color: AppColors.primary,
-                  )
+                ? Icon(FontAwesomeIcons.pills, size: 100)
                 : GestureDetector(
                     onTap: () {
                       GoRouter.of(context).push(

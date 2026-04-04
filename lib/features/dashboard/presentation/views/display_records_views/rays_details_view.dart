@@ -64,9 +64,9 @@ class RaysDetailsView extends StatelessWidget {
       body: BlocConsumer<ManageRaysCubit, ManageRaysState>(
         listener: (context, state) {
           if (state is GetRaysFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteRaysSuccess) {
-            InfoBox.customSnackBar(context, 'Rays deleted.');
+            InfoBox.successFloatingBox(context, 'Rays deleted.');
             GoRouter.of(context).pop();
           }
         },

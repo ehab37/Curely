@@ -1,7 +1,5 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
@@ -33,9 +31,8 @@ class DisplayedMedicineItem extends StatelessWidget {
           borderRadius: BorderRadiusGeometry.circular(
             SpacingConstants.borderRadius,
           ),
-          side: BorderSide(color: AppColors.borderMedium),
+          side: BorderSide(color: Theme.of(context).primaryColor),
         ),
-        color: AppColors.background,
         elevation: 8,
         child: Column(
           children: [
@@ -55,18 +52,23 @@ class DisplayedMedicineItem extends StatelessWidget {
               ],
             ),
             medicineItem.imageUrl == null
-                ? Icon(
-                    FontAwesomeIcons.pills,
-                    size: 50,
-                    color: AppColors.primary,
-                  )
+                ? Icon(FontAwesomeIcons.pills, size: 50)
                 : CustomCachedImage(height: 60, url: medicineItem.imageUrl!),
             Spacer(),
-            Text(medicineItem.medicineName, style: Styles.styleBlue20),
+            Text(
+              medicineItem.medicineName,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             4.verticalSpacing,
-            Text(medicineItem.medicineTypes, style: Styles.style16),
+            Text(
+              medicineItem.medicineTypes,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
             4.verticalSpacing,
-            Text(medicineItem.medicineUsage, style: Styles.style16),
+            Text(
+              medicineItem.medicineUsage,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
             12.verticalSpacing,
           ],
         ),

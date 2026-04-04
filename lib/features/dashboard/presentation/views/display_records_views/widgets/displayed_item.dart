@@ -1,6 +1,4 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +29,8 @@ class DisplayedItem extends StatelessWidget {
         borderRadius: BorderRadiusGeometry.circular(
           SpacingConstants.borderRadius,
         ),
-        side: BorderSide(color: AppColors.borderMedium),
+        side: BorderSide(color: Theme.of(context).primaryColor),
       ),
-      color: AppColors.background,
       elevation: 8,
       child: Column(
         children: [
@@ -51,13 +48,13 @@ class DisplayedItem extends StatelessWidget {
                   child: CustomCachedImage(height: 80, url: imageUrl!),
                 ),
           Spacer(),
-          Text(text1, style: Styles.styleBlue20),
+          Text(text1, style: Theme.of(context).textTheme.titleSmall),
           4.verticalSpacing,
-          Text(text2, style: Styles.style16),
+          Text(text2, style: Theme.of(context).textTheme.bodyMedium),
           4.verticalSpacing,
           Text(
             DateFormat("dd/MM/yyyy").format(DateTime.parse(text3)).toString(),
-            style: Styles.style16,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           12.verticalSpacing,
         ],

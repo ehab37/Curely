@@ -1,5 +1,3 @@
-import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,24 +18,29 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
-      ),
       title: Text(title),
       content: Text(content),
       actions: <Widget>[
         TextButton(
-          child: Text('No', style: TextStyle(color: AppColors.textPrimary)),
+          child: Text(
+            'No',
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+          ),
           onPressed: () {
             GoRouter.of(dialogContext).pop(false);
           },
         ),
         TextButton(
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(AppColors.textPrimary),
+            backgroundColor: WidgetStatePropertyAll(
+              Theme.of(context).colorScheme.primary,
+            ),
           ),
           onPressed: onDone,
-          child: Text('Yes', style: TextStyle(color: AppColors.textSecondary)),
+          child: Text(
+            'Yes',
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          ),
         ),
       ],
     );

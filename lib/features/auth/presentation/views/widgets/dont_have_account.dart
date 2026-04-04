@@ -1,5 +1,4 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +25,7 @@ class DontHaveAccount extends StatelessWidget {
                 ).pushReplacement(AppRoutesConstants.kRegisterView);
               },
             text: S.of(context).register,
-            style: Styles.styleUnderline16.copyWith(
-              color: Theme.of(context).primaryColor,
-            ),
+            style: Theme.of(context).textTheme.displaySmall,
           ),
         ],
       ),

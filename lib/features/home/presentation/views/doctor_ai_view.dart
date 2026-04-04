@@ -13,7 +13,10 @@ class DoctorAiView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => DoctorAiCubit(homeRepo: getIt<HomeRepo>()),
-      child: Scaffold(appBar: buildDoctorAiAppBar(), body: DoctorAiViewBody()),
+      child: Scaffold(
+        appBar: buildDoctorAiAppBar(context),
+        body: DoctorAiViewBody(),
+      ),
     );
   }
 }

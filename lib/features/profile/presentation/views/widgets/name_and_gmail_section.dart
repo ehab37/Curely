@@ -1,6 +1,4 @@
 import 'package:curely/core/entities/user_entity.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:flutter/material.dart';
@@ -34,13 +32,10 @@ class NameAndGmailSection extends StatelessWidget {
           ),
         ],
       ),
-      title: Text(
-        user.name,
-        style: Styles.style28.copyWith(color: AppColors.background),
-      ),
+      title: Text(user.name, style: Theme.of(context).textTheme.headlineMedium),
       subtitle: Text(
         user.email,
-        style: Styles.style18,
+        style: Theme.of(context).textTheme.displayLarge,
         overflow: TextOverflow.ellipsis,
       ),
     );

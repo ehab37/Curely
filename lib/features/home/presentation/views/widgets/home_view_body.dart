@@ -1,7 +1,6 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/helpers/extensions.dart';
@@ -50,7 +49,7 @@ class HomeViewBody extends StatelessWidget {
                   onPressed: () async {
                     var result = await homeRepo.nearestPharmacy();
                     result.fold(
-                      (l) => InfoBox.customSnackBar(context, l.errMessage),
+                      (l) => InfoBox.errorFloatingBox(context, l.errMessage),
                       (r) => null,
                     );
                   },
@@ -73,7 +72,10 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
             16.verticalSpacing,
-            Text(" Add Records", style: Styles.styleBlue25),
+            Text(
+              " Add Records",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             CustomNavBar(
               text: "Add Medicine",
               prefixIcon: FontAwesomeIcons.pills,

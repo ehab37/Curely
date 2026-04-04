@@ -2,11 +2,11 @@ import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
+import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'displayed_medicine_item.dart';
 import 'medicine_dismissible_widget.dart';
 
@@ -74,11 +74,11 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
           );
         } else {
           if (state is DeleteMedicinesFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteMedicinesSuccess) {
-            InfoBox.customSnackBar(context, "Item deleted successfully.");
+            InfoBox.successFloatingBox(context, "Item deleted successfully.");
           }
-          return Skeletonizer(
+          return CustomSkeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedMedicineItem(
