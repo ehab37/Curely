@@ -3,11 +3,11 @@ import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
+import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_rays_cubit/manage_rays_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'displayed_item.dart';
 import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
@@ -57,7 +57,7 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
                   context.read<ManageRaysCubit>().deleteRays(
                     docId: state.rays[index].docId!,
                   );
-                  InfoBox.customSnackBar(context, 'Rays deleted.');
+                  InfoBox.successFloatingBox(context, 'Rays deleted.');
                 },
                 content: GestureDetector(
                   onTap: () {
@@ -94,11 +94,11 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
           );
         } else {
           if (state is DeleteRaysFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteRaysSuccess) {
-            InfoBox.customSnackBar(context, "Item deleted successfully.");
+            InfoBox.successFloatingBox(context, "Item deleted successfully.");
           }
-          return Skeletonizer(
+          return CustomSkeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedItem(

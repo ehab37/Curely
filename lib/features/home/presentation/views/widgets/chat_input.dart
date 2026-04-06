@@ -1,4 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ChatInput extends StatelessWidget {
@@ -12,10 +11,12 @@ class ChatInput extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: AppColors.lightGray,
+            color: Theme.of(
+              context,
+            ).colorScheme.surfaceContainerHigh.withAlpha(50),
             blurRadius: 4,
             offset: const Offset(0, -2),
           ),
@@ -33,7 +34,9 @@ class ChatInput extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: AppColors.gray100,
+                fillColor: Theme.of(
+                  context,
+                ).colorScheme.surfaceContainerHighest.withAlpha(100),
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 10,
@@ -44,7 +47,7 @@ class ChatInput extends StatelessWidget {
           SizedBox(width: 8),
           IconButton(
             onPressed: () => onSend(controller.text),
-            icon: Icon(Icons.send, color: AppColors.primary),
+            icon: Icon(Icons.send),
           ),
         ],
       ),

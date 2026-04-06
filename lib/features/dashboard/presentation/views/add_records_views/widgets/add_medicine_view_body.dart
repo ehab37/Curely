@@ -2,13 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helpers/get_default_reminders_list.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
-import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_dropdown_search.dart';
-import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
@@ -17,6 +12,11 @@ import 'package:curely/features/dashboard/presentation/views/add_records_views/w
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:curely/core/services/notification_service.dart';
+import 'frequency_field.dart';
+import 'medicine_name_field.dart';
+import 'medicine_notes_field.dart';
+import 'medicine_type_field.dart';
+import 'medicine_usage_field.dart';
 
 class AddMedicineViewBody extends StatefulWidget {
   const AddMedicineViewBody({super.key});
@@ -52,56 +52,32 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          CustomTextFormField(
-            controller: medicineNameController,
-            label: "Medicine Name",
-            hint: "Enter Medicine Name",
-            keyboard: TextInputType.name,
-            validator: (value) => AppValidators.validateName(value),
-          ),
-          CustomTextFormField(
-            controller: medicineNotesController,
-            label: "Medicine Notes",
-            hint: "Please, Enter any missing information about the medicine.",
-            maxLines: 3,
-          ),
+          MedicineNameField(medicineNameController: medicineNameController),
+          MedicineNotesField(medicineNotesController: medicineNotesController),
           8.verticalSpacing,
-          CustomDropdownSearch(
-            hint: 'How Often?',
-            label: "Frequency",
-            showSearchBox: false,
-            list: frequencyList,
+          FrequencyField(
             onChanged: (value) {
               setState(() {
                 addMedicineCubit.remindersList = getDefaultRemindersList(value);
                 frequency = value;
               });
             },
-            validator: (value) => AppValidators.validateRequired(value),
           ),
           16.verticalSpacing,
-          CustomDropdownSearch(
-            label: "Medicine Usage",
-            hint: "Enter Medicine Usage",
-            list: medicineUsagesList,
+          MedicineUsageField(
             onChanged: (value) {
               setState(() {
                 medicineUsage = value;
               });
             },
-            validator: (value) => AppValidators.validateRequired(value),
           ),
           16.verticalSpacing,
-          CustomDropdownSearch(
-            label: 'Medicine Type',
-            hint: 'Enter Medicine Type',
-            list: medicineTypesList,
+          MedicineTypeField(
             onChanged: (value) {
               setState(() {
                 medicineTypes = value;
               });
             },
-            validator: (value) => AppValidators.validateRequired(value),
           ),
           16.verticalSpacing,
           ReminderToggleSwitch(
@@ -109,7 +85,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             onChangedToggle: (newVal) async {
               setState(() {
                 if (frequency == null) {
-                  InfoBox.customSnackBar(
+                  InfoBox.infoFloatingBox(
                     context,
                     "Please, Choose the frequency first.",
                   );
@@ -153,8 +129,11 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 });
               }
             },
-            backgroundColor: AppColors.buttonAccent,
-            child: Text("Add Medicine", style: Styles.styleWhite20),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: Text(
+              "Add Medicine",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           SizedBox(height: SpacingConstants.bottomPadding),
         ],

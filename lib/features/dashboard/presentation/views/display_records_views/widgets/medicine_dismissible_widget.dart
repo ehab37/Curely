@@ -49,7 +49,7 @@ class MedicineDismissibleWidget extends StatelessWidget {
         context.read<ManageMedicinesCubit>().deleteMedicines(
           medicine: medicine,
         );
-        InfoBox.customSnackBar(
+        InfoBox.successFloatingBox(
           context,
           '${medicine.medicineName} medicine deleted.',
         );

@@ -24,7 +24,9 @@ class CustomCheckBox extends StatelessWidget {
         height: 22,
         duration: Duration(milliseconds: 400),
         decoration: ShapeDecoration(
-          color: isChecked ? AppColors.primary : AppColors.background,
+          color: isChecked
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
             side: BorderSide(
               width: 1.50,
@@ -36,7 +38,13 @@ class CustomCheckBox extends StatelessWidget {
         child: isChecked
             ? Padding(
                 padding: const EdgeInsets.all(2),
-                child: SvgPicture.asset(AssetsConstants.kCheck),
+                child: SvgPicture.asset(
+                  AssetsConstants.kCheck,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.onPrimary,
+                    BlendMode.srcIn,
+                  ),
+                ),
               )
             : const SizedBox(),
       ),

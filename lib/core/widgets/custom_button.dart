@@ -18,17 +18,12 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         side: WidgetStatePropertyAll(
-          BorderSide(
-            color: backgroundColor,
-            width: 2,
-          ),
+          BorderSide(color: backgroundColor, width: 2),
         ),
         fixedSize: WidgetStatePropertyAll(Size(double.maxFinite, 50)),
         backgroundColor: WidgetStatePropertyAll(backgroundColor),
         shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         ),
       ),
       child: child,

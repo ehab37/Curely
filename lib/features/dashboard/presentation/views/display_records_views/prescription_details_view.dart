@@ -65,9 +65,9 @@ class PrescriptionDetailsView extends StatelessWidget {
       body: BlocConsumer<ManagePrescriptionsCubit, ManagePrescriptionsState>(
         listener: (context, state) {
           if (state is GetPrescriptionsFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeletePrescriptionsSuccess) {
-            InfoBox.customSnackBar(context, 'Prescription deleted.');
+            InfoBox.successFloatingBox(context, 'Prescription deleted.');
             GoRouter.of(context).pop();
           }
         },

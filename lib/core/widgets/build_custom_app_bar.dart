@@ -1,5 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'custom_back_bar.dart';
 
@@ -11,15 +9,12 @@ AppBar buildCustomAppBar({
 }) {
   return AppBar(
     leading: isBackable ? CustomBackBar() : null,
-    title: Text(title, style: Styles.styleBlue25),
+    title: Text(title),
     actions: [
       ?icon != null
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: GestureDetector(
-                onTap: onTap,
-                child: Icon(icon, color: AppColors.primary),
-              ),
+              child: GestureDetector(onTap: onTap, child: Icon(icon)),
             )
           : null,
     ],

@@ -1,6 +1,4 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/views/widgets/icon_box.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +19,9 @@ class PersonalDetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: EdgeInsetsDirectional.all(12),
+        padding: const EdgeInsetsDirectional.all(12),
         decoration: BoxDecoration(
-          color: AppColors.skyBlue.withAlpha(100),
+          color: Theme.of(context).colorScheme.onPrimary.withAlpha(50),
           borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
         ),
         child: Row(
@@ -35,11 +33,15 @@ class PersonalDetailWidget extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Styles.style18.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   subTitle,
-                  style: Styles.style15.copyWith(color: AppColors.background),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
                 ),
               ],
             ),

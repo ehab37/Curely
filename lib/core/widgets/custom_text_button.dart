@@ -1,4 +1,3 @@
-import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -17,11 +16,7 @@ class CustomTextButton extends StatelessWidget {
       alignment: AlignmentDirectional.centerStart,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: Styles.style28,
-          textAlign: TextAlign.start,
-        ),
+        child: Text(text, style: Theme.of(context).textTheme.titleMedium),
       ),
     );
   }

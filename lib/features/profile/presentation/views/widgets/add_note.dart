@@ -1,6 +1,4 @@
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
@@ -47,7 +45,7 @@ class _AddNoteState extends State<AddNote> {
             mainAxisSize: MainAxisSize.min,
             children: [
               16.verticalSpacing,
-              Text('Add Note', style: Styles.styleBlue20),
+              Text('Add Note', style: Theme.of(context).textTheme.titleSmall),
               20.verticalSpacing,
               CustomTextFormField(
                 controller: titleController,
@@ -67,8 +65,11 @@ class _AddNoteState extends State<AddNote> {
               ),
               20.verticalSpacing,
               CustomButton(
-                backgroundColor: AppColors.buttonAccent,
-                child: Text('Save', style: Styles.styleWhite20),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Text(
+                  'Save',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();

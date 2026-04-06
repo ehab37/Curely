@@ -1,12 +1,9 @@
 import 'dart:io';
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
-import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
@@ -14,7 +11,10 @@ import 'package:curely/features/dashboard/presentation/cubits/add_prescription_c
 import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'diagnosis_field.dart';
+import 'doctor_name_field.dart';
 import 'examination_date_box.dart';
+import 'hospital_field.dart';
 
 class AddPrescriptionViewBody extends StatefulWidget {
   const AddPrescriptionViewBody({super.key});
@@ -50,23 +50,9 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          CustomTextFormField(
-            controller: doctorNameController,
-            label: "Doctor Name",
-            hint: "Enter Doctor Name",
-            keyboard: TextInputType.name,
-            validator: (value) => AppValidators.validateName(value),
-          ),
-          CustomTextFormField(
-            controller: hospitalController,
-            label: "Hospital or Clinic",
-            hint: "Enter the place of examination",
-          ),
-          CustomTextFormField(
-            controller: diagnosisController,
-            label: "Diagnosis",
-            maxLines: 3,
-          ),
+          DoctorNameField(doctorNameController: doctorNameController),
+          HospitalField(hospitalController: hospitalController),
+          DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
             hint: 'Doctor Specialization',
@@ -103,7 +89,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 if (images.isEmpty) {
-                  InfoBox.customSnackBar(context, "Please select an image");
+                  InfoBox.infoFloatingBox(context, "Please select an image");
                   return;
                 }
                 PrescriptionEntity prescription = PrescriptionEntity(
@@ -125,8 +111,11 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                 });
               }
             },
-            backgroundColor: AppColors.buttonAccent,
-            child: Text("Add Prescription", style: Styles.styleWhite20),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: Text(
+              "Add Prescription",
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           SizedBox(height: SpacingConstants.bottomPadding),
         ],

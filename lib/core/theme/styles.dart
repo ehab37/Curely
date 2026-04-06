@@ -10,11 +10,6 @@ abstract class Styles {
     letterSpacing: 1.5,
     height: .8,
   );
-  static const TextStyle style33 = TextStyle(
-    color: AppColors.textPrimary,
-    fontSize: 33,
-    fontWeight: FontWeightHelper.bold,
-  );
   static const TextStyle style28 = TextStyle(
     color: AppColors.textPrimary,
     fontSize: 28,

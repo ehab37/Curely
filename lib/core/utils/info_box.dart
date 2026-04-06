@@ -1,6 +1,5 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 abstract class InfoBox {
@@ -18,108 +17,55 @@ abstract class InfoBox {
   }) {
     return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: AppColors.background,
-        shape: Border(top: BorderSide(color: AppColors.borderMedium, width: 2)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        shape: Border(
+          top: BorderSide(
+            color: Theme.of(context).colorScheme.primary,
+            width: 2,
+          ),
+        ),
         content: content,
       ),
     );
   }
 
-  static void successFloatingBox(BuildContext context) {
+  static void infoFloatingBox(BuildContext context, String message) {
+    return CherryToast.info(
+      inheritThemeColors: true,
+      description: Text(message),
+      displayCloseButton: false,
+    ).show(context);
+  }
+
+  static void successFloatingBox(BuildContext context, String message) {
     return CherryToast.success(
       inheritThemeColors: true,
-      title: const Text('Logout Successful'),
-      borderRadius: 0,
+      title: Text(message),
+      displayCloseButton: false,
     ).show(context);
   }
 
-  static void customFloatingBox(BuildContext context) {
-    return CherryToast(
-      inheritThemeColors: true,
-      iconWidget: Icon(Icons.car_repair),
-      description: const Text('This is a description message'),
-      themeColor: AppColors.success,
-      toastPosition: Position.bottom,
-      textDirection: TextDirection.rtl,
-      animationType: AnimationType.fromRight,
-      action: Text('انقر هنا', style: TextStyle(color: AppColors.success)),
-      animationDuration: const Duration(milliseconds: 1000),
-      autoDismiss: true,
-    ).show(context);
-  }
-
-  static void errorFloatingBox(BuildContext context) {
+  static void errorFloatingBox(BuildContext context, String message) {
     return CherryToast.error(
-      enableIconAnimation: false,
       inheritThemeColors: true,
-      description: const Text('Invalid account information'),
-      animationType: AnimationType.fromRight,
-      animationDuration: const Duration(milliseconds: 1000),
-      autoDismiss: true,
+      description: Text(message),
+      displayCloseButton: false,
+      toastPosition: Position.bottom,
     ).show(context);
   }
 
-  static void warningFloatingBox(BuildContext context) {
+  static void warningFloatingBox(
+    BuildContext context, {
+    required String message,
+    String? actionMessage,
+    Function? action,
+  }) {
     return CherryToast.warning(
       inheritThemeColors: true,
-      description: const Text(
-        'All information may be deleted after this action',
-      ),
-      animationType: AnimationType.fromTop,
-      action: const Text('Backup data'),
-      actionHandler: () {},
+      description: Text(message, style: Theme.of(context).textTheme.bodySmall),
+      displayCloseButton: false,
+      action: actionMessage == null ? null : Text(actionMessage),
+      actionHandler: action,
     ).show(context);
-  }
-
-  static void infoFloatingBox(BuildContext context) {
-    return CherryToast.info(
-      disableToastAnimation: true,
-      title: const Text(
-        'Cherry toast title',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      action: const Text('Toast content description'),
-      inheritThemeColors: true,
-      displayIcon: false,
-      autoDismiss: false,
-      toastPosition: Position.top,
-      actionHandler: () {},
-      onToastClosed: () {},
-      horizontalAlignment: CrossAxisAlignment.start,
-      textDirection: TextDirection.rtl,
-    ).show(context);
-  }
-
-  static void showTopSnackBar(BuildContext context, String message) {
-    OverlayState? overlayState = Overlay.of(context);
-    OverlayEntry overlayEntry;
-
-    overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: MediaQuery.of(context).padding.top + 10,
-        left: 20,
-        right: 20,
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Color(0xFFCAE8FF),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black26)],
-            ),
-            child: Text(
-              message,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    overlayState.insert(overlayEntry);
-    // Remove it after 2 seconds
-    Future.delayed(Duration(seconds: 2), () => overlayEntry.remove());
   }
 }

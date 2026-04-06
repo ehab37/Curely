@@ -1,5 +1,4 @@
 import 'package:curely/core/helpers/pick_time.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'custom_icon_button_row.dart';
@@ -21,7 +20,7 @@ class _AllRemindersWidgetsState extends State<AllRemindersWidgets> {
       children: [
         const Divider(),
         4.verticalSpacing,
-        Text('Reminder Time', style: Styles.style16),
+        Text('Reminder Time', style: Theme.of(context).textTheme.bodyMedium),
         CustomIconButtonRow(
           text1: widget.remindersList.length == 1
               ? 'Reminder Time: '

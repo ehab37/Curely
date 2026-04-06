@@ -1,8 +1,8 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({super.key, required this.error, this.onTryAgain});
@@ -16,7 +16,11 @@ class CustomErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 80),
+          SvgPicture.asset(
+            AssetsConstants.kNotify,
+            fit: BoxFit.scaleDown,
+            height: 160,
+          ),
           16.verticalSpacing,
           Text(
             error,
@@ -28,9 +32,12 @@ class CustomErrorWidget extends StatelessWidget {
             SizedBox(
               width: 200, // Limit button width
               child: CustomButton(
-                backgroundColor: AppColors.primary,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 onPressed: onTryAgain!,
-                child: Text("Please try again.", style: Styles.style18),
+                child: Text(
+                  "Please try again",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
             ),
         ],

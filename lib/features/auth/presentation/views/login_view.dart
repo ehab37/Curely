@@ -23,11 +23,12 @@ class LoginView extends StatelessWidget {
             return BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {
+                  InfoBox.successFloatingBox(context, "Logged in Successfully");
                   GoRouter.of(
                     context,
                   ).pushReplacement(AppRoutesConstants.kMainView);
                 } else if (state is LoginFailure) {
-                  InfoBox.customSnackBar(context, state.errMessage);
+                  InfoBox.errorFloatingBox(context, state.errMessage);
                 }
               },
               builder: (context, state) {

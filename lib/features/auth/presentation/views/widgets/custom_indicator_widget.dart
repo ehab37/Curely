@@ -6,14 +6,14 @@ class CustomIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       height: 40,
       width: 40,
       child: Padding(
         padding: EdgeInsets.all(6.0),
         child: CircularProgressIndicator(
           strokeWidth: 3.5,
-          color: AppColors.primary,
+          color: Theme.of(context).primaryColor,
           backgroundColor: AppColors.transparent,
         ),
       ),

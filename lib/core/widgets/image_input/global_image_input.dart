@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'image_input.dart';
 
@@ -40,9 +38,9 @@ class _GlobalImageInputState extends State<GlobalImageInput> {
             : MediaQuery.of(context).size.width / 1.5,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: Theme.of(context).colorScheme.onPrimary,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.borderMedium),
+          border: Border.all(color: Theme.of(context).colorScheme.primary),
         ),
         child: imageFile != null && !widget.isMultiple
             ? Image.file(imageFile!, width: double.infinity, fit: BoxFit.fill)
@@ -50,8 +48,11 @@ class _GlobalImageInputState extends State<GlobalImageInput> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add, color: AppColors.primary, size: 28),
-                    Text(' Pick Image', style: Styles.styleBlue20),
+                    Icon(Icons.add, size: 28),
+                    Text(
+                      ' Pick Image',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ],
                 ),
               ),

@@ -1,5 +1,4 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
@@ -8,7 +7,6 @@ import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/re
 import 'package:curely/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'custom_double_material.dart';
 import 'custom_indicator_widget.dart';
 
@@ -50,6 +48,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Form(
+                    autovalidateMode: autoValidateMode,
                     key: formKey,
                     child: CustomTextFormField(
                       controller: emailController,
@@ -63,12 +62,14 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                   BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
                     listener: (context, state) {
                       if (state is ResetPasswordFailure) {
-                        InfoBox.customSnackBar(context, state.errMessage);
+                        InfoBox.errorFloatingBox(context, state.errMessage);
                       }
                     },
                     builder: (context, state) {
                       return GestureDetector(
-                        onTap: state is! ResetPasswordSuccess
+                        onTap:
+                            state is! ResetPasswordSuccess ||
+                                state is! ResetPasswordLoading
                             ? () async {
                                 if (formKey.currentState!.validate()) {
                                   formKey.currentState!.save();
@@ -79,12 +80,14 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                                       );
                                   FocusScope.of(context).unfocus();
                                 } else {
-                                  autoValidateMode = AutovalidateMode.always;
+                                  setState(() {
+                                    autoValidateMode = AutovalidateMode.always;
+                                  });
                                 }
                               }
                             : null,
                         child: Material(
-                          color: AppColors.background,
+                          color: Theme.of(context).colorScheme.secondary,
                           elevation: 3,
                           type: MaterialType.circle,
                           child: Container(
@@ -98,9 +101,8 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                                     state is ResetPasswordSuccess
                                         ? Icons.done
                                         : state is ResetPasswordInitial
-                                        ? Icons.arrow_forward_outlined
+                                        ? Icons.link
                                         : Icons.restart_alt,
-                                    color: AppColors.primary,
                                     size: 40,
                                   ),
                           ),

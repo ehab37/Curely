@@ -63,9 +63,9 @@ class AnalysisDetailsView extends StatelessWidget {
       body: BlocConsumer<ManageAnalysisCubit, ManageAnalysisState>(
         listener: (context, state) {
           if (state is GetAnalysisFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteAnalysisSuccess) {
-            InfoBox.customSnackBar(context, 'Analysis deleted.');
+            InfoBox.successFloatingBox(context, 'Analysis deleted.');
             GoRouter.of(context).pop();
           }
         },

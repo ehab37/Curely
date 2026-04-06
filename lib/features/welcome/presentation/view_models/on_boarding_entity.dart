@@ -1,5 +1,4 @@
 import 'package:curely/core/constants/assets_constants.dart';
-import 'package:curely/generated/l10n.dart';
 
 class OnBoardingEntity {
   final String title;
@@ -16,24 +15,22 @@ class OnBoardingEntity {
 List<OnBoardingEntity> onBoardingPages(context) {
   return [
     OnBoardingEntity(
-      image: AssetsConstants.kTrack,
-      title: S.of(context).onBoardingTitle1,
-      subTitle: S.of(context).onBoardingSubTitle1,
+      image: AssetsConstants.kOrganizer,
+      title: "Your Health, Organized",
+      subTitle:
+          "Keep your medicines, prescriptions, X-rays, and lab results in one secure place. No more lost papers or forgotten dates.",
     ),
     OnBoardingEntity(
       image: AssetsConstants.kReminder,
-      title: S.of(context).onBoardingTitle2,
-      subTitle: S.of(context).onBoardingSubTitle2,
+      title: "Never Miss a Dose",
+      subTitle:
+          "Focus on feeling better while we handle the schedule. Get timely alerts for your medications.",
     ),
     OnBoardingEntity(
-      image: AssetsConstants.kOrganizer,
-      title: S.of(context).onBoardingTitle3,
-      subTitle: S.of(context).onBoardingSubTitle3,
-    ),
-    OnBoardingEntity(
-      image: AssetsConstants.kStay,
-      title: S.of(context).onBoardingTitle4,
-      subTitle: S.of(context).onBoardingSubTitle4,
+      image: AssetsConstants.kChatBot,
+      title: "Chat with Dr. Curely",
+      subTitle:
+          "Not feeling well? Describe your symptoms to AI Health Assistant for reliable guidance and tips on what to do next.",
     ),
   ];
 }

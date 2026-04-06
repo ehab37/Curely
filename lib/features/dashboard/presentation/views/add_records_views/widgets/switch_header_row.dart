@@ -1,5 +1,4 @@
 import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -24,20 +23,25 @@ class SwitchHeaderRow extends StatelessWidget {
               isReminderEnabled
                   ? Icons.notifications_active
                   : Icons.notifications_off,
-              color: isReminderEnabled ? AppColors.primary : AppColors.unActive,
+              color: isReminderEnabled
+                  ? Theme.of(context).primaryColor
+                  : AppColors.unActive,
               size: 28,
             ),
             12.horizontalSpacing,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Set Reminder', style: Styles.style16),
+                Text(
+                  'Set Reminder',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
                 Text(
                   isReminderEnabled ? 'Reminders are ON' : 'Reminders are OFF',
                   style: TextStyle(
                     fontSize: 12.0,
                     color: isReminderEnabled
-                        ? AppColors.secondary
+                        ? Theme.of(context).colorScheme.onSecondary
                         : AppColors.unActive,
                   ),
                 ),
@@ -49,10 +53,6 @@ class SwitchHeaderRow extends StatelessWidget {
           // Use .adaptive for native look on iOS/Android
           value: isReminderEnabled,
           onChanged: onChangedToggle,
-          activeThumbColor: AppColors.primary,
-          inactiveThumbColor: AppColors.unActive,
-          inactiveTrackColor: AppColors.gray200,
-          activeTrackColor: AppColors.primary.withAlpha(110),
         ),
       ],
     );
