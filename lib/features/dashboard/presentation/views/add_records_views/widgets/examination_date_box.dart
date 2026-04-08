@@ -1,6 +1,6 @@
 import 'package:curely/core/widgets/custom_date_box.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'custom_icon_button_row.dart';
 
 class ExaminationDateBox extends StatefulWidget {
@@ -19,10 +19,10 @@ class _ExaminationDateBoxState extends State<ExaminationDateBox> {
   Widget build(BuildContext context) {
     return CustomDateBox(
       child: CustomIconButtonRow(
-        text1: 'Examination date: ',
+        text1: '${context.tr('examination_date')}: ',
         text2: examinationDate != null
             ? DateFormat("dd/MM/yyyy").format(examinationDate!)
-            : 'Pick a Date',
+            : context.tr('pick_date'),
         icon: Icons.date_range_outlined,
         onPressed: () {
           showDatePicker(

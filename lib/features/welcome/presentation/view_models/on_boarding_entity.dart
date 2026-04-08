@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/assets_constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OnBoardingEntity {
   final String title;
@@ -12,25 +13,20 @@ class OnBoardingEntity {
   });
 }
 
-List<OnBoardingEntity> onBoardingPages(context) {
-  return [
-    OnBoardingEntity(
-      image: AssetsConstants.kOrganizer,
-      title: "Your Health, Organized",
-      subTitle:
-          "Keep your medicines, prescriptions, X-rays, and lab results in one secure place. No more lost papers or forgotten dates.",
-    ),
-    OnBoardingEntity(
-      image: AssetsConstants.kReminder,
-      title: "Never Miss a Dose",
-      subTitle:
-          "Focus on feeling better while we handle the schedule. Get timely alerts for your medications.",
-    ),
-    OnBoardingEntity(
-      image: AssetsConstants.kChatBot,
-      title: "Chat with Dr. Curely",
-      subTitle:
-          "Not feeling well? Describe your symptoms to AI Health Assistant for reliable guidance and tips on what to do next.",
-    ),
-  ];
-}
+final List<OnBoardingEntity> onBoardingPages = [
+  OnBoardingEntity(
+    image: AssetsConstants.kOrganizer,
+    title: "onboarding_title_1".tr(),
+    subTitle: "onboarding_subtitle_1".tr(),
+  ),
+  OnBoardingEntity(
+    image: AssetsConstants.kReminder,
+    title: "onboarding_title_2".tr(),
+    subTitle: "onboarding_subtitle_2".tr(),
+  ),
+  OnBoardingEntity(
+    image: AssetsConstants.kChatBot,
+    title: "onboarding_title_3".tr(),
+    subTitle: "onboarding_subtitle_3".tr(),
+  ),
+];

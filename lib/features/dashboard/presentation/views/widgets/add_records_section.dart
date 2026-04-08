@@ -1,6 +1,7 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_square_nav_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,7 +13,10 @@ class AddRecordsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(" Add Record", style: Theme.of(context).textTheme.titleSmall),
+        Text(
+          context.tr("add_record"),
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
         8.verticalSpacing,
         Row(
           children: [
@@ -20,7 +24,7 @@ class AddRecordsSection extends StatelessWidget {
               onTab: () {
                 GoRouter.of(context).push(AppRoutesConstants.kAddMedicineView);
               },
-              text: "Add Medicines",
+              text: context.tr("add_medicines"),
             ),
             CustomSquareNavBar(
               onTab: () {
@@ -28,7 +32,7 @@ class AddRecordsSection extends StatelessWidget {
                   context,
                 ).push(AppRoutesConstants.kAddPrescriptionView);
               },
-              text: "Add Prescriptions",
+              text: context.tr("add_prescriptions"),
             ),
           ],
         ),
@@ -38,13 +42,13 @@ class AddRecordsSection extends StatelessWidget {
               onTab: () {
                 GoRouter.of(context).push(AppRoutesConstants.kAddRaysView);
               },
-              text: "Add Rays",
+              text: context.tr("add_rays"),
             ),
             CustomSquareNavBar(
               onTab: () {
                 GoRouter.of(context).push(AppRoutesConstants.kAddAnalysisView);
               },
-              text: "Add Analysis",
+              text: context.tr("add_analysis"),
             ),
           ],
         ),

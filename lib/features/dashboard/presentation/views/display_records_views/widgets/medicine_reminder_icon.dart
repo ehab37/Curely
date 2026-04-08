@@ -37,7 +37,7 @@ class MedicineReminderIcon extends StatelessWidget {
             )
           : null,
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, right: 8),
+        padding: const EdgeInsetsDirectional.only(top: 8, end: 8),
         child: Icon(
           Icons.access_alarms_outlined,
           size: 25,

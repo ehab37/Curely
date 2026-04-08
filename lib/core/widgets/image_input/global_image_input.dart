@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'image_input.dart';
 
@@ -48,9 +49,9 @@ class _GlobalImageInputState extends State<GlobalImageInput> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add, size: 28),
+                    const Icon(Icons.add, size: 28),
                     Text(
-                      ' Pick Image',
+                      context.tr('pick_image'),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ],

@@ -5,6 +5,7 @@ import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/notes_list_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'note_item.dart';
@@ -40,10 +41,10 @@ class _NotesViewBodyState extends State<NotesViewBody> {
         if (state is GetNotesSuccess) {
           if (state.notes.isEmpty) {
             return widget.isFavoriteView
-                ? CustomEmptyWidget(title: "NO Favorite Notes Yet !...")
+                ? CustomEmptyWidget(title: context.tr("no_fav_notes"))
                 : CustomEmptyWidget(
-                    title: "No Notes Found",
-                    subTitle: "You haven't added any notes yet!...",
+                    title: context.tr("no_notes_found"),
+                    subTitle: context.tr("no_notes_added"),
                   );
           }
           return NotesListView(notesList: state.notes);
@@ -58,7 +59,10 @@ class _NotesViewBodyState extends State<NotesViewBody> {
           if (state is DeleteNoteFailure) {
             InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteNoteSuccess) {
-            InfoBox.successFloatingBox(context, "Note deleted successfully.");
+            InfoBox.successFloatingBox(
+              context,
+              context.tr("note_deleted_successfully"),
+            );
           } else if (state is AddNoteFailure) {
             InfoBox.errorFloatingBox(context, state.errMessage);
           }

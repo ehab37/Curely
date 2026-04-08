@@ -1,4 +1,5 @@
 import 'package:curely/features/home/domain/entities/search_suggestion_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'home_search_bar.dart';
@@ -25,7 +26,7 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
   Widget build(BuildContext context) {
     return SearchAnchor(
       searchController: _controller,
-      viewHintText: 'Search for Pages or actions...',
+      viewHintText: context.tr('search_for_pages_or_actions'),
       headerTextStyle: Theme.of(context).textTheme.bodySmall,
       viewBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
       dividerColor: Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -38,8 +39,8 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
         onTap: () {
           GoRouter.of(context).pop();
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Icon(Icons.arrow_back_ios_new_outlined),
         ),
       ),
@@ -57,7 +58,7 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
               return ListTile(
                 leading: Icon(suggestion.icon, size: 20),
                 title: Text(
-                  suggestion.title,
+                  context.tr(suggestion.title),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 onTap: () {

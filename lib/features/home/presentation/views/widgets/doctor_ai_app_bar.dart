@@ -2,6 +2,7 @@ import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/services/cache_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildDoctorAiAppBar(BuildContext context) {
@@ -25,7 +26,10 @@ AppBar buildDoctorAiAppBar(BuildContext context) {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Dr. Curely', style: Theme.of(context).textTheme.bodyMedium),
+            Text(
+              context.tr("dr_curely"),
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
             Row(
               children: [
                 Container(
@@ -38,8 +42,8 @@ AppBar buildDoctorAiAppBar(BuildContext context) {
                 ),
                 4.horizontalSpacing,
                 Text(
-                  'Online',
-                  style: TextStyle(fontSize: 12, color: Colors.green),
+                  context.tr("online"),
+                  style: const TextStyle(fontSize: 12, color: Colors.green),
                 ),
               ],
             ),

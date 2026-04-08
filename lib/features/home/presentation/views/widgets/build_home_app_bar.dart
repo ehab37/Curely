@@ -1,8 +1,8 @@
 import 'package:curely/core/entities/user_entity.dart';
-import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildHomeAppBar(BuildContext context) {
@@ -28,8 +28,10 @@ AppBar buildHomeAppBar(BuildContext context) {
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Hello", style: Theme.of(context).textTheme.displayLarge),
-        5.verticalSpacing,
+        Text(
+          context.tr("hello"),
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
         Text(user.name, style: Theme.of(context).textTheme.headlineMedium),
       ],
     ),

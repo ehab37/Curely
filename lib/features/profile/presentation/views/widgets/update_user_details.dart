@@ -4,6 +4,7 @@ import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/birth_date_box.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blood_field.dart';
@@ -71,7 +72,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Edit Your Details',
+                context.tr('edit_your_details'),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               20.verticalSpacing,
@@ -94,7 +95,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
               CustomButton(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Text(
-                  'Save',
+                  context.tr('save'),
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 onPressed: () {

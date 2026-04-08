@@ -9,6 +9,7 @@ import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +27,10 @@ class HomeDrawer extends StatelessWidget {
     return BlocConsumer<LogoutUserCubit, LogoutUserState>(
       listener: (context, state) {
         if (state is LogoutUserSuccess) {
-          InfoBox.errorFloatingBox(context, "Logged out successfully.");
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("logged_out_successfully"),
+          );
           GoRouter.of(context).pushReplacement(AppRoutesConstants.kLoginView);
         } else if (state is LogoutUserFailure) {
           InfoBox.errorFloatingBox(context, state.errMessage);
@@ -54,7 +58,7 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   Divider(),
                   ListTile(
-                    title: const Text("Dashboard"),
+                    title: Text(context.tr("dashboard")),
                     leading: const Icon(Icons.dashboard_outlined),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
@@ -62,7 +66,7 @@ class HomeDrawer extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    title: Text("Reminder"),
+                    title: Text(context.tr("reminder")),
                     leading: Icon(Icons.alarm),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
@@ -73,7 +77,7 @@ class HomeDrawer extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    title: const Text("Profile"),
+                    title: Text(context.tr("profile")),
                     leading: const Icon(FontAwesomeIcons.circleUser),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
@@ -82,7 +86,7 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   Spacer(),
                   ListTile(
-                    title: const Text("Log out"),
+                    title: Text(context.tr("logout")),
                     leading: SvgPicture.asset(
                       AssetsConstants.kLogout,
                       colorFilter: ColorFilter.mode(

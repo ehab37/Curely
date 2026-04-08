@@ -5,7 +5,7 @@ import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'on_boarding_app_bar.dart';
@@ -57,7 +57,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           Visibility(
             visible:
                 (pageController.hasClients ? currentPage : 0) ==
-                onBoardingPages(context).length - 1,
+                onBoardingPages.length - 1,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
@@ -77,7 +77,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 },
                 backgroundColor: Theme.of(context).colorScheme.onSurface,
                 child: Text(
-                  S.of(context).getStarted,
+                  context.tr("get_started"),
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),

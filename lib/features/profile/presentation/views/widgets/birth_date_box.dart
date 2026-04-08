@@ -1,7 +1,7 @@
 import 'package:curely/core/widgets/custom_date_box.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/custom_icon_button_row.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class BirthDateBox extends StatefulWidget {
   const BirthDateBox({super.key, required this.onChanged});
@@ -19,10 +19,10 @@ class _BirthDateBoxState extends State<BirthDateBox> {
   Widget build(BuildContext context) {
     return CustomDateBox(
       child: CustomIconButtonRow(
-        text1: 'Date of birth: ',
+        text1: context.tr("date_of_birth"),
         text2: dateOfBirth != null
             ? DateFormat("dd/MM/yyyy").format(dateOfBirth!)
-            : 'Pick a Date',
+            : context.tr("pick_date"),
         icon: Icons.date_range_outlined,
         onPressed: () async {
           final pickedDate = await showDatePicker(

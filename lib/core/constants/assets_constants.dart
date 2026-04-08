@@ -15,4 +15,5 @@ abstract class AssetsConstants {
   static const kNotify = 'assets/images/notify_ill.svg';
   static const kLogout = 'assets/images/logout.svg';
   static const kSettings = 'assets/images/settings.svg';
+  static const kTranslations = 'assets/translations';
 }

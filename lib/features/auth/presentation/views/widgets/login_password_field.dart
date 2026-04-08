@@ -1,6 +1,6 @@
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class LoginPasswordField extends StatelessWidget {
@@ -18,8 +18,8 @@ class LoginPasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
-      label: S.of(context).password,
-      hint: S.of(context).enterYourPassword,
+      label: context.tr('password'),
+      hint: context.tr('enter_your_password'),
       controller: passwordController,
       validator: (value) => AppValidators.validateLoginPassword(value),
       isSecure: isSecure,

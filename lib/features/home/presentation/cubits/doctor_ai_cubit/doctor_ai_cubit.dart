@@ -1,5 +1,6 @@
 import 'package:curely/features/home/domain/entities/chat_message.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,10 +18,8 @@ class DoctorAiCubit extends Cubit<DoctorAiState> {
 
   void sendInitialMessage() async {
     emit(DoctorAiTypingState());
-    const String disclaimer =
-        """I am an AI assistant, not a replacement for professional medical advice. In case of emergency, please contact local medical services immediately.""";
-    const String welcomeMessage =
-        """Hello! I am Dr. Curely, your personal health assistant. How can I help you today? Please feel free to share any symptoms or concerns you have.""";
+    final String disclaimer = "doctor_ai_disclaimer".tr();
+    final String welcomeMessage = "doctor_ai_welcome_message".tr();
     await Future.delayed(const Duration(seconds: 1));
     messages.add(ChatMessage(text: disclaimer, sender: MessageSender.ai));
     messages.add(ChatMessage(text: welcomeMessage, sender: MessageSender.ai));

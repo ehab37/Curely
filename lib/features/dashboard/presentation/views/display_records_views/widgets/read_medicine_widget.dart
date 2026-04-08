@@ -2,6 +2,7 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -40,34 +41,34 @@ class ReadMedicineWidget extends StatelessWidget {
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.pills),
-              title: const Text('Name'),
+              title: Text(context.tr('medicine_name')),
               subtitle: Text(medicine.medicineName),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.prescriptionBottle),
-              title: const Text('Type'),
-              subtitle: Text(medicine.medicineTypes),
+              title: Text(context.tr('medicine_type')),
+              subtitle: Text(context.tr(medicine.medicineTypes)),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.description),
-              title: const Text('Usage'),
-              subtitle: Text(medicine.medicineUsage),
+              title: Text(context.tr('usage')),
+              subtitle: Text(context.tr(medicine.medicineUsage)),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.notes),
-              title: const Text('Notes'),
-              subtitle: Text(medicine.medicineNotes ?? "No Notes"),
+              title: Text(context.tr('notes')),
+              subtitle: Text(medicine.medicineNotes ?? context.tr("no_notes")),
             ),
           ),
           Card(
             child: SwitchListTile(
-              title: const Text('Reminder'),
+              title: Text(context.tr('reminder')),
               value: medicine.isReminderActive,
               onChanged: null,
             ),

@@ -40,11 +40,13 @@ class NoteItem extends StatelessWidget {
               child: CustomFavIcon(isFav: note.isFavorite),
             ),
           ),
-          Positioned(
+          Positioned.directional(
+            textDirection: Directionality.of(context),
             bottom: 6,
-            right: 12,
+            end: 12,
             child: Text(
               note.createdAt ?? '',
+              textDirection: TextDirection.ltr,
               style: Styles.style15.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
               ),

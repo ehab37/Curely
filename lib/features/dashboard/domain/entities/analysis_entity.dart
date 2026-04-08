@@ -1,19 +1,19 @@
 import 'dart:io';
 
 const List<String> analysisTypesList = [
-  'CBC',
-  'Stool Analysis',
-  'Urine Test',
-  'Random Blood Glucose',
-  'Fasting Blood Sugar',
-  'ESR',
-  'Bleeding Time',
-  'Glucose',
-  'Cholesterol',
-  'Uric Acid',
-  'Creatinine',
-  'Triglycerides',
-  'Other',
+  'cbc',
+  'stool_analysis',
+  'urine_test',
+  'random_blood_glucose',
+  'fasting_blood_sugar',
+  'esr',
+  'bleeding_time',
+  'glucose',
+  'cholesterol',
+  'uric_acid',
+  'creatinine',
+  'triglycerides',
+  'other',
 ];
 
 class AnalysisEntity {

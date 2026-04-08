@@ -6,6 +6,7 @@ import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +26,10 @@ class AddRaysView extends StatelessWidget {
         onPopInvokedWithResult: (didPop, result) =>
             didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
         child: Scaffold(
-          appBar: buildCustomAppBar(title: "Add Rays", isBackable: true),
+          appBar: buildCustomAppBar(
+            title: context.tr("add_rays"),
+            isBackable: true,
+          ),
           body: Builder(
             builder: (context) {
               return BlocConsumer<AddRaysCubit, AddRaysState>(

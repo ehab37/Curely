@@ -1,3 +1,4 @@
+import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/theme/app_themes.dart';
 import 'package:curely/core/services/get_it.dart';
@@ -5,13 +6,12 @@ import 'package:curely/core/services/notification_service.dart';
 import 'package:curely/core/utils/app_router.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart' as lz;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_transitions/go_transitions.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'core/constants/app_text_constants.dart';
@@ -20,6 +20,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await lz.EasyLocalization.ensureInitialized();
   await dotenv.load(fileName: ".env");
   tz.initializeTimeZones();
   await NotificationService.initNotification();
@@ -35,12 +36,17 @@ void main() async {
   setupGetIt();
   Bloc.observer = MyBlocObserver();
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<LanguageCubit>()),
-        BlocProvider(create: (context) => getIt<ThemeCubit>()),
-      ],
-      child: const Curely(),
+    lz.EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: AssetsConstants.kTranslations,
+      fallbackLocale: const Locale('en'),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => getIt<LanguageCubit>()),
+          BlocProvider(create: (context) => getIt<ThemeCubit>()),
+        ],
+        child: const Curely(),
+      ),
     ),
   );
 }
@@ -57,7 +63,7 @@ class Curely extends StatelessWidget {
         return BlocBuilder<LanguageCubit, Locale>(
           builder: (context, locale) {
             final TextDirection textDirection =
-                locale.languageCode == AppTextConstants.kArabic
+                context.locale.languageCode == AppTextConstants.kArabic
                 ? TextDirection.rtl
                 : TextDirection.ltr;
             return MaterialApp.router(
@@ -65,14 +71,9 @@ class Curely extends StatelessWidget {
               theme: AppThemes.lightTheme,
               darkTheme: AppThemes.darkTheme,
               themeMode: themeMode,
-              locale: locale,
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
+              locale: context.locale,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
               routerConfig: AppRouter.router,
               builder: (context, child) =>
                   Directionality(textDirection: textDirection, child: child!),

@@ -1,5 +1,5 @@
 import 'package:curely/features/auth/presentation/views/widgets/terms_and_conditions_body.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TermsAndConditionsView extends StatelessWidget {
@@ -11,7 +11,7 @@ class TermsAndConditionsView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          S.of(context).termsAndConditions,
+          context.tr('terms_and_conditions'),
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         backgroundColor: Theme.of(context).primaryColor,
@@ -19,7 +19,7 @@ class TermsAndConditionsView extends StatelessWidget {
           color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
-      body: TermsAndConditionsBody(),
+      body: const TermsAndConditionsBody(),
     );
   }
 }

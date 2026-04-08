@@ -1,4 +1,5 @@
 import 'package:curely/core/widgets/custom_text_form_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MedicineNotesField extends StatelessWidget {
@@ -10,8 +11,8 @@ class MedicineNotesField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: medicineNotesController,
-      label: "Medicine Notes",
-      hint: "Please, Enter any missing information about the medicine.",
+      label: context.tr("medicine_notes"),
+      hint: context.tr("medicine_notes_hint"),
       maxLines: 3,
     );
   }

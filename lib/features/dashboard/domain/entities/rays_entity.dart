@@ -1,17 +1,17 @@
 import 'dart:io';
 
 const List<String> raysTypesList = [
-  'Cardiogram',
-  'X-Rays',
-  'Deep Xray',
-  'Electrocardiogram',
-  'CT Scan',
-  'MRI',
-  'Fluoroscopy',
-  'Mammography',
-  'DEXA',
-  'Isotope',
-  'Other',
+  'cardiogram',
+  'x_rays',
+  'deep_xray',
+  'electrocardiogram',
+  'ct_scan',
+  'mri',
+  'fluoroscopy',
+  'mammography',
+  'dexa',
+  'isotope',
+  'other',
 ];
 
 class RaysEntity {

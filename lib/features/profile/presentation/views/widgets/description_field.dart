@@ -1,5 +1,6 @@
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionField extends StatelessWidget {
@@ -16,7 +17,7 @@ class DescriptionField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: descriptionController,
-      label: 'Description',
+      label: context.tr('description'),
       validator: (value) => AppValidators.validateRequired(value),
       enabled: isEditable,
       maxLines: 8,

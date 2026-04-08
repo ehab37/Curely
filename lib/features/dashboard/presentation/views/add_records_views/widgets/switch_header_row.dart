@@ -1,5 +1,6 @@
 import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SwitchHeaderRow extends StatelessWidget {
@@ -33,11 +34,13 @@ class SwitchHeaderRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Set Reminder',
+                  context.tr('set_reminder'),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Text(
-                  isReminderEnabled ? 'Reminders are ON' : 'Reminders are OFF',
+                  isReminderEnabled
+                      ? context.tr('reminders_on')
+                      : context.tr('reminders_off'),
                   style: TextStyle(
                     fontSize: 12.0,
                     color: isReminderEnabled

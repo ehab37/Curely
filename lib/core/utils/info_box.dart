@@ -1,5 +1,7 @@
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
+import 'package:curely/core/constants/app_text_constants.dart';
+import 'package:easy_localization/easy_localization.dart' as lz;
 import 'package:flutter/material.dart';
 
 abstract class InfoBox {
@@ -29,11 +31,18 @@ abstract class InfoBox {
     );
   }
 
+  static TextDirection _getTextDirection(BuildContext context) {
+    return context.locale.languageCode == AppTextConstants.kArabic
+        ? TextDirection.rtl
+        : TextDirection.ltr;
+  }
+
   static void infoFloatingBox(BuildContext context, String message) {
     return CherryToast.info(
       inheritThemeColors: true,
       description: Text(message),
       displayCloseButton: false,
+      textDirection: _getTextDirection(context),
     ).show(context);
   }
 
@@ -42,6 +51,7 @@ abstract class InfoBox {
       inheritThemeColors: true,
       title: Text(message),
       displayCloseButton: false,
+      textDirection: _getTextDirection(context),
     ).show(context);
   }
 
@@ -51,6 +61,7 @@ abstract class InfoBox {
       description: Text(message),
       displayCloseButton: false,
       toastPosition: Position.bottom,
+      textDirection: _getTextDirection(context),
     ).show(context);
   }
 
@@ -66,6 +77,7 @@ abstract class InfoBox {
       displayCloseButton: false,
       action: actionMessage == null ? null : Text(actionMessage),
       actionHandler: action,
+      textDirection: _getTextDirection(context),
     ).show(context);
   }
 }

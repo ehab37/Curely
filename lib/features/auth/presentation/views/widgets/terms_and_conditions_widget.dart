@@ -1,5 +1,5 @@
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'custom_check_box.dart';
 
@@ -29,7 +29,7 @@ class TermsAndConditionsWidget extends StatelessWidget {
         Expanded(
           child: Text.rich(
             TextSpan(
-              text: S.of(context).iAgreeToThe,
+              text: context.tr("i_agree_to_the"),
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: Theme.of(context).colorScheme.surfaceContainerHigh,
               ),
@@ -38,7 +38,7 @@ class TermsAndConditionsWidget extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onTermsPressed,
                     child: Text(
-                      S.of(context).termsAndConditions,
+                      context.tr("terms_and_conditions"),
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),

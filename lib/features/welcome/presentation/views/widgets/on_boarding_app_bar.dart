@@ -4,7 +4,7 @@ import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/widgets/custom_text_button.dart';
 import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +31,7 @@ class OnBoardingAppBar extends StatelessWidget {
             maintainState: true,
             visible:
                 (pageController.hasClients ? currentPage : 0) !=
-                onBoardingPages(context).length - 1,
+                onBoardingPages.length - 1,
             child: CustomTextButton(
               onPressed: () {
                 GoRouter.of(
@@ -42,7 +42,7 @@ class OnBoardingAppBar extends StatelessWidget {
                   value: true,
                 );
               },
-              text: S.of(context).skip,
+              text: context.tr("skip"),
             ),
           ),
           Spacer(),

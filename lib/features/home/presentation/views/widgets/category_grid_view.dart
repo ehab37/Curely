@@ -1,4 +1,5 @@
 import 'package:curely/features/home/presentation/cubits/search_cubit/search_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'category_item.dart';
@@ -27,7 +28,7 @@ class CategoryGridView extends StatelessWidget {
             },
             child: CategoryItem(
               isSelected: cubit.currentCategoryIndex == index,
-              name: cubit.categories[index],
+              name: context.tr(cubit.categories[index]),
             ),
           ),
         );

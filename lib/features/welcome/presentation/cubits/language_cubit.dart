@@ -1,7 +1,7 @@
 import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,11 +15,11 @@ Locale _getInitialLocale() {
 class LanguageCubit extends Cubit<Locale> {
   LanguageCubit() : super(_getInitialLocale());
 
-  void changeLanguage(String languageCode) async {
+   Future<void> changeLanguage(BuildContext context, String languageCode) async {
     final newLocale = Locale(languageCode);
 
     if (newLocale != state) {
-      await S.load(newLocale);
+      await context.setLocale(newLocale);
       final isArabic = languageCode == AppTextConstants.kArabic;
       await CacheHelper.putBoolData(
         key: CacheConstants.kIsArabic,

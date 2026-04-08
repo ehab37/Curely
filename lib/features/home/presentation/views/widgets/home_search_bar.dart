@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -16,8 +17,8 @@ class HomeSearchBar extends StatelessWidget {
     return SearchBar(
       controller: controller,
       focusNode: focusNode,
-      hintText: 'Search for Pages...',
-      constraints: BoxConstraints(minHeight: 50),
+      hintText: context.tr('search_for_pages'),
+      constraints: const BoxConstraints(minHeight: 50),
       hintStyle: WidgetStateProperty.all(
         Theme.of(context).textTheme.bodyMedium,
       ),

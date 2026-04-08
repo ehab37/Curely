@@ -1,4 +1,4 @@
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class OrWidget extends StatelessWidget {
@@ -10,7 +10,7 @@ class OrWidget extends StatelessWidget {
       children: [
         Expanded(child: Divider(color: Theme.of(context).primaryColor)),
         Text(
-          " ${S.of(context).or} ",
+          " ${context.tr("or")} ",
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Expanded(child: Divider(color: Theme.of(context).primaryColor)),

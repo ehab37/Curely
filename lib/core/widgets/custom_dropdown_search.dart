@@ -1,6 +1,7 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helpers/border_functions.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdownSearch extends StatelessWidget {
@@ -60,7 +61,7 @@ class CustomDropdownSearch extends StatelessWidget {
             enabledBorder: customBorder(context),
             border: customBorder(context),
             focusedBorder: customBorder(context),
-            hintText: "Type to filter items...",
+            hintText: context.tr("type_to_filter"),
             hintStyle: Theme.of(context).textTheme.bodyMedium,
           ),
         ),

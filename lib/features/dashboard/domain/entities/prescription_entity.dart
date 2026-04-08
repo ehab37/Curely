@@ -1,21 +1,21 @@
 import 'dart:io';
 
 const List<String> doctorSpecializationsList = [
-  'Dentistry',
-  'Neurology',
-  'Ear Nose Throat',
-  'Orthopedics',
-  'Cardiology',
-  'Dermatology',
-  'Gastroenterology',
-  'Surgery',
-  'Internal Medicine',
-  'Obstetrics Gynecology',
-  'Ophthalmology',
-  'Pediatrics',
-  'Psychiatry',
-  'Urology',
-  'Other',
+  'dentistry',
+  'neurology',
+  'ear_nose_throat',
+  'orthopedics',
+  'cardiology',
+  'dermatology',
+  'gastroenterology',
+  'surgery',
+  'internal_medicine',
+  'obstetrics_gynecology',
+  'ophthalmology',
+  'pediatrics',
+  'psychiatry',
+  'urology',
+  'other',
 ];
 
 class PrescriptionEntity {

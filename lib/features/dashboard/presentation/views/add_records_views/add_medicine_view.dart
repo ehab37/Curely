@@ -7,6 +7,7 @@ import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +28,10 @@ class AddMedicineView extends StatelessWidget {
         onPopInvokedWithResult: (didPop, result) =>
             didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
         child: Scaffold(
-          appBar: buildCustomAppBar(title: "Add Medicine", isBackable: true),
+          appBar: buildCustomAppBar(
+            title: context.tr("add_medicine"),
+            isBackable: true,
+          ),
           body: Builder(
             builder: (context) {
               return BlocConsumer<AddMedicineCubit, AddMedicineState>(

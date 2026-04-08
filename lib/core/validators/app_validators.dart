@@ -1,13 +1,13 @@
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'app_regex.dart';
 
 extension StringValidation on String? {
   String? get validateEmail {
     if (this == null || this!.trim().isEmpty) {
-      return S.current.emailIsRequired;
+      return 'email_required'.tr();
     }
     if (!AppRegex.isEmailValid(this!.trim())) {
-      return S.current.invalidEmail;
+      return 'enter_valid_email'.tr();
     }
     return null;
   }
@@ -17,60 +17,64 @@ extension StringValidation on String? {
         this!.isEmpty ||
         this!.trim().isEmpty ||
         this!.length < 8) {
-      return S.current.passwordIsRequired;
+      return 'password_required'.tr();
     }
     return null;
   }
 
   String? get validatePassword {
     if (this == null || this!.isEmpty) {
-      return S.current.passwordIsRequired;
+      return 'password_required'.tr();
     }
 
     if (!AppRegex.isPasswordValid(this!)) {
-      return '${S.current.passwordTooShort}'
-          '\n'
-          '• ${S.current.passwordUppercaseLetter} '
-          '\n'
-          '• ${S.current.passwordLowercaseLetter} '
-          '\n'
-          '• ${S.current.passwordNumber}'
-          ' \n'
-          '• ${S.current.passwordSpecialCharacter}'
-          ' (@\$!%*?&)';
+      return 'password_validation_rules'.tr();
     }
     return null;
   }
 
   String? validateMatch(String? originalValue) {
     if (this == null || this!.isEmpty) {
-      return S.current.confirmPasswordIsRequired;
+      return 'confirm_password_required'.tr();
     }
     if (this != originalValue) {
-      return S.current.passwordsDoNotMatch;
+      return 'passwords_do_not_match'.tr();
     }
     return null;
   }
 
   String? get validateName {
     if (this == null || this!.trim().isEmpty) {
-      return S.current.nameIsRequired;
+      return 'name_required'.tr();
     }
     if (this!.length < 2) {
-      return S.current.nameTooShort;
+      return 'name_min_length'.tr();
     }
     if (!AppRegex.isNameValid(this!)) {
-      return S.current.nameCanOnlyContainLettersOrSpaces;
+      return 'name_invalid'.tr();
     }
     return null;
   }
 
-  String? validateNumberLength(String? fieldName) {
+  String? get validateNameArabic {
+    if (this == null || this!.trim().isEmpty) {
+      return 'name_required'.tr();
+    }
+    if (this!.length < 2) {
+      return 'name_min_length'.tr();
+    }
+    if (!AppRegex.isNameValidArabic(this!)) {
+      return 'name_invalid'.tr();
+    }
+    return null;
+  }
+
+  String? validateNumberLength() {
     if (this == null || this!.trim().isEmpty) {
       return null;
     }
     if (!AppRegex.isNumberValid(this!)) {
-      return 'Please enter a valid $fieldName (2-3 digits).';
+      return 'invalid_number_length'.tr();
     }
     return null;
   }
@@ -80,14 +84,14 @@ extension StringValidation on String? {
       return null;
     }
     if (!AppRegex.isBloodTypeValid(this!)) {
-      return 'Invalid blood type (e.g., A+, O-).';
+      return 'invalid_blood_type'.tr();
     }
     return null;
   }
 
   String? get validateRequired {
     if (this == null || this!.trim().isEmpty) {
-      return 'This field is required';
+      return 'field_required'.tr();
     }
     return null;
   }
@@ -112,6 +116,8 @@ class AppValidators {
 
   static String? validateName(String? value) => value.validateName;
 
+  static String? validateNameArabic(String? value) => value.validateNameArabic;
+
   static String? validatePassword(String? value) => value.validatePassword;
 
   static String? validateLoginPassword(String? value) =>
@@ -122,8 +128,8 @@ class AppValidators {
     String? originalPassword,
   ) => value.validateMatch(originalPassword);
 
-  static String? validateNumberLength(String? value, String? fieldName) =>
-      value.validateNumberLength(fieldName);
+  static String? validateNumberLength(String? value) =>
+      value.validateNumberLength();
 
   static String? validateBloodType(String? value) => value.validateBloodType;
 
@@ -132,11 +138,11 @@ class AppValidators {
   /// ================= PHONE (UPDATED) =================
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Phone number is required';
+      return 'phone_number_required'.tr();
     }
 
     if (!AppRegex.isPhoneValid(value)) {
-      return 'Enter a valid phone number';
+      return 'enter_valid_phone_number'.tr();
     }
 
     return null;

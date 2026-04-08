@@ -9,6 +9,7 @@ import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_prescription_cubit/add_prescription_cubit.dart';
 import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'diagnosis_field.dart';
@@ -55,12 +56,15 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
           DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: 'Doctor Specialization',
-            label: 'Doctor Specialization',
-            list: doctorSpecializationsList,
-            onChanged: (value) {
+            hint: context.tr('doctor_specialization'),
+            label: context.tr('doctor_specialization'),
+            list: doctorSpecializationsList.map((e) => context.tr(e)).toList(),
+            onChanged: (localizedValue) {
               setState(() {
-                doctorSpecialization = value;
+                doctorSpecialization = doctorSpecializationsList.firstWhere(
+                  (englishKey) => context.tr(englishKey) == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
             validator: (value) => AppValidators.validateRequired(value),
@@ -89,7 +93,10 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 if (images.isEmpty) {
-                  InfoBox.infoFloatingBox(context, "Please select an image");
+                  InfoBox.infoFloatingBox(
+                    context,
+                    context.tr("please_select_image"),
+                  );
                   return;
                 }
                 PrescriptionEntity prescription = PrescriptionEntity(
@@ -113,7 +120,7 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Text(
-              "Add Prescription",
+              context.tr("add_prescription"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),

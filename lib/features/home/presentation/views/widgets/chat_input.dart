@@ -1,15 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ChatInput extends StatelessWidget {
   final TextEditingController controller;
-  final Function(String) onSend;
+  final Function(String)? onSend;
 
-  const ChatInput({super.key, required this.controller, required this.onSend});
+  const ChatInput({super.key, required this.controller, this.onSend});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
@@ -28,7 +29,7 @@ class ChatInput extends StatelessWidget {
             child: TextField(
               controller: controller,
               decoration: InputDecoration(
-                hintText: 'Ask Dr. Curely...',
+                hintText: context.tr('ask_dr_curely'),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide.none,
@@ -37,17 +38,17 @@ class ChatInput extends StatelessWidget {
                 fillColor: Theme.of(
                   context,
                 ).colorScheme.surfaceContainerHighest.withAlpha(100),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 10,
                 ),
               ),
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           IconButton(
-            onPressed: () => onSend(controller.text),
-            icon: Icon(Icons.send),
+            onPressed: () => onSend?.call(controller.text),
+            icon: const Icon(Icons.send),
           ),
         ],
       ),

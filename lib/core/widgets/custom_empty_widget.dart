@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -52,9 +53,9 @@ class CustomEmptyWidget extends StatelessWidget {
             if (onActionPressed != null)
               ElevatedButton.icon(
                 onPressed: onActionPressed,
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
                 label: Text(
-                  "Add New Record",
+                  context.tr("add_new_record"),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 style: ElevatedButton.styleFrom(

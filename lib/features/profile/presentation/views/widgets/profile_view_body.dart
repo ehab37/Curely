@@ -6,6 +6,7 @@ import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +28,10 @@ class ProfileViewBody extends StatelessWidget {
         } else if (state is DeleteAccountFailure) {
           InfoBox.errorFloatingBox(context, state.errMessage);
         } else if (state is DeleteAccountSuccess) {
-          InfoBox.successFloatingBox(context, "Deleted Account Successfully");
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("deleted_account_successfully"),
+          );
           GoRouter.of(
             context,
           ).pushReplacement(AppRoutesConstants.kRegisterView);
