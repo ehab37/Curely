@@ -5,6 +5,7 @@ import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -41,15 +42,25 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ManageAnalysisCubit, ManageAnalysisState>(
+    return BlocConsumer<ManageAnalysisCubit, ManageAnalysisState>(
+      listener: (context, state) {
+        if (state is DeleteAnalysisFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
+        } else if (state is DeleteAnalysisSuccess) {
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("record_deleted_successfully"),
+          );
+        }
+      },
       builder: (context, state) {
         if (state is GetAnalysisSuccess) {
           if (state.analysis.isEmpty) {
             return widget.isFavoriteView
-                ? CustomEmptyWidget(title: "NO Favorite Analysis Yet !...")
+                ? CustomEmptyWidget(title: context.tr("no_fav_analysis"))
                 : CustomEmptyWidget(
-                    title: "No Analysis Found",
-                    subTitle: "You haven't added any analysis yet!...",
+                    title: context.tr("no_analysis_found"),
+                    subTitle: context.tr("no_analysis_added"),
                   );
           }
           return DisplayedListView(
@@ -60,7 +71,6 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
                   context.read<ManageAnalysisCubit>().deleteAnalysis(
                     docId: state.analysis[index].docId!,
                   );
-                  InfoBox.successFloatingBox(context, 'Analysis deleted.');
                 },
                 content: GestureDetector(
                   onTap: () {
@@ -74,7 +84,7 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
                   child: DisplayedItem(
                     imageUrl: state.analysis[index].imageUrls![0],
                     text1: state.analysis[index].doctorName,
-                    text2: state.analysis[index].analysisType,
+                    text2: context.tr(state.analysis[index].analysisType),
                     text3: state.analysis[index].examinationDate,
                     isFavorite: state.analysis[index].isFavorite,
                     onTap: () {
@@ -97,11 +107,6 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
             },
           );
         } else {
-          if (state is DeleteAnalysisFailure) {
-            InfoBox.errorFloatingBox(context, state.errMessage);
-          } else if (state is DeleteAnalysisSuccess) {
-            InfoBox.successFloatingBox(context, "Item deleted successfully.");
-          }
           return CustomSkeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {

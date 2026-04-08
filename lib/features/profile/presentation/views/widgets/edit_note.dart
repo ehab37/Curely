@@ -1,6 +1,7 @@
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -57,7 +58,9 @@ class _EditNoteState extends State<EditNote> {
               Row(
                 children: [
                   Text(
-                    isEditable ? 'Edit Health Note' : 'My Health Note',
+                    isEditable
+                        ? context.tr("edit_health_note")
+                        : context.tr("my_health_note"),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Spacer(),

@@ -1,6 +1,7 @@
 import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,12 +31,12 @@ class CustomErrorWidget extends StatelessWidget {
           16.verticalSpacing,
           if (onTryAgain != null)
             SizedBox(
-              width: 200, // Limit button width
+              width: 200,
               child: CustomButton(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 onPressed: onTryAgain!,
                 child: Text(
-                  "Please try again",
+                  context.tr("please_try_again"),
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),

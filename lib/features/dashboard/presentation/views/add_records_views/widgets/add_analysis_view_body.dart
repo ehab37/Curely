@@ -9,6 +9,7 @@ import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_analysis_cubit/add_analysis_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'diagnosis_field.dart';
@@ -54,12 +55,15 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
           DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: 'Analysis Type',
-            label: 'Analysis Type',
-            list: analysisTypesList,
-            onChanged: (value) {
+            hint: context.tr('analysis_type'),
+            label: context.tr('analysis_type'),
+            list: analysisTypesList.map((e) => context.tr(e)).toList(),
+            onChanged: (localizedValue) {
               setState(() {
-                analysisType = value;
+                analysisType = analysisTypesList.firstWhere(
+                  (englishKey) => englishKey.tr() == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
             validator: (value) => AppValidators.validateRequired(value),
@@ -88,7 +92,10 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 if (images.isEmpty) {
-                  InfoBox.infoFloatingBox(context, "Please select an image");
+                  InfoBox.infoFloatingBox(
+                    context,
+                    context.tr("please_select_image"),
+                  );
                   return;
                 }
                 AnalysisEntity analysis = AnalysisEntity(
@@ -112,7 +119,7 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Text(
-              "Add Analysis",
+              context.tr("add_analysis"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),

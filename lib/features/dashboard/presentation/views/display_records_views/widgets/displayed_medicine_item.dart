@@ -4,6 +4,7 @@ import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -61,12 +62,12 @@ class DisplayedMedicineItem extends StatelessWidget {
             ),
             4.verticalSpacing,
             Text(
-              medicineItem.medicineTypes,
+              context.tr(medicineItem.medicineTypes),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             4.verticalSpacing,
             Text(
-              medicineItem.medicineUsage,
+              context.tr(medicineItem.medicineUsage),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             12.verticalSpacing,

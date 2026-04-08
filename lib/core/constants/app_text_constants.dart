@@ -6,4 +6,5 @@ class AppTextConstants {
   static const kEnglish = "en";
   static const height = "Height";
   static const weight = "Weight";
+  static const dark = "dark";
 }

@@ -2,7 +2,7 @@ import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/welcome/presentation/cubits/selection_cubit.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +27,7 @@ class CustomAnimatedContainer extends StatelessWidget {
         );
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         decoration: BoxDecoration(
           boxShadow: [
             if ((isArabicContainer && isArabicLanguage) ||
@@ -61,8 +61,8 @@ class CustomAnimatedContainer extends StatelessWidget {
               ),
               Text(
                 isArabicContainer
-                    ? S.of(context).arabic
-                    : S.of(context).english,
+                    ? context.tr('arabic')
+                    : context.tr('english'),
                 style:
                     ((isArabicContainer && isArabicLanguage) ||
                         (!isArabicContainer && !isArabicLanguage))

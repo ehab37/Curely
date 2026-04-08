@@ -5,6 +5,7 @@ import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +34,7 @@ class HomeViewBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CardCircle(
-                  text: "Reminder",
+                  text: context.tr("reminder"),
                   icon: Icons.alarm,
                   size: 35,
                   onPressed: () {
@@ -44,7 +45,7 @@ class HomeViewBody extends StatelessWidget {
                   },
                 ),
                 CardCircle(
-                  text: "Pharmacy",
+                  text: context.tr("pharmacy"),
                   icon: Icons.local_pharmacy_rounded,
                   onPressed: () async {
                     var result = await homeRepo.nearestPharmacy();
@@ -55,7 +56,7 @@ class HomeViewBody extends StatelessWidget {
                   },
                 ),
                 CardCircle(
-                  text: "Ambulance",
+                  text: context.tr("ambulance"),
                   icon: FontAwesomeIcons.truckMedical,
                   size: 25,
                   onPressed: () async {
@@ -63,7 +64,7 @@ class HomeViewBody extends StatelessWidget {
                   },
                 ),
                 CardCircle(
-                  text: "Doctor Ai",
+                  text: context.tr("doctor_ai"),
                   icon: FontAwesomeIcons.userDoctor,
                   onPressed: () {
                     GoRouter.of(context).push(AppRoutesConstants.kDoctorAiView);
@@ -73,11 +74,11 @@ class HomeViewBody extends StatelessWidget {
             ),
             16.verticalSpacing,
             Text(
-              " Add Records",
+              context.tr("add_record"),
               style: Theme.of(context).textTheme.titleMedium,
             ),
             CustomNavBar(
-              text: "Add Medicine",
+              text: context.tr("add_medicine"),
               prefixIcon: FontAwesomeIcons.pills,
               suffixIcon: Icons.add,
               onPressed: () {
@@ -85,7 +86,7 @@ class HomeViewBody extends StatelessWidget {
               },
             ),
             CustomNavBar(
-              text: "Add Prescription",
+              text: context.tr("add_prescription"),
               prefixIcon: FontAwesomeIcons.fileMedical,
               suffixIcon: Icons.add,
               onPressed: () {
@@ -95,7 +96,7 @@ class HomeViewBody extends StatelessWidget {
               },
             ),
             CustomNavBar(
-              text: "Add Rays",
+              text: context.tr("add_rays"),
               prefixIcon: FontAwesomeIcons.xRay,
               suffixIcon: Icons.add,
               onPressed: () {
@@ -103,7 +104,7 @@ class HomeViewBody extends StatelessWidget {
               },
             ),
             CustomNavBar(
-              text: "Add Analysis",
+              text: context.tr("add_analysis"),
               prefixIcon: FontAwesomeIcons.flaskVial,
               suffixIcon: Icons.add,
               onPressed: () {

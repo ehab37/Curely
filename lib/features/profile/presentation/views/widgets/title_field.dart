@@ -1,4 +1,5 @@
 import 'package:curely/core/widgets/custom_text_form_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TitleField extends StatelessWidget {
@@ -10,7 +11,7 @@ class TitleField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: titleController,
-      label: 'Title',
+      label: context.tr('field_title'),
       enabled: false,
     );
   }

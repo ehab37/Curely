@@ -8,11 +8,11 @@ class SearchCubit extends Cubit<SearchState> {
   TextEditingController searchController = TextEditingController();
   int currentCategoryIndex = 0;
   final List<String> categories = [
-    "Medicines",
-    "Prescriptions",
-    "Rays",
-    "Analysis",
-    "Health Notes",
+    "medicines",
+    "prescription",
+    "rays",
+    "analysis",
+    "health_notes",
   ];
 
   changeCategory({int? index}) async {
@@ -20,7 +20,7 @@ class SearchCubit extends Cubit<SearchState> {
     if (index != null && currentCategoryIndex != index) {
       currentCategoryIndex = index;
     }
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
     emit(CategoryChanged(currentIndex: currentCategoryIndex));
   }
 }

@@ -5,6 +5,7 @@ import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_list_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'displayed_medicine_item.dart';
@@ -44,17 +45,27 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ManageMedicinesCubit, ManageMedicinesState>(
+    return BlocConsumer<ManageMedicinesCubit, ManageMedicinesState>(
+      listener: (context, state) {
+        if (state is DeleteMedicinesFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
+        } else if (state is DeleteMedicinesSuccess) {
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("record_deleted_successfully"),
+          );
+        }
+      },
       builder: (context, state) {
         if (state is GetMedicinesSuccess) {
           if (state.medicines.isEmpty) {
             return widget.isFavoriteView
-                ? CustomEmptyWidget(title: "NO Favorite Medicines Yet !...")
+                ? CustomEmptyWidget(title: context.tr("no_fav_medicines"))
                 : widget.isRemindersView
-                ? CustomEmptyWidget(title: "NO Reminders Yet !...")
+                ? CustomEmptyWidget(title: context.tr("no_reminders"))
                 : CustomEmptyWidget(
-                    title: "No Medicines Found",
-                    subTitle: "You haven't added any medicines yet!...",
+                    title: context.tr("no_medicines_found"),
+                    subTitle: context.tr("no_medicines_added"),
                   );
           }
           return DisplayedListView(
@@ -73,11 +84,6 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
             },
           );
         } else {
-          if (state is DeleteMedicinesFailure) {
-            InfoBox.errorFloatingBox(context, state.errMessage);
-          } else if (state is DeleteMedicinesSuccess) {
-            InfoBox.successFloatingBox(context, "Item deleted successfully.");
-          }
           return CustomSkeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {

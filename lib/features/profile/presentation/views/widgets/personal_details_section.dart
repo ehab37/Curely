@@ -6,6 +6,7 @@ import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart
 import 'package:curely/core/widgets/image_input/profile_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'name_and_gmail_section.dart';
@@ -52,16 +53,17 @@ class PersonalDetailsSection extends StatelessWidget {
             Row(
               children: [
                 PersonalDetailWidget(
-                  title: "Blood",
+                  title: context.tr("blood"),
                   subTitle: user.blood == null || user.blood!.isEmpty
-                      ? "TBD"
+                      ? context.tr("tbd")
                       : user.blood!,
                   icon: Icons.water_drop_outlined,
                 ),
                 16.horizontalSpacing,
                 PersonalDetailWidget(
-                  title: "Height",
-                  subTitle: "${user.height ?? "TBD"} CM",
+                  title: context.tr("height"),
+                  subTitle:
+                      "${user.height ?? context.tr("tbd")} ${context.tr("cm")}",
                   icon: Icons.height,
                 ),
               ],
@@ -69,14 +71,16 @@ class PersonalDetailsSection extends StatelessWidget {
             Row(
               children: [
                 PersonalDetailWidget(
-                  title: "Weight",
-                  subTitle: "${user.weight ?? "TBD"} KG",
+                  title: context.tr("weight"),
+                  subTitle:
+                      "${user.weight ?? context.tr("tbd")} ${context.tr("kg")}",
                   icon: Icons.monitor_weight_outlined,
                 ),
                 16.horizontalSpacing,
                 PersonalDetailWidget(
-                  title: "Age",
-                  subTitle: "${age ?? "TBD"} Years",
+                  title: context.tr("age"),
+                  subTitle:
+                      "${age ?? context.tr("tbd")} ${context.tr("years")}",
                   icon: Icons.cake_outlined,
                 ),
               ],

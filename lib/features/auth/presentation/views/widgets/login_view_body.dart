@@ -2,7 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dont_have_account.dart';
@@ -46,7 +46,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  S.of(context).login,
+                  context.tr("login"),
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 40.verticalSpacing,
@@ -64,7 +64,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 CustomButton(
                   backgroundColor: Theme.of(context).colorScheme.onSurface,
                   child: Text(
-                    S.of(context).login,
+                    context.tr("login"),
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   onPressed: () async {

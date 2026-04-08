@@ -1,6 +1,6 @@
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EmailField extends StatelessWidget {
@@ -12,8 +12,8 @@ class EmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: emailController,
-      label: S.of(context).email,
-      hint: S.of(context).enterYourEmail,
+      label: context.tr("email"),
+      hint: context.tr("enter_your_email"),
       keyboard: TextInputType.emailAddress,
       validator: (value) => AppValidators.validateEmail(value),
       prefixIcon: Icons.email_outlined,

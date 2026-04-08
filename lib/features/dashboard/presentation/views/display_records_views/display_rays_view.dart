@@ -3,6 +3,7 @@ import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_rays_cubit/manage_rays_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/display_rays_view_body.dart';
@@ -16,7 +17,9 @@ class DisplayRaysView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildCustomAppBar(
-        title: isFavoriteView ? "Favorite Rays" : "Rays",
+        title: isFavoriteView
+            ? context.tr("favorite_rays")
+            : context.tr("rays"),
         isBackable: true,
       ),
       body: SafeArea(

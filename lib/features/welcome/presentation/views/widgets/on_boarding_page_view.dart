@@ -12,7 +12,7 @@ class OnBoardingPageView extends StatelessWidget {
     return PageView(
       controller: pageController,
       children: [
-        ...onBoardingPages(context).map((e) {
+        ...onBoardingPages.map((e) {
           return PageViewUnit(onBoardingModel: e);
         }),
       ],

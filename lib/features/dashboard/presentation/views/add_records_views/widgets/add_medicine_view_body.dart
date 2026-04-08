@@ -9,6 +9,7 @@ import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:curely/core/services/notification_service.dart';
@@ -56,26 +57,37 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
           MedicineNotesField(medicineNotesController: medicineNotesController),
           8.verticalSpacing,
           FrequencyField(
-            onChanged: (value) {
+            onChanged: (localizedValue) {
               setState(() {
-                addMedicineCubit.remindersList = getDefaultRemindersList(value);
-                frequency = value;
+                addMedicineCubit.remindersList = getDefaultRemindersList(
+                  localizedValue,
+                );
+                frequency = frequencyList.firstWhere(
+                  (englishKey) => context.tr(englishKey) == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
           ),
           16.verticalSpacing,
           MedicineUsageField(
-            onChanged: (value) {
+            onChanged: (localizedValue) {
               setState(() {
-                medicineUsage = value;
+                medicineUsage = medicineUsagesList.firstWhere(
+                  (englishKey) => context.tr(englishKey) == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
           ),
           16.verticalSpacing,
           MedicineTypeField(
-            onChanged: (value) {
+            onChanged: (localizedValue) {
               setState(() {
-                medicineTypes = value;
+                medicineTypes = medicineTypesList.firstWhere(
+                  (englishKey) => context.tr(englishKey) == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
           ),
@@ -87,7 +99,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 if (frequency == null) {
                   InfoBox.infoFloatingBox(
                     context,
-                    "Please, Choose the frequency first.",
+                    context.tr("choose_frequency_first"),
                   );
                   return;
                 }
@@ -131,7 +143,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Text(
-              "Add Medicine",
+              context.tr("add_medicine"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),

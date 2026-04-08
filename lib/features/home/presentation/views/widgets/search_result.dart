@@ -18,6 +18,7 @@ import 'package:curely/features/home/presentation/cubits/search_cubit/search_cub
 import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/notes_view_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -84,7 +85,7 @@ class SearchResult extends StatelessWidget {
           return CustomLoadingIndicator();
         }
         return CustomEmptyWidget(
-          title: "Please, Select a category to search",
+          title: context.tr("select_category_to_search"),
           icon: Icons.manage_search,
         );
       },

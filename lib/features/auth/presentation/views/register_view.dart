@@ -5,6 +5,7 @@ import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
 import 'package:curely/features/auth/presentation/views/widgets/register_view_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,7 @@ class RegisterView extends StatelessWidget {
                 if (state is RegisterSuccess) {
                   InfoBox.successFloatingBox(
                     context,
-                    "Registered Successfully",
+                    context.tr("registered_successfully"),
                   );
                   GoRouter.of(
                     context,

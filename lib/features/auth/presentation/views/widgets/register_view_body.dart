@@ -4,7 +4,7 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,7 +27,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController password2Controller = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController nameController = TextEditingController();
   bool isSecure = true;
   bool isSecure2 = true;
@@ -37,7 +38,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    password2Controller.dispose();
+    confirmPasswordController.dispose();
     nameController.dispose();
     super.dispose();
   }
@@ -55,7 +56,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  S.of(context).register,
+                  context.tr("register"),
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 40.verticalSpacing,
@@ -70,7 +71,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   },
                 ),
                 ConfirmPasswordField(
-                  passwordController: password2Controller,
+                  passwordController: passwordController,
+                  confirmPasswordController: confirmPasswordController,
                   isSecure: isSecure2,
                   suffixPress: () {
                     isSecure2 = !isSecure2;
@@ -98,7 +100,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 CustomButton(
                   backgroundColor: Theme.of(context).colorScheme.onSurface,
                   child: Text(
-                    S.of(context).register,
+                    context.tr("register"),
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   onPressed: () async {
@@ -114,10 +116,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                       } else {
                         InfoBox.warningFloatingBox(
                           context,
-                          message: S
-                              .of(context)
-                              .TermsAndConditionsMustBeAccepted,
-                          actionMessage: 'Accept Terms',
+                          message: context.tr("terms_must_be_accepted"),
+                          actionMessage: context.tr("accept_terms"),
                           action: () {
                             setState(() {
                               isAgreeTerms = true;

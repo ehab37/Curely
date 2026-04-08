@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/diagnosis_field.dart';
 import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/doctor_name_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'examination_date_box.dart';
@@ -57,12 +58,15 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
           DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: 'Rays Type',
-            label: 'Rays Type',
-            list: raysTypesList,
-            onChanged: (value) {
+            hint: context.tr('rays_type'),
+            label: context.tr('rays_type'),
+            list: raysTypesList.map((e) => context.tr(e)).toList(),
+            onChanged: (localizedValue) {
               setState(() {
-                raysType = value;
+                raysType = raysTypesList.firstWhere(
+                  (englishKey) => context.tr(englishKey) == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
             validator: (value) => AppValidators.validateRequired(value),
@@ -91,7 +95,10 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 if (images.isEmpty) {
-                  InfoBox.infoFloatingBox(context, "Please select an image");
+                  InfoBox.infoFloatingBox(
+                    context,
+                    context.tr("please_select_image"),
+                  );
                   return;
                 }
                 RaysEntity rays = RaysEntity(
@@ -113,7 +120,7 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
             child: Text(
-              "Add Rays",
+              context.tr("add_rays"),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),

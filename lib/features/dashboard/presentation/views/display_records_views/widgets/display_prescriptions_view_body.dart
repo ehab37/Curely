@@ -6,6 +6,7 @@ import 'package:curely/core/widgets/custom_error_widget.dart';
 import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_item.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -42,15 +43,27 @@ class _DisplayPrescriptionsViewBodyState
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ManagePrescriptionsCubit, ManagePrescriptionsState>(
+    return BlocConsumer<ManagePrescriptionsCubit, ManagePrescriptionsState>(
+      listener: (context, state) {
+        if (state is DeletePrescriptionsFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
+        } else if (state is DeletePrescriptionsSuccess) {
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("record_deleted_successfully"),
+          );
+        }
+      },
       builder: (context, state) {
         if (state is GetPrescriptionsSuccess) {
           if (state.prescriptions.isEmpty) {
             return widget.isFavoriteView
-                ? CustomEmptyWidget(title: "NO Favorite Prescriptions Yet !...")
+                ? CustomEmptyWidget(
+                    title: context.tr("no_favorite_prescriptions"),
+                  )
                 : CustomEmptyWidget(
-                    title: "No Prescriptions Found",
-                    subTitle: "You haven't added any prescriptions yet!...",
+                    title: context.tr("no_prescriptions_found"),
+                    subTitle: context.tr("no_prescriptions_added"),
                   );
           }
           return DisplayedListView(
@@ -61,7 +74,6 @@ class _DisplayPrescriptionsViewBodyState
                   context.read<ManagePrescriptionsCubit>().deletePrescriptions(
                     docId: state.prescriptions[index].docId!,
                   );
-                  InfoBox.successFloatingBox(context, 'Prescription deleted.');
                 },
                 content: GestureDetector(
                   onTap: () {
@@ -75,7 +87,9 @@ class _DisplayPrescriptionsViewBodyState
                   child: DisplayedItem(
                     imageUrl: state.prescriptions[index].imageUrls![0],
                     text1: state.prescriptions[index].doctorName,
-                    text2: state.prescriptions[index].doctorSpecialization,
+                    text2: context.tr(
+                      state.prescriptions[index].doctorSpecialization,
+                    ),
                     text3: state.prescriptions[index].examinationDate,
                     isFavorite: state.prescriptions[index].isFavorite,
                     onTap: () {
@@ -101,11 +115,6 @@ class _DisplayPrescriptionsViewBodyState
             },
           );
         } else {
-          if (state is DeletePrescriptionsFailure) {
-            InfoBox.errorFloatingBox(context, state.errMessage);
-          } else if (state is DeletePrescriptionsSuccess) {
-            InfoBox.successFloatingBox(context, "Item deleted successfully.");
-          }
           return CustomSkeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {

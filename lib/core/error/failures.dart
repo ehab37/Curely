@@ -1,4 +1,4 @@
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class Failure {
@@ -23,38 +23,38 @@ class AuthExceptionHandler extends Failure {
     if (e is FirebaseAuthException) {
       switch (e.code) {
         case 'email-already-in-use':
-          errorDescription = S.current.thisEmailIsAlreadyInUse;
+          errorDescription = 'email_already_in_use'.tr();
           break;
         case 'user-not-found':
-          errorDescription = S.current.userNotFound;
+          errorDescription = 'user_not_found'.tr();
           break;
         case 'wrong-password':
-          errorDescription = S.current.invalidEmailOrPassword;
+          errorDescription = 'wrong_password'.tr();
           break;
         case 'weak-password':
-          errorDescription = S.current.weakPassword;
+          errorDescription = 'weak_password'.tr();
           break;
         case 'invalid-email':
-          errorDescription = S.current.invalidEmailOrPassword;
+          errorDescription = 'invalid_email'.tr();
           break;
         case 'invalid-credential':
-          errorDescription = S.current.invalidEmailOrPassword;
+          errorDescription = 'invalid_credential'.tr();
           break;
         case 'network-request-failed':
-          errorDescription = S.current.noInternetConnection;
+          errorDescription = 'network_request_failed'.tr();
           break;
         case 'too-many-requests':
-          errorDescription = S.current.tooManyRequests;
+          errorDescription = 'too_many_requests'.tr();
           break;
         case 'unknown':
-          errorDescription = "Please, check your internet connection";
+          errorDescription = 'unknown_error'.tr();
           break;
         default:
           errorDescription = e.code.toString();
           break;
       }
     } else {
-      errorDescription = S.current.authenticationFailed;
+      errorDescription = 'auth_failed'.tr();
     }
     return AuthExceptionHandler(errorDescription);
   }

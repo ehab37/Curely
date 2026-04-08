@@ -43,10 +43,6 @@ dependencies:
   dio: ^5.9.1
   url_launcher: ^6.3.2
   connectivity_plus: ^7.0.0
-  # Localization
-  intl: ^0.20.2
-  flutter_localizations:
-    sdk: flutter
   # An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics 1.1 files
   flutter_svg: ^2.2.1
   flutter_svg_provider: ^1.0.7
@@ -94,6 +90,8 @@ dependencies:
   gemini_ai: ^1.0.1
   # Create rich text output, including text styles, tables, links, and more, from plain text data formatted with simple Markdown tags.
   flutter_markdown_plus: ^1.0.7
+  # Easy and Fast internationalizing and localization your Flutter Apps.
+  easy_localization: ^3.0.8
 
 dev_dependencies:
   # App Icon
@@ -130,6 +128,8 @@ flutter:
   assets:
     - assets/images/
     - .env
+    - assets/translations/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
@@ -153,5 +153,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-flutter_intl:
-  enabled: true

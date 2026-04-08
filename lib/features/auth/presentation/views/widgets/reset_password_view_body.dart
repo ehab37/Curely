@@ -4,7 +4,7 @@ import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/widgets/title_sub_title_back.dart';
 import 'package:curely/features/auth/presentation/cubits/reset_password_cubit/reset_password_cubit.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'custom_double_material.dart';
@@ -39,10 +39,10 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
         child: Column(
           children: [
             TitleSubTitleBack(
-              title: S.of(context).resetPassword,
-              subTitle: S.of(context).enterYourEmailToReceiveAPasswordResetLink,
+              title: context.tr('reset_password'),
+              subTitle: context.tr('reset_password_subtitle'),
             ),
-            Spacer(),
+            const Spacer(),
             CustomDoubleMaterial(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -52,8 +52,8 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                     key: formKey,
                     child: CustomTextFormField(
                       controller: emailController,
-                      label: S.of(context).email,
-                      hint: S.of(context).enterYourEmail,
+                      label: context.tr('email'),
+                      hint: context.tr('enter_your_email'),
                       validator: (value) => AppValidators.validateEmail(value),
                       keyboard: TextInputType.emailAddress,
                       prefixIcon: Icons.email_outlined,
@@ -113,7 +113,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 ],
               ),
             ),
-            Spacer(flex: 2),
+            const Spacer(flex: 2),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_container.dart';
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,13 +20,13 @@ class WelcomeViewBody extends StatelessWidget {
       children: [
         const Spacer(flex: 3),
         Text(
-          S.of(context).welcome,
+          context.tr("welcome"),
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Text(S.of(context).to, style: Theme.of(context).textTheme.titleLarge),
+        Text(context.tr("to"), style: Theme.of(context).textTheme.titleLarge),
         10.verticalSpacing,
         Text(
-          S.of(context).title,
+          context.tr("title"),
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         const Spacer(),
@@ -35,7 +35,7 @@ class WelcomeViewBody extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 1,
             child: Image.asset(
-              theme == "dark"
+              theme == AppTextConstants.dark
                   ? AssetsConstants.kLogoDark
                   : AssetsConstants.kLogo,
               fit: BoxFit.cover,
@@ -58,7 +58,7 @@ class WelcomeViewBody extends StatelessWidget {
                 CustomButton(
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                   child: Text(
-                    S.of(context).login,
+                    context.tr("login"),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onPressed: () {
@@ -71,7 +71,7 @@ class WelcomeViewBody extends StatelessWidget {
                 CustomButton(
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                   child: Text(
-                    S.of(context).register,
+                    context.tr("register"),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onPressed: () {

@@ -56,6 +56,7 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         autofocus: autoFocus ?? false,
         decoration: InputDecoration(
+          errorMaxLines: 8,
           isDense: true,
           fillColor: Theme.of(context).colorScheme.onPrimary,
           filled: true,

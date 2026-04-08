@@ -1,5 +1,5 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +13,7 @@ class DontHaveAccount extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: S.of(context).dontHaveAccount,
+            text: context.tr("dont_have_account"),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           TextSpan(text: "  ", style: Theme.of(context).textTheme.bodySmall),
@@ -24,7 +24,7 @@ class DontHaveAccount extends StatelessWidget {
                   context,
                 ).pushReplacement(AppRoutesConstants.kRegisterView);
               },
-            text: S.of(context).register,
+            text: context.tr("register"),
             style: Theme.of(context).textTheme.displaySmall,
           ),
         ],
