@@ -48,6 +48,7 @@ class WelcomeViewBody extends StatelessWidget {
             topLeft: Radius.circular(50),
             topRight: Radius.circular(50),
           ),
+          height: MediaQuery.of(context).size.height * 0.39,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: SpacingConstants.horizontalPadding,

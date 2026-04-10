@@ -44,12 +44,14 @@ class DisplayedItem extends StatelessWidget {
               ),
             ),
             imageUrl == null
-                ? Icon(FontAwesomeIcons.pills, size: 80)
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: CustomCachedImage(height: 80, url: imageUrl!),
+                ? Expanded(child: Icon(FontAwesomeIcons.pills, size: 60))
+                : Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: CustomCachedImage(url: imageUrl!),
+                    ),
                   ),
-            Spacer(),
+            8.verticalSpacing,
             Text(text1, style: Theme.of(context).textTheme.titleSmall),
             4.verticalSpacing,
             FittedBox(

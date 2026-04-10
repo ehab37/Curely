@@ -16,7 +16,7 @@ class NameField extends StatelessWidget {
       hint: context.tr("enter_your_name"),
       keyboard: TextInputType.name,
       textCapitalization: TextCapitalization.words,
-      validator: (value) => AppValidators.validateName(value),
+      validator: (value) => AppValidators.validateNameArabic(value),
     );
   }
 }

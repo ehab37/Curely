@@ -35,9 +35,11 @@ class CustomErrorWidget extends StatelessWidget {
               child: CustomButton(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 onPressed: onTryAgain!,
-                child: Text(
-                  context.tr("please_try_again"),
-                  style: Theme.of(context).textTheme.headlineSmall,
+                child: FittedBox(
+                  child: Text(
+                    context.tr("please_try_again"),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
               ),
             ),

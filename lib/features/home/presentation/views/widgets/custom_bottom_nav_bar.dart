@@ -31,6 +31,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double bottomIndicatorHeight = MediaQuery.viewPaddingOf(context).bottom;
     return CurvedNavigationBar(
       key: bottomNavigationKey,
       items: bottomNavBarIconsList(context),
@@ -38,7 +39,7 @@ class CustomBottomNavBar extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       animationDuration: Duration(milliseconds: 400),
       backgroundColor: Colors.transparent,
-      height: 70,
+      height: 58 + bottomIndicatorHeight,
     );
   }
 }

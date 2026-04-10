@@ -44,8 +44,9 @@ class ProfileViewBody extends StatelessWidget {
             child: Column(
               children: [
                 PersonalDetailsSection(user: user),
-                40.verticalSpacing,
+                20.verticalSpacing,
                 ProfileViewNavigators(user: user),
+                20.verticalSpacing,
               ],
             ),
           ),

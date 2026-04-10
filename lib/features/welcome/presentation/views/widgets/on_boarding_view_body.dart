@@ -57,7 +57,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           Visibility(
             visible:
                 (pageController.hasClients ? currentPage : 0) ==
-                onBoardingPages.length - 1,
+                onBoardingPages(context).length - 1,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,

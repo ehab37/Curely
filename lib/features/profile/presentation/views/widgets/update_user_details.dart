@@ -58,6 +58,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
 
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.viewPaddingOf(context).top;
     return Padding(
       padding: EdgeInsets.only(
         top: 20,
@@ -71,6 +72,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              (statusBarHeight + 10).verticalSpacing,
               Text(
                 context.tr('edit_your_details'),
                 style: Theme.of(context).textTheme.titleSmall,

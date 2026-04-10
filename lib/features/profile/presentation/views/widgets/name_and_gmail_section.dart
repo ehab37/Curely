@@ -14,25 +14,24 @@ class NameAndGmailSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GestureDetector(
-            onTap: () {
-              final cubit = context.read<ManageProfileCubit>();
-              showCustomBottomSheet(
-                context,
-                BlocProvider.value(
-                  value: cubit,
-                  child: UpdateUserDetails(user: user),
-                ),
-              );
-            },
-            child: IconBox(icon: Icons.edit),
-          ),
-        ],
+      leading: GestureDetector(
+        onTap: () {
+          final cubit = context.read<ManageProfileCubit>();
+          showCustomBottomSheet(
+            context,
+            BlocProvider.value(
+              value: cubit,
+              child: UpdateUserDetails(user: user),
+            ),
+          );
+        },
+        child: IconBox(icon: Icons.edit),
       ),
-      title: Text(user.name, style: Theme.of(context).textTheme.headlineMedium),
+      title: Text(
+        user.name,
+        style: Theme.of(context).textTheme.headlineMedium,
+        overflow: TextOverflow.ellipsis,
+      ),
       subtitle: Text(
         user.email,
         style: Theme.of(context).textTheme.displayLarge,

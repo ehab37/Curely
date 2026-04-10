@@ -9,7 +9,8 @@ class CustomDateBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+      margin: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),

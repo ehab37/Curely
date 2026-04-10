@@ -18,7 +18,7 @@ class TitleSubTitleBack extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomBackBar(horizontalPadding: 0),
-        20.verticalSpacing,
+        10.verticalSpacing,
         Text(title, style: Theme.of(context).textTheme.titleMedium),
         Text(
           subTitle,

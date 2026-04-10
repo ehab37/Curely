@@ -23,6 +23,7 @@ class AppThemes {
       shadow: AppColors.navy.withAlpha(160),
       onSecondaryContainer: AppColors.skyBlue,
       primaryContainer: AppColors.darkGray,
+      onPrimaryContainer: AppColors.skyBlue.withAlpha(51),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.white,
@@ -135,6 +136,7 @@ class AppThemes {
       shadow: AppColors.skyBlue.withAlpha(160),
       onSecondaryContainer: AppColors.stone,
       primaryContainer: AppColors.lightGray,
+      onPrimaryContainer: AppColors.stone,
     ),
     appBarTheme: const AppBarTheme(
       titleTextStyle: Styles.styleWhite25,

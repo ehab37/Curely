@@ -20,7 +20,7 @@ class ChatBubble extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isAi
-              ? Theme.of(context).colorScheme.onSecondaryContainer.withAlpha(51)
+              ? Theme.of(context).colorScheme.onPrimaryContainer
               : Theme.of(context).colorScheme.primaryContainer,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),

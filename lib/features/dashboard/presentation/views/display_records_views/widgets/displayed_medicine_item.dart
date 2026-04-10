@@ -53,9 +53,11 @@ class DisplayedMedicineItem extends StatelessWidget {
               ],
             ),
             medicineItem.imageUrl == null
-                ? Icon(FontAwesomeIcons.pills, size: 50)
-                : CustomCachedImage(height: 60, url: medicineItem.imageUrl!),
-            Spacer(),
+                ? Expanded(child: Icon(FontAwesomeIcons.pills, size: 50))
+                : Expanded(
+                    child: CustomCachedImage(url: medicineItem.imageUrl!),
+                  ),
+            8.verticalSpacing,
             Text(
               medicineItem.medicineName,
               style: Theme.of(context).textTheme.titleSmall,

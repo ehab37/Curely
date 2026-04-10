@@ -18,9 +18,14 @@ class GoogleButton extends StatelessWidget {
         children: [
           Image.asset(AssetsConstants.kGoogleLogo, width: 25),
           8.horizontalSpacing,
-          Text(
-            context.tr("google_sign_in"),
-            style: Theme.of(context).textTheme.titleSmall,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                context.tr("google_sign_in"),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
           ),
         ],
       ),

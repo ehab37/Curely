@@ -16,7 +16,7 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: height ?? MediaQuery.of(context).size.height * 0.39,
+      height: height,
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         borderRadius: border,

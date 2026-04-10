@@ -15,11 +15,14 @@ class ProfileCachedImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size appSize = MediaQuery.sizeOf(context);
     return ClipRRect(
-      borderRadius: BorderRadius.circular(isProfile ? 60 : 20),
+      borderRadius: BorderRadius.circular(
+        isProfile ? appSize.height / 14.5 : 20,
+      ),
       clipBehavior: Clip.hardEdge,
       child: CircleAvatar(
-        radius: isProfile ? 60 : 20,
+        radius: isProfile ? appSize.height / 14.5 : 20,
         backgroundColor: isProfile
             ? Theme.of(context).colorScheme.secondary
             : Theme.of(context).primaryColor,
@@ -32,7 +35,7 @@ class ProfileCachedImageWidget extends StatelessWidget {
             : Center(
                 child: Icon(
                   FontAwesomeIcons.circleUser,
-                  size: isProfile ? 105 : 35,
+                  size: isProfile ? appSize.height / 8.5 : 35,
                   color: isProfile
                       ? Theme.of(context).primaryColor
                       : Theme.of(context).colorScheme.onPrimary,

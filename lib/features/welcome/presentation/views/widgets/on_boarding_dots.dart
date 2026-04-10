@@ -10,7 +10,7 @@ class OnBoardingDots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DotsIndicator(
-      dotsCount: onBoardingPages.length,
+      dotsCount: onBoardingPages(context).length,
       position: position,
       decorator: DotsDecorator(
         size: const Size(8, 8),

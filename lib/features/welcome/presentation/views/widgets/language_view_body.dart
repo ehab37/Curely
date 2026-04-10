@@ -24,7 +24,6 @@ class LanguageViewBody extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: SpacingConstants.horizontalPadding,
-              vertical: 12,
             ),
             child: Column(
               children: [
@@ -43,7 +42,7 @@ class LanguageViewBody extends StatelessWidget {
                   isArabicLanguage: isArabicSelected,
                 ),
                 Spacer(),
-                40.verticalSpacing,
+                20.verticalSpacing,
                 CustomButton(
                   onPressed: () {
                     final localeCubit = context.read<LanguageCubit>();

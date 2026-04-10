@@ -5,6 +5,7 @@ import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileRepoImpl implements ProfileRepo {
@@ -17,7 +18,7 @@ class ProfileRepoImpl implements ProfileRepo {
   Future<Either<Failure, void>> editUserData({required UserEntity user}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await userDataRepo.editUserData(user: user);
       await userDataRepo.saveUserDataLocally(user: user);

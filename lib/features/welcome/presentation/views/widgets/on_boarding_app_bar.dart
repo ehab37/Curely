@@ -31,7 +31,7 @@ class OnBoardingAppBar extends StatelessWidget {
             maintainState: true,
             visible:
                 (pageController.hasClients ? currentPage : 0) !=
-                onBoardingPages.length - 1,
+                onBoardingPages(context).length - 1,
             child: CustomTextButton(
               onPressed: () {
                 GoRouter.of(

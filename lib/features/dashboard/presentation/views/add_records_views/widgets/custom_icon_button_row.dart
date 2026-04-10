@@ -1,3 +1,4 @@
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButtonRow extends StatelessWidget {
@@ -18,23 +19,24 @@ class CustomIconButtonRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 2.25,
-          child: Text(
-            text1,
-            style: Theme.of(context).textTheme.bodyMedium,
-            overflow: TextOverflow.ellipsis,
+        Expanded(
+          flex: 10,
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(text1, style: Theme.of(context).textTheme.bodyMedium),
+            ),
           ),
         ),
+        8.horizontalSpacing,
         Text(text2, style: Theme.of(context).textTheme.bodyMedium),
         const Spacer(),
         IconButton(
           onPressed: onPressed,
           style: ButtonStyle(
             backgroundColor: WidgetStatePropertyAll(
-              Theme.of(
-                context,
-              ).colorScheme.surfaceContainerHighest.withAlpha(50),
+              Theme.of(context).colorScheme.onPrimaryContainer,
             ),
           ),
           icon: Icon(icon),

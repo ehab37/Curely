@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/data/models/analysis_model.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AnalysisRepoImpl implements AnalysisRepo {
   AnalysisRepoImpl({
@@ -31,7 +32,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
         path: DatabaseConstants.users,
@@ -58,7 +59,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -93,7 +94,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -123,7 +124,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   Future<Either<Failure, void>> deleteAnalysis({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -150,7 +151,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,
