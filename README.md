@@ -2,6 +2,14 @@
 
 Curely is a professional-grade personal health management application built with Flutter. It empowers users to organize their medical history, manage medications with smart reminders, and interact with an AI health assistant—all within a secure and highly localized experience.
 
+## 🎨 Mockup
+
+### ☀️ English & Light Mockup
+<img width="4020" height="1000" alt="1" src="https://github.com/user-attachments/assets/38c35184-b488-4edb-b002-313d21dda970" />
+
+### 🌑 Arabic & Dark Mockup
+<img width="4020" height="1000" alt="2" src="https://github.com/user-attachments/assets/4937fe49-5946-49f3-a09f-63bfccaa3194" />
+
 ## 🌟 Key Features
 
 ### 🔐 Secure Authentication
@@ -13,7 +21,7 @@ Curely is a professional-grade personal health management application built with
 *   **Unified Medical Records:** Centralized management for all your health data.
 *   **Medication Management:** Track current and past medicines with detailed usage instructions and notes.
 *   **Digital Archive:** Securely store and categorize **Prescriptions**, **Radiology Reports (Rays)**, and **Lab Analysis** results.
-*   **Visual Documentation:** Attach and view medical documents and images directly within the app.
+*   **Visual Images:** Attach and view medical images and download them directly within the app.
 
 ### 🤖 Dr. Curely (AI Health Consultant)
 *   **Advanced AI Integration:** Powered by **Gemini AI** to provide empathetic and professional health guidance.
