@@ -87,7 +87,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                               }
                             : null,
                         child: Material(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: Theme.of(context).colorScheme.onPrimary,
                           elevation: 3,
                           type: MaterialType.circle,
                           child: Container(

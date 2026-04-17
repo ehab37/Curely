@@ -55,7 +55,10 @@ class DisplayedMedicineItem extends StatelessWidget {
             medicineItem.imageUrl == null
                 ? Expanded(child: Icon(FontAwesomeIcons.pills, size: 50))
                 : Expanded(
-                    child: CustomCachedImage(url: medicineItem.imageUrl!),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: CustomCachedImage(url: medicineItem.imageUrl!),
+                    ),
                   ),
             8.verticalSpacing,
             Text(

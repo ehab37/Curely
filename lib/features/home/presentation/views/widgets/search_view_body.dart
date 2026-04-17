@@ -18,6 +18,7 @@ class SearchViewBody extends StatelessWidget {
         CustomTextFormField(
           suffixIcon: FontAwesomeIcons.magnifyingGlass,
           suffixPress: () => context.read<SearchCubit>().changeCategory(),
+          onSubmit: (_) => context.read<SearchCubit>().changeCategory(),
           controller: context.read<SearchCubit>().searchController,
           label: context.tr('search_at_records'),
         ),

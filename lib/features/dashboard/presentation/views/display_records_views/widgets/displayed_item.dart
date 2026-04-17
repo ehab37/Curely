@@ -46,8 +46,8 @@ class DisplayedItem extends StatelessWidget {
             imageUrl == null
                 ? Expanded(child: Icon(FontAwesomeIcons.pills, size: 60))
                 : Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
                       child: CustomCachedImage(url: imageUrl!),
                     ),
                   ),

@@ -66,7 +66,7 @@ class HomeDrawer extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    title: Text(context.tr("reminder")),
+                    title: Text(context.tr("reminders")),
                     leading: Icon(Icons.alarm),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();

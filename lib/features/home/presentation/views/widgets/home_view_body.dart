@@ -34,7 +34,7 @@ class HomeViewBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CardCircle(
-                  text: context.tr("reminder"),
+                  text: context.tr("reminders"),
                   icon: Icons.alarm,
                   size: 35,
                   onPressed: () {

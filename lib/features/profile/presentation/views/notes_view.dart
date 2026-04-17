@@ -22,20 +22,20 @@ class NotesView extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            appBar: buildCustomAppBar(
-              title: isFavoriteView
-                  ? context.tr("favorite_health_notes")
-                  : context.tr("my_health_notes"),
-              icon: Icons.note_add_outlined,
-              isBackable: true,
-              onTap: () {
-                final cubit = context.read<ManageNotesCubit>();
-                showCustomBottomSheet(
-                  context,
-                  BlocProvider.value(value: cubit, child: AddNote()),
-                );
-              },
-            ),
+            appBar: isFavoriteView
+                ? buildCustomAppBar(title: context.tr("favorite_health_notes"))
+                : buildCustomAppBar(
+                    title: context.tr("my_health_notes"),
+                    icon: Icons.note_add_outlined,
+                    isBackable: true,
+                    onTap: () {
+                      final cubit = context.read<ManageNotesCubit>();
+                      showCustomBottomSheet(
+                        context,
+                        BlocProvider.value(value: cubit, child: AddNote()),
+                      );
+                    },
+                  ),
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(

@@ -16,7 +16,7 @@ AppBar buildDoctorAiAppBar(BuildContext context) {
           child: Padding(
             padding: const EdgeInsets.all(3.0),
             child: Image.asset(
-              theme == "dark"
+              theme == AppTextConstants.dark
                   ? AssetsConstants.kLogoDark
                   : AssetsConstants.kLogo,
             ),

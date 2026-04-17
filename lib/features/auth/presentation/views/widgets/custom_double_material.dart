@@ -11,13 +11,13 @@ class CustomDoubleMaterial extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
       child: Material(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.onPrimary,
         elevation: 5,
         borderRadius: BorderRadius.circular(20),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Material(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.onPrimary,
             elevation: 5,
             borderRadius: BorderRadius.circular(20),
             child: Padding(

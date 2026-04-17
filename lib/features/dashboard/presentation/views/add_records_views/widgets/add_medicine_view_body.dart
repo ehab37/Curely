@@ -97,7 +97,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
             onChangedToggle: (newVal) async {
               setState(() {
                 if (frequency == null) {
-                  InfoBox.infoFloatingBox(
+                  InfoBox.errorFloatingBox(
                     context,
                     context.tr("choose_frequency_first"),
                   );
