@@ -36,13 +36,14 @@ class DoctorAiViewBody extends StatelessWidget {
                 },
               ),
             ),
-            ChatInput(
-              controller: cubit.promptController,
-              onSend: state is DoctorAiTypingState
-                  ? null
-                  : (text) {
-                      context.read<DoctorAiCubit>().sendPrompt();
-                    },
+            AbsorbPointer(
+              absorbing: state is DoctorAiTypingState,
+               child: ChatInput(
+                controller: cubit.promptController,
+                onSend: (text) {
+                  context.read<DoctorAiCubit>().sendPrompt();
+                },
+              ),
             ),
           ],
         );
