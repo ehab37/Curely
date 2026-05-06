@@ -7,7 +7,7 @@ abstract class HomeRepo {
 
   Future<Either<Failure, void>> nearestPharmacy();
 
-  Future<Either<Failure, String>> doctorAiChat({
+  Future<Either<Failure, String>> sendPromptToAi({
     required String prompt,
     List<ChatMessage>? messagesHistory,
   });

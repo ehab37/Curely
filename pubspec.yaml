@@ -60,6 +60,7 @@ dependencies:
   cloud_firestore: ^6.0.3
   firebase_storage: ^13.0.4
   google_sign_in: ^7.2.0
+  firebase_ai: ^3.11.0
   # Purify your Dart code using efficient immutable data structures, monads, lenses and other FP tools.
   dartz: ^0.10.1
   # Loading
@@ -86,8 +87,6 @@ dependencies:
   timezone: ^0.10.1
   # Easily configure any flutter application with global variables using a `.env` file.
   flutter_dotenv: ^6.0.0
-  # Plugin for Google Gemini AI Library.
-  gemini_ai: ^1.0.1
   # Create rich text output, including text styles, tables, links, and more, from plain text data formatted with simple Markdown tags.
   flutter_markdown_plus: ^1.0.7
   # Easy and Fast internationalizing and localization your Flutter Apps.

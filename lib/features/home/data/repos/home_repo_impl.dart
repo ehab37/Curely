@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
-import 'package:curely/core/services/gemini_chat_service.dart';
+import 'package:curely/core/services/ai_chat_service.dart';
 import 'package:curely/core/services/location_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/url_service.dart';
@@ -21,7 +21,7 @@ class HomeRepoImpl implements HomeRepo {
 
   final UrlService urlService;
   final LocationService locationService;
-  final GeminiChatService geminiChatService;
+  final AiChatService geminiChatService;
   final NetworkManager networkManager;
 
   @override
@@ -54,7 +54,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, String>> doctorAiChat({
+  Future<Either<Failure, String>> sendPromptToAi({
     required String prompt,
     List<ChatMessage>? messagesHistory,
   }) async {
@@ -62,7 +62,7 @@ class HomeRepoImpl implements HomeRepo {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
-      final response = await geminiChatService.sendMessage(
+      final response = await geminiChatService.sendPrompt(
         prompt: prompt,
         messagesHistory: messagesHistory,
       );
