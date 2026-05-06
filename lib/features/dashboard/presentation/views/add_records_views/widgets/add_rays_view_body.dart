@@ -9,11 +9,11 @@ import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/diagnosis_field.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/doctor_name_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'diagnosis_field.dart';
+import 'doctor_name_field.dart';
 import 'examination_date_box.dart';
 import 'radiology_center_field.dart';
 
@@ -104,8 +104,8 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                 RaysEntity rays = RaysEntity(
                   raysType: raysType,
                   doctorName: doctorNameController.text,
-                  radiologyCenter: radiologyCenterController.text,
-                  diagnosis: diagnosisController.text,
+                  radiologyCenter: radiologyCenterController.text.nullIfEmpty,
+                  diagnosis: diagnosisController.text.nullIfEmpty,
                   examinationDate: examinationDate == null
                       ? DateTime.now().toString()
                       : examinationDate.toString(),

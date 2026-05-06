@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 
 class RaysModel {
@@ -44,7 +45,7 @@ class RaysModel {
       doctorName: doctorName,
       radiologyCenter: radiologyCenter,
       diagnosis: diagnosis,
-      examinationDate: examinationDate,
+      examinationDate: examinationDate.toReadableDate(),
       isFavorite: isFavorite,
       images: images,
       imageUrls: imageUrls,

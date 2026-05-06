@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'custom_fav_icon.dart';
 import 'medicine_reminder_icon.dart';
 
@@ -19,6 +20,7 @@ class DisplayedMedicineItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: () {
         ManageMedicinesCubit cubit = context.read<ManageMedicinesCubit>();
@@ -52,14 +54,19 @@ class DisplayedMedicineItem extends StatelessWidget {
                 MedicineReminderIcon(medicineItem: medicineItem),
               ],
             ),
-            medicineItem.imageUrl == null
-                ? Expanded(child: Icon(FontAwesomeIcons.pills, size: 50))
-                : Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            Expanded(
+              child: medicineItem.imageUrl == null
+                  ? Icon(FontAwesomeIcons.pills, size: 50)
+                  : Skeleton.replace(
+                      width: width / 6,
+                      replacement: Bone.square(
+                        borderRadius: BorderRadius.circular(
+                          SpacingConstants.borderRadius,
+                        ),
+                      ),
                       child: CustomCachedImage(url: medicineItem.imageUrl!),
                     ),
-                  ),
+            ),
             8.verticalSpacing,
             Text(
               medicineItem.medicineName,

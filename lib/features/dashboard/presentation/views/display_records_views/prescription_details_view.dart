@@ -5,12 +5,12 @@ import 'package:curely/core/widgets/custom_loading_indicator.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/update_record_details.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'widgets/read_prescription_widget.dart';
+import 'widgets/details_view_body.dart';
+import 'widgets/update_record_details.dart';
 
 class PrescriptionDetailsView extends StatelessWidget {
   const PrescriptionDetailsView({super.key, required this.prescription});
@@ -77,7 +77,10 @@ class PrescriptionDetailsView extends StatelessWidget {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ReadPrescriptionWidget(prescription: prescription),
+            child: DetailsViewBody(
+              imagesList: prescription.imageUrls!,
+              detailsList: prescriptionDetailsList(context, prescription),
+            ),
           );
         },
       ),

@@ -72,4 +72,20 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
       },
     );
   }
+
+  Future<void> stopMedicineReminder({required MedicineEntity medicine}) async {
+    emit(ManageMedicinesLoading());
+    var result = await medicineNotificationRepo.cancelAllMedicineNotification(
+      medicine: medicine,
+    );
+    result.fold(
+      (failure) {
+        emit(CancelMedicinesNotificationFailure(failure.errMessage));
+        getMedicines();
+      },
+      (success) async {
+        updateMedicines(medicine: medicine..isReminderActive = false);
+      },
+    );
+  }
 }

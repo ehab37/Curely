@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 
 class PrescriptionModel {
@@ -44,7 +45,7 @@ class PrescriptionModel {
       doctorName: doctorName,
       hospital: hospital,
       diagnosis: diagnosis,
-      examinationDate: examinationDate,
+      examinationDate: examinationDate.toReadableDate(),
       isFavorite: isFavorite,
       images: images,
       imageUrls: imageUrls,

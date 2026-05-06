@@ -37,7 +37,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
     bloodController = TextEditingController(text: user.blood);
     heightController = TextEditingController(text: user.height?.toString());
     weightController = TextEditingController(text: user.weight?.toString());
-    if (user.dateOfBirth != null && user.dateOfBirth!.isNotEmpty) {
+    if (!user.dateOfBirth.isNullOrEmpty) {
       try {
         dateOfBirth = DateTime.parse(user.dateOfBirth!);
       } catch (e) {

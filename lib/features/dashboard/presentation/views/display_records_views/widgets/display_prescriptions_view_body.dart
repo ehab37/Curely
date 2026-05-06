@@ -1,17 +1,12 @@
-import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
-import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'displayed_list_view.dart';
-import 'records_dismissible_widget.dart';
+import 'display_prescriptions_loading.dart';
+import 'display_prescriptions_success.dart';
 
 class DisplayPrescriptionsViewBody extends StatefulWidget {
   const DisplayPrescriptionsViewBody({
@@ -66,46 +61,8 @@ class _DisplayPrescriptionsViewBodyState
                     subTitle: context.tr("no_prescriptions_added"),
                   );
           }
-          return DisplayedListView(
-            itemBuilder: (context, index) {
-              return RecordsDismissibleWidget(
-                recordKey: state.prescriptions[index].docId!,
-                onDismissed: (direction) {
-                  context.read<ManagePrescriptionsCubit>().deletePrescriptions(
-                    docId: state.prescriptions[index].docId!,
-                  );
-                },
-                content: GestureDetector(
-                  onTap: () {
-                    ManagePrescriptionsCubit cubit = context
-                        .read<ManagePrescriptionsCubit>();
-                    GoRouter.of(context).push(
-                      AppRoutesConstants.kPrescriptionDetailsView,
-                      extra: [state.prescriptions[index], cubit],
-                    );
-                  },
-                  child: DisplayedItem(
-                    imageUrl: state.prescriptions[index].imageUrls![0],
-                    text1: state.prescriptions[index].doctorName,
-                    text2: context.tr(
-                      state.prescriptions[index].doctorSpecialization,
-                    ),
-                    text3: state.prescriptions[index].examinationDate,
-                    isFavorite: state.prescriptions[index].isFavorite,
-                    onTap: () {
-                      context
-                          .read<ManagePrescriptionsCubit>()
-                          .updatePrescriptions(
-                            prescription: state.prescriptions[index]
-                              ..isFavorite =
-                                  !state.prescriptions[index].isFavorite,
-                          );
-                    },
-                  ),
-                ),
-              );
-            },
-            displayedList: state.prescriptions,
+          return DisplayPrescriptionsSuccess(
+            prescriptionsList: state.prescriptions,
           );
         } else if (state is GetPrescriptionsFailure) {
           return CustomErrorWidget(
@@ -115,18 +72,7 @@ class _DisplayPrescriptionsViewBodyState
             },
           );
         } else {
-          return CustomSkeletonizer(
-            child: DisplayedListView(
-              itemBuilder: (context, index) {
-                return DisplayedItem(
-                  text1: getDummyPrescriptions()[index].doctorName,
-                  text2: getDummyPrescriptions()[index].doctorSpecialization,
-                  text3: getDummyPrescriptions()[index].examinationDate,
-                );
-              },
-              displayedList: getDummyPrescriptions(),
-            ),
-          );
+          return DisplayPrescriptionsLoading();
         }
       },
     );

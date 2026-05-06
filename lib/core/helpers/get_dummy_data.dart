@@ -3,14 +3,16 @@ import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 MedicineEntity medicineEntity() {
   return MedicineEntity(
-    medicineUsage: 'Anti Biotic',
-    medicineName: "fdjndk",
-    frequency: 'Once Daily',
+    medicineUsage: BoneMock.title,
+    medicineName: BoneMock.chars(5),
+    frequency: BoneMock.words(2),
     isReminderActive: false,
-    medicineTypes: "Tablet",
+    medicineTypes: BoneMock.title,
+    imageUrl: BoneMock.title,
   );
 }
 
@@ -27,9 +29,10 @@ List<MedicineEntity> getDummyMedicines() {
 
 PrescriptionEntity prescriptionEntity() {
   return PrescriptionEntity(
-    doctorSpecialization: 'Dentistry',
-    doctorName: 'ehab',
-    examinationDate: DateTime.now().toString(),
+    doctorSpecialization: BoneMock.title,
+    doctorName: BoneMock.chars(5),
+    examinationDate: BoneMock.date,
+    imageUrls: [BoneMock.title],
   );
 }
 
@@ -46,9 +49,10 @@ List<PrescriptionEntity> getDummyPrescriptions() {
 
 RaysEntity raysEntity() {
   return RaysEntity(
-    raysType: 'Cardiogram',
-    doctorName: 'ehab',
-    examinationDate: DateTime.now().toString(),
+    raysType: BoneMock.title,
+    doctorName: BoneMock.chars(5),
+    examinationDate: BoneMock.date,
+    imageUrls: [BoneMock.title],
   );
 }
 
@@ -65,9 +69,10 @@ List<RaysEntity> getDummyRays() {
 
 AnalysisEntity analysisEntity() {
   return AnalysisEntity(
-    analysisType: 'Cardiogram',
-    doctorName: 'ehab',
-    examinationDate: DateTime.now().toString(),
+    analysisType: BoneMock.title,
+    doctorName: BoneMock.chars(5),
+    examinationDate: BoneMock.date,
+    imageUrls: [BoneMock.title],
   );
 }
 
@@ -84,9 +89,9 @@ List<AnalysisEntity> getDummyAnalysis() {
 
 NoteEntity noteEntity() {
   return NoteEntity(
-    title: 'title title',
-    description: 'description description',
-    createdAt: 'createdAt createdAt',
+    title: BoneMock.title,
+    description: BoneMock.subtitle,
+    createdAt: BoneMock.date,
   );
 }
 

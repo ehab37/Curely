@@ -24,8 +24,8 @@ class MedicineReminderIcon extends StatelessWidget {
                 content:
                     'Are you sure you want to stop the reminder for ${medicineItem.medicineName}?',
                 onDone: () {
-                  context.read<ManageMedicinesCubit>().updateMedicines(
-                    medicine: medicineItem..isReminderActive = false,
+                  context.read<ManageMedicinesCubit>().stopMedicineReminder(
+                    medicine: medicineItem,
                   );
                   InfoBox.successFloatingBox(
                     context,
