@@ -1,19 +1,27 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/get_dummy_data.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_error_widget.dart';
+import 'package:curely/core/widgets/custom_skeletonizer.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/displayed_item.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'displayed_list_view.dart';
 import 'records_dismissible_widget.dart';
 
 class DisplayPrescriptionsViewBody extends StatefulWidget {
-  const DisplayPrescriptionsViewBody({super.key});
+  const DisplayPrescriptionsViewBody({
+    super.key,
+    required this.isFavoriteView,
+    this.searchText,
+  });
+
+  final bool isFavoriteView;
+  final String? searchText;
 
   @override
   State<DisplayPrescriptionsViewBody> createState() =>
@@ -24,24 +32,39 @@ class _DisplayPrescriptionsViewBodyState
     extends State<DisplayPrescriptionsViewBody> {
   @override
   void initState() {
-    context.read<ManagePrescriptionsCubit>().getPrescriptions();
+    if (widget.isFavoriteView) {
+      context.read<ManagePrescriptionsCubit>().isFavoriteView = true;
+    }
+    context.read<ManagePrescriptionsCubit>().getPrescriptions(
+      searchText: widget.searchText,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ManagePrescriptionsCubit, ManagePrescriptionsState>(
+    return BlocConsumer<ManagePrescriptionsCubit, ManagePrescriptionsState>(
+      listener: (context, state) {
+        if (state is DeletePrescriptionsFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
+        } else if (state is DeletePrescriptionsSuccess) {
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("record_deleted_successfully"),
+          );
+        }
+      },
       builder: (context, state) {
         if (state is GetPrescriptionsSuccess) {
           if (state.prescriptions.isEmpty) {
-            return SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  "NO Prescriptions added yet!...",
-                  style: Styles.styleBlue25,
-                ),
-              ),
-            );
+            return widget.isFavoriteView
+                ? CustomEmptyWidget(
+                    title: context.tr("no_favorite_prescriptions"),
+                  )
+                : CustomEmptyWidget(
+                    title: context.tr("no_prescriptions_found"),
+                    subTitle: context.tr("no_prescriptions_added"),
+                  );
           }
           return DisplayedListView(
             itemBuilder: (context, index) {
@@ -51,7 +74,6 @@ class _DisplayPrescriptionsViewBodyState
                   context.read<ManagePrescriptionsCubit>().deletePrescriptions(
                     docId: state.prescriptions[index].docId!,
                   );
-                  InfoBox.customSnackBar(context, 'Prescription deleted.');
                 },
                 content: GestureDetector(
                   onTap: () {
@@ -65,8 +87,20 @@ class _DisplayPrescriptionsViewBodyState
                   child: DisplayedItem(
                     imageUrl: state.prescriptions[index].imageUrls![0],
                     text1: state.prescriptions[index].doctorName,
-                    text2: state.prescriptions[index].doctorSpecialization,
+                    text2: context.tr(
+                      state.prescriptions[index].doctorSpecialization,
+                    ),
                     text3: state.prescriptions[index].examinationDate,
+                    isFavorite: state.prescriptions[index].isFavorite,
+                    onTap: () {
+                      context
+                          .read<ManagePrescriptionsCubit>()
+                          .updatePrescriptions(
+                            prescription: state.prescriptions[index]
+                              ..isFavorite =
+                                  !state.prescriptions[index].isFavorite,
+                          );
+                    },
                   ),
                 ),
               );
@@ -74,21 +108,14 @@ class _DisplayPrescriptionsViewBodyState
             displayedList: state.prescriptions,
           );
         } else if (state is GetPrescriptionsFailure) {
-          return SliverToBoxAdapter(
-            child: CustomErrorWidget(
-              error: state.errMessage,
-              onTryAgain: () {
-                context.read<ManagePrescriptionsCubit>().getPrescriptions();
-              },
-            ),
+          return CustomErrorWidget(
+            error: state.errMessage,
+            onTryAgain: () {
+              context.read<ManagePrescriptionsCubit>().getPrescriptions();
+            },
           );
         } else {
-          if (state is DeletePrescriptionsFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
-          } else if (state is DeletePrescriptionsSuccess) {
-            InfoBox.customSnackBar(context, "Item deleted successfully.");
-          }
-          return Skeletonizer.sliver(
+          return CustomSkeletonizer(
             child: DisplayedListView(
               itemBuilder: (context, index) {
                 return DisplayedItem(

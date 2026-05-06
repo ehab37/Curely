@@ -2,10 +2,10 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'custom_list_view.dart';
 
 class ReadRaysWidget extends StatelessWidget {
@@ -42,35 +42,35 @@ class ReadRaysWidget extends StatelessWidget {
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.userDoctor),
-              title: const Text('Doctor Name'),
+              title: Text(context.tr('doctor_name')),
               subtitle: Text(rays.doctorName),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.xRay),
-              title: const Text('Rays Type'),
-              subtitle: Text(rays.raysType),
+              title: Text(context.tr('rays_type')),
+              subtitle: Text(context.tr(rays.raysType)),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.circleRadiation),
-              title: const Text('Radiology Center'),
-              subtitle: Text(rays.radiologyCenter ?? 'Not Added'),
+              title: Text(context.tr('radiology_center')),
+              subtitle: Text(rays.radiologyCenter ?? context.tr('not_added')),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.notes),
-              title: const Text('Diagnosis'),
-              subtitle: Text(rays.diagnosis ?? 'No Diagnosis'),
+              title: Text(context.tr('diagnosis')),
+              subtitle: Text(rays.diagnosis ?? context.tr('no_diagnosis')),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.calendar_month),
-              title: const Text('Examination Date'),
+              title: Text(context.tr('examination_date')),
               subtitle: Text(
                 DateFormat(
                   "dd/MM/yyyy",

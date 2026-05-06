@@ -28,8 +28,10 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/dashboard/presentation/views/display_records_views/medicine_details_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/prescription_details_view.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/rays_details_view.dart';
+import 'package:curely/features/home/presentation/views/doctor_ai_view.dart';
 import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
+import 'package:curely/features/profile/presentation/views/notes_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
 import 'package:curely/features/welcome/presentation/views/on_boarding_view.dart';
@@ -120,23 +122,51 @@ abstract class AppRouter {
         path: AppRoutesConstants.kDisplayMedicineView,
         builder: (context, state) {
           bool isReminderView = false;
+          bool isFavoriteView = false;
           if (state.extra != null) {
-            isReminderView = true;
+            var data = state.extra as Map<String, bool>;
+            if (data['isReminderView'] as bool) {
+              isReminderView = true;
+            }
+            if (data['isFavoriteView'] as bool) {
+              isFavoriteView = true;
+            }
           }
-          return DisplayMedicinesView(isRemindersView: isReminderView);
+          return DisplayMedicinesView(
+            isRemindersView: isReminderView,
+            isFavoriteView: isFavoriteView,
+          );
         },
       ),
       GoRoute(
         path: AppRoutesConstants.kDisplayPrescriptionView,
-        builder: (context, state) => const DisplayPrescriptionsView(),
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return DisplayPrescriptionsView(isFavoriteView: isFavoriteView);
+        },
       ),
       GoRoute(
         path: AppRoutesConstants.kDisplayRaysView,
-        builder: (context, state) => const DisplayRaysView(),
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return DisplayRaysView(isFavoriteView: isFavoriteView);
+        },
       ),
       GoRoute(
         path: AppRoutesConstants.kDisplayAnalysisView,
-        builder: (context, state) => const DisplayAnalysisView(),
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return DisplayAnalysisView(isFavoriteView: isFavoriteView);
+        },
       ),
       GoRoute(
         path: AppRoutesConstants.kMedicineDetailsView,
@@ -175,6 +205,20 @@ abstract class AppRouter {
       GoRoute(
         path: AppRoutesConstants.kImageView,
         builder: (context, state) => ImageView(image: state.extra as String),
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kNotesView,
+        builder: (context, state) {
+          bool isFavoriteView = false;
+          if (state.extra != null) {
+            isFavoriteView = true;
+          }
+          return NotesView(isFavoriteView: isFavoriteView);
+        },
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kDoctorAiView,
+        builder: (context, state) => DoctorAiView(),
       ),
     ],
   );

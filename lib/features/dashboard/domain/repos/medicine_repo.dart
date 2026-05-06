@@ -7,9 +7,13 @@ abstract class MedicineRepo {
     required MedicineEntity medicine,
   });
 
-  Future<Either<Failure, List<MedicineEntity>>> getMedicines();
+  Future<Either<Failure, List<MedicineEntity>>> getMedicines({
+    String? searchText,
+  });
 
   Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines();
+
+  Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines();
 
   Future<Either<Failure, void>> deleteMedicine({required String docId});
 

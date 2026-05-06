@@ -22,26 +22,28 @@ class _ImageViewState extends State<ImageView> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: downloadDone
-                ? () {
-                    setState(() async {
-                      downloadDone = await FileDownloader.downloadImage(
-                        widget.image,
-                      );
-                      context.mounted
-                          ? InfoBox.customSnackBar(
-                              context,
-                              downloadDone
-                                  ? 'Image downloaded successfully'
-                                  : 'An error occurred while downloading the image!',
-                            )
-                          : null;
-                    });
+            onPressed: !downloadDone
+                ? () async {
+                    downloadDone = await FileDownloader.downloadImage(
+                      widget.image,
+                    );
+                    context.mounted
+                        ? downloadDone
+                              ? InfoBox.successFloatingBox(
+                                  context,
+                                  'Image downloaded successfully',
+                                )
+                              : InfoBox.errorFloatingBox(
+                                  context,
+                                  'An error occurred while downloading the image!',
+                                )
+                        : null;
+                    setState(() {});
                   }
                 : null,
             icon: downloadDone
                 ? Icon(Icons.download_outlined, color: AppColors.unActive)
-                : Icon(Icons.download_outlined, color: AppColors.primary),
+                : Icon(Icons.download_outlined),
           ),
         ],
       ),

@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/data/models/medicine_model.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MedicineRepoImpl implements MedicineRepo {
   MedicineRepoImpl({
@@ -31,7 +32,7 @@ class MedicineRepoImpl implements MedicineRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       String? docId = await databaseService.addData(
         path: DatabaseConstants.users,
@@ -53,10 +54,12 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
-  Future<Either<Failure, List<MedicineEntity>>> getMedicines() async {
+  Future<Either<Failure, List<MedicineEntity>>> getMedicines({
+    String? searchText,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -65,6 +68,12 @@ class MedicineRepoImpl implements MedicineRepo {
                 subCollectionPath: DatabaseConstants.medicinePath,
               )
               as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
       List<MedicineEntity> medicines = data
           .map((e) => MedicineModel.fromJson(e).toEntity())
           .toList();
@@ -85,7 +94,7 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -112,10 +121,40 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
+  Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines() async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      var data =
+          await databaseService.getData(
+                path: DatabaseConstants.users,
+                docId: user.uId,
+                subCollectionPath: DatabaseConstants.medicinePath,
+                query: {"field": "isFavorite", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+      List<MedicineEntity> medicines = data
+          .map((e) => MedicineModel.fromJson(e).toEntity())
+          .toList();
+      return Right(medicines);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> deleteMedicine({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -142,7 +181,7 @@ class MedicineRepoImpl implements MedicineRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,

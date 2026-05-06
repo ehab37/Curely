@@ -8,8 +8,10 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color offWhite = Color(0xffF7F8FC);
   static const Color skyBlue = Color(0xffcae8ff);
-  static const Color stone = Color(0xff59788E);
+  static const Color stone = Color(0xff183253);
   static const Color darkBlue = Color(0xff0B2347);
+  // static const Color skyBlue = Color(0xffa9d6e5);
+  // static const Color darkBlue = Color(0xff021526);
   static const Color navy = Color(0xff0E3F78);
   static const Color gray = Color(0xffBDBDBD);
   static const Color lightGray = Color(0xffE0E0E0);
@@ -18,10 +20,10 @@ class AppColors {
 
   // Brand
   static const Color primary = navy;
-  static const Color secondary = stone;
-  static const Color accent = navy;
-  static const Color primaryDark = navy;
-  static const Color secondaryDark = navy;
+  static const Color secondary = darkBlue;
+  static const Color accent = white;
+  static const Color primaryDark = white;
+  static const Color secondaryDark = skyBlue;
   static const Color accentDark = navy;
 
   static const Color unActive = gray;
@@ -29,6 +31,7 @@ class AppColors {
   // Backgrounds
   static const Color background = white;
   static const Color background2 = offWhite;
+  static const Color backgroundDark = darkBlue;
   static const Color gray100 = Color(0xFFF7F7F7);
   static const Color gray200 = Color(0xFFF1F1F1);
 

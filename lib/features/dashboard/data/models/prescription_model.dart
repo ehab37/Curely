@@ -8,6 +8,7 @@ class PrescriptionModel {
   final String? hospital;
   final String? diagnosis;
   final String examinationDate;
+  final bool isFavorite;
   final List<File>? images;
   List<String> imageUrls;
 
@@ -18,6 +19,7 @@ class PrescriptionModel {
     this.hospital,
     this.diagnosis,
     required this.examinationDate,
+    required this.isFavorite,
     this.images,
     required this.imageUrls,
   });
@@ -30,6 +32,7 @@ class PrescriptionModel {
       hospital: json['hospital'],
       diagnosis: json['diagnosis'],
       examinationDate: json['examinationDate'],
+      isFavorite: json['isFavorite'],
       imageUrls: List<String>.from(json['imageUrls']),
     );
   }
@@ -42,6 +45,7 @@ class PrescriptionModel {
       hospital: hospital,
       diagnosis: diagnosis,
       examinationDate: examinationDate,
+      isFavorite: isFavorite,
       images: images,
       imageUrls: imageUrls,
     );
@@ -54,6 +58,7 @@ class PrescriptionModel {
       hospital: entity.hospital,
       diagnosis: entity.diagnosis,
       examinationDate: entity.examinationDate,
+      isFavorite: entity.isFavorite,
       images: entity.images,
       imageUrls: entity.imageUrls!,
     );
@@ -66,6 +71,7 @@ class PrescriptionModel {
       'hospital': hospital,
       'diagnosis': diagnosis,
       'examinationDate': examinationDate,
+      'isFavorite': isFavorite,
       'imageUrls': imageUrls,
     };
   }

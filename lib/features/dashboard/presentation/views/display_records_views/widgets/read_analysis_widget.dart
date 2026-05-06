@@ -2,10 +2,10 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_cached_image.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'custom_list_view.dart';
 
 class ReadAnalysisWidget extends StatelessWidget {
@@ -42,35 +42,35 @@ class ReadAnalysisWidget extends StatelessWidget {
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.userDoctor),
-              title: const Text('Doctor Name'),
+              title: Text(context.tr('doctor_name')),
               subtitle: Text(analysis.doctorName),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.flaskVial),
-              title: const Text('Analysis Type'),
-              subtitle: Text(analysis.analysisType),
+              title: Text(context.tr('analysis_type')),
+              subtitle: Text(context.tr(analysis.analysisType)),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(FontAwesomeIcons.houseMedicalCircleCheck),
-              title: const Text('Lab Name'),
-              subtitle: Text(analysis.lab ?? 'Not Added'),
+              title: Text(context.tr('lab_name')),
+              subtitle: Text(analysis.lab ?? context.tr('not_added')),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.notes),
-              title: const Text('Diagnosis'),
-              subtitle: Text(analysis.diagnosis ?? 'No Diagnosis'),
+              title: Text(context.tr('diagnosis')),
+              subtitle: Text(analysis.diagnosis ?? context.tr('no_diagnosis')),
             ),
           ),
           Card(
             child: ListTile(
               leading: const Icon(Icons.calendar_month),
-              title: const Text('Examination Date'),
+              title: Text(context.tr('examination_date')),
               subtitle: Text(
                 DateFormat(
                   "dd/MM/yyyy",

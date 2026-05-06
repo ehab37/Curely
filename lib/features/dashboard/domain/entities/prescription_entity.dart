@@ -1,21 +1,21 @@
 import 'dart:io';
 
 const List<String> doctorSpecializationsList = [
-  'Dentistry',
-  'Neurology',
-  'Ear Nose Throat',
-  'Orthopedics',
-  'Cardiology',
-  'Dermatology',
-  'Gastroenterology',
-  'Surgery',
-  'Internal Medicine',
-  'Obstetrics Gynecology',
-  'Ophthalmology',
-  'Pediatrics',
-  'Psychiatry',
-  'Urology',
-  'Other',
+  'dentistry',
+  'neurology',
+  'ear_nose_throat',
+  'orthopedics',
+  'cardiology',
+  'dermatology',
+  'gastroenterology',
+  'surgery',
+  'internal_medicine',
+  'obstetrics_gynecology',
+  'ophthalmology',
+  'pediatrics',
+  'psychiatry',
+  'urology',
+  'other',
 ];
 
 class PrescriptionEntity {
@@ -25,6 +25,7 @@ class PrescriptionEntity {
   final String? hospital;
   String? diagnosis;
   final String examinationDate;
+  bool isFavorite;
   final List<File>? images;
   List<String>? imageUrls;
 
@@ -35,6 +36,7 @@ class PrescriptionEntity {
     this.hospital,
     this.diagnosis,
     required this.examinationDate,
+    this.isFavorite = false,
     this.images,
     this.imageUrls,
   });

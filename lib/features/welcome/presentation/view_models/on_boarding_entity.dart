@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/assets_constants.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 
 class OnBoardingEntity {
   final String title;
@@ -13,27 +14,20 @@ class OnBoardingEntity {
   });
 }
 
-List<OnBoardingEntity> onBoardingPages(context) {
-  return [
-    OnBoardingEntity(
-      image: AssetsConstants.kTrack,
-      title: S.of(context).onBoardingTitle1,
-      subTitle: S.of(context).onBoardingSubTitle1,
-    ),
-    OnBoardingEntity(
-      image: AssetsConstants.kReminder,
-      title: S.of(context).onBoardingTitle2,
-      subTitle: S.of(context).onBoardingSubTitle2,
-    ),
-    OnBoardingEntity(
-      image: AssetsConstants.kOrganizer,
-      title: S.of(context).onBoardingTitle3,
-      subTitle: S.of(context).onBoardingSubTitle3,
-    ),
-    OnBoardingEntity(
-      image: AssetsConstants.kStay,
-      title: S.of(context).onBoardingTitle4,
-      subTitle: S.of(context).onBoardingSubTitle4,
-    ),
-  ];
-}
+List<OnBoardingEntity> onBoardingPages(BuildContext context) => [
+  OnBoardingEntity(
+    image: AssetsConstants.kOrganizer,
+    title: context.tr("onboarding_title_1"),
+    subTitle: context.tr("onboarding_subtitle_1"),
+  ),
+  OnBoardingEntity(
+    image: AssetsConstants.kReminder,
+    title: context.tr("onboarding_title_2"),
+    subTitle: context.tr("onboarding_subtitle_2"),
+  ),
+  OnBoardingEntity(
+    image: AssetsConstants.kChatBot,
+    title: context.tr("onboarding_title_3"),
+    subTitle: context.tr("onboarding_subtitle_3"),
+  ),
+];

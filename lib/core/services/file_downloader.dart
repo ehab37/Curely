@@ -24,7 +24,9 @@ class FileDownloader {
       final dir = await getTemporaryDirectory();
 
       // Create an image name
-      var filename = '${dir.path}/image.png';
+      var now = DateTime.now();
+      var filename =
+          '${dir.path}/image_${now.year}-${now.month}-${now.day}-${now.hour}-${now.minute}-${now.second}_com.curely.png';
 
       // Save to filesystem
       final file = File(filename);

@@ -1,17 +1,16 @@
 import 'dart:developer';
-import 'package:curely/core/constants/app_text_constants.dart';
 import 'package:curely/core/entities/user_entity.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
-import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_profile_cubit/manage_profile_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/birth_date_box.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'blood_field.dart';
+import 'height_field.dart';
+import 'name_field.dart';
+import 'weight_field.dart';
 
 class UpdateUserDetails extends StatefulWidget {
   const UpdateUserDetails({super.key, required this.user});
@@ -59,6 +58,7 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
 
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.viewPaddingOf(context).top;
     return Padding(
       padding: EdgeInsets.only(
         top: 20,
@@ -72,47 +72,19 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Edit Your Details', style: Styles.styleBlue20),
+              (statusBarHeight + 10).verticalSpacing,
+              Text(
+                context.tr('edit_your_details'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               20.verticalSpacing,
-              CustomTextFormField(
-                controller: nameController,
-                label: S.of(context).name,
-                hint: S.of(context).enterYourName,
-                keyboard: TextInputType.name,
-                textCapitalization: TextCapitalization.words,
-                validator: (value) => AppValidators.validateName(value),
-                autoFocus: true,
-              ),
+              NameField(nameController: nameController),
               8.verticalSpacing,
-              CustomTextFormField(
-                controller: bloodController,
-                label: 'Blood Type',
-                hint: 'e.g., A+',
-                textCapitalization: TextCapitalization.characters,
-                validator: (value) => AppValidators.validateBloodType(value),
-              ),
+              BloodField(bloodController: bloodController),
               8.verticalSpacing,
-              CustomTextFormField(
-                controller: heightController,
-                label: 'Height (cm)',
-                hint: 'e.g., 175',
-                keyboard: TextInputType.number,
-                validator: (value) => AppValidators.validateNumberLength(
-                  value,
-                  AppTextConstants.height,
-                ),
-              ),
+              HeightField(heightController: heightController),
               8.verticalSpacing,
-              CustomTextFormField(
-                controller: weightController,
-                label: 'Weight (kg)',
-                hint: 'e.g., 70',
-                keyboard: TextInputType.number,
-                validator: (value) => AppValidators.validateNumberLength(
-                  value,
-                  AppTextConstants.weight,
-                ),
-              ),
+              WeightField(weightController: weightController),
               8.verticalSpacing,
               BirthDateBox(
                 onChanged: (value) {
@@ -123,8 +95,11 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
               ),
               20.verticalSpacing,
               CustomButton(
-                backgroundColor: AppColors.buttonAccent,
-                child: Text('Save', style: Styles.styleWhite20),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Text(
+                  context.tr('save'),
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();

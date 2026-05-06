@@ -9,6 +9,11 @@ abstract class AppRegex {
     return RegExp(pattern).hasMatch(name);
   }
 
+  static bool isNameValidArabic(String name) {
+    const pattern = r"^[a-zA-Z\u0600-\u06FF\s]{2,}$";
+    return RegExp(pattern).hasMatch(name);
+  }
+
   static bool isPasswordValid(String password) {
     const minLength = 8;
     const pattern =

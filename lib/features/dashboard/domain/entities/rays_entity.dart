@@ -1,17 +1,17 @@
 import 'dart:io';
 
 const List<String> raysTypesList = [
-  'Cardiogram',
-  'X-Rays',
-  'Deep Xray',
-  'Electrocardiogram',
-  'CT Scan',
-  'MRI',
-  'Fluoroscopy',
-  'Mammography',
-  'DEXA',
-  'Isotope',
-  'Other',
+  'cardiogram',
+  'x_rays',
+  'deep_xray',
+  'electrocardiogram',
+  'ct_scan',
+  'mri',
+  'fluoroscopy',
+  'mammography',
+  'dexa',
+  'isotope',
+  'other',
 ];
 
 class RaysEntity {
@@ -21,6 +21,7 @@ class RaysEntity {
   final String? radiologyCenter;
   String? diagnosis;
   final String examinationDate;
+  bool isFavorite;
   final List<File>? images;
   List<String>? imageUrls;
 
@@ -31,6 +32,7 @@ class RaysEntity {
     this.radiologyCenter,
     this.diagnosis,
     required this.examinationDate,
+    this.isFavorite = false,
     this.images,
     this.imageUrls,
   });

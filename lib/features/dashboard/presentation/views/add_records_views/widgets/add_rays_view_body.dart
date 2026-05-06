@@ -1,20 +1,21 @@
 import 'dart:io';
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_dropdown_search.dart';
-import 'package:curely/core/widgets/custom_text_fom_field.dart';
 import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_rays_cubit/add_rays_cubit.dart';
+import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/diagnosis_field.dart';
+import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/doctor_name_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'examination_date_box.dart';
+import 'radiology_center_field.dart';
 
 class AddRaysViewBody extends StatefulWidget {
   const AddRaysViewBody({super.key});
@@ -50,32 +51,22 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          8.verticalSpacing,
-          CustomTextFormField(
-            controller: doctorNameController,
-            label: "Doctor Name",
-            hint: "Enter Doctor Name",
-            keyboard: TextInputType.name,
-            validator: (value) => AppValidators.validateName(value),
+          DoctorNameField(doctorNameController: doctorNameController),
+          RadiologyCenterField(
+            radiologyCenterController: radiologyCenterController,
           ),
-          CustomTextFormField(
-            controller: radiologyCenterController,
-            label: "Radiology Center",
-            hint: "Enter Radiology Center Name",
-          ),
-          CustomTextFormField(
-            controller: diagnosisController,
-            label: "Diagnosis",
-            maxLines: 3,
-          ),
+          DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: 'Rays Type',
-            label: 'Rays Type',
-            list: raysTypesList,
-            onChanged: (value) {
+            hint: context.tr('rays_type'),
+            label: context.tr('rays_type'),
+            list: raysTypesList.map((e) => context.tr(e)).toList(),
+            onChanged: (localizedValue) {
               setState(() {
-                raysType = value;
+                raysType = raysTypesList.firstWhere(
+                  (englishKey) => context.tr(englishKey) == localizedValue,
+                  orElse: () => context.tr('other'),
+                );
               });
             },
             validator: (value) => AppValidators.validateRequired(value),
@@ -104,7 +95,10 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 if (images.isEmpty) {
-                  InfoBox.customSnackBar(context, "Please select an image");
+                  InfoBox.infoFloatingBox(
+                    context,
+                    context.tr("please_select_image"),
+                  );
                   return;
                 }
                 RaysEntity rays = RaysEntity(
@@ -124,8 +118,11 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
                 });
               }
             },
-            backgroundColor: AppColors.buttonAccent,
-            child: Text("Add Rays", style: Styles.styleWhite20),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: Text(
+              context.tr("add_rays"),
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           SizedBox(height: SpacingConstants.bottomPadding),
         ],

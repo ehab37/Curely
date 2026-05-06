@@ -1,9 +1,8 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,19 +46,22 @@ class _UpdateMedicineDetailsState extends State<UpdateMedicineDetails> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Edit Your Details', style: Styles.styleBlue20),
+            Text(
+              context.tr('edit_your_details'),
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             20.verticalSpacing,
             TextFormField(
               controller: notesController,
-              decoration: const InputDecoration(
-                labelText: 'Notes',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: context.tr('notes'),
+                border: const OutlineInputBorder(),
               ),
               maxLines: 5,
             ),
             8.verticalSpacing,
             SwitchListTile(
-              title: const Text('Reminder'),
+              title: Text(context.tr('reminder')),
               value: isReminderActive,
               onChanged: (value) {
                 setState(() {
@@ -69,8 +71,11 @@ class _UpdateMedicineDetailsState extends State<UpdateMedicineDetails> {
             ),
             20.verticalSpacing,
             CustomButton(
-              backgroundColor: AppColors.buttonAccent,
-              child: Text('Save', style: Styles.styleWhite20),
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              child: Text(
+                context.tr('save'),
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
               onPressed: () {
                 final updatedMedicine = widget.medicine
                   ..medicineNotes = notesController.text

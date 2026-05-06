@@ -6,6 +6,7 @@ import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/storage_services.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ImagesRepoImpl implements ImagesRepo {
   const ImagesRepoImpl({
@@ -23,7 +24,7 @@ class ImagesRepoImpl implements ImagesRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       String url = await storageServices.uploadFile(
         file: imageFile,
@@ -36,7 +37,7 @@ class ImagesRepoImpl implements ImagesRepo {
       log(e.toString());
       return Left(
         OtherErrors.fromOtherErrors(
-          "Something went wrong while uploading image, try again later.",
+          "upload_image_error".tr(),
         ),
       );
     }
@@ -49,7 +50,7 @@ class ImagesRepoImpl implements ImagesRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       List<String> urls = await storageServices.uploadFiles(
         files: imageFiles,
@@ -62,7 +63,7 @@ class ImagesRepoImpl implements ImagesRepo {
       log(e.toString());
       return Left(
         OtherErrors.fromOtherErrors(
-          "Something went wrong while uploading images, try again later.",
+          "upload_images_error".tr(),
         ),
       );
     }

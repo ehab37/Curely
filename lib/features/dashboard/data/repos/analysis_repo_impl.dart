@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/data/models/analysis_model.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AnalysisRepoImpl implements AnalysisRepo {
   AnalysisRepoImpl({
@@ -31,7 +32,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
         path: DatabaseConstants.users,
@@ -53,16 +54,54 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }
 
   @override
-  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis() async {
+  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis({
+    String? searchText,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
                 path: DatabaseConstants.users,
                 docId: user.uId,
                 subCollectionPath: DatabaseConstants.analysisPath,
+              )
+              as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
+      List<AnalysisEntity> analysis = data
+          .map((e) => AnalysisModel.fromJson(e).toEntity())
+          .toList();
+      return Right(analysis);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(
+        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis() async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      var data =
+          await databaseService.getData(
+                path: DatabaseConstants.users,
+                docId: user.uId,
+                subCollectionPath: DatabaseConstants.analysisPath,
+                query: {"field": "isFavorite", "value": true},
               )
               as List<Map<String, dynamic>>;
       List<AnalysisEntity> analysis = data
@@ -85,7 +124,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   Future<Either<Failure, void>> deleteAnalysis({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -112,7 +151,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,

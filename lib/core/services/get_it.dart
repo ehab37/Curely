@@ -1,3 +1,4 @@
+import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -6,10 +7,12 @@ import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
+import 'package:curely/core/services/gemini_chat_service.dart';
+import 'package:curely/core/services/location_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/notification_service.dart';
 import 'package:curely/core/services/storage_services.dart';
-import 'package:curely/core/services/url_services.dart';
+import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/dashboard/data/repos/analysis_repo_impl.dart';
@@ -24,7 +27,9 @@ import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/home/data/repos/home_repo_impl.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:curely/features/profile/data/repos/notes_repo_impl.dart';
 import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -32,69 +37,86 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 void setupGetIt() {
-  getIt.registerSingleton<LanguageCubit>(LanguageCubit());
-  getIt.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
-  getIt.registerSingleton<DatabaseService>(FirestoreServices());
-  getIt.registerSingleton<UrlServices>(UrlServices());
-  getIt.registerSingleton<NotificationService>(NotificationService());
-  getIt.registerSingleton<StorageServices>(FireStorage());
-  getIt.registerSingleton<NetworkManager>(NetworkManager());
-  getIt.registerSingleton<UserDataRepo>(
-    UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
+  getIt.registerFactory<LanguageCubit>(() => LanguageCubit());
+  getIt.registerFactory<ThemeCubit>(() => ThemeCubit());
+  getIt.registerLazySingleton<FirebaseAuthServices>(
+    () => FirebaseAuthServices(),
   );
-  getIt.registerSingleton<AuthRepo>(
-    AuthRepoImpl(
+  getIt.registerLazySingleton<DatabaseService>(() => FirestoreServices());
+  getIt.registerLazySingleton<UrlService>(() => UrlService());
+  getIt.registerLazySingleton<NotificationService>(() => NotificationService());
+  getIt.registerLazySingleton<StorageServices>(() => FireStorage());
+  getIt.registerLazySingleton<NetworkManager>(() => NetworkManager());
+  getIt.registerLazySingleton<LocationService>(() => LocationService());
+  getIt.registerLazySingleton<GeminiChatService>(() => GeminiChatService());
+  getIt.registerLazySingleton<UserDataRepo>(
+    () => UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
+  );
+  getIt.registerLazySingleton<AuthRepo>(
+    () => AuthRepoImpl(
       firebaseAuthServices: getIt<FirebaseAuthServices>(),
       userDataRepo: getIt<UserDataRepo>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
-  getIt.registerSingleton<ProfileRepo>(
-    ProfileRepoImpl(
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepoImpl(
       userDataRepo: getIt<UserDataRepo>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
-  getIt.registerSingleton<ImagesRepo>(
-    ImagesRepoImpl(
+  getIt.registerLazySingleton<ImagesRepo>(
+    () => ImagesRepoImpl(
       storageServices: getIt<StorageServices>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
-  getIt.registerSingleton<MedicineNotificationRepo>(
-    MedicineNotificationRepoImpl(
+  getIt.registerLazySingleton<MedicineNotificationRepo>(
+    () => MedicineNotificationRepoImpl(
       notificationService: getIt<NotificationService>(),
     ),
   );
-  getIt.registerSingleton<MedicineRepo>(
-    MedicineRepoImpl(
+  getIt.registerLazySingleton<MedicineRepo>(
+    () => MedicineRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<PrescriptionRepo>(
-    PrescriptionRepoImpl(
+  getIt.registerLazySingleton<PrescriptionRepo>(
+    () => PrescriptionRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<RaysRepo>(
-    RaysRepoImpl(
+  getIt.registerLazySingleton<RaysRepo>(
+    () => RaysRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<AnalysisRepo>(
-    AnalysisRepoImpl(
+  getIt.registerLazySingleton<AnalysisRepo>(
+    () => AnalysisRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<HomeRepo>(
-    HomeRepoImpl(urlServices: getIt<UrlServices>()),
+  getIt.registerLazySingleton<NotesRepo>(
+    () => NotesRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
+    ),
+  );
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(
+      urlService: getIt<UrlService>(),
+      locationService: getIt<LocationService>(),
+      geminiChatService: getIt<GeminiChatService>(),
+      networkManager: getIt<NetworkManager>(),
+    ),
   );
 }

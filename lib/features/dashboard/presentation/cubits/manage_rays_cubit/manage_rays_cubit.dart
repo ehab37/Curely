@@ -8,10 +8,13 @@ part 'manage_rays_state.dart';
 class ManageRaysCubit extends Cubit<ManageRaysState> {
   ManageRaysCubit({required this.raysRepo}) : super(ManageRaysInitial());
   final RaysRepo raysRepo;
+  bool isFavoriteView = false;
 
-  Future<void> getRays() async {
+  Future<void> getRays({String? searchText}) async {
     emit(ManageRaysLoading());
-    var result = await raysRepo.getRays();
+    var result = isFavoriteView
+        ? await raysRepo.getFavoriteRays()
+        : await raysRepo.getRays(searchText: searchText);
     result.fold(
       (failure) {
         emit(GetRaysFailure(failure.errMessage));

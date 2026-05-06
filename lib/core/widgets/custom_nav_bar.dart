@@ -1,5 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +17,11 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       alignment: AlignmentDirectional.center,
-      height: MediaQuery.of(context).size.height / 15,
+      height: 50,
       decoration: BoxDecoration(
-        color: AppColors.lightGray,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           bottomRight: Radius.circular(20),
@@ -33,19 +31,16 @@ class CustomNavBar extends StatelessWidget {
       child: Row(
         children: [
           16.horizontalSpacing,
-          Icon(prefixIcon, color: AppColors.primary),
+          Icon(prefixIcon),
           16.horizontalSpacing,
           Expanded(
             child: Text(
               text,
-              style: Styles.styleBlue20,
+              style: Theme.of(context).textTheme.bodyMedium,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-          IconButton(
-            icon: Icon(suffixIcon, color: AppColors.primary, size: 35),
-            onPressed: onPressed,
-          ),
+          IconButton(icon: Icon(suffixIcon, size: 30), onPressed: onPressed),
         ],
       ),
     );
