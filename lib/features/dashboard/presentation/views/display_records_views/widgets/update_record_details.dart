@@ -1,7 +1,6 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class UpdateRecordDetails extends StatefulWidget {
@@ -42,23 +41,29 @@ class _UpdateRecordDetailsState extends State<UpdateRecordDetails> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Edit Your Details', style: Styles.styleBlue20),
+            Text(
+              context.tr('edit_your_details'),
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             20.verticalSpacing,
             TextFormField(
               controller: diagnosisController,
-              decoration: const InputDecoration(
-                labelText: 'Diagnosis',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: context.tr('diagnosis'),
+                border: const OutlineInputBorder(),
               ),
               maxLines: 5,
             ),
             20.verticalSpacing,
             CustomButton(
-              backgroundColor: AppColors.buttonAccent,
+              backgroundColor: Theme.of(context).colorScheme.primary,
               onPressed: () {
                 widget.onSave(diagnosisController.text);
               },
-              child: Text('Save', style: Styles.styleWhite20),
+              child: Text(
+                context.tr('save'),
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
             ),
             20.verticalSpacing,
           ],

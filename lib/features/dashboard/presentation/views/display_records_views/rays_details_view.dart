@@ -3,14 +3,14 @@ import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/custom_alert_dialog.dart';
 import 'package:curely/core/widgets/custom_loading_indicator.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
-import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_rays_cubit/manage_rays_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/update_record_details.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'widgets/read_rays_widget.dart';
+import 'widgets/details_view_body.dart';
+import 'widgets/update_record_details.dart';
 
 class RaysDetailsView extends StatelessWidget {
   const RaysDetailsView({super.key, required this.rays});
@@ -21,7 +21,7 @@ class RaysDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rays Details'),
+        title: Text(context.tr('rays_details')),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -47,12 +47,12 @@ class RaysDetailsView extends StatelessWidget {
                 context: context,
                 content: CustomAlertDialog(
                   dialogContext: context,
-                  title: 'Delete Rays?',
-                  content: 'Are you sure you want to delete this rays?',
+                  title: context.tr('delete_rays_title'),
+                  content: context.tr('delete_rays_content'),
                   onDone: () {
-                    context
-                        .read<ManagePrescriptionsCubit>()
-                        .deletePrescriptions(docId: rays.docId!);
+                    context.read<ManageRaysCubit>().deleteRays(
+                      docId: rays.docId!,
+                    );
                     GoRouter.of(context).pop();
                   },
                 ),
@@ -64,9 +64,8 @@ class RaysDetailsView extends StatelessWidget {
       body: BlocConsumer<ManageRaysCubit, ManageRaysState>(
         listener: (context, state) {
           if (state is GetRaysFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteRaysSuccess) {
-            InfoBox.customSnackBar(context, 'Rays deleted.');
             GoRouter.of(context).pop();
           }
         },
@@ -76,7 +75,10 @@ class RaysDetailsView extends StatelessWidget {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ReadRaysWidget(rays: rays),
+            child: DetailsViewBody(
+              imagesList: rays.imageUrls!,
+              detailsList: raysDetailsList(context, rays),
+            ),
           );
         },
       ),

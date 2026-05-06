@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/data/models/rays_model.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RaysRepoImpl implements RaysRepo {
   RaysRepoImpl({
@@ -29,7 +30,7 @@ class RaysRepoImpl implements RaysRepo {
   Future<Either<Failure, void>> addRays({required RaysEntity rays}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
         path: DatabaseConstants.users,
@@ -56,7 +57,7 @@ class RaysRepoImpl implements RaysRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -91,7 +92,7 @@ class RaysRepoImpl implements RaysRepo {
   Future<Either<Failure, List<RaysEntity>>> getFavoriteRays() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -122,7 +123,7 @@ class RaysRepoImpl implements RaysRepo {
   Future<Either<Failure, void>> deleteRays({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -147,7 +148,7 @@ class RaysRepoImpl implements RaysRepo {
   Future<Either<Failure, void>> updateRays({required RaysEntity rays}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,

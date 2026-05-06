@@ -11,6 +11,7 @@ import 'package:curely/features/profile/data/models/note_model.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
 import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class NotesRepoImpl implements NotesRepo {
   NotesRepoImpl({
@@ -29,7 +30,7 @@ class NotesRepoImpl implements NotesRepo {
   Future<Either<Failure, void>> addNote({required NoteEntity note}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
         path: DatabaseConstants.users,
@@ -56,7 +57,7 @@ class NotesRepoImpl implements NotesRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -91,7 +92,7 @@ class NotesRepoImpl implements NotesRepo {
   Future<Either<Failure, List<NoteEntity>>> getFavoriteNotes() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -121,7 +122,7 @@ class NotesRepoImpl implements NotesRepo {
   Future<Either<Failure, void>> deleteNote({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -146,7 +147,7 @@ class NotesRepoImpl implements NotesRepo {
   Future<Either<Failure, void>> updateNote({required NoteEntity note}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,

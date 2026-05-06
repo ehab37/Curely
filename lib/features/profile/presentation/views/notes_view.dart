@@ -6,6 +6,7 @@ import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:curely/features/profile/presentation/views/widgets/add_note.dart';
 import 'package:curely/features/profile/presentation/views/widgets/notes_view_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,20 +22,20 @@ class NotesView extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            appBar: buildCustomAppBar(
-              title: isFavoriteView
-                  ? 'Favorite Health Notes'
-                  : 'My Health Notes',
-              icon: Icons.note_add_outlined,
-              isBackable: true,
-              onTap: () {
-                final cubit = context.read<ManageNotesCubit>();
-                showCustomBottomSheet(
-                  context,
-                  BlocProvider.value(value: cubit, child: AddNote()),
-                );
-              },
-            ),
+            appBar: isFavoriteView
+                ? buildCustomAppBar(title: context.tr("favorite_health_notes"))
+                : buildCustomAppBar(
+                    title: context.tr("my_health_notes"),
+                    icon: Icons.note_add_outlined,
+                    isBackable: true,
+                    onTap: () {
+                      final cubit = context.read<ManageNotesCubit>();
+                      showCustomBottomSheet(
+                        context,
+                        BlocProvider.value(value: cubit, child: AddNote()),
+                      );
+                    },
+                  ),
             body: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(

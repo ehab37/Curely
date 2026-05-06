@@ -1,4 +1,4 @@
-import 'package:curely/core/theme/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TypingIndicator extends StatelessWidget {
@@ -9,16 +9,16 @@ class TypingIndicator extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
-        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: AppColors.skyBlue.withAlpha(51),
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Text(
-          "Typing...",
+          context.tr("typing"),
           style: TextStyle(
-            color: Colors.black54,
+            color: Theme.of(context).colorScheme.onSurface,
             fontSize: 12,
             fontStyle: FontStyle.italic,
           ),

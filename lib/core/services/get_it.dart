@@ -1,3 +1,4 @@
+import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -36,79 +37,82 @@ import 'package:get_it/get_it.dart';
 final getIt = GetIt.instance;
 
 void setupGetIt() {
-  getIt.registerSingleton<LanguageCubit>(LanguageCubit());
-  getIt.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
-  getIt.registerSingleton<DatabaseService>(FirestoreServices());
-  getIt.registerSingleton<UrlService>(UrlService());
-  getIt.registerSingleton<NotificationService>(NotificationService());
-  getIt.registerSingleton<StorageServices>(FireStorage());
-  getIt.registerSingleton<NetworkManager>(NetworkManager());
-  getIt.registerSingleton<LocationService>(LocationService());
-  getIt.registerSingleton<GeminiChatService>(GeminiChatService());
-  getIt.registerSingleton<UserDataRepo>(
-    UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
+  getIt.registerFactory<LanguageCubit>(() => LanguageCubit());
+  getIt.registerFactory<ThemeCubit>(() => ThemeCubit());
+  getIt.registerLazySingleton<FirebaseAuthServices>(
+    () => FirebaseAuthServices(),
   );
-  getIt.registerSingleton<AuthRepo>(
-    AuthRepoImpl(
+  getIt.registerLazySingleton<DatabaseService>(() => FirestoreServices());
+  getIt.registerLazySingleton<UrlService>(() => UrlService());
+  getIt.registerLazySingleton<NotificationService>(() => NotificationService());
+  getIt.registerLazySingleton<StorageServices>(() => FireStorage());
+  getIt.registerLazySingleton<NetworkManager>(() => NetworkManager());
+  getIt.registerLazySingleton<LocationService>(() => LocationService());
+  getIt.registerLazySingleton<GeminiChatService>(() => GeminiChatService());
+  getIt.registerLazySingleton<UserDataRepo>(
+    () => UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
+  );
+  getIt.registerLazySingleton<AuthRepo>(
+    () => AuthRepoImpl(
       firebaseAuthServices: getIt<FirebaseAuthServices>(),
       userDataRepo: getIt<UserDataRepo>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
-  getIt.registerSingleton<ProfileRepo>(
-    ProfileRepoImpl(
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepoImpl(
       userDataRepo: getIt<UserDataRepo>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
-  getIt.registerSingleton<ImagesRepo>(
-    ImagesRepoImpl(
+  getIt.registerLazySingleton<ImagesRepo>(
+    () => ImagesRepoImpl(
       storageServices: getIt<StorageServices>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );
-  getIt.registerSingleton<MedicineNotificationRepo>(
-    MedicineNotificationRepoImpl(
+  getIt.registerLazySingleton<MedicineNotificationRepo>(
+    () => MedicineNotificationRepoImpl(
       notificationService: getIt<NotificationService>(),
     ),
   );
-  getIt.registerSingleton<MedicineRepo>(
-    MedicineRepoImpl(
+  getIt.registerLazySingleton<MedicineRepo>(
+    () => MedicineRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<PrescriptionRepo>(
-    PrescriptionRepoImpl(
+  getIt.registerLazySingleton<PrescriptionRepo>(
+    () => PrescriptionRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<RaysRepo>(
-    RaysRepoImpl(
+  getIt.registerLazySingleton<RaysRepo>(
+    () => RaysRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<AnalysisRepo>(
-    AnalysisRepoImpl(
+  getIt.registerLazySingleton<AnalysisRepo>(
+    () => AnalysisRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<NotesRepo>(
-    NotesRepoImpl(
+  getIt.registerLazySingleton<NotesRepo>(
+    () => NotesRepoImpl(
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
     ),
   );
-  getIt.registerSingleton<HomeRepo>(
-    HomeRepoImpl(
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(
       urlService: getIt<UrlService>(),
       locationService: getIt<LocationService>(),
       geminiChatService: getIt<GeminiChatService>(),

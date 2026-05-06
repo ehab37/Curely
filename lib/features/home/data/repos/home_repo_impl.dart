@@ -8,6 +8,7 @@ import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/home/domain/entities/chat_message.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:geolocator/geolocator.dart';
 
 class HomeRepoImpl implements HomeRepo {
@@ -36,7 +37,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, void>> nearestPharmacy() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await locationService.locationPermission();
       Position currentLocation = await locationService.getCurrentUserLocation();
@@ -59,7 +60,7 @@ class HomeRepoImpl implements HomeRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       final response = await geminiChatService.sendMessage(
         prompt: prompt,

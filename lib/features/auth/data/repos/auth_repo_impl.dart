@@ -8,6 +8,7 @@ import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepoImpl implements AuthRepo {
@@ -30,7 +31,7 @@ class AuthRepoImpl implements AuthRepo {
     User? user;
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       user = await firebaseAuthServices.createAccount(
         email: email,
@@ -69,7 +70,7 @@ class AuthRepoImpl implements AuthRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       User user = await firebaseAuthServices.loginUser(
         email: email,
@@ -95,7 +96,7 @@ class AuthRepoImpl implements AuthRepo {
     User? user;
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       user = await firebaseAuthServices.loginWithGoogle();
       UserEntity userEntity = UserModel.fromFirebaseUser(user);
@@ -129,7 +130,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, void>> resetPassword({required String email}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await firebaseAuthServices.resetPassword(email: email);
       return Right(null);
@@ -150,7 +151,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, void>> logoutUser() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await firebaseAuthServices.logoutUser();
       await userDataRepo.deleteUserDataLocally();
@@ -173,7 +174,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, void>> deleteAccount({required String uId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await userDataRepo.deleteUserData(uId: uId);
       await userDataRepo.deleteUserDataLocally();

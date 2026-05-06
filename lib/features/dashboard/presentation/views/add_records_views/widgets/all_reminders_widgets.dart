@@ -1,6 +1,6 @@
 import 'package:curely/core/helpers/pick_time.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'custom_icon_button_row.dart';
 
@@ -21,11 +21,14 @@ class _AllRemindersWidgetsState extends State<AllRemindersWidgets> {
       children: [
         const Divider(),
         4.verticalSpacing,
-        Text('Reminder Time', style: Styles.style16),
+        Text(
+          context.tr('reminder_time'),
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
         CustomIconButtonRow(
           text1: widget.remindersList.length == 1
-              ? 'Reminder Time: '
-              : 'First Reminder Time: ',
+              ? '${context.tr('reminder_time')}: '
+              : context.tr('first_reminder_time'),
           text2: widget.remindersList[0].format(context),
           icon: Icons.timer_outlined,
           onPressed: () async {
@@ -35,11 +38,11 @@ class _AllRemindersWidgetsState extends State<AllRemindersWidgets> {
           },
         ),
         widget.remindersList.length == 1
-            ? SizedBox.shrink()
+            ? const SizedBox.shrink()
             : Column(
                 children: [
                   CustomIconButtonRow(
-                    text1: 'Second Reminder Time: ',
+                    text1: context.tr('second_reminder_time'),
                     text2: widget.remindersList[1].format(context),
                     icon: Icons.timer_outlined,
                     onPressed: () async {
@@ -49,11 +52,11 @@ class _AllRemindersWidgetsState extends State<AllRemindersWidgets> {
                     },
                   ),
                   widget.remindersList.length == 2
-                      ? SizedBox.shrink()
+                      ? const SizedBox.shrink()
                       : Column(
                           children: [
                             CustomIconButtonRow(
-                              text1: 'Third Reminder Time: ',
+                              text1: context.tr('third_reminder_time'),
                               text2: widget.remindersList[2].format(context),
                               icon: Icons.timer_outlined,
                               onPressed: () async {
@@ -64,9 +67,9 @@ class _AllRemindersWidgetsState extends State<AllRemindersWidgets> {
                               },
                             ),
                             widget.remindersList.length == 3
-                                ? SizedBox.shrink()
+                                ? const SizedBox.shrink()
                                 : CustomIconButtonRow(
-                                    text1: 'Forth Reminder Time: ',
+                                    text1: context.tr('forth_reminder_time'),
                                     text2: widget.remindersList[3].format(
                                       context,
                                     ),

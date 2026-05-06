@@ -1,5 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'custom_back_bar.dart';
@@ -19,13 +17,13 @@ class TitleSubTitleBack extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomBackBar(),
-        30.verticalSpacing,
-        Text(title, style: Styles.styleBlue25),
+        CustomBackBar(horizontalPadding: 0),
+        10.verticalSpacing,
+        Text(title, style: Theme.of(context).textTheme.titleMedium),
         Text(
           subTitle,
-          style: Styles.style18.copyWith(
-            color: AppColors.primary.withAlpha(160),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
         ),
       ],

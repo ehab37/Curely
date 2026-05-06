@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/image_input/icon_text_in_row.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -39,7 +41,7 @@ class ImageInput extends StatelessWidget {
         ScaffoldMessenger.of(context).clearSnackBars();
         InfoBox.customImageSnackBar(
           context: context,
-          content: (imageUrl == null || imageUrl!.isEmpty) && imageFile == null
+          content: (imageUrl.isNullOrEmpty) && imageFile == null
               ? Column(
                   children: [
                     GestureDetector(
@@ -49,7 +51,7 @@ class ImageInput extends StatelessWidget {
                       },
                       child: IconTextInRow(
                         icon: Icons.image_outlined,
-                        text: "From Gallery",
+                        text: context.tr("from_gallery"),
                       ),
                     ),
                     GestureDetector(
@@ -58,7 +60,7 @@ class ImageInput extends StatelessWidget {
                         _pickImage(ImageSource.camera);
                       },
                       child: IconTextInRow(
-                        text: "From Camera",
+                        text: context.tr("from_camera"),
                         icon: Icons.camera_alt_outlined,
                       ),
                     ),
@@ -82,7 +84,7 @@ class ImageInput extends StatelessWidget {
                                 },
                                 child: IconTextInRow(
                                   icon: Icons.image_outlined,
-                                  text: "From Gallery",
+                                  text: context.tr("from_gallery"),
                                 ),
                               ),
                               GestureDetector(
@@ -93,7 +95,7 @@ class ImageInput extends StatelessWidget {
                                   _pickImage(ImageSource.camera);
                                 },
                                 child: IconTextInRow(
-                                  text: "From Camera",
+                                  text: context.tr("from_camera"),
                                   icon: Icons.camera_alt_outlined,
                                 ),
                               ),
@@ -102,7 +104,7 @@ class ImageInput extends StatelessWidget {
                         );
                       },
                       child: IconTextInRow(
-                        text: "Pick New Image",
+                        text: context.tr("pick_new_image"),
                         icon: Icons.add,
                       ),
                     ),
@@ -114,7 +116,7 @@ class ImageInput extends StatelessWidget {
                             _removeImage();
                           },
                       child: IconTextInRow(
-                        text: "Remove Image",
+                        text: context.tr("remove_image"),
                         icon: Icons.remove_circle_outline,
                       ),
                     ),

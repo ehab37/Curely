@@ -5,11 +5,12 @@ import 'package:curely/core/widgets/custom_loading_indicator.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/update_record_details.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'widgets/read_analysis_widget.dart';
+import 'widgets/details_view_body.dart';
+import 'widgets/update_record_details.dart';
 
 class AnalysisDetailsView extends StatelessWidget {
   const AnalysisDetailsView({super.key, required this.analysis});
@@ -20,7 +21,7 @@ class AnalysisDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Analysis Details'),
+        title: Text(context.tr('analysis_details')),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -46,8 +47,8 @@ class AnalysisDetailsView extends StatelessWidget {
                 context: context,
                 content: CustomAlertDialog(
                   dialogContext: context,
-                  title: 'Delete Analysis?',
-                  content: 'Are you sure you want to delete this analysis?',
+                  title: context.tr('delete_analysis_title'),
+                  content: context.tr('delete_analysis_content'),
                   onDone: () {
                     context.read<ManageAnalysisCubit>().deleteAnalysis(
                       docId: analysis.docId!,
@@ -63,9 +64,8 @@ class AnalysisDetailsView extends StatelessWidget {
       body: BlocConsumer<ManageAnalysisCubit, ManageAnalysisState>(
         listener: (context, state) {
           if (state is GetAnalysisFailure) {
-            InfoBox.customSnackBar(context, state.errMessage);
+            InfoBox.errorFloatingBox(context, state.errMessage);
           } else if (state is DeleteAnalysisSuccess) {
-            InfoBox.customSnackBar(context, 'Analysis deleted.');
             GoRouter.of(context).pop();
           }
         },
@@ -75,7 +75,10 @@ class AnalysisDetailsView extends StatelessWidget {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ReadAnalysisWidget(analysis: analysis),
+            child: DetailsViewBody(
+              imagesList: analysis.imageUrls!,
+              detailsList: analysisDetailsList(context, analysis),
+            ),
           );
         },
       ),

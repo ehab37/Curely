@@ -17,42 +17,42 @@ class SearchSuggestionEntity {
   static List<SearchSuggestionEntity> getSuggestionsList() {
     return [
       SearchSuggestionEntity(
-        title: 'Add Medicine',
+        title: 'add_medicine',
         icon: Icons.medication_liquid_rounded,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kAddMedicineView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Add Prescription',
+        title: 'add_prescription',
         icon: FontAwesomeIcons.fileMedical,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kAddPrescriptionView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Add Rays',
+        title: 'add_rays',
         icon: FontAwesomeIcons.xRay,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kAddRaysView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Add Analysis',
+        title: 'add_analysis',
         icon: FontAwesomeIcons.handHoldingMedical,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kAddAnalysisView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Display Medicines',
+        title: 'display_medicines',
         icon: FontAwesomeIcons.capsules,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kDisplayMedicineView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Display Prescriptions',
+        title: 'display_prescriptions',
         icon: FontAwesomeIcons.prescription,
         onTap: (context) {
           GoRouter.of(
@@ -61,21 +61,21 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Display Rays',
+        title: 'display_rays',
         icon: FontAwesomeIcons.fileWaveform,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kDisplayRaysView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Display Analysis',
+        title: 'display_analysis',
         icon: FontAwesomeIcons.flaskVial,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kDisplayAnalysisView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Favorite Medicines',
+        title: 'favorite_medicines',
         icon: FontAwesomeIcons.heartCirclePlus,
         onTap: (context) {
           GoRouter.of(context).push(
@@ -85,7 +85,7 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Favorite Prescriptions',
+        title: 'favorite_prescriptions',
         icon: FontAwesomeIcons.filePrescription,
         onTap: (context) {
           GoRouter.of(context).push(
@@ -95,7 +95,7 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Favorite Rays',
+        title: 'favorite_rays',
         icon: FontAwesomeIcons.heartPulse,
         onTap: (context) {
           GoRouter.of(context).push(
@@ -105,7 +105,7 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Favorite Analysis',
+        title: 'favorite_analysis',
         icon: FontAwesomeIcons.handHoldingDroplet,
         onTap: (context) {
           GoRouter.of(context).push(
@@ -115,7 +115,7 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Reminders',
+        title: 'reminders',
         icon: FontAwesomeIcons.userClock,
         onTap: (context) {
           GoRouter.of(context).push(
@@ -125,14 +125,14 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Health Notes',
+        title: 'health_notes',
         icon: FontAwesomeIcons.notesMedical,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kNotesView);
         },
       ),
       SearchSuggestionEntity(
-        title: 'Favorite Health Notes',
+        title: 'favorite_health_notes',
         icon: Icons.bookmark_border,
         onTap: (context) {
           GoRouter.of(context).push(
@@ -142,7 +142,7 @@ class SearchSuggestionEntity {
         },
       ),
       SearchSuggestionEntity(
-        title: 'Language',
+        title: 'language',
         icon: FontAwesomeIcons.language,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kLanguageView);

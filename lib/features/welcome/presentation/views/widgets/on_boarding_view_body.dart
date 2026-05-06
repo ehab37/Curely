@@ -2,17 +2,15 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/welcome/presentation/view_models/on_boarding_entity.dart';
-import 'package:curely/features/welcome/presentation/views/widgets/on_boarding_page_view.dart';
-import 'package:curely/generated/l10n.dart';
-import 'package:dots_indicator/dots_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'on_boarding_app_bar.dart';
+import 'on_boarding_dots.dart';
+import 'on_boarding_page_view.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
@@ -47,30 +45,19 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     return SafeArea(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: OnBoardingAppBar(
-              pageController: pageController,
-              currentPage: currentPage,
-            ),
+          OnBoardingAppBar(
+            pageController: pageController,
+            currentPage: currentPage,
           ),
           Expanded(child: OnBoardingPageView(pageController: pageController)),
-          DotsIndicator(
-            dotsCount: onBoardingPages(context).length,
+          OnBoardingDots(
             position: pageController.hasClients ? pageController.page! : 0,
-            decorator: DotsDecorator(
-              activeColor: AppColors.primary,
-              color: AppColors.unActive,
-              size: Size(8, 8),
-              activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusDirectional.circular(25),
-              ),
-              activeSize: Size(20, 8),
-            ),
           ),
           10.verticalSpacing,
           Visibility(
-            visible: (pageController.hasClients ? currentPage : 0) == 3,
+            visible:
+                (pageController.hasClients ? currentPage : 0) ==
+                onBoardingPages(context).length - 1,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
@@ -88,10 +75,10 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                     value: true,
                   );
                 },
-                backgroundColor: AppColors.darkBlue,
+                backgroundColor: Theme.of(context).colorScheme.onSurface,
                 child: Text(
-                  S.of(context).getStarted,
-                  style: Styles.styleWhite20,
+                  context.tr("get_started"),
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
             ),

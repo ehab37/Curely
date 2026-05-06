@@ -1,19 +1,19 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
-import 'package:curely/core/theme/styles.dart';
-import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
-import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
-import 'package:curely/features/auth/presentation/views/widgets/terms_and_conditions_widget.dart';
-import 'package:curely/generated/l10n.dart';
-import 'package:flutter/gestures.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'already_have_account.dart';
+import 'confirm_password_field.dart';
+import 'email_field.dart';
+import 'name_field.dart';
+import 'password_field.dart';
+import 'terms_and_conditions_widget.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
@@ -27,7 +27,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController password2Controller = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController nameController = TextEditingController();
   bool isSecure = true;
   bool isSecure2 = true;
@@ -37,7 +38,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-    password2Controller.dispose();
+    confirmPasswordController.dispose();
     nameController.dispose();
     super.dispose();
   }
@@ -54,56 +55,29 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(S.of(context).register, style: Styles.style45),
+                Text(
+                  context.tr("register"),
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
                 40.verticalSpacing,
-                CustomTextFormField(
-                  controller: nameController,
-                  label: S.of(context).name,
-                  hint: S.of(context).enterYourName,
-                  keyboard: TextInputType.name,
-                  textCapitalization: TextCapitalization.words,
-                  validator: (value) => AppValidators.validateName(value),
-                ),
-                CustomTextFormField(
-                  controller: emailController,
-                  label: S.of(context).email,
-                  hint: S.of(context).enterYourEmail,
-                  keyboard: TextInputType.emailAddress,
-                  validator: (value) => AppValidators.validateEmail(value),
-                  prefixIcon: Icons.email_outlined,
-                ),
-                CustomTextFormField(
-                  controller: passwordController,
-                  label: S.of(context).password,
-                  hint: S.of(context).enterYourPassword,
-                  keyboard: TextInputType.visiblePassword,
+                NameField(nameController: nameController),
+                EmailField(emailController: emailController),
+                PasswordField(
+                  passwordController: passwordController,
                   isSecure: isSecure,
-                  suffixIcon: isSecure
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined,
                   suffixPress: () {
                     isSecure = !isSecure;
                     setState(() {});
                   },
-                  validator: (value) => AppValidators.validatePassword(value),
                 ),
-                CustomTextFormField(
-                  controller: password2Controller,
-                  label: S.of(context).confirmPassword,
-                  hint: S.of(context).confirmYourPassword,
-                  keyboard: TextInputType.visiblePassword,
+                ConfirmPasswordField(
+                  passwordController: passwordController,
+                  confirmPasswordController: confirmPasswordController,
                   isSecure: isSecure2,
-                  suffixIcon: isSecure2
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined,
                   suffixPress: () {
                     isSecure2 = !isSecure2;
                     setState(() {});
                   },
-                  validator: (value) => AppValidators.validateConfirmPassword(
-                    value,
-                    passwordController.text,
-                  ),
                 ),
                 TermsAndConditionsWidget(
                   onChanged: (value) {
@@ -124,10 +98,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 ),
                 24.verticalSpacing,
                 CustomButton(
-                  backgroundColor: AppColors.darkBlue,
+                  backgroundColor: Theme.of(context).colorScheme.onSurface,
                   child: Text(
-                    S.of(context).register,
-                    style: Styles.styleWhite20,
+                    context.tr("register"),
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
@@ -140,9 +114,15 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                         );
                         FocusScope.of(context).unfocus();
                       } else {
-                        InfoBox.customSnackBar(
+                        InfoBox.warningFloatingBox(
                           context,
-                          S.of(context).TermsAndConditionsMustBeAccepted,
+                          message: context.tr("terms_must_be_accepted"),
+                          actionMessage: context.tr("accept_terms"),
+                          action: () {
+                            setState(() {
+                              isAgreeTerms = true;
+                            });
+                          },
                         );
                       }
                     } else {
@@ -152,27 +132,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   },
                 ),
                 15.verticalSpacing,
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: S.of(context).alreadyHaveAccount,
-                        style: Styles.style15,
-                      ),
-                      const TextSpan(text: "  ", style: Styles.style15),
-                      TextSpan(
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            GoRouter.of(
-                              context,
-                            ).pushReplacement(AppRoutesConstants.kLoginView);
-                          },
-                        text: '${S.of(context).login}!',
-                        style: Styles.styleUnderline16,
-                      ),
-                    ],
-                  ),
-                ),
+                AlreadyHaveAccount(),
               ],
             ),
           ),

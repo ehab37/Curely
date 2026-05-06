@@ -15,7 +15,7 @@ class DoctorAiViewBody extends StatelessWidget {
     return BlocConsumer<DoctorAiCubit, DoctorAiState>(
       listener: (context, state) {
         if (state is DoctorAiFailure) {
-          InfoBox.customSnackBar(context, state.errMessage);
+          InfoBox.errorFloatingBox(context, state.errMessage);
         }
       },
       builder: (context, state) {
@@ -36,11 +36,14 @@ class DoctorAiViewBody extends StatelessWidget {
                 },
               ),
             ),
-            ChatInput(
-              controller: cubit.promptController,
-              onSend: (text) {
-                context.read<DoctorAiCubit>().sendPrompt();
-              },
+            AbsorbPointer(
+              absorbing: state is DoctorAiTypingState,
+               child: ChatInput(
+                controller: cubit.promptController,
+                onSend: (text) {
+                  context.read<DoctorAiCubit>().sendPrompt();
+                },
+              ),
             ),
           ],
         );

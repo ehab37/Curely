@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/data/models/medicine_model.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MedicineRepoImpl implements MedicineRepo {
   MedicineRepoImpl({
@@ -31,7 +32,7 @@ class MedicineRepoImpl implements MedicineRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       String? docId = await databaseService.addData(
         path: DatabaseConstants.users,
@@ -58,7 +59,7 @@ class MedicineRepoImpl implements MedicineRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -93,7 +94,7 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -123,7 +124,7 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -153,7 +154,7 @@ class MedicineRepoImpl implements MedicineRepo {
   Future<Either<Failure, void>> deleteMedicine({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -180,7 +181,7 @@ class MedicineRepoImpl implements MedicineRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,

@@ -29,6 +29,4 @@ class DatabaseConstants {
   static const String raysPath = "rays";
   static const String analysisPath = "analysis";
   static const String notesPath = "notes";
-
-  static final String geminiApiKey = dotenv.get("GEMINI_API_KEY");
 }

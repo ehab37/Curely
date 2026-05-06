@@ -1,8 +1,6 @@
 import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/helpers/border_functions.dart';
 import 'package:curely/core/services/cache_helper.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
   final bool? autoFocus;
-  final bool? enabled;
+  final bool enabled;
 
   const CustomTextFormField({
     super.key,
@@ -39,7 +37,7 @@ class CustomTextFormField extends StatelessWidget {
     this.textCapitalization,
     this.inputFormatters,
     this.autoFocus,
-    this.enabled,
+    this.enabled = true,
   });
 
   @override
@@ -49,7 +47,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
-        enabled: enabled,
+        readOnly: !enabled,
         cursorHeight: 18,
         inputFormatters: inputFormatters,
         textCapitalization: textCapitalization ?? TextCapitalization.none,
@@ -58,8 +56,9 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         autofocus: autoFocus ?? false,
         decoration: InputDecoration(
+          errorMaxLines: 8,
           isDense: true,
-          fillColor: AppColors.background,
+          fillColor: Theme.of(context).colorScheme.onPrimary,
           filled: true,
           contentPadding: EdgeInsetsDirectional.symmetric(
             vertical: 12,
@@ -67,11 +66,11 @@ class CustomTextFormField extends StatelessWidget {
           ),
           hintText: hint,
           labelText: label,
-          labelStyle: Styles.style15,
-          enabledBorder: customBorder(),
-          disabledBorder: customBorder(),
-          border: customBorder(),
-          focusedBorder: customBorder(),
+          labelStyle: Theme.of(context).textTheme.bodySmall,
+          enabledBorder: customBorder(context),
+          disabledBorder: customBorder(context),
+          border: customBorder(context),
+          focusedBorder: customBorder(context),
           prefixIconConstraints: BoxConstraints(minWidth: 40),
           prefixIcon: prefixIcon != null
               ? Padding(
@@ -79,14 +78,17 @@ class CustomTextFormField extends StatelessWidget {
                     right: isArabic ? 8.0 : 0,
                     left: isArabic ? 0 : 8,
                   ),
-                  child: Icon(prefixIcon, color: AppColors.primary),
+                  child: Icon(
+                    prefixIcon,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
                 )
               : null,
           suffixIcon: suffixIcon != null
               ? IconButton(
                   icon: Icon(suffixIcon),
                   onPressed: suffixPress,
-                  color: AppColors.primary,
+                  color: Theme.of(context).iconTheme.color,
                 )
               : null,
         ),

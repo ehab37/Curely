@@ -1,6 +1,5 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/features/home/domain/entities/search_suggestion_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'home_search_bar.dart';
@@ -27,10 +26,10 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
   Widget build(BuildContext context) {
     return SearchAnchor(
       searchController: _controller,
-      viewHintText: 'Search for Pages or actions...',
-      headerTextStyle: Styles.style15,
-      viewBackgroundColor: Colors.white,
-      dividerColor: AppColors.lightGray,
+      viewHintText: context.tr('search_for_pages_or_actions'),
+      headerTextStyle: Theme.of(context).textTheme.bodySmall,
+      viewBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      dividerColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       headerHeight: 50,
       isFullScreen: false,
       viewConstraints: BoxConstraints.tightFor(
@@ -40,12 +39,9 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
         onTap: () {
           GoRouter.of(context).pop();
         },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Icon(
-            Icons.arrow_back_ios_new_outlined,
-            color: AppColors.primary,
-          ),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Icon(Icons.arrow_back_ios_new_outlined),
         ),
       ),
       builder: (BuildContext context, SearchController controller) {
@@ -60,12 +56,11 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
             )
             .map((suggestion) {
               return ListTile(
-                leading: Icon(
-                  suggestion.icon,
-                  color: AppColors.primary,
-                  size: 20,
+                leading: Icon(suggestion.icon, size: 20),
+                title: Text(
+                  context.tr(suggestion.title),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                title: Text(suggestion.title, style: Styles.style16),
                 onTap: () {
                   controller.closeView(null);
                   controller.clear();

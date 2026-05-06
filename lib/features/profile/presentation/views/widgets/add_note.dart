@@ -1,11 +1,10 @@
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/validators/app_validators.dart';
 import 'package:curely/core/widgets/custom_button.dart';
 import 'package:curely/core/widgets/custom_text_form_field.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,12 +46,15 @@ class _AddNoteState extends State<AddNote> {
             mainAxisSize: MainAxisSize.min,
             children: [
               16.verticalSpacing,
-              Text('Add Note', style: Styles.styleBlue20),
+              Text(
+                context.tr('add_note'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               20.verticalSpacing,
               CustomTextFormField(
                 controller: titleController,
-                label: 'Title',
-                hint: 'Enter the title',
+                label: context.tr('field_title'),
+                hint: context.tr('enter_title'),
                 keyboard: TextInputType.name,
                 inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 textCapitalization: TextCapitalization.words,
@@ -61,14 +63,18 @@ class _AddNoteState extends State<AddNote> {
               8.verticalSpacing,
               CustomTextFormField(
                 controller: descriptionController,
-                label: 'Description',
+                label: context.tr('description'),
+                hint: context.tr('enter_description'),
                 validator: (value) => AppValidators.validateRequired(value),
                 maxLines: 5,
               ),
               20.verticalSpacing,
               CustomButton(
-                backgroundColor: AppColors.buttonAccent,
-                child: Text('Save', style: Styles.styleWhite20),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Text(
+                  context.tr('save'),
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();

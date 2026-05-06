@@ -1,4 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/styles.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/custom_fav_icon.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
@@ -23,12 +22,14 @@ class NoteItem extends StatelessWidget {
               bottom: 20,
               top: 4,
             ),
-            title: Text(note.title, style: Styles.styleBlue20),
+            title: Text(
+              note.title,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             subtitle: Text(
               note.description,
               overflow: TextOverflow.ellipsis,
-              // maxLines: 3,
-              style: Styles.style16,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             trailing: GestureDetector(
               onTap: () {
@@ -39,13 +40,15 @@ class NoteItem extends StatelessWidget {
               child: CustomFavIcon(isFav: note.isFavorite),
             ),
           ),
-          Positioned(
+          Positioned.directional(
+            textDirection: Directionality.of(context),
             bottom: 6,
-            right: 12,
+            end: 12,
             child: Text(
               note.createdAt ?? '',
+              textDirection: TextDirection.ltr,
               style: Styles.style15.copyWith(
-                color: AppColors.darkGray.withAlpha(100),
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
           ),

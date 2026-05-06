@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +13,7 @@ class FavoriteViewBody extends StatelessWidget {
     return Column(
       children: [
         CustomNavBar(
-          text: 'Medicines',
+          text: context.tr('medicines'),
           prefixIcon: FontAwesomeIcons.pills,
           onPressed: () {
             GoRouter.of(context).push(
@@ -23,7 +24,7 @@ class FavoriteViewBody extends StatelessWidget {
           suffixIcon: Icons.arrow_forward_ios_rounded,
         ),
         CustomNavBar(
-          text: 'Prescription',
+          text: context.tr('prescription'),
           prefixIcon: FontAwesomeIcons.fileMedical,
           onPressed: () {
             GoRouter.of(context).push(
@@ -34,7 +35,7 @@ class FavoriteViewBody extends StatelessWidget {
           suffixIcon: Icons.arrow_forward_ios_rounded,
         ),
         CustomNavBar(
-          text: 'Rays',
+          text: context.tr('rays'),
           prefixIcon: FontAwesomeIcons.xRay,
           onPressed: () {
             GoRouter.of(context).push(
@@ -45,7 +46,7 @@ class FavoriteViewBody extends StatelessWidget {
           suffixIcon: Icons.arrow_forward_ios_rounded,
         ),
         CustomNavBar(
-          text: 'Analysis',
+          text: context.tr('analysis'),
           prefixIcon: FontAwesomeIcons.flaskVial,
           onPressed: () {
             GoRouter.of(context).push(
@@ -56,7 +57,7 @@ class FavoriteViewBody extends StatelessWidget {
           suffixIcon: Icons.arrow_forward_ios_rounded,
         ),
         CustomNavBar(
-          text: 'Health Notes',
+          text: context.tr('health_notes'),
           prefixIcon: FontAwesomeIcons.noteSticky,
           onPressed: () {
             GoRouter.of(context).push(

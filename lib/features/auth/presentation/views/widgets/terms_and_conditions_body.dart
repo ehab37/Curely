@@ -1,8 +1,7 @@
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
-import 'package:curely/generated/l10n.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'custom_check_box.dart';
@@ -23,7 +22,7 @@ class TermsAndConditionsBody extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.borderLight),
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.background,
+                color: Theme.of(context).colorScheme.surface,
               ),
               padding: const EdgeInsets.all(15.0),
               child: const SingleChildScrollView(child: TermsDetails()),
@@ -44,8 +43,8 @@ class TermsAndConditionsBody extends StatelessWidget {
                   16.horizontalSpacing,
                   Expanded(
                     child: Text(
-                      S.of(context).iHaveReadAndAgreeToTheTermsAndConditions,
-                      style: Styles.style16,
+                      context.tr('i_agree_terms_body'),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ],
@@ -66,14 +65,14 @@ class TermsAndConditionsBody extends StatelessWidget {
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Text(
-                    S.of(context).iAcceptAndContinue,
-                    style: Styles.styleWhite20,
+                    context.tr('accept_and_continue'),
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
               );

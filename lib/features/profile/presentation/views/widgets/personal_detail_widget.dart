@@ -1,50 +1,53 @@
 import 'package:curely/core/constants/spacing_constants.dart';
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/features/profile/domain/entities/personal_details_entity.dart';
 import 'package:curely/features/profile/presentation/views/widgets/icon_box.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PersonalDetailWidget extends StatelessWidget {
-  const PersonalDetailWidget({
-    super.key,
-    required this.title,
-    required this.subTitle,
-    required this.icon,
-  });
+  const PersonalDetailWidget({super.key, required this.personalDetailsEntity});
 
-  final String title;
-  final String subTitle;
-  final IconData icon;
+  final PersonalDetailsEntity personalDetailsEntity;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsetsDirectional.all(12),
-        decoration: BoxDecoration(
-          color: AppColors.skyBlue.withAlpha(100),
-          borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
-        ),
-        child: Row(
-          children: [
-            IconBox(icon: icon),
-            12.horizontalSpacing,
-            Column(
+    return Container(
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 12,
+        vertical: 6,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onPrimary.withAlpha(50),
+        borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
+      ),
+      child: Row(
+        children: [
+          IconBox(icon: personalDetailsEntity.icon),
+          9.horizontalSpacing,
+          Flexible(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  title,
-                  style: Styles.style18.copyWith(fontWeight: FontWeight.bold),
+                  context.tr(personalDetailsEntity.title),
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  subTitle,
-                  style: Styles.style15.copyWith(color: AppColors.background),
+                  personalDetailsEntity.subTitle,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

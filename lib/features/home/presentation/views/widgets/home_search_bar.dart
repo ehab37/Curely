@@ -1,5 +1,4 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -18,10 +17,14 @@ class HomeSearchBar extends StatelessWidget {
     return SearchBar(
       controller: controller,
       focusNode: focusNode,
-      hintText: 'Search for Pages...',
-      constraints: BoxConstraints(minHeight: 50),
-      hintStyle: WidgetStateProperty.all(Styles.style16),
-      textStyle: WidgetStateProperty.all(Styles.style16),
+      hintText: context.tr('search_for_pages'),
+      constraints: const BoxConstraints(minHeight: 50),
+      hintStyle: WidgetStateProperty.all(
+        Theme.of(context).textTheme.bodyMedium,
+      ),
+      textStyle: WidgetStateProperty.all(
+        Theme.of(context).textTheme.bodyMedium,
+      ),
       padding: const WidgetStatePropertyAll<EdgeInsets>(
         EdgeInsets.symmetric(horizontal: 16.0),
       ),
@@ -31,12 +34,10 @@ class HomeSearchBar extends StatelessWidget {
       onChanged: (_) {
         controller.openView();
       },
-      leading: const Icon(
-        FontAwesomeIcons.magnifyingGlass,
-        color: AppColors.primary,
-        size: 20,
+      leading: const Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+      backgroundColor: WidgetStateProperty.all(
+        Theme.of(context).colorScheme.surfaceContainerHighest,
       ),
-      backgroundColor: WidgetStateProperty.all(AppColors.lightGray),
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       ),

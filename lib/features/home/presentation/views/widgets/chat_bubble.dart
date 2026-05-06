@@ -1,4 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/features/home/domain/entities/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
@@ -20,7 +19,9 @@ class ChatBubble extends StatelessWidget {
           maxWidth: MediaQuery.sizeOf(context).width * 0.75,
         ),
         decoration: BoxDecoration(
-          color: isAi ? AppColors.skyBlue.withAlpha(51) : AppColors.darkGray,
+          color: isAi
+              ? Theme.of(context).colorScheme.onPrimaryContainer
+              : Theme.of(context).colorScheme.primaryContainer,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
@@ -33,7 +34,9 @@ class ChatBubble extends StatelessWidget {
           selectable: true,
           styleSheet: MarkdownStyleSheet(
             p: TextStyle(
-              color: isAi ? Colors.black87 : Colors.white,
+              color: isAi
+                  ? Theme.of(context).colorScheme.onSurface
+                  : Theme.of(context).colorScheme.onPrimary,
               fontSize: 14,
             ),
           ),

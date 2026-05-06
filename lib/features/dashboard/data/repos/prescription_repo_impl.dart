@@ -11,6 +11,7 @@ import 'package:curely/features/dashboard/data/models/prescription_model.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PrescriptionRepoImpl implements PrescriptionRepo {
   PrescriptionRepoImpl({
@@ -31,7 +32,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
         path: DatabaseConstants.users,
@@ -58,7 +59,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -94,7 +95,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   getFavoritePrescriptions() async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
@@ -126,7 +127,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
         path: DatabaseConstants.users,
@@ -153,7 +154,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
-        throw CustomException(message: "No Internet Connection");
+        throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
         path: DatabaseConstants.users,

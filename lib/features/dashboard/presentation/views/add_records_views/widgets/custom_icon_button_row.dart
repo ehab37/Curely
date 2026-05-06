@@ -1,5 +1,4 @@
-import 'package:curely/core/theme/app_colors.dart';
-import 'package:curely/core/theme/styles.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButtonRow extends StatelessWidget {
@@ -20,22 +19,27 @@ class CustomIconButtonRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width / 2.25,
-          child: Text(
-            text1,
-            style: Styles.style16,
-            overflow: TextOverflow.ellipsis,
+        Expanded(
+          flex: 10,
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(text1, style: Theme.of(context).textTheme.bodyMedium),
+            ),
           ),
         ),
-        Text(text2, style: Styles.style16),
+        8.horizontalSpacing,
+        Text(text2, style: Theme.of(context).textTheme.bodyMedium),
         const Spacer(),
         IconButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(AppColors.background2),
+            backgroundColor: WidgetStatePropertyAll(
+              Theme.of(context).colorScheme.onPrimaryContainer,
+            ),
           ),
-          icon: Icon(icon, color: AppColors.primary),
+          icon: Icon(icon),
         ),
       ],
     );

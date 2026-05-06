@@ -2,6 +2,7 @@ import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/home/presentation/cubits/search_cubit/search_cubit.dart';
 import 'package:curely/features/home/presentation/views/widgets/search_view_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +16,7 @@ class SearchView extends StatelessWidget {
       create: (context) => SearchCubit(),
       child: Scaffold(
         appBar: buildCustomAppBar(
-          title: "  Search",
+          title: context.tr("search"),
           icon: FontAwesomeIcons.magnifyingGlass,
         ),
         body: SafeArea(
@@ -23,7 +24,7 @@ class SearchView extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: SpacingConstants.horizontalPadding,
             ),
-            child: SearchViewBody(),
+            child: const SearchViewBody(),
           ),
         ),
       ),

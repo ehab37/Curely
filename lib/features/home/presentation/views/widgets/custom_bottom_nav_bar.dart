@@ -1,4 +1,3 @@
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,24 +12,34 @@ class CustomBottomNavBar extends StatelessWidget {
   final GlobalKey<CurvedNavigationBarState> bottomNavigationKey;
   final void Function(int) onTap;
 
-  List<Icon> get bottomNavBarIconsList => const [
-    Icon(Icons.home_filled, color: Colors.white),
-    Icon(Icons.dashboard_outlined, color: Colors.white),
-    Icon(FontAwesomeIcons.magnifyingGlass, color: Colors.white),
-    Icon(Icons.favorite_border_outlined, color: Colors.white),
-    Icon(FontAwesomeIcons.user, color: Colors.white),
+  List<Widget> bottomNavBarIconsList(BuildContext context) => [
+    Icon(Icons.home_filled, color: Theme.of(context).colorScheme.onPrimary),
+    Icon(
+      Icons.dashboard_outlined,
+      color: Theme.of(context).colorScheme.onPrimary,
+    ),
+    Icon(
+      FontAwesomeIcons.magnifyingGlass,
+      color: Theme.of(context).colorScheme.onPrimary,
+    ),
+    Icon(
+      Icons.favorite_border_outlined,
+      color: Theme.of(context).colorScheme.onPrimary,
+    ),
+    Icon(FontAwesomeIcons.user, color: Theme.of(context).colorScheme.onPrimary),
   ];
 
   @override
   Widget build(BuildContext context) {
+    double bottomIndicatorHeight = MediaQuery.viewPaddingOf(context).bottom;
     return CurvedNavigationBar(
       key: bottomNavigationKey,
-      items: bottomNavBarIconsList,
+      items: bottomNavBarIconsList(context),
       onTap: onTap,
-      color: AppColors.primary,
+      color: Theme.of(context).primaryColor,
       animationDuration: Duration(milliseconds: 400),
       backgroundColor: Colors.transparent,
-      height: 70,
+      height: 58 + bottomIndicatorHeight,
     );
   }
 }

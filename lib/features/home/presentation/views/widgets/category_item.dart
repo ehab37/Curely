@@ -1,6 +1,4 @@
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/core/theme/font_weight_helper.dart';
-import 'package:curely/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -13,15 +11,19 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isSelected ? AppColors.primary : AppColors.skyBlue,
+        color: isSelected
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).colorScheme.onSecondaryContainer,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
         child: Text(
           name,
           style: isSelected
-              ? Styles.style18.copyWith(fontWeight: FontWeightHelper.bold)
-              : Styles.style16,
+              ? Theme.of(context).textTheme.displayLarge!.copyWith(
+                  fontWeight: FontWeightHelper.bold,
+                )
+              : Theme.of(context).textTheme.bodyMedium,
         ),
       ),
     );
