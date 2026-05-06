@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 
 class AnalysisModel {
@@ -44,7 +45,7 @@ class AnalysisModel {
       doctorName: doctorName,
       lab: lab,
       diagnosis: diagnosis,
-      examinationDate: examinationDate,
+      examinationDate: examinationDate.toReadableDate(),
       isFavorite: isFavorite,
       images: images,
       imageUrls: imageUrls,

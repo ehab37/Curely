@@ -4,13 +4,13 @@ import 'package:curely/core/widgets/custom_alert_dialog.dart';
 import 'package:curely/core/widgets/custom_loading_indicator.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/read_medicine_widget.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/update_medicine_details.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'widgets/medicine_details_view_body.dart';
+import 'widgets/update_medicine_details.dart';
 
 class MedicineDetailsView extends StatelessWidget {
   const MedicineDetailsView({super.key, required this.medicine});
@@ -71,7 +71,7 @@ class MedicineDetailsView extends StatelessWidget {
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ReadMedicineWidget(medicine: medicine),
+            child: MedicineDetailsViewBody(medicine: medicine),
           );
         },
       ),

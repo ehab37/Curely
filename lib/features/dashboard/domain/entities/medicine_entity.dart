@@ -1,4 +1,8 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'record_details_item_entity.dart';
 
 const List<String> medicineTypesList = [
   "tablet",
@@ -88,3 +92,29 @@ class MedicineEntity {
     this.imageUrl,
   });
 }
+
+List<RecordDetailsItemEntity> medicineDetailsList(
+  BuildContext context,
+  MedicineEntity medicine,
+) => [
+  RecordDetailsItemEntity(
+    title: context.tr('medicine_name'),
+    subTitle: medicine.medicineName,
+    icon: FontAwesomeIcons.pills,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('medicine_type'),
+    subTitle: context.tr(medicine.medicineTypes),
+    icon: FontAwesomeIcons.prescriptionBottle,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('usage'),
+    subTitle: context.tr(medicine.medicineUsage),
+    icon: Icons.description,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('notes'),
+    subTitle: medicine.medicineNotes ?? context.tr("no_notes"),
+    icon: Icons.notes,
+  ),
+];

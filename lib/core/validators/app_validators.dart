@@ -1,9 +1,10 @@
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'app_regex.dart';
 
 extension StringValidation on String? {
   String? get validateEmail {
-    if (this == null || this!.trim().isEmpty) {
+    if (isNullOrEmpty) {
       return 'email_required'.tr();
     }
     if (!AppRegex.isEmailValid(this!.trim())) {
@@ -13,17 +14,14 @@ extension StringValidation on String? {
   }
 
   String? get validateLoginPassword {
-    if (this == null ||
-        this!.isEmpty ||
-        this!.trim().isEmpty ||
-        this!.length < 8) {
+    if (isNullOrEmpty || this!.length < 8) {
       return 'password_required'.tr();
     }
     return null;
   }
 
   String? get validatePassword {
-    if (this == null || this!.isEmpty) {
+    if (isNullOrEmpty) {
       return 'password_required'.tr();
     }
 
@@ -34,7 +32,7 @@ extension StringValidation on String? {
   }
 
   String? validateMatch(String? originalValue) {
-    if (this == null || this!.isEmpty) {
+    if (isNullOrEmpty) {
       return 'confirm_password_required'.tr();
     }
     if (this != originalValue) {
@@ -44,7 +42,7 @@ extension StringValidation on String? {
   }
 
   String? get validateName {
-    if (this == null || this!.trim().isEmpty) {
+    if (isNullOrEmpty) {
       return 'name_required'.tr();
     }
     if (this!.length < 2) {
@@ -57,7 +55,7 @@ extension StringValidation on String? {
   }
 
   String? get validateNameArabic {
-    if (this == null || this!.trim().isEmpty) {
+    if (isNullOrEmpty) {
       return 'name_required'.tr();
     }
     if (this!.length < 2) {
@@ -70,7 +68,7 @@ extension StringValidation on String? {
   }
 
   String? validateNumberLength() {
-    if (this == null || this!.trim().isEmpty) {
+    if (isNullOrEmpty) {
       return null;
     }
     if (!AppRegex.isNumberValid(this!)) {
@@ -80,7 +78,7 @@ extension StringValidation on String? {
   }
 
   String? get validateBloodType {
-    if (this == null || this!.trim().isEmpty) {
+    if (isNullOrEmpty) {
       return null;
     }
     if (!AppRegex.isBloodTypeValid(this!)) {
@@ -90,14 +88,14 @@ extension StringValidation on String? {
   }
 
   String? get validateRequired {
-    if (this == null || this!.trim().isEmpty) {
+    if (isNullOrEmpty) {
       return 'field_required'.tr();
     }
     return null;
   }
 
   String? validateMinLength(int minLength, {String? errorMessage}) {
-    if (this == null || this!.length < minLength) {
+    if (isNullOrEmpty || this!.length < minLength) {
       return errorMessage ?? 'Must be at least $minLength characters';
     }
     return null;
@@ -137,11 +135,11 @@ class AppValidators {
 
   /// ================= PHONE (UPDATED) =================
   static String? validatePhoneNumber(String? value) {
-    if (value == null || value.trim().isEmpty) {
+    if (value.isNullOrEmpty) {
       return 'phone_number_required'.tr();
     }
 
-    if (!AppRegex.isPhoneValid(value)) {
+    if (!AppRegex.isPhoneValid(value!)) {
       return 'enter_valid_phone_number'.tr();
     }
 

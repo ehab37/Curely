@@ -30,7 +30,15 @@ class ProfileCachedImageWidget extends StatelessWidget {
             ? CachedNetworkImage(
                 imageUrl: imageUrl!,
                 placeholder: (context, url) => CustomLoadingIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                errorWidget: (context, url, error) => Center(
+                  child: Icon(
+                    FontAwesomeIcons.circleUser,
+                    size: isProfile ? appSize.height / 8.5 : 35,
+                    color: isProfile
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
               )
             : Center(
                 child: Icon(

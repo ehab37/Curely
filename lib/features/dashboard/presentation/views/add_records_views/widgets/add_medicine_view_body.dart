@@ -8,7 +8,6 @@ import 'package:curely/core/widgets/image_input/global_image_input.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/reminder_toggle_switch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +17,7 @@ import 'medicine_name_field.dart';
 import 'medicine_notes_field.dart';
 import 'medicine_type_field.dart';
 import 'medicine_usage_field.dart';
+import 'reminder_toggle_switch.dart';
 
 class AddMedicineViewBody extends StatefulWidget {
   const AddMedicineViewBody({super.key});
@@ -129,7 +129,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                   medicineUsage: medicineUsage,
                   medicineName: medicineNameController.text,
                   frequency: frequency!,
-                  medicineNotes: medicineNotesController.text,
+                  medicineNotes: medicineNotesController.text.nullIfEmpty,
                   isReminderActive: isReminderActive,
                   medicineTypes: medicineTypes,
                   image: image,

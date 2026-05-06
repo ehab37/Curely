@@ -22,9 +22,9 @@ class CustomNavBar extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(20),
-          bottomRight: Radius.circular(20),
+        borderRadius: const BorderRadiusDirectional.only(
+          topEnd: Radius.circular(20),
+          bottomEnd: Radius.circular(20),
         ),
         shape: BoxShape.rectangle,
       ),

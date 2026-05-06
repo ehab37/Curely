@@ -101,8 +101,8 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
                 AnalysisEntity analysis = AnalysisEntity(
                   analysisType: analysisType,
                   doctorName: doctorNameController.text,
-                  lab: labController.text,
-                  diagnosis: diagnosisController.text,
+                  lab: labController.text.nullIfEmpty,
+                  diagnosis: diagnosisController.text.nullIfEmpty,
                   examinationDate: examinationDate == null
                       ? DateTime.now().toString()
                       : examinationDate.toString(),

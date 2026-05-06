@@ -102,8 +102,8 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                 PrescriptionEntity prescription = PrescriptionEntity(
                   doctorName: doctorNameController.text,
                   doctorSpecialization: doctorSpecialization,
-                  hospital: hospitalController.text,
-                  diagnosis: diagnosisController.text,
+                  hospital: hospitalController.text.nullIfEmpty,
+                  diagnosis: diagnosisController.text.nullIfEmpty,
                   examinationDate: examinationDate == null
                       ? DateTime.now().toString()
                       : examinationDate.toString(),

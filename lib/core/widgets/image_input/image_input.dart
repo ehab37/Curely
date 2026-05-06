@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/widgets/image_input/icon_text_in_row.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,7 +41,7 @@ class ImageInput extends StatelessWidget {
         ScaffoldMessenger.of(context).clearSnackBars();
         InfoBox.customImageSnackBar(
           context: context,
-          content: (imageUrl == null || imageUrl!.isEmpty) && imageFile == null
+          content: (imageUrl.isNullOrEmpty) && imageFile == null
               ? Column(
                   children: [
                     GestureDetector(

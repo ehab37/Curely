@@ -1,4 +1,8 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'record_details_item_entity.dart';
 
 const List<String> raysTypesList = [
   'cardiogram',
@@ -37,3 +41,34 @@ class RaysEntity {
     this.imageUrls,
   });
 }
+
+List<RecordDetailsItemEntity> raysDetailsList(
+  BuildContext context,
+  RaysEntity rays,
+) => [
+  RecordDetailsItemEntity(
+    title: context.tr('doctor_name'),
+    subTitle: rays.doctorName,
+    icon: FontAwesomeIcons.userDoctor,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('rays_type'),
+    subTitle: context.tr(rays.raysType),
+    icon: FontAwesomeIcons.xRay,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('radiology_center'),
+    subTitle: rays.radiologyCenter ?? context.tr('not_added'),
+    icon: FontAwesomeIcons.circleRadiation,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('diagnosis'),
+    subTitle: rays.diagnosis ?? context.tr('no_diagnosis'),
+    icon: Icons.notes,
+  ),
+  RecordDetailsItemEntity(
+    title: context.tr('examination_date'),
+    subTitle: rays.examinationDate,
+    icon: Icons.calendar_month,
+  ),
+];
