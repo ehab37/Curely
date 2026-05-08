@@ -39,7 +39,7 @@ class CustomBottomNavBar extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       animationDuration: Duration(milliseconds: 400),
       backgroundColor: Colors.transparent,
-      height: 58 + bottomIndicatorHeight,
+      height: bottomIndicatorHeight == 0 ? 58 : 30 + bottomIndicatorHeight,
     );
   }
 }

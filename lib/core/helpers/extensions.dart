@@ -9,6 +9,17 @@ extension SpacingExtension on num {
   Widget get horizontalSpacing => SizedBox(width: toDouble());
 }
 
+extension IntExtension on int {
+  double toResponsiveFontSize(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width;
+    double scaleFactor = width / 420;
+    double responsiveFontSize = this * scaleFactor;
+    double lowerLimit = this * .8;
+    double upperLimit = this * 1.2;
+    return responsiveFontSize.clamp(lowerLimit, upperLimit);
+  }
+}
+
 extension TimestampExtension on Timestamp {
   String toReadableDateAndTime() {
     return "${DateFormat('hh:mm a').format(toDate())} - ${DateFormat('dd/MM/yyyy').format(toDate())}";

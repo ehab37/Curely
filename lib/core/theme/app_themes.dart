@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_transitions/go_transitions.dart';
 
 class AppThemes {
-  static final lightTheme = ThemeData(
+  static ThemeData lightTheme(BuildContext context) => ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.white,
@@ -25,34 +25,34 @@ class AppThemes {
       primaryContainer: AppColors.darkGray,
       onPrimaryContainer: AppColors.skyBlue.withAlpha(51),
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: AppColors.white,
-      iconTheme: IconThemeData(color: AppColors.primary),
-      titleTextStyle: Styles.styleBlue25,
+      iconTheme: const IconThemeData(color: AppColors.primary),
+      titleTextStyle: Styles.styleBlue25(context),
     ),
     textTheme: TextTheme(
-      displayLarge: Styles.style18,
-      bodyMedium: Styles.style16,
-      bodySmall: Styles.style15,
-      titleLarge: Styles.style28,
-      titleMedium: Styles.styleBlue25,
-      titleSmall: Styles.styleBlue20,
-      headlineMedium: Styles.styleWhite25,
-      headlineSmall: Styles.styleWhite20,
-      headlineLarge: Styles.style45,
-      displaySmall: Styles.styleUnderline16,
+      displayLarge: Styles.style18(context),
+      bodyMedium: Styles.style16(context),
+      bodySmall: Styles.style15(context),
+      titleLarge: Styles.style28(context),
+      titleMedium: Styles.styleBlue25(context),
+      titleSmall: Styles.styleBlue20(context),
+      headlineMedium: Styles.styleWhite25(context),
+      headlineSmall: Styles.styleWhite20(context),
+      headlineLarge: Styles.style45(context),
+      displaySmall: Styles.styleUnderline16(context),
     ).apply(fontSizeFactor: 1),
     iconTheme: const IconThemeData(color: AppColors.primary),
-    listTileTheme: ListTileThemeData(iconColor: AppColors.primary),
+    listTileTheme: const ListTileThemeData(iconColor: AppColors.primary),
     dialogTheme: DialogThemeData(
       backgroundColor: AppColors.background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
       ),
-      titleTextStyle: Styles.styleBlue20,
-      contentTextStyle: Styles.style16.copyWith(
-        color: AppColors.navy.withAlpha(200),
-      ),
+      titleTextStyle: Styles.styleBlue20(context),
+      contentTextStyle: Styles.style16(
+        context,
+      ).copyWith(color: AppColors.navy.withAlpha(200)),
       actionsPadding: const EdgeInsets.only(right: 16, bottom: 8),
     ),
     timePickerTheme: TimePickerThemeData(
@@ -91,8 +91,8 @@ class AppThemes {
       backgroundColor: AppColors.background,
       headerBackgroundColor: AppColors.primary,
       headerForegroundColor: AppColors.background,
-      headerHeadlineStyle: Styles.styleWhite20,
-      dayStyle: Styles.style16,
+      headerHeadlineStyle: Styles.styleWhite20(context),
+      dayStyle: Styles.style16(context),
       // Color of the numbers
       dayForegroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) return AppColors.white;
@@ -109,7 +109,7 @@ class AppThemes {
         foregroundColor: AppColors.primary,
       ),
     ),
-    pageTransitionsTheme: PageTransitionsTheme(
+    pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: GoTransitions.fade,
         TargetPlatform.iOS: GoTransitions.cupertino,
@@ -118,7 +118,7 @@ class AppThemes {
     ),
   );
 
-  static final darkTheme = ThemeData(
+  static ThemeData darkTheme(BuildContext context) => ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.skyBlue,
     scaffoldBackgroundColor: AppColors.darkBlue,
@@ -138,30 +138,42 @@ class AppThemes {
       primaryContainer: AppColors.lightGray,
       onPrimaryContainer: AppColors.stone,
     ),
-    appBarTheme: const AppBarTheme(
-      titleTextStyle: Styles.styleWhite25,
+    appBarTheme: AppBarTheme(
+      titleTextStyle: Styles.styleWhite25(context),
       backgroundColor: AppColors.backgroundDark,
-      iconTheme: IconThemeData(color: AppColors.primaryDark),
+      iconTheme: const IconThemeData(color: AppColors.primaryDark),
     ),
     textTheme: TextTheme(
-      displayLarge: Styles.style18.copyWith(color: AppColors.darkBlue),
-      bodyMedium: Styles.style16.copyWith(color: AppColors.textSecondary),
-      bodySmall: Styles.style15.copyWith(color: AppColors.textSecondary),
-      titleLarge: Styles.style28.copyWith(color: AppColors.textSecondary),
-      titleMedium: Styles.styleWhite25,
-      titleSmall: Styles.styleWhite20,
-      headlineMedium: Styles.styleBlue25.copyWith(color: AppColors.darkBlue),
-      headlineSmall: Styles.styleBlue20,
-      headlineLarge: Styles.style45.copyWith(color: AppColors.textSecondary),
-      displaySmall: Styles.styleUnderline16.copyWith(
-        color: AppColors.secondaryDark,
-      ),
+      displayLarge: Styles.style18(context).copyWith(color: AppColors.darkBlue),
+      bodyMedium: Styles.style16(
+        context,
+      ).copyWith(color: AppColors.textSecondary),
+      bodySmall: Styles.style15(
+        context,
+      ).copyWith(color: AppColors.textSecondary),
+      titleLarge: Styles.style28(
+        context,
+      ).copyWith(color: AppColors.textSecondary),
+      titleMedium: Styles.styleWhite25(context),
+      titleSmall: Styles.styleWhite20(context),
+      headlineMedium: Styles.styleBlue25(
+        context,
+      ).copyWith(color: AppColors.darkBlue),
+      headlineSmall: Styles.styleBlue20(context),
+      headlineLarge: Styles.style45(
+        context,
+      ).copyWith(color: AppColors.textSecondary),
+      displaySmall: Styles.styleUnderline16(
+        context,
+      ).copyWith(color: AppColors.secondaryDark),
     ),
     iconTheme: const IconThemeData(color: AppColors.primaryDark),
-    listTileTheme: ListTileThemeData(iconColor: AppColors.primaryDark),
-    drawerTheme: DrawerThemeData(backgroundColor: AppColors.backgroundDark),
-    cardTheme: CardThemeData(color: AppColors.stone),
-    bottomSheetTheme: BottomSheetThemeData(
+    listTileTheme: const ListTileThemeData(iconColor: AppColors.primaryDark),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: AppColors.backgroundDark,
+    ),
+    cardTheme: const CardThemeData(color: AppColors.stone),
+    bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: AppColors.backgroundDark,
     ),
     dialogTheme: DialogThemeData(
@@ -169,8 +181,10 @@ class AppThemes {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(SpacingConstants.borderRadius),
       ),
-      titleTextStyle: Styles.styleWhite20,
-      contentTextStyle: Styles.style16.copyWith(color: AppColors.lightGray),
+      titleTextStyle: Styles.styleWhite20(context),
+      contentTextStyle: Styles.style16(
+        context,
+      ).copyWith(color: AppColors.lightGray),
       actionsPadding: const EdgeInsets.only(right: 16, bottom: 8),
     ),
     timePickerTheme: TimePickerThemeData(
@@ -213,10 +227,10 @@ class AppThemes {
       backgroundColor: AppColors.darkBlue,
       headerBackgroundColor: AppColors.primaryDark,
       headerForegroundColor: AppColors.backgroundDark,
-      headerHeadlineStyle: Styles.styleWhite20.copyWith(
-        color: AppColors.backgroundDark,
-      ),
-      dayStyle: Styles.style16,
+      headerHeadlineStyle: Styles.styleWhite20(
+        context,
+      ).copyWith(color: AppColors.backgroundDark),
+      dayStyle: Styles.style16(context),
       dayForegroundColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           return AppColors.backgroundDark;
@@ -237,7 +251,7 @@ class AppThemes {
         foregroundColor: AppColors.primaryDark,
       ),
     ),
-    pageTransitionsTheme: PageTransitionsTheme(
+    pageTransitionsTheme: const PageTransitionsTheme(
       builders: {
         TargetPlatform.android: GoTransitions.fade,
         TargetPlatform.iOS: GoTransitions.cupertino,
