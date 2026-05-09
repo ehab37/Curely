@@ -18,7 +18,7 @@ class CustomBottomNavBar extends StatelessWidget {
       Icons.dashboard_outlined,
       color: Theme.of(context).colorScheme.onPrimary,
     ),
-    Icon(
+    FaIcon(
       FontAwesomeIcons.magnifyingGlass,
       color: Theme.of(context).colorScheme.onPrimary,
     ),
@@ -26,7 +26,10 @@ class CustomBottomNavBar extends StatelessWidget {
       Icons.favorite_border_outlined,
       color: Theme.of(context).colorScheme.onPrimary,
     ),
-    Icon(FontAwesomeIcons.user, color: Theme.of(context).colorScheme.onPrimary),
+    FaIcon(
+      FontAwesomeIcons.user,
+      color: Theme.of(context).colorScheme.onPrimary,
+    ),
   ];
 
   @override

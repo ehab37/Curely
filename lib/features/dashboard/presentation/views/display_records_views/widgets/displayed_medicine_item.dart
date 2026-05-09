@@ -56,7 +56,7 @@ class DisplayedMedicineItem extends StatelessWidget {
             ),
             Expanded(
               child: medicineItem.imageUrl == null
-                  ? Icon(FontAwesomeIcons.pills, size: 50)
+                  ? FaIcon(FontAwesomeIcons.pills, size: 50)
                   : Skeleton.replace(
                       width: width / 6,
                       replacement: Bone.square(

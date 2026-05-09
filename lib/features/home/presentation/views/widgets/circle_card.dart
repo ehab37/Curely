@@ -1,5 +1,6 @@
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CardCircle extends StatelessWidget {
   const CardCircle({
@@ -7,13 +8,11 @@ class CardCircle extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.onPressed,
-    this.size,
   });
 
-  final IconData icon;
+  final FaIconData icon;
   final String text;
   final void Function() onPressed;
-  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +25,9 @@ class CardCircle extends StatelessWidget {
           ).colorScheme.surfaceContainerHighest,
           child: Center(
             child: IconButton(
-              icon: Icon(
+              icon: FaIcon(
                 icon,
-                size: size ?? 30,
+                size: 27,
                 color: Theme.of(context).colorScheme.primary,
               ),
               onPressed: onPressed,

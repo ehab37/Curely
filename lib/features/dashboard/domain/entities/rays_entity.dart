@@ -64,11 +64,11 @@ List<RecordDetailsItemEntity> raysDetailsList(
   RecordDetailsItemEntity(
     title: context.tr('diagnosis'),
     subTitle: rays.diagnosis ?? context.tr('no_diagnosis'),
-    icon: Icons.notes,
+    icon: FontAwesomeIcons.notesMedical,
   ),
   RecordDetailsItemEntity(
     title: context.tr('examination_date'),
     subTitle: rays.examinationDate,
-    icon: Icons.calendar_month,
+    icon: FontAwesomeIcons.calendar,
   ),
 ];

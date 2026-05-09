@@ -1,6 +1,7 @@
 import 'package:curely/features/home/domain/entities/search_suggestion_entity.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'home_search_bar.dart';
 
@@ -56,7 +57,7 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
             )
             .map((suggestion) {
               return ListTile(
-                leading: Icon(suggestion.icon, size: 20),
+                leading: FaIcon(suggestion.icon, size: 20),
                 title: Text(
                   context.tr(suggestion.title),
                   style: Theme.of(context).textTheme.bodyMedium,

@@ -67,7 +67,7 @@ class CustomDropdownSearch extends StatelessWidget {
         ),
       ),
       items: (filter, infiniteScrollProps) => list,
-      onChanged: onChanged,
+      onSelected: onChanged,
     );
   }
 }

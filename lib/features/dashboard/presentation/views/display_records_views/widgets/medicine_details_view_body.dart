@@ -15,13 +15,13 @@ class MedicineDetailsViewBody extends StatelessWidget {
     return Column(
       children: [
         medicine.imageUrl == null
-            ? Icon(FontAwesomeIcons.pills, size: 150)
+            ? FaIcon(FontAwesomeIcons.pills, size: 150)
             : Expanded(child: DetailsImageItem(imageUrl: medicine.imageUrl!)),
         24.verticalSpacing,
         ...medicineDetailsList(context, medicine).map(
           (e) => Card(
             child: ListTile(
-              leading: Icon(e.icon),
+              leading: FaIcon(e.icon),
               title: Text(e.title),
               subtitle: Text(e.subTitle),
             ),

@@ -12,7 +12,7 @@ extension SpacingExtension on num {
 extension IntExtension on int {
   double toResponsiveFontSize(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
-    double scaleFactor = width / 420;
+    double scaleFactor = width / 400;
     double responsiveFontSize = this * scaleFactor;
     double lowerLimit = this * .8;
     double upperLimit = this * 1.2;

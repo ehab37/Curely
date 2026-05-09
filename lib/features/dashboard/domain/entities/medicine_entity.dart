@@ -110,11 +110,11 @@ List<RecordDetailsItemEntity> medicineDetailsList(
   RecordDetailsItemEntity(
     title: context.tr('usage'),
     subTitle: context.tr(medicine.medicineUsage),
-    icon: Icons.description,
+    icon: FontAwesomeIcons.fileLines,
   ),
   RecordDetailsItemEntity(
     title: context.tr('notes'),
     subTitle: medicine.medicineNotes ?? context.tr("no_notes"),
-    icon: Icons.notes,
+    icon: FontAwesomeIcons.notesMedical,
   ),
 ];

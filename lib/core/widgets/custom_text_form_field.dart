@@ -3,6 +3,7 @@ import 'package:curely/core/helpers/border_functions.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -13,7 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? prefixIcon;
   final bool isSecure;
   final void Function(String)? onSubmit;
-  final IconData? suffixIcon;
+  final FaIconData? suffixIcon;
   final void Function()? suffixPress;
   final int? maxLines;
   final TextCapitalization? textCapitalization;
@@ -86,7 +87,7 @@ class CustomTextFormField extends StatelessWidget {
               : null,
           suffixIcon: suffixIcon != null
               ? IconButton(
-                  icon: Icon(suffixIcon),
+                  icon: FaIcon(suffixIcon),
                   onPressed: suffixPress,
                   color: Theme.of(context).iconTheme.color,
                 )

@@ -9,7 +9,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this.authRepo) : super(RegisterInitial());
   final AuthRepo authRepo;
 
-  createAccount({
+  Future<void> createAccount({
     required String name,
     required String email,
     required String password,

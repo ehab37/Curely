@@ -78,7 +78,7 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text(context.tr("profile")),
-                    leading: const Icon(FontAwesomeIcons.circleUser),
+                    leading: const FaIcon(FontAwesomeIcons.circleUser),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
                       bottomNavigationKey.currentState?.setPage(4);
