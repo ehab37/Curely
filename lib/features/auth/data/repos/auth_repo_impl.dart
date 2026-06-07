@@ -6,6 +6,7 @@ import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/models/user_model.dart';
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/services/network_manager.dart';
+import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -15,11 +16,13 @@ class AuthRepoImpl implements AuthRepo {
   final FirebaseAuthServices firebaseAuthServices;
   final UserDataRepo userDataRepo;
   final NetworkManager networkManager;
+  final UrlService urlService;
 
   const AuthRepoImpl({
     required this.firebaseAuthServices,
     required this.userDataRepo,
     required this.networkManager,
+    required this.urlService,
   });
 
   @override
@@ -43,7 +46,7 @@ class AuthRepoImpl implements AuthRepo {
         uId: user.uid,
       );
       await userDataRepo.addUserData(user: userEntity);
-      await userDataRepo.saveUserDataLocally(user: userEntity);
+      await firebaseAuthServices.logoutUser();
       return Right(userEntity);
     } on FirebaseAuthException catch (e) {
       if (user != null) {
@@ -76,6 +79,10 @@ class AuthRepoImpl implements AuthRepo {
         email: email,
         password: password,
       );
+      if (!user.emailVerified) {
+        await firebaseAuthServices.logoutUser();
+        throw CustomException(message: "please_verify_your_email".tr());
+      }
       UserEntity userEntity = await userDataRepo.getUserData(uId: user.uid);
       await userDataRepo.saveUserDataLocally(user: userEntity);
       return Right(userEntity);
@@ -191,6 +198,15 @@ class AuthRepoImpl implements AuthRepo {
           "Something wrong happened, please try again later.",
         ),
       );
+    }
+  }
+
+  @override
+  Future<void> goToGmail() async {
+    try {
+      await urlService.navigateToGmail();
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

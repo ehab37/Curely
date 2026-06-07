@@ -11,6 +11,7 @@ class AiChatService {
     List<ChatMessage>? messagesHistory,
   }) async {
     final UserEntity user = getIt<UserDataRepo>().getUserDataLocally();
+    // ignore: experimental_member_use
     final model = FirebaseAI.googleAI().templateGenerativeModel();
     final chat = model.startChat(
       'curely-doctor-v1-0-0',
@@ -24,13 +25,12 @@ class AiChatService {
       history: messagesHistory.isNullOrEmpty
           ? []
           : messagesHistory!
-          .map(
-            (e) =>
-        e.sender == MessageSender.ai
-            ? Content.model([TextPart(e.text)])
-            : Content.text(e.text),
-      )
-          .toList(),
+                .map(
+                  (e) => e.sender == MessageSender.ai
+                      ? Content.model([TextPart(e.text)])
+                      : Content.text(e.text),
+                )
+                .toList(),
     );
     final response = await chat.sendMessage(Content.text(prompt));
     return response.text;
