@@ -62,7 +62,7 @@ class HomeViewBody extends StatelessWidget {
                   },
                 ),
                 CardCircle(
-                  text: context.tr("doctor_ai"),
+                  text: context.tr("dr_curely"),
                   icon: FontAwesomeIcons.userDoctor,
                   onPressed: () {
                     GoRouter.of(context).push(AppRoutesConstants.kDoctorAiView);
