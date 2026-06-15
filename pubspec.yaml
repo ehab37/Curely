@@ -78,7 +78,7 @@ dependencies:
   # Navigation Bar
   curved_navigation_bar: ^1.0.6
   # Simple and reactive Searchable Dropdown with item search feature
-  dropdown_search: ^7.0.0
+  dropdown_button2: ^3.1.0
   # Geolocation plugin: provides a cross-platform (iOS, Android) API for generic location (GPS etc.) functions.
   geolocator: ^14.0.2
   # A string-based path manipulation library.

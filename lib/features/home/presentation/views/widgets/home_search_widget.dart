@@ -33,6 +33,7 @@ class _HomeSearchWidgetState extends State<HomeSearchWidget> {
       dividerColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       headerHeight: 50,
       isFullScreen: false,
+      textInputAction: TextInputAction.search,
       viewConstraints: BoxConstraints.tightFor(
         width: MediaQuery.widthOf(context) - 60,
       ),

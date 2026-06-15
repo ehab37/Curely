@@ -55,16 +55,14 @@ class _AddAnalysisViewBodyState extends State<AddAnalysisViewBody> {
           DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: context.tr('analysis_type'),
+            hint: context.tr('select_analysis_type'),
             label: context.tr('analysis_type'),
             list: analysisTypesList.map((e) => context.tr(e)).toList(),
             onChanged: (localizedValue) {
-              setState(() {
-                analysisType = analysisTypesList.firstWhere(
-                  (englishKey) => englishKey.tr() == localizedValue,
-                  orElse: () => context.tr('other'),
-                );
-              });
+              analysisType = analysisTypesList.firstWhere(
+                (englishKey) => englishKey.tr() == localizedValue,
+                orElse: () => context.tr('other'),
+              );
             },
             validator: (value) => AppValidators.validateRequired(value),
           ),

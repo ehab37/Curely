@@ -30,6 +30,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final FocusNode emailFocus = FocusNode();
+  final FocusNode passwordFocus = FocusNode();
+  final FocusNode confirmPasswordFocus = FocusNode();
   bool isSecure = true;
   bool isSecure2 = true;
   bool isAgreeTerms = false;
@@ -40,6 +43,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     passwordController.dispose();
     confirmPasswordController.dispose();
     nameController.dispose();
+    emailFocus.dispose();
+    passwordFocus.dispose();
+    confirmPasswordFocus.dispose();
     super.dispose();
   }
 
@@ -60,10 +66,19 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 40.verticalSpacing,
-                NameField(nameController: nameController),
-                EmailField(emailController: emailController),
+                NameField(
+                  nameController: nameController,
+                  nextFocus: emailFocus,
+                ),
+                EmailField(
+                  emailController: emailController,
+                  emailFocus: emailFocus,
+                  nextFocus: passwordFocus,
+                ),
                 PasswordField(
                   passwordController: passwordController,
+                  passwordFocus: passwordFocus,
+                  nextFocus: confirmPasswordFocus,
                   isSecure: isSecure,
                   suffixPress: () {
                     isSecure = !isSecure;
@@ -73,6 +88,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 ConfirmPasswordField(
                   passwordController: passwordController,
                   confirmPasswordController: confirmPasswordController,
+                  confirmPasswordFocus: confirmPasswordFocus,
                   isSecure: isSecure2,
                   suffixPress: () {
                     isSecure2 = !isSecure2;

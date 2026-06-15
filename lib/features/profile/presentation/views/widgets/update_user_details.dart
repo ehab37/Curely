@@ -26,6 +26,9 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
   late final TextEditingController bloodController;
   late final TextEditingController heightController;
   late final TextEditingController weightController;
+  final FocusNode bloodFocus = FocusNode();
+  final FocusNode heightFocus = FocusNode();
+  final FocusNode weightFocus = FocusNode();
   final formKey = GlobalKey<FormState>();
   DateTime? dateOfBirth;
 
@@ -53,6 +56,9 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
     bloodController.dispose();
     heightController.dispose();
     weightController.dispose();
+    bloodFocus.dispose();
+    heightFocus.dispose();
+    weightFocus.dispose();
     super.dispose();
   }
 
@@ -78,13 +84,24 @@ class _UpdateUserDetailsState extends State<UpdateUserDetails> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               20.verticalSpacing,
-              NameField(nameController: nameController),
+              NameField(nameController: nameController, nextFocus: bloodFocus),
               8.verticalSpacing,
-              BloodField(bloodController: bloodController),
+              BloodField(
+                bloodController: bloodController,
+                bloodFocus: bloodFocus,
+                nextFocus: heightFocus,
+              ),
               8.verticalSpacing,
-              HeightField(heightController: heightController),
+              HeightField(
+                heightController: heightController,
+                heightFocus: heightFocus,
+                nextFocus: weightFocus,
+              ),
               8.verticalSpacing,
-              WeightField(weightController: weightController),
+              WeightField(
+                weightController: weightController,
+                weightFocus: weightFocus,
+              ),
               8.verticalSpacing,
               BirthDateBox(
                 onChanged: (value) {

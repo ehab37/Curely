@@ -21,6 +21,8 @@ class CustomTextFormField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool? autoFocus;
   final bool enabled;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
 
   const CustomTextFormField({
     super.key,
@@ -39,6 +41,8 @@ class CustomTextFormField extends StatelessWidget {
     this.inputFormatters,
     this.autoFocus,
     this.enabled = true,
+    this.focusNode,
+    this.textInputAction,
   });
 
   @override
@@ -48,6 +52,8 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        textInputAction: textInputAction,
+        focusNode: focusNode,
         readOnly: !enabled,
         cursorHeight: 18,
         inputFormatters: inputFormatters,

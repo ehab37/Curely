@@ -10,9 +10,11 @@ class LoginPasswordField extends StatelessWidget {
     required this.passwordController,
     required this.isSecure,
     required this.suffixPress,
+    required this.passwordFocus,
   });
 
   final TextEditingController passwordController;
+  final FocusNode passwordFocus;
   final bool isSecure;
   final void Function() suffixPress;
 
@@ -22,6 +24,7 @@ class LoginPasswordField extends StatelessWidget {
       label: context.tr('password'),
       hint: context.tr('enter_your_password'),
       controller: passwordController,
+      focusNode: passwordFocus,
       validator: (value) => AppValidators.validateLoginPassword(value),
       isSecure: isSecure,
       suffixIcon: isSecure ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,

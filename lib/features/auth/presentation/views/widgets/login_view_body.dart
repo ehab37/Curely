@@ -24,12 +24,14 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FocusNode passwordFocus = FocusNode();
   bool isSecure = true;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    passwordFocus.dispose();
     super.dispose();
   }
 
@@ -50,9 +52,13 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 40.verticalSpacing,
-                LoginEmailField(emailController: emailController),
+                LoginEmailField(
+                  emailController: emailController,
+                  nextFocus: passwordFocus,
+                ),
                 LoginPasswordField(
                   passwordController: passwordController,
+                  passwordFocus: passwordFocus,
                   isSecure: isSecure,
                   suffixPress: () {
                     isSecure = !isSecure;

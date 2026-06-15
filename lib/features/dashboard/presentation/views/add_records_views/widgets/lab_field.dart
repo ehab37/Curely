@@ -11,7 +11,7 @@ class LabField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: labController,
-      label: context.tr("lab"),
+      label: context.tr("lab_name"),
       hint: context.tr("enter_lab_name"),
     );
   }

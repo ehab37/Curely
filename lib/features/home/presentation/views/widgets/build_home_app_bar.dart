@@ -1,7 +1,6 @@
 import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/widgets/auto_scroll_text.dart';
 import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +32,13 @@ AppBar buildHomeAppBar(BuildContext context) {
           context.tr("hello"),
           style: Theme.of(context).textTheme.displayLarge,
         ),
-        AutoScrollText(
-          text: user.name,
-          style: Theme.of(context).textTheme.headlineMedium,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            user.name,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
         ),
       ],
     ),

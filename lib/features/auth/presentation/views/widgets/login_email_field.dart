@@ -4,9 +4,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class LoginEmailField extends StatelessWidget {
-  const LoginEmailField({super.key, required this.emailController});
+  const LoginEmailField({
+    super.key,
+    required this.emailController,
+    required this.nextFocus,
+  });
 
   final TextEditingController emailController;
+  final FocusNode nextFocus;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +19,10 @@ class LoginEmailField extends StatelessWidget {
       controller: emailController,
       label: context.tr('email'),
       hint: context.tr('enter_your_email'),
-      validator: (value) => AppValidators.validateEmail(value),
       keyboard: TextInputType.emailAddress,
       prefixIcon: Icons.email_outlined,
+      onSubmit: (value) => FocusScope.of(context).requestFocus(nextFocus),
+      validator: (value) => AppValidators.validateEmail(value),
     );
   }
 }

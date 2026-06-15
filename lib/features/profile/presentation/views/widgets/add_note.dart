@@ -20,6 +20,7 @@ class AddNote extends StatefulWidget {
 class _AddNoteState extends State<AddNote> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final FocusNode descriptionFocus = FocusNode();
   final formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
@@ -27,6 +28,7 @@ class _AddNoteState extends State<AddNote> {
   void dispose() {
     titleController.dispose();
     descriptionController.dispose();
+    descriptionFocus.dispose();
     super.dispose();
   }
 
@@ -41,6 +43,7 @@ class _AddNoteState extends State<AddNote> {
       ),
       child: Form(
         key: formKey,
+        autovalidateMode: autoValidateMode,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -59,10 +62,13 @@ class _AddNoteState extends State<AddNote> {
                 inputFormatters: [LengthLimitingTextInputFormatter(20)],
                 textCapitalization: TextCapitalization.words,
                 validator: (value) => AppValidators.validateRequired(value),
+                onSubmit: (p0) =>
+                    FocusScope.of(context).requestFocus(descriptionFocus),
               ),
               8.verticalSpacing,
               CustomTextFormField(
                 controller: descriptionController,
+                focusNode: descriptionFocus,
                 label: context.tr('description'),
                 hint: context.tr('enter_description'),
                 validator: (value) => AppValidators.validateRequired(value),

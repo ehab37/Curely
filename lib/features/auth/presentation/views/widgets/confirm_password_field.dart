@@ -11,10 +11,12 @@ class ConfirmPasswordField extends StatelessWidget {
     required this.isSecure,
     required this.suffixPress,
     required this.confirmPasswordController,
+    required this.confirmPasswordFocus,
   });
 
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
+  final FocusNode confirmPasswordFocus;
   final bool isSecure;
   final void Function() suffixPress;
 
@@ -22,6 +24,7 @@ class ConfirmPasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: confirmPasswordController,
+      focusNode: confirmPasswordFocus,
       label: context.tr("confirm_password"),
       hint: context.tr("confirm_your_password"),
       keyboard: TextInputType.visiblePassword,
