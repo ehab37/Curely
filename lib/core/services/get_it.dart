@@ -7,10 +7,10 @@ import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
-import 'package:curely/core/services/gemini_chat_service.dart';
+import 'package:curely/core/services/ai_chat_service.dart';
 import 'package:curely/core/services/location_service.dart';
 import 'package:curely/core/services/network_manager.dart';
-import 'package:curely/core/services/notification_service.dart';
+import 'package:curely/core/services/local_notifications_service.dart';
 import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
@@ -44,11 +44,13 @@ void setupGetIt() {
   );
   getIt.registerLazySingleton<DatabaseService>(() => FirestoreServices());
   getIt.registerLazySingleton<UrlService>(() => UrlService());
-  getIt.registerLazySingleton<NotificationService>(() => NotificationService());
+  getIt.registerLazySingleton<LocalNotificationsService>(
+    () => LocalNotificationsService(),
+  );
   getIt.registerLazySingleton<StorageServices>(() => FireStorage());
   getIt.registerLazySingleton<NetworkManager>(() => NetworkManager());
   getIt.registerLazySingleton<LocationService>(() => LocationService());
-  getIt.registerLazySingleton<GeminiChatService>(() => GeminiChatService());
+  getIt.registerLazySingleton<AiChatService>(() => AiChatService());
   getIt.registerLazySingleton<UserDataRepo>(
     () => UserDataRepoImpl(databaseService: getIt<DatabaseService>()),
   );
@@ -57,6 +59,7 @@ void setupGetIt() {
       firebaseAuthServices: getIt<FirebaseAuthServices>(),
       userDataRepo: getIt<UserDataRepo>(),
       networkManager: getIt<NetworkManager>(),
+      urlService: getIt<UrlService>(),
     ),
   );
   getIt.registerLazySingleton<ProfileRepo>(
@@ -73,7 +76,7 @@ void setupGetIt() {
   );
   getIt.registerLazySingleton<MedicineNotificationRepo>(
     () => MedicineNotificationRepoImpl(
-      notificationService: getIt<NotificationService>(),
+      notificationService: getIt<LocalNotificationsService>(),
     ),
   );
   getIt.registerLazySingleton<MedicineRepo>(
@@ -115,7 +118,7 @@ void setupGetIt() {
     () => HomeRepoImpl(
       urlService: getIt<UrlService>(),
       locationService: getIt<LocationService>(),
-      geminiChatService: getIt<GeminiChatService>(),
+      geminiChatService: getIt<AiChatService>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );

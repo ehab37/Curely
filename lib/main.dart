@@ -1,7 +1,7 @@
 import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/services/notification_service.dart';
+import 'package:curely/core/services/local_notifications_service.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
 import 'package:device_preview/device_preview.dart';
@@ -21,7 +21,7 @@ void main() async {
   await lz.EasyLocalization.ensureInitialized();
   await dotenv.load(fileName: ".env");
   tz.initializeTimeZones();
-  await NotificationService.initNotification();
+  await LocalNotificationsService.initNotification();
   await CacheHelper.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(

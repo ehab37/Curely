@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helpers/get_default_reminders_list.dart';
-import 'package:curely/core/services/notification_service.dart';
+import 'package:curely/core/services/local_notifications_service.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
   MedicineNotificationRepoImpl({required this.notificationService});
 
-  final NotificationService notificationService;
+  final LocalNotificationsService notificationService;
 
   @override
   Future<Either<Failure, void>> addMedicineNotification({

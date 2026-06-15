@@ -9,7 +9,10 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.authRepo) : super(LoginInitial());
   final AuthRepo authRepo;
 
-  loginUser({required String email, required String password}) async {
+  Future<void> loginUser({
+    required String email,
+    required String password,
+  }) async {
     emit(LoginLoading());
     final result = await authRepo.loginUser(email: email, password: password);
     result.fold(
@@ -17,7 +20,8 @@ class LoginCubit extends Cubit<LoginState> {
       (r) => emit(LoginSuccess(userEntity: r)),
     );
   }
-  loginUserWithGoogle() async {
+
+  Future<void> loginUserWithGoogle() async {
     emit(LoginLoading());
     final result = await authRepo.loginUserWithGoogle();
     result.fold(

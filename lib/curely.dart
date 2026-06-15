@@ -25,8 +25,8 @@ class Curely extends StatelessWidget {
                 : TextDirection.ltr;
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              theme: AppThemes.lightTheme,
-              darkTheme: AppThemes.darkTheme,
+              theme: AppThemes.lightTheme(context),
+              darkTheme: AppThemes.darkTheme(context),
               themeMode: themeMode,
               locale: context.locale,
               localizationsDelegates: context.localizationDelegates,

@@ -1,5 +1,6 @@
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({
@@ -10,7 +11,8 @@ class CustomNavBar extends StatelessWidget {
     required this.suffixIcon,
   });
 
-  final IconData prefixIcon, suffixIcon;
+  final FaIconData prefixIcon;
+  final IconData suffixIcon;
   final String text;
   final void Function() onPressed;
 
@@ -31,7 +33,7 @@ class CustomNavBar extends StatelessWidget {
       child: Row(
         children: [
           16.horizontalSpacing,
-          Icon(prefixIcon),
+          FaIcon(prefixIcon),
           16.horizontalSpacing,
           Expanded(
             child: Text(

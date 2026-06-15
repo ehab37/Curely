@@ -1,14 +1,13 @@
+import 'package:curely/core/helpers/show_alert_dialog.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/services/get_it.dart';
-import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/auth/presentation/cubits/register_cubit/register_cubit.dart';
-import 'package:curely/features/auth/presentation/views/widgets/register_view_body.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'widgets/register_view_body.dart';
+import 'widgets/verification_alert_dialog.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -23,13 +22,10 @@ class RegisterView extends StatelessWidget {
             return BlocConsumer<RegisterCubit, RegisterState>(
               listener: (context, state) {
                 if (state is RegisterSuccess) {
-                  InfoBox.successFloatingBox(
-                    context,
-                    context.tr("registered_successfully"),
+                  showAlertDialog(
+                    context: context,
+                    content: VerificationAlertDialog(),
                   );
-                  GoRouter.of(
-                    context,
-                  ).pushReplacement(AppRoutesConstants.kMainView);
                 } else if (state is RegisterFailure) {
                   InfoBox.errorFloatingBox(context, state.errMessage);
                 }

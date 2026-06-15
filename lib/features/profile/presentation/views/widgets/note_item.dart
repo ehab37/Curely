@@ -47,9 +47,9 @@ class NoteItem extends StatelessWidget {
             child: Text(
               note.createdAt ?? '',
               textDirection: TextDirection.ltr,
-              style: Styles.style15.copyWith(
-                color: Theme.of(context).colorScheme.onSecondary,
-              ),
+              style: Styles.style15(
+                context,
+              ).copyWith(color: Theme.of(context).colorScheme.onSecondary),
             ),
           ),
         ],

@@ -11,7 +11,7 @@ import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:curely/core/services/notification_service.dart';
+import 'package:curely/core/services/local_notifications_service.dart';
 import 'frequency_field.dart';
 import 'medicine_name_field.dart';
 import 'medicine_notes_field.dart';
@@ -105,7 +105,7 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
                 }
                 isReminderActive = newVal;
               });
-              if (await NotificationService.requestPermissions(context)) {
+              if (await LocalNotificationsService.requestPermissions(context)) {
                 log('permission approved');
               }
             },

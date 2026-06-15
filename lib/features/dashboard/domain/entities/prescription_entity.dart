@@ -73,6 +73,6 @@ List<RecordDetailsItemEntity> prescriptionDetailsList(
   RecordDetailsItemEntity(
     title: context.tr('examination_date'),
     subTitle: prescription.examinationDate,
-    icon: Icons.calendar_month,
+    icon: FontAwesomeIcons.calendar,
   ),
 ];

@@ -31,7 +31,7 @@ class ProfileCachedImageWidget extends StatelessWidget {
                 imageUrl: imageUrl!,
                 placeholder: (context, url) => CustomLoadingIndicator(),
                 errorWidget: (context, url, error) => Center(
-                  child: Icon(
+                  child: FaIcon(
                     FontAwesomeIcons.circleUser,
                     size: isProfile ? appSize.height / 8.5 : 35,
                     color: isProfile
@@ -41,7 +41,7 @@ class ProfileCachedImageWidget extends StatelessWidget {
                 ),
               )
             : Center(
-                child: Icon(
+                child: FaIcon(
                   FontAwesomeIcons.circleUser,
                   size: isProfile ? appSize.height / 8.5 : 35,
                   color: isProfile

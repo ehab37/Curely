@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RecordDetailsItemEntity {
   final String title;
   final String subTitle;
-  final IconData icon;
+  final FaIconData icon;
 
   RecordDetailsItemEntity({
     required this.title,

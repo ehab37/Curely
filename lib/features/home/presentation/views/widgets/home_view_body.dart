@@ -35,8 +35,7 @@ class HomeViewBody extends StatelessWidget {
               children: [
                 CardCircle(
                   text: context.tr("reminders"),
-                  icon: Icons.alarm,
-                  size: 35,
+                  icon: FontAwesomeIcons.alarmClock,
                   onPressed: () {
                     GoRouter.of(context).push(
                       AppRoutesConstants.kDisplayMedicineView,
@@ -46,7 +45,7 @@ class HomeViewBody extends StatelessWidget {
                 ),
                 CardCircle(
                   text: context.tr("pharmacy"),
-                  icon: Icons.local_pharmacy_rounded,
+                  icon: FontAwesomeIcons.staffSnake,
                   onPressed: () async {
                     var result = await homeRepo.nearestPharmacy();
                     result.fold(
@@ -58,13 +57,12 @@ class HomeViewBody extends StatelessWidget {
                 CardCircle(
                   text: context.tr("ambulance"),
                   icon: FontAwesomeIcons.truckMedical,
-                  size: 25,
                   onPressed: () async {
                     await homeRepo.callEmergency();
                   },
                 ),
                 CardCircle(
-                  text: context.tr("doctor_ai"),
+                  text: context.tr("dr_curely"),
                   icon: FontAwesomeIcons.userDoctor,
                   onPressed: () {
                     GoRouter.of(context).push(AppRoutesConstants.kDoctorAiView);

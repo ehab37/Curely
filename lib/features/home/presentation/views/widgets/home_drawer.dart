@@ -6,6 +6,7 @@ import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/widgets/auto_scroll_text.dart';
 import 'package:curely/core/widgets/custom_progress_hud.dart';
 import 'package:curely/core/widgets/image_input/profile_cached_image_widget.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -45,12 +46,11 @@ class HomeDrawer extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    title: Text(
-                      user.name,
+                    title: AutoScrollText(
+                      text: user.name,
                       style: Theme.of(context).textTheme.titleSmall,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                    subtitle: Text(user.email, overflow: TextOverflow.ellipsis),
+                    subtitle: AutoScrollText(text: user.email),
                     leading: ProfileCachedImageWidget(
                       imageUrl: user.imageUrl,
                       isProfile: false,
@@ -78,7 +78,7 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text(context.tr("profile")),
-                    leading: const Icon(FontAwesomeIcons.circleUser),
+                    leading: const FaIcon(FontAwesomeIcons.circleUser),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
                       bottomNavigationKey.currentState?.setPage(4);

@@ -15,7 +15,7 @@ class SearchCubit extends Cubit<SearchState> {
     "health_notes",
   ];
 
-  changeCategory({int? index}) async {
+  Future<void> changeCategory({int? index}) async {
     emit(SearchLoading());
     if (index != null && currentCategoryIndex != index) {
       currentCategoryIndex = index;

@@ -56,16 +56,14 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
           DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: context.tr('doctor_specialization'),
+            hint: context.tr('select_doctor_specialization'),
             label: context.tr('doctor_specialization'),
             list: doctorSpecializationsList.map((e) => context.tr(e)).toList(),
             onChanged: (localizedValue) {
-              setState(() {
-                doctorSpecialization = doctorSpecializationsList.firstWhere(
-                  (englishKey) => context.tr(englishKey) == localizedValue,
-                  orElse: () => context.tr('other'),
-                );
-              });
+              doctorSpecialization = doctorSpecializationsList.firstWhere(
+                (englishKey) => context.tr(englishKey) == localizedValue,
+                orElse: () => context.tr('other'),
+              );
             },
             validator: (value) => AppValidators.validateRequired(value),
           ),

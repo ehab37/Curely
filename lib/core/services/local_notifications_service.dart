@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-class NotificationService {
+class LocalNotificationsService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -20,7 +20,7 @@ class NotificationService {
           iOS: initializationSettingsDarwin,
         );
     await notificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {
             final String? payload = notificationResponse.payload;
@@ -70,11 +70,11 @@ class NotificationService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
     await notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(scheduledDate, tz.local),
-      NotificationDetails(
+      id: id,
+      title: title,
+      body: body,
+      scheduledDate: tz.TZDateTime.from(scheduledDate, tz.local),
+      notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
           'daily_meds',
           'Daily Meds',
@@ -96,11 +96,11 @@ class NotificationService {
     required String body,
   }) async {
     await notificationsPlugin.periodicallyShow(
-      id,
-      title,
-      body,
-      RepeatInterval.everyMinute,
-      const NotificationDetails(
+      id: id,
+      title: title,
+      body: body,
+      repeatInterval: RepeatInterval.everyMinute,
+      notificationDetails: const NotificationDetails(
         android: AndroidNotificationDetails(
           'daily_meds',
           'Daily Meds',
@@ -120,6 +120,6 @@ class NotificationService {
   }
 
   Future<void> cancelReminder(int id) async {
-    await notificationsPlugin.cancel(id);
+    await notificationsPlugin.cancel(id: id);
   }
 }

@@ -32,7 +32,14 @@ AppBar buildHomeAppBar(BuildContext context) {
           context.tr("hello"),
           style: Theme.of(context).textTheme.displayLarge,
         ),
-        Text(user.name, style: Theme.of(context).textTheme.headlineMedium),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            user.name,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ),
       ],
     ),
   );

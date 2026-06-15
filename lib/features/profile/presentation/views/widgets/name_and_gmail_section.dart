@@ -27,15 +27,21 @@ class NameAndGmailSection extends StatelessWidget {
         },
         child: IconBox(icon: Icons.edit),
       ),
-      title: Text(
-        user.name,
-        style: Theme.of(context).textTheme.headlineMedium,
-        overflow: TextOverflow.ellipsis,
+      title: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          user.name,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
       ),
-      subtitle: Text(
-        user.email,
-        style: Theme.of(context).textTheme.displayLarge,
-        overflow: TextOverflow.ellipsis,
+      subtitle: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          user.email,
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
       ),
     );
   }

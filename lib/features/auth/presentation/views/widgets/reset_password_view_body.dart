@@ -55,6 +55,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                       label: context.tr('email'),
                       hint: context.tr('enter_your_email'),
                       validator: (value) => AppValidators.validateEmail(value),
+                      textInputAction: TextInputAction.go,
                       keyboard: TextInputType.emailAddress,
                       prefixIcon: Icons.email_outlined,
                     ),

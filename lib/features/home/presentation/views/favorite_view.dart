@@ -3,6 +3,7 @@ import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/home/presentation/views/widgets/favorite_view_body.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FavoriteView extends StatelessWidget {
   const FavoriteView({super.key});
@@ -12,7 +13,7 @@ class FavoriteView extends StatelessWidget {
     return Scaffold(
       appBar: buildCustomAppBar(
         title: context.tr("favorite_records"),
-        icon: Icons.favorite,
+        icon: FontAwesomeIcons.solidHeart,
       ),
       body: SafeArea(
         child: Padding(

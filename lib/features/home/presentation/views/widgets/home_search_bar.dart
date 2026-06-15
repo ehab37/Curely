@@ -34,7 +34,7 @@ class HomeSearchBar extends StatelessWidget {
       onChanged: (_) {
         controller.openView();
       },
-      leading: const Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+      leading: const FaIcon(FontAwesomeIcons.magnifyingGlass, size: 20),
       backgroundColor: WidgetStateProperty.all(
         Theme.of(context).colorScheme.surfaceContainerHighest,
       ),

@@ -58,16 +58,14 @@ class _AddRaysViewBodyState extends State<AddRaysViewBody> {
           DiagnosisField(diagnosisController: diagnosisController),
           8.verticalSpacing,
           CustomDropdownSearch(
-            hint: context.tr('rays_type'),
+            hint: context.tr('select_rays_type'),
             label: context.tr('rays_type'),
             list: raysTypesList.map((e) => context.tr(e)).toList(),
             onChanged: (localizedValue) {
-              setState(() {
-                raysType = raysTypesList.firstWhere(
-                  (englishKey) => context.tr(englishKey) == localizedValue,
-                  orElse: () => context.tr('other'),
-                );
-              });
+              raysType = raysTypesList.firstWhere(
+                (englishKey) => context.tr(englishKey) == localizedValue,
+                orElse: () => context.tr('other'),
+              );
             },
             validator: (value) => AppValidators.validateRequired(value),
           ),

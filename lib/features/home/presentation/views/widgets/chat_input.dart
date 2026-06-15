@@ -28,6 +28,7 @@ class ChatInput extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
+              textInputAction: TextInputAction.send,
               decoration: InputDecoration(
                 hintText: context.tr('ask_dr_curely'),
                 border: OutlineInputBorder(
@@ -43,6 +44,7 @@ class ChatInput extends StatelessWidget {
                   vertical: 10,
                 ),
               ),
+              onSubmitted: (_) => onSend?.call(controller.text),
             ),
           ),
           const SizedBox(width: 8),

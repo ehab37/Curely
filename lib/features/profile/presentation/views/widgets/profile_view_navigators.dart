@@ -33,7 +33,7 @@ class ProfileViewNavigators extends StatelessWidget {
           ),
           CustomNavBar(
             text: context.tr("language"),
-            prefixIcon: Icons.language_outlined,
+            prefixIcon: FontAwesomeIcons.language,
             suffixIcon: Icons.arrow_forward_ios,
             onPressed: () {
               GoRouter.of(context).push(AppRoutesConstants.kLanguageView);
@@ -41,7 +41,7 @@ class ProfileViewNavigators extends StatelessWidget {
           ),
           CustomNavBar(
             text: context.tr("delete_account"),
-            prefixIcon: Icons.delete_forever_outlined,
+            prefixIcon: FontAwesomeIcons.trashCan,
             suffixIcon: Icons.arrow_forward_ios,
             onPressed: () {
               showAlertDialog(

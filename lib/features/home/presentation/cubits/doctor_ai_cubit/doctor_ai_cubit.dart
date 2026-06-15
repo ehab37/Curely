@@ -38,14 +38,14 @@ class DoctorAiCubit extends Cubit<DoctorAiState> {
     });
   }
 
-  sendPrompt() async {
+  Future<void> sendPrompt() async {
     final prompt = promptController.text;
     if (prompt.trim().isEmpty) return;
     messages.add(ChatMessage(text: prompt, sender: MessageSender.user));
     promptController.clear();
     scrollToBottom();
     emit(DoctorAiTypingState());
-    var result = await homeRepo.doctorAiChat(
+    var result = await homeRepo.sendPromptToAi(
       prompt: prompt,
       messagesHistory: messages,
     );

@@ -58,7 +58,7 @@ class FavoriteViewBody extends StatelessWidget {
         ),
         CustomNavBar(
           text: context.tr('health_notes'),
-          prefixIcon: FontAwesomeIcons.noteSticky,
+          prefixIcon: FontAwesomeIcons.solidNoteSticky,
           onPressed: () {
             GoRouter.of(context).push(
               AppRoutesConstants.kNotesView,

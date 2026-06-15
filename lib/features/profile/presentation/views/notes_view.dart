@@ -9,6 +9,7 @@ import 'package:curely/features/profile/presentation/views/widgets/notes_view_bo
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({super.key, required this.isFavoriteView});
@@ -26,7 +27,7 @@ class NotesView extends StatelessWidget {
                 ? buildCustomAppBar(title: context.tr("favorite_health_notes"))
                 : buildCustomAppBar(
                     title: context.tr("my_health_notes"),
-                    icon: Icons.note_add_outlined,
+                    icon: FontAwesomeIcons.fileCirclePlus,
                     isBackable: true,
                     onTap: () {
                       final cubit = context.read<ManageNotesCubit>();

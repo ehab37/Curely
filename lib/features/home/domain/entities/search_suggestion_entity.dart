@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 class SearchSuggestionEntity {
   final String title;
-  final IconData icon;
+  final FaIconData icon;
   final void Function(BuildContext context) onTap;
 
   SearchSuggestionEntity({
@@ -18,7 +18,7 @@ class SearchSuggestionEntity {
     return [
       SearchSuggestionEntity(
         title: 'add_medicine',
-        icon: Icons.medication_liquid_rounded,
+        icon: FontAwesomeIcons.briefcaseMedical,
         onTap: (context) {
           GoRouter.of(context).push(AppRoutesConstants.kAddMedicineView);
         },
@@ -133,7 +133,7 @@ class SearchSuggestionEntity {
       ),
       SearchSuggestionEntity(
         title: 'favorite_health_notes',
-        icon: Icons.bookmark_border,
+        icon: FontAwesomeIcons.solidBookmark,
         onTap: (context) {
           GoRouter.of(context).push(
             AppRoutesConstants.kNotesView,

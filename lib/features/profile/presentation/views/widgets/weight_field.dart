@@ -4,14 +4,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class WeightField extends StatelessWidget {
-  const WeightField({super.key, required this.weightController});
+  const WeightField({
+    super.key,
+    required this.weightController,
+    required this.weightFocus,
+  });
 
   final TextEditingController weightController;
+  final FocusNode weightFocus;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: weightController,
+      focusNode: weightFocus,
       label: context.tr('weight_kg'),
       hint: context.tr('weight_hint'),
       keyboard: TextInputType.number,

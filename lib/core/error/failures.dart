@@ -10,7 +10,7 @@ abstract class Failure {
 class OtherErrors extends Failure {
   OtherErrors(super.errMessage);
 
-  factory OtherErrors.fromOtherErrors(e) {
+  factory OtherErrors.fromOtherErrors(dynamic e) {
     return OtherErrors(e.toString());
   }
 }
@@ -18,7 +18,7 @@ class OtherErrors extends Failure {
 class AuthExceptionHandler extends Failure {
   AuthExceptionHandler(super.errMessage);
 
-  factory AuthExceptionHandler.fromAuthException(e) {
+  factory AuthExceptionHandler.fromAuthException(dynamic e) {
     var errorDescription = '';
     if (e is FirebaseAuthException) {
       switch (e.code) {

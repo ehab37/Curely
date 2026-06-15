@@ -30,4 +30,13 @@ class UrlService {
       );
     }
   }
+
+  Future<void> navigateToGmail() async {
+    final Uri url = Uri.parse('https://mail.google.com/');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw CustomException(message: 'Could not launch $url');
+    }
+  }
 }
