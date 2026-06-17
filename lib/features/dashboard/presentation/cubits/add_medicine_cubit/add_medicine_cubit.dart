@@ -25,7 +25,7 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
       var result = await imagesRepo.uploadImage(
         imageFile: medicine.image!,
         path:
-            '${DatabaseConstants.imagesPath}/${DatabaseConstants.medicinePath}',
+            '${DatabaseConstants.recordsPath}/${DatabaseConstants.medicinePath}',
       );
       result.fold(
         (failure) {

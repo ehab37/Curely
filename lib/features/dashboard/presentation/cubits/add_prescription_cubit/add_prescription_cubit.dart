@@ -22,7 +22,7 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
     var result = await imagesRepo.uploadImages(
       imageFiles: prescription.images!,
       path:
-          '${DatabaseConstants.imagesPath}/${DatabaseConstants.prescriptionPath}',
+          '${DatabaseConstants.recordsPath}/${DatabaseConstants.prescriptionPath}',
     );
     result.fold(
       (failure) {

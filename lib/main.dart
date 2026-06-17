@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/assets_constants.dart';
+import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/services/local_notifications_service.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'core/utils/observer.dart';
 import 'curely.dart';
@@ -31,6 +33,10 @@ void main() async {
     ),
   );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Supabase.initialize(
+    url: DatabaseConstants.supabaseUrl,
+    publishableKey: DatabaseConstants.supabasePublishableKey,
+  );
   setupGetIt();
   Bloc.observer = MyBlocObserver();
   runApp(

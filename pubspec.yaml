@@ -61,6 +61,8 @@ dependencies:
   firebase_storage: ^13.0.4
   google_sign_in: ^7.2.0
   firebase_ai: ^3.11.0
+  # Flutter integration for Supabase.
+  supabase_flutter: ^2.14.2
   # Purify your Dart code using efficient immutable data structures, monads, lenses and other FP tools.
   dartz: ^0.10.1
   # Loading

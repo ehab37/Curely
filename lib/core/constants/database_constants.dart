@@ -22,8 +22,15 @@ class DatabaseConstants {
     fallback: '',
   );
 
-  static const String imagesPath = "images";
-  static const String profilePath = "profile";
+  static final String supabaseUrl = dotenv.get('SUPABASE_URL', fallback: '');
+  static final String supabasePublishableKey = dotenv.get(
+    'SUPABASE_PUBLISHABLE_KEY',
+    fallback: '',
+  );
+
+  static const String recordsPath = "records_images";
+  static const String imagesBucket = "images";
+  static const String profilePath = "profile_pictures";
   static const String medicinePath = "medicine";
   static const String prescriptionPath = "prescription";
   static const String raysPath = "rays";
