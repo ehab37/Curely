@@ -23,8 +23,7 @@ class ManageProfileCubit extends Cubit<ManageProfileState> {
     if (user.image != null) {
       var result = await imagesRepo.uploadImage(
         imageFile: user.image!,
-        path:
-            '${DatabaseConstants.imagesPath}/${DatabaseConstants.profilePath}',
+        path: DatabaseConstants.profilePath,
       );
       result.fold(
         (failure) {

@@ -4,7 +4,6 @@ import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo_impl.dart';
 import 'package:curely/core/services/database_service.dart';
-import 'package:curely/core/services/fire_storage.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
 import 'package:curely/core/services/ai_chat_service.dart';
@@ -12,6 +11,7 @@ import 'package:curely/core/services/location_service.dart';
 import 'package:curely/core/services/network_manager.dart';
 import 'package:curely/core/services/local_notifications_service.dart';
 import 'package:curely/core/services/storage_services.dart';
+import 'package:curely/core/services/supabase_storage.dart';
 import 'package:curely/core/services/url_service.dart';
 import 'package:curely/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:curely/features/auth/domain/repos/auth_repo.dart';
@@ -47,7 +47,7 @@ void setupGetIt() {
   getIt.registerLazySingleton<LocalNotificationsService>(
     () => LocalNotificationsService(),
   );
-  getIt.registerLazySingleton<StorageServices>(() => FireStorage());
+  getIt.registerLazySingleton<StorageServices>(() => SupabaseStorage());
   getIt.registerLazySingleton<NetworkManager>(() => NetworkManager());
   getIt.registerLazySingleton<LocationService>(() => LocationService());
   getIt.registerLazySingleton<AiChatService>(() => AiChatService());

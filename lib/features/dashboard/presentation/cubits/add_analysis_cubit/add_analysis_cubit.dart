@@ -17,7 +17,8 @@ class AddAnalysisCubit extends Cubit<AddAnalysisState> {
     emit(AddAnalysisLoading());
     var result = await imagesRepo.uploadImages(
       imageFiles: analysis.images!,
-      path: '${DatabaseConstants.imagesPath}/${DatabaseConstants.analysisPath}',
+      path:
+          '${DatabaseConstants.recordsPath}/${DatabaseConstants.analysisPath}',
     );
     result.fold(
       (failure) {

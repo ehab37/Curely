@@ -17,7 +17,7 @@ class AddRaysCubit extends Cubit<AddRaysState> {
     emit(AddRaysLoading());
     var result = await imagesRepo.uploadImages(
       imageFiles: rays.images!,
-      path: '${DatabaseConstants.imagesPath}/${DatabaseConstants.raysPath}',
+      path: '${DatabaseConstants.recordsPath}/${DatabaseConstants.raysPath}',
     );
     result.fold(
       (failure) {
