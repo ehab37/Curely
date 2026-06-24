@@ -2,7 +2,7 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
-import 'package:curely/core/widgets/image_input/image_view.dart';
+import 'package:curely/features/dashboard/presentation/views/image_view.dart';
 import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
 import 'package:curely/features/auth/presentation/views/reset_password_view.dart';
@@ -204,7 +204,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: AppRoutesConstants.kImageView,
-        builder: (context, state) => ImageView(image: state.extra as String),
+        builder: (context, state) => ImageView(imageUrl: state.extra as String),
       ),
       GoRoute(
         path: AppRoutesConstants.kNotesView,

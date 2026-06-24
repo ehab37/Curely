@@ -4,6 +4,7 @@ import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo_impl.dart';
 import 'package:curely/core/services/database_service.dart';
+import 'package:curely/core/services/file_downloader.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
 import 'package:curely/core/services/firestore_services.dart';
 import 'package:curely/core/services/ai_chat_service.dart';
@@ -48,6 +49,7 @@ void setupGetIt() {
     () => LocalNotificationsService(),
   );
   getIt.registerLazySingleton<StorageServices>(() => SupabaseStorage());
+  getIt.registerLazySingleton<FileDownloader>(() => FileDownloader());
   getIt.registerLazySingleton<NetworkManager>(() => NetworkManager());
   getIt.registerLazySingleton<LocationService>(() => LocationService());
   getIt.registerLazySingleton<AiChatService>(() => AiChatService());
@@ -71,6 +73,7 @@ void setupGetIt() {
   getIt.registerLazySingleton<ImagesRepo>(
     () => ImagesRepoImpl(
       storageServices: getIt<StorageServices>(),
+      fileDownloader: getIt<FileDownloader>(),
       networkManager: getIt<NetworkManager>(),
     ),
   );

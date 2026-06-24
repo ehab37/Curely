@@ -1,46 +1,26 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:dio/dio.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileDownloader {
-  static final Dio _dio = Dio();
+  Future<void> downloadFile({required Uint8List fileBytes}) async {
+    // 1. Get temporary directory to download the file into
+    final directory = await getTemporaryDirectory();
+    // Create an image name
+    var now = DateTime.now();
+    final savePath =
+        '${directory.path}/image_${now.year}-${now.month}-${now.day}-${now.hour}-${now.minute}-${now.second}_com.curely.png';
 
-  static Future<bool> downloadImage(String url) async {
-    try {
-      // Download image
-      final Response response = await _dio.get<Uint8List>(
-        url,
-        options: Options(responseType: ResponseType.bytes),
-        onReceiveProgress: (received, total) {
-          if (total != -1) {
-            received / total;
-          }
-        },
-      );
+    // 2. Save to the provided local path
+    final File file = File(savePath);
+    await file.writeAsBytes(fileBytes);
 
-      // Get temporary directory
-      final dir = await getTemporaryDirectory();
+    // 3. Use flutter_file_dialog to save it to the Gallery/Downloads
+    final params = SaveFileDialogParams(sourceFilePath: file.path);
+    final text =await FlutterFileDialog.saveFile(params: params);
 
-      // Create an image name
-      var now = DateTime.now();
-      var filename =
-          '${dir.path}/image_${now.year}-${now.month}-${now.day}-${now.hour}-${now.minute}-${now.second}_com.curely.png';
-
-      // Save to filesystem
-      final file = File(filename);
-      await file.writeAsBytes(response.data);
-
-      // Ask the user to save it
-      final params = SaveFileDialogParams(sourceFilePath: file.path);
-      final finalPath = await FlutterFileDialog.saveFile(params: params);
-      if (finalPath != null) {
-        return true;
-      }
-    } catch (e) {
-      return false;
-    }
-    return false;
+    // 4. Clean up the temporary file
+    await file.delete();
   }
 }

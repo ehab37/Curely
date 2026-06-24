@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/services/storage_services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:path/path.dart' as p;
@@ -10,15 +12,14 @@ class SupabaseStorage implements StorageServices {
   @override
   Future<String> uploadFile({required File file, required String path}) async {
     String fileName = p.basename(file.path);
-    String extensionName = p.extension(file.path);
 
     await _client.storage
         .from(DatabaseConstants.imagesBucket)
-        .upload('$path/$fileName.$extensionName', file);
+        .upload('$path/$fileName', file);
 
     final String publicUrl = _client.storage
         .from(DatabaseConstants.imagesBucket)
-        .getPublicUrl('$path/$fileName.$extensionName');
+        .getPublicUrl('$path/$fileName');
 
     return publicUrl;
   }
@@ -34,5 +35,25 @@ class SupabaseStorage implements StorageServices {
       urls.add(url);
     }
     return urls;
+  }
+
+  @override
+  Future<Uint8List> downloadFile({required String url}) async {
+    // Extract bucket name and file path from the Supabase Public URL
+    final uri = Uri.parse(url);
+    final segments = uri.pathSegments;
+
+    // Public URL format usually: .../storage/v1/object/public/[bucket]/[path]
+    final publicIndex = segments.indexOf('public');
+    if (publicIndex == -1 || publicIndex + 2 > segments.length) {
+      throw CustomException(message: "Invalid Supabase storage URL");
+    }
+
+    final bucketName = segments[publicIndex + 1];
+    final internalPath = segments.sublist(publicIndex + 2).join('/');
+
+    final fileBytes = _client.storage.from(bucketName).download(internalPath);
+
+    return fileBytes;
   }
 }

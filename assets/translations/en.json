@@ -325,6 +325,7 @@
   "back_to_login": "Back to Login",
   "upload_image_error": "Something went wrong while uploading image, try again later.",
   "upload_images_error": "Something went wrong while uploading images, try again later.",
+  "download_image_error": "An error occurred while downloading the image!",
   "email_required": "Email is required.",
   "enter_valid_email": "Enter a valid email address.",
   "password_required": "Password is required.",

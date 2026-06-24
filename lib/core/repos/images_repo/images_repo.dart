@@ -12,4 +12,6 @@ abstract class ImagesRepo {
     required List<File> imageFiles,
     required String path,
   });
+
+  Future<Either<Failure, void>> downloadImage({required String url});
 }
