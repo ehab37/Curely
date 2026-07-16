@@ -27,29 +27,27 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   UserEntity get user => userDataRepo.getUserDataLocally();
 
   @override
-  Future<Either<Failure, void>> addPrescription({
+  Future<Either<Failure, String>> addPrescription({
     required PrescriptionEntity prescription,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
-      await databaseService.addData(
+      String? docId = await databaseService.addData(
         path: DatabaseConstants.users,
         data: PrescriptionModel.fromEntity(prescription).toMap(),
         docId: user.uId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
       );
-      return const Right(null);
+      return Right(docId!);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));
     } on CustomException catch (e) {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -84,9 +82,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -115,9 +111,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -142,9 +136,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -170,9 +162,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 }

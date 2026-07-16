@@ -8,13 +8,19 @@ class CustomAlertDialog extends StatelessWidget {
     required this.dialogContext,
     required this.title,
     required this.content,
+    this.yesText,
+    this.noText,
     required this.onDone,
+    this.onCancel,
   });
 
   final BuildContext dialogContext;
   final String title;
   final String content;
+  final String? yesText;
+  final String? noText;
   final void Function() onDone;
+  final void Function()? onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +29,15 @@ class CustomAlertDialog extends StatelessWidget {
       content: Text(content),
       actions: <Widget>[
         TextButton(
+          onPressed:
+              onCancel ??
+              () {
+                GoRouter.of(dialogContext).pop(false);
+              },
           child: Text(
-            context.tr('no'),
+            noText ?? context.tr('no'),
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
-          onPressed: () {
-            GoRouter.of(dialogContext).pop(false);
-          },
         ),
         Padding(
           padding: const EdgeInsetsDirectional.only(end: 8.0),
@@ -41,7 +49,7 @@ class CustomAlertDialog extends StatelessWidget {
             ),
             onPressed: onDone,
             child: Text(
-              context.tr('yes'),
+              yesText ?? context.tr('yes'),
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),

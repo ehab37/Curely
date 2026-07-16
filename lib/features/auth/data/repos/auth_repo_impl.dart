@@ -60,9 +60,7 @@ class AuthRepoImpl implements AuthRepo {
         await firebaseAuthServices.deleteUser();
       }
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -92,9 +90,7 @@ class AuthRepoImpl implements AuthRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -127,9 +123,7 @@ class AuthRepoImpl implements AuthRepo {
         await firebaseAuthServices.deleteUser();
       }
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -148,9 +142,7 @@ class AuthRepoImpl implements AuthRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -169,11 +161,7 @@ class AuthRepoImpl implements AuthRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors(
-          "Something wrong happened, please try again later.",
-        ),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -193,11 +181,7 @@ class AuthRepoImpl implements AuthRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors(
-          "Something wrong happened, please try again later.",
-        ),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 

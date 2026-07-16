@@ -9,6 +9,7 @@ import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/presentation/cubits/add_prescription_cubit/add_prescription_cubit.dart';
 import 'package:curely/core/widgets/image_input/images_list_view_widget.dart';
+import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/next_appointment_date_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,6 +76,8 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
               });
             },
           ),
+          16.verticalSpacing,
+          NextAppointmentDateBox(),
           16.verticalSpacing,
           ImagesListViewWidget(images: images),
           GlobalImageInput(

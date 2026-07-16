@@ -40,7 +40,6 @@ dependencies:
   # Dependency Injection
   get_it: ^9.2.1
   # Networking
-  dio: ^5.9.1
   url_launcher: ^6.3.2
   connectivity_plus: ^7.0.0
   # An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics 1.1 files

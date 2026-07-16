@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/services/storage_services.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:path/path.dart' as p;
 
@@ -15,7 +17,10 @@ class SupabaseStorage implements StorageServices {
 
     await _client.storage
         .from(DatabaseConstants.imagesBucket)
-        .upload('$path/$fileName', file);
+        .upload(
+          '$path/${DateTime.now().millisecondsSinceEpoch}$fileName',
+          file,
+        );
 
     final String publicUrl = _client.storage
         .from(DatabaseConstants.imagesBucket)
@@ -46,13 +51,16 @@ class SupabaseStorage implements StorageServices {
     // Public URL format usually: .../storage/v1/object/public/[bucket]/[path]
     final publicIndex = segments.indexOf('public');
     if (publicIndex == -1 || publicIndex + 2 > segments.length) {
-      throw CustomException(message: "Invalid Supabase storage URL");
+      log("Invalid Supabase storage URL");
+      throw CustomException(message: "download_image_error".tr());
     }
 
     final bucketName = segments[publicIndex + 1];
     final internalPath = segments.sublist(publicIndex + 2).join('/');
 
-    final fileBytes = _client.storage.from(bucketName).download(internalPath);
+    final fileBytes = await _client.storage
+        .from(bucketName)
+        .download(internalPath);
 
     return fileBytes;
   }

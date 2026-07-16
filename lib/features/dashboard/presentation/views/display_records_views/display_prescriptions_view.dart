@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DisplayPrescriptionsView extends StatelessWidget {
-  const DisplayPrescriptionsView({super.key, required this.isFavoriteView});
+  const DisplayPrescriptionsView({super.key, this.isFavoriteView = false});
 
   final bool isFavoriteView;
 

@@ -1,10 +1,12 @@
 import 'dart:developer';
+import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/helpers/get_default_reminders_list.dart';
 import 'package:curely/core/services/local_notifications_service.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
@@ -14,20 +16,35 @@ class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
 
   @override
   Future<Either<Failure, void>> addMedicineNotification({
-    required String docId,
     required MedicineEntity medicine,
     required List<TimeOfDay> remindersList,
   }) async {
     try {
-      int notificationId = docId.hashCode;
+      int notificationId = medicine.docId.hashCode;
+      final now = DateTime.now();
       for (int i = 0; i < remindersList.length; i++) {
         final TimeOfDay reminderTime = remindersList[i];
+        var scheduledDate = DateTime(
+          now.year,
+          now.month,
+          now.day,
+          reminderTime.hour,
+          reminderTime.minute,
+        );
+        if (scheduledDate.isBefore(now)) {
+          scheduledDate = scheduledDate.add(const Duration(days: 1));
+        }
         final int uniqueNotificationId = notificationId + i;
-        await notificationService.scheduleDailyReminder(
+        await notificationService.zonedScheduleNotification(
           id: uniqueNotificationId,
-          title: 'Time for your medicine: ${medicine.medicineName}',
-          body: 'Don\'t forget to take your dose! Tap to confirm.',
-          time: reminderTime,
+          title: "medicine_notification_title".tr(
+            args: [medicine.medicineName],
+          ),
+          body: "medicine_notification_body".tr(),
+          channelId: 'daily_meds',
+          channelName: 'Daily Meds',
+          date: scheduledDate,
+          payload: AppRoutesConstants.kDisplayMedicineView,
         );
         log(
           'Scheduled notification $i with ID $uniqueNotificationId at ${reminderTime.hour}',
@@ -37,9 +54,7 @@ class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
     } catch (e) {
       log(e.toString());
       return Left(
-        OtherErrors.fromOtherErrors(
-          "Couldn't add the reminder, please try to add again",
-        ),
+        OtherErrors.fromOtherErrors("add_medicine_reminder_error".tr()),
       );
     }
   }
@@ -62,7 +77,9 @@ class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
       return Right(null);
     } catch (e) {
       log(e.toString());
-      return Left(OtherErrors.fromOtherErrors("Couldn't cancel the reminder"));
+      return Left(
+        OtherErrors.fromOtherErrors("cancel_medicine_reminder_error".tr()),
+      );
     }
   }
 }

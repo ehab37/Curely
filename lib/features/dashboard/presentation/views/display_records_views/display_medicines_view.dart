@@ -12,8 +12,8 @@ import 'widgets/display_medicines_view_body.dart';
 class DisplayMedicinesView extends StatelessWidget {
   const DisplayMedicinesView({
     super.key,
-    required this.isRemindersView,
-    required this.isFavoriteView,
+    this.isRemindersView = false,
+    this.isFavoriteView = false,
   });
 
   final bool isRemindersView;

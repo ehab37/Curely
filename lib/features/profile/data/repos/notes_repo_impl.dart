@@ -45,9 +45,7 @@ class NotesRepoImpl implements NotesRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -82,9 +80,7 @@ class NotesRepoImpl implements NotesRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -112,9 +108,7 @@ class NotesRepoImpl implements NotesRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -137,9 +131,7 @@ class NotesRepoImpl implements NotesRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -163,9 +155,7 @@ class NotesRepoImpl implements NotesRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 }

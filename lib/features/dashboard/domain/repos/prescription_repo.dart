@@ -3,7 +3,7 @@ import 'package:curely/features/dashboard/domain/entities/prescription_entity.da
 import 'package:dartz/dartz.dart';
 
 abstract class PrescriptionRepo {
-  Future<Either<Failure, void>> addPrescription({
+  Future<Either<Failure, String>> addPrescription({
     required PrescriptionEntity prescription,
   });
 

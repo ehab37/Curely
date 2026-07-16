@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/services/storage_services.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
 
@@ -30,8 +32,12 @@ class FireStorage implements StorageServices {
   }
 
   @override
-  Future<Uint8List> downloadFile({required String url}) {
-    // TODO: implement downloadFile
-    throw UnimplementedError();
+  Future<Uint8List> downloadFile({required String url}) async {
+    final ref = FirebaseStorage.instance.refFromURL(url);
+    final Uint8List? fileBytes = await ref.getData(10 * 1024 * 1024);
+    if (fileBytes == null) {
+      throw CustomException(message: "download_image_error".tr());
+    }
+    return fileBytes;
   }
 }

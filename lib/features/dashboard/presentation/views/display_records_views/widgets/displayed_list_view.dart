@@ -19,6 +19,7 @@ class DisplayedListView extends StatelessWidget {
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
       ),
+      padding: const EdgeInsets.only(bottom: 16),
       itemCount: displayedList.length,
       itemBuilder: itemBuilder,
     );

@@ -19,11 +19,13 @@ import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/dashboard/data/repos/analysis_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/medicine_notification_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/medicine_repo_impl.dart';
+import 'package:curely/features/dashboard/data/repos/prescription_notifiction_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/prescription_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/rays_repo_impl.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
+import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/home/data/repos/home_repo_impl.dart';
@@ -87,6 +89,11 @@ void setupGetIt() {
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
+    ),
+  );
+  getIt.registerLazySingleton<PrescriptionNotificationRepo>(
+    () => PrescriptionNotificationRepoImpl(
+      notificationService: getIt<LocalNotificationsService>(),
     ),
   );
   getIt.registerLazySingleton<PrescriptionRepo>(

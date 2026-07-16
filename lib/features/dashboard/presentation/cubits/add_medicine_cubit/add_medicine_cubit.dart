@@ -48,9 +48,9 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
         emit(AddMedicineFailure(failure.errMessage));
       },
       (docId) async {
+        medicine.docId = docId;
         if (medicine.isReminderActive) {
           var result3 = await medicineNotificationRepo.addMedicineNotification(
-            docId: docId,
             medicine: medicine,
             remindersList: remindersList,
           );

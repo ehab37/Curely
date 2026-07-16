@@ -23,7 +23,8 @@ void main() async {
   await lz.EasyLocalization.ensureInitialized();
   await dotenv.load(fileName: ".env");
   tz.initializeTimeZones();
-  await LocalNotificationsService.initNotification();
+  setupGetIt();
+  await getIt<LocalNotificationsService>().initNotification();
   await CacheHelper.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
@@ -37,7 +38,6 @@ void main() async {
     url: DatabaseConstants.supabaseUrl,
     publishableKey: DatabaseConstants.supabasePublishableKey,
   );
-  setupGetIt();
   Bloc.observer = MyBlocObserver();
   runApp(
     DevicePreview(

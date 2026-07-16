@@ -13,6 +13,12 @@ final class AddPrescriptionFailure extends AddPrescriptionState {
   AddPrescriptionFailure(this.errMessage);
 }
 
+final class AddPrescriptionNotificationFailure extends AddPrescriptionState {
+  final String errMessage;
+
+  AddPrescriptionNotificationFailure(this.errMessage);
+}
+
 final class UploadImageFailure extends AddPrescriptionState {
   final String errMessage;
 

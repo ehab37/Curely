@@ -23,7 +23,7 @@ const List<String> doctorSpecializationsList = [
 ];
 
 class PrescriptionEntity {
-  final String? docId;
+  String? docId;
   final String doctorSpecialization;
   final String doctorName;
   final String? hospital;

@@ -18,7 +18,7 @@ class FileDownloader {
 
     // 3. Use flutter_file_dialog to save it to the Gallery/Downloads
     final params = SaveFileDialogParams(sourceFilePath: file.path);
-    final text =await FlutterFileDialog.saveFile(params: params);
+    await FlutterFileDialog.saveFile(params: params);
 
     // 4. Clean up the temporary file
     await file.delete();

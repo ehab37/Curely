@@ -45,9 +45,7 @@ class RaysRepoImpl implements RaysRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -82,9 +80,7 @@ class RaysRepoImpl implements RaysRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -113,9 +109,7 @@ class RaysRepoImpl implements RaysRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -138,9 +132,7 @@ class RaysRepoImpl implements RaysRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 
@@ -164,9 +156,7 @@ class RaysRepoImpl implements RaysRepo {
       return Left(OtherErrors.fromOtherErrors(e.message));
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("Something went wrong, try again later"),
-      );
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
     }
   }
 }

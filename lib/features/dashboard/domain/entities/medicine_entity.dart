@@ -68,7 +68,7 @@ const List<String> frequencyList = [
 ];
 
 class MedicineEntity {
-  final String? docId;
+  String? docId;
   final String medicineUsage;
   final String medicineName;
   final String frequency;

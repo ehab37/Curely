@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helpers/get_default_reminders_list.dart';
@@ -11,7 +10,7 @@ import 'package:curely/features/dashboard/presentation/cubits/add_medicine_cubit
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:curely/core/services/local_notifications_service.dart';
+import 'package:curely/core/helpers/notification_permission.dart';
 import 'frequency_field.dart';
 import 'medicine_name_field.dart';
 import 'medicine_notes_field.dart';
@@ -94,22 +93,26 @@ class _AddMedicineViewBodyState extends State<AddMedicineViewBody> {
           16.verticalSpacing,
           ReminderToggleSwitch(
             isReminderEnabled: isReminderActive,
+            remindersList: addMedicineCubit.remindersList,
             onChangedToggle: (newVal) async {
-              setState(() {
-                if (frequency == null) {
-                  InfoBox.errorFloatingBox(
-                    context,
-                    context.tr("choose_frequency_first"),
-                  );
-                  return;
-                }
-                isReminderActive = newVal;
-              });
-              if (await LocalNotificationsService.requestPermissions(context)) {
-                log('permission approved');
+              if (frequency == null) {
+                InfoBox.errorFloatingBox(
+                  context,
+                  context.tr("choose_frequency_first"),
+                );
+                return;
+              }
+              if (newVal == true) {
+                await notificationPermission(
+                  context: context,
+                  onPermissionResult: (granted) {
+                    setState(() => isReminderActive = granted);
+                  },
+                );
+              } else {
+                setState(() => isReminderActive = false);
               }
             },
-            remindersList: addMedicineCubit.remindersList,
           ),
           16.verticalSpacing,
           GlobalImageInput(

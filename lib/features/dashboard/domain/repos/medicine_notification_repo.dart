@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 abstract class MedicineNotificationRepo {
   Future<Either<Failure, void>> addMedicineNotification({
-    required String docId,
     required MedicineEntity medicine,
     required List<TimeOfDay> remindersList,
   });
