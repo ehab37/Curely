@@ -8,7 +8,6 @@ part 'manage_notes_state.dart';
 class ManageNotesCubit extends Cubit<ManageNotesState> {
   ManageNotesCubit({required this.notesRepo}) : super(ManageNotesInitial());
   final NotesRepo notesRepo;
-  bool isFavoriteView = false;
 
   Future<void> addNote({required NoteEntity note}) async {
     emit(ManageNotesLoading());
@@ -25,7 +24,10 @@ class ManageNotesCubit extends Cubit<ManageNotesState> {
     );
   }
 
-  Future<void> getNotes({String? searchText}) async {
+  Future<void> getNotes({
+    String? searchText,
+    bool isFavoriteView = false,
+  }) async {
     emit(ManageNotesLoading());
     var result = isFavoriteView
         ? await notesRepo.getFavoriteNotes()

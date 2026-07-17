@@ -8,29 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'display_rays_loading.dart';
 import 'display_rays_success.dart';
 
-class DisplayRaysViewBody extends StatefulWidget {
-  const DisplayRaysViewBody({
-    super.key,
-    required this.isFavoriteView,
-    this.searchText,
-  });
+class DisplayRaysViewBody extends StatelessWidget {
+  const DisplayRaysViewBody({super.key, this.isFavoriteView = false});
 
   final bool isFavoriteView;
-  final String? searchText;
-
-  @override
-  State<DisplayRaysViewBody> createState() => _DisplayRaysViewBodyState();
-}
-
-class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
-  @override
-  void initState() {
-    if (widget.isFavoriteView) {
-      context.read<ManageRaysCubit>().isFavoriteView = true;
-    }
-    context.read<ManageRaysCubit>().getRays(searchText: widget.searchText);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +29,7 @@ class _DisplayRaysViewBodyState extends State<DisplayRaysViewBody> {
       builder: (context, state) {
         if (state is GetRaysSuccess) {
           if (state.rays.isEmpty) {
-            return widget.isFavoriteView
+            return isFavoriteView
                 ? CustomEmptyWidget(title: context.tr("no_favorite_rays"))
                 : CustomEmptyWidget(
                     title: context.tr("no_rays_found"),

@@ -8,33 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'display_prescriptions_loading.dart';
 import 'display_prescriptions_success.dart';
 
-class DisplayPrescriptionsViewBody extends StatefulWidget {
-  const DisplayPrescriptionsViewBody({
-    super.key,
-    required this.isFavoriteView,
-    this.searchText,
-  });
+class DisplayPrescriptionsViewBody extends StatelessWidget {
+  const DisplayPrescriptionsViewBody({super.key, this.isFavoriteView = false});
 
   final bool isFavoriteView;
-  final String? searchText;
-
-  @override
-  State<DisplayPrescriptionsViewBody> createState() =>
-      _DisplayPrescriptionsViewBodyState();
-}
-
-class _DisplayPrescriptionsViewBodyState
-    extends State<DisplayPrescriptionsViewBody> {
-  @override
-  void initState() {
-    if (widget.isFavoriteView) {
-      context.read<ManagePrescriptionsCubit>().isFavoriteView = true;
-    }
-    context.read<ManagePrescriptionsCubit>().getPrescriptions(
-      searchText: widget.searchText,
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +29,7 @@ class _DisplayPrescriptionsViewBodyState
       builder: (context, state) {
         if (state is GetPrescriptionsSuccess) {
           if (state.prescriptions.isEmpty) {
-            return widget.isFavoriteView
+            return isFavoriteView
                 ? CustomEmptyWidget(
                     title: context.tr("no_favorite_prescriptions"),
                   )

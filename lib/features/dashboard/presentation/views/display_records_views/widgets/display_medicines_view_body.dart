@@ -11,37 +11,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'displayed_medicine_item.dart';
 import 'medicine_dismissible_widget.dart';
 
-class DisplayMedicinesViewBody extends StatefulWidget {
+class DisplayMedicinesViewBody extends StatelessWidget {
   const DisplayMedicinesViewBody({
     super.key,
-    required this.isRemindersView,
-    required this.isFavoriteView,
-    this.searchText,
+    this.isRemindersView = false,
+    this.isFavoriteView = false,
   });
 
   final bool isRemindersView;
   final bool isFavoriteView;
-  final String? searchText;
-
-  @override
-  State<DisplayMedicinesViewBody> createState() =>
-      _DisplayMedicinesViewBodyState();
-}
-
-class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
-  @override
-  void initState() {
-    if (widget.isRemindersView) {
-      context.read<ManageMedicinesCubit>().isReminderView = true;
-    }
-    if (widget.isFavoriteView) {
-      context.read<ManageMedicinesCubit>().isFavoriteView = true;
-    }
-    context.read<ManageMedicinesCubit>().getMedicines(
-      searchText: widget.searchText,
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +37,9 @@ class _DisplayMedicinesViewBodyState extends State<DisplayMedicinesViewBody> {
       builder: (context, state) {
         if (state is GetMedicinesSuccess) {
           if (state.medicines.isEmpty) {
-            return widget.isFavoriteView
+            return isFavoriteView
                 ? CustomEmptyWidget(title: context.tr("no_fav_medicines"))
-                : widget.isRemindersView
+                : isRemindersView
                 ? CustomEmptyWidget(title: context.tr("no_reminders"))
                 : CustomEmptyWidget(
                     title: context.tr("no_medicines_found"),

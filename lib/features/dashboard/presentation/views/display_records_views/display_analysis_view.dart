@@ -29,7 +29,8 @@ class DisplayAnalysisView extends StatelessWidget {
           ),
           child: BlocProvider(
             create: (context) =>
-                ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
+                ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>())
+                  ..getAnalysis(isFavoriteView: isFavoriteView),
             child: DisplayAnalysisViewBody(isFavoriteView: isFavoriteView),
           ),
         ),

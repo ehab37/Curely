@@ -19,7 +19,9 @@ class NotesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ManageNotesCubit(notesRepo: getIt<NotesRepo>()),
+      create: (context) =>
+          ManageNotesCubit(notesRepo: getIt<NotesRepo>())
+            ..getNotes(isFavoriteView: isFavoriteView),
       child: Builder(
         builder: (context) {
           return Scaffold(

@@ -9,9 +9,11 @@ class ManageAnalysisCubit extends Cubit<ManageAnalysisState> {
   ManageAnalysisCubit({required this.analysisRepo})
     : super(ManageAnalysisInitial());
   final AnalysisRepo analysisRepo;
-  bool isFavoriteView = false;
 
-  Future<void> getAnalysis({String? searchText}) async {
+  Future<void> getAnalysis({
+    String? searchText,
+    bool isFavoriteView = false,
+  }) async {
     emit(ManageAnalysisLoading());
     var result = isFavoriteView
         ? await analysisRepo.getFavoriteAnalysis()

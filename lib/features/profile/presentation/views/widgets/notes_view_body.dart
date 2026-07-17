@@ -10,29 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'note_item.dart';
 
-class NotesViewBody extends StatefulWidget {
-  const NotesViewBody({
-    super.key,
-    required this.isFavoriteView,
-    this.searchText,
-  });
+class NotesViewBody extends StatelessWidget {
+  const NotesViewBody({super.key, this.isFavoriteView = false});
 
   final bool isFavoriteView;
-  final String? searchText;
-
-  @override
-  State<NotesViewBody> createState() => _NotesViewBodyState();
-}
-
-class _NotesViewBodyState extends State<NotesViewBody> {
-  @override
-  void initState() {
-    if (widget.isFavoriteView) {
-      context.read<ManageNotesCubit>().isFavoriteView = true;
-    }
-    context.read<ManageNotesCubit>().getNotes(searchText: widget.searchText);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +21,7 @@ class _NotesViewBodyState extends State<NotesViewBody> {
       builder: (context, state) {
         if (state is GetNotesSuccess) {
           if (state.notes.isEmpty) {
-            return widget.isFavoriteView
+            return isFavoriteView
                 ? CustomEmptyWidget(title: context.tr("no_fav_notes"))
                 : CustomEmptyWidget(
                     title: context.tr("no_notes_found"),

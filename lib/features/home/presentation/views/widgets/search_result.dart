@@ -29,6 +29,7 @@ class SearchResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
+        String searchText = context.read<SearchCubit>().searchController.text;
         if (state is CategoryChanged) {
           switch (state.currentIndex) {
             case 0:
@@ -36,49 +37,36 @@ class SearchResult extends StatelessWidget {
                 create: (context) => ManageMedicinesCubit(
                   medicineRepo: getIt<MedicineRepo>(),
                   medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
-                ),
-                child: DisplayMedicinesViewBody(
-                  isRemindersView: false,
-                  isFavoriteView: false,
-                  searchText: context.read<SearchCubit>().searchController.text,
-                ),
+                )..getMedicines(searchText: searchText),
+                child: DisplayMedicinesViewBody(),
               );
             case 1:
               return BlocProvider(
                 create: (context) => ManagePrescriptionsCubit(
                   prescriptionRepo: getIt<PrescriptionRepo>(),
-                ),
-                child: DisplayPrescriptionsViewBody(
-                  isFavoriteView: false,
-                  searchText: context.read<SearchCubit>().searchController.text,
-                ),
+                )..getPrescriptions(searchText: searchText),
+                child: DisplayPrescriptionsViewBody(),
               );
             case 2:
               return BlocProvider(
                 create: (context) =>
-                    ManageRaysCubit(raysRepo: getIt<RaysRepo>()),
-                child: DisplayRaysViewBody(
-                  isFavoriteView: false,
-                  searchText: context.read<SearchCubit>().searchController.text,
-                ),
+                    ManageRaysCubit(raysRepo: getIt<RaysRepo>())
+                      ..getRays(searchText: searchText),
+                child: DisplayRaysViewBody(),
               );
             case 3:
               return BlocProvider(
                 create: (context) =>
-                    ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>()),
-                child: DisplayAnalysisViewBody(
-                  isFavoriteView: false,
-                  searchText: context.read<SearchCubit>().searchController.text,
-                ),
+                    ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>())
+                      ..getAnalysis(searchText: searchText),
+                child: DisplayAnalysisViewBody(),
               );
             case 4:
               return BlocProvider(
                 create: (context) =>
-                    ManageNotesCubit(notesRepo: getIt<NotesRepo>()),
-                child: NotesViewBody(
-                  isFavoriteView: false,
-                  searchText: context.read<SearchCubit>().searchController.text,
-                ),
+                    ManageNotesCubit(notesRepo: getIt<NotesRepo>())
+                      ..getNotes(searchText: searchText),
+                child: NotesViewBody(),
               );
           }
         } else if (state is SearchLoading) {

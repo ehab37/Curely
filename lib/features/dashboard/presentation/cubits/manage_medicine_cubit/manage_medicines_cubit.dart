@@ -13,12 +13,14 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
   }) : super(ManageMedicinesInitial());
   final MedicineRepo medicineRepo;
   final MedicineNotificationRepo medicineNotificationRepo;
-  bool isReminderView = false;
-  bool isFavoriteView = false;
 
-  Future<void> getMedicines({String? searchText}) async {
+  Future<void> getMedicines({
+    String? searchText,
+    bool isRemindersView = false,
+    bool isFavoriteView = false,
+  }) async {
     emit(ManageMedicinesLoading());
-    var result = isReminderView
+    var result = isRemindersView
         ? await medicineRepo.getReminderMedicines()
         : isFavoriteView
         ? await medicineRepo.getFavoriteMedicines()

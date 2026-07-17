@@ -28,7 +28,9 @@ class DisplayRaysView extends StatelessWidget {
             horizontal: SpacingConstants.horizontalPadding,
           ),
           child: BlocProvider(
-            create: (context) => ManageRaysCubit(raysRepo: getIt<RaysRepo>()),
+            create: (context) =>
+                ManageRaysCubit(raysRepo: getIt<RaysRepo>())
+                  ..getRays(isFavoriteView: isFavoriteView),
             child: DisplayRaysViewBody(isFavoriteView: isFavoriteView),
           ),
         ),

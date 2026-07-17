@@ -30,7 +30,7 @@ class DisplayPrescriptionsView extends StatelessWidget {
           child: BlocProvider(
             create: (context) => ManagePrescriptionsCubit(
               prescriptionRepo: getIt<PrescriptionRepo>(),
-            ),
+            )..getPrescriptions(isFavoriteView: isFavoriteView),
             child: DisplayPrescriptionsViewBody(isFavoriteView: isFavoriteView),
           ),
         ),

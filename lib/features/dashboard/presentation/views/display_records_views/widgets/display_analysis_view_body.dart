@@ -8,32 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'display_analysis_loading.dart';
 import 'display_analysis_success.dart';
 
-class DisplayAnalysisViewBody extends StatefulWidget {
-  const DisplayAnalysisViewBody({
-    super.key,
-    required this.isFavoriteView,
-    this.searchText,
-  });
+class DisplayAnalysisViewBody extends StatelessWidget {
+  const DisplayAnalysisViewBody({super.key, this.isFavoriteView = false});
 
   final bool isFavoriteView;
-  final String? searchText;
-
-  @override
-  State<DisplayAnalysisViewBody> createState() =>
-      _DisplayAnalysisViewBodyState();
-}
-
-class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
-  @override
-  void initState() {
-    if (widget.isFavoriteView) {
-      context.read<ManageAnalysisCubit>().isFavoriteView = true;
-    }
-    context.read<ManageAnalysisCubit>().getAnalysis(
-      searchText: widget.searchText,
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +29,7 @@ class _DisplayAnalysisViewBodyState extends State<DisplayAnalysisViewBody> {
       builder: (context, state) {
         if (state is GetAnalysisSuccess) {
           if (state.analysis.isEmpty) {
-            return widget.isFavoriteView
+            return isFavoriteView
                 ? CustomEmptyWidget(title: context.tr("no_fav_analysis"))
                 : CustomEmptyWidget(
                     title: context.tr("no_analysis_found"),

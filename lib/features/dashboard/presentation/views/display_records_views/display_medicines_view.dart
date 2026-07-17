@@ -36,10 +36,14 @@ class DisplayMedicinesView extends StatelessWidget {
             horizontal: SpacingConstants.horizontalPadding,
           ),
           child: BlocProvider(
-            create: (context) => ManageMedicinesCubit(
-              medicineRepo: getIt<MedicineRepo>(),
-              medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
-            ),
+            create: (context) =>
+                ManageMedicinesCubit(
+                  medicineRepo: getIt<MedicineRepo>(),
+                  medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
+                )..getMedicines(
+                  isFavoriteView: isFavoriteView,
+                  isRemindersView: isRemindersView,
+                ),
             child: DisplayMedicinesViewBody(
               isRemindersView: isRemindersView,
               isFavoriteView: isFavoriteView,
