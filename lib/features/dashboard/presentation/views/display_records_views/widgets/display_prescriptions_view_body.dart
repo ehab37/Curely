@@ -19,6 +19,8 @@ class DisplayPrescriptionsViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is DeletePrescriptionsFailure) {
           InfoBox.errorFloatingBox(context, state.errMessage);
+        } else if (state is CancelPrescriptionsNotificationFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
         } else if (state is DeletePrescriptionsSuccess) {
           InfoBox.successFloatingBox(
             context,

@@ -42,15 +42,15 @@ class ManageRaysCubit extends Cubit<ManageRaysState> {
     );
   }
 
-  Future<void> deleteRays({required String docId}) async {
+  Future<void> deleteRays({required RaysEntity rays}) async {
     emit(ManageRaysLoading());
-    var result = await raysRepo.deleteRays(docId: docId);
+    var result = await raysRepo.deleteRays(rays: rays);
     result.fold(
       (failure) {
         emit(DeleteRaysFailure(failure.errMessage));
         getRays();
       },
-      (rays) {
+      (success) {
         emit(DeleteRaysSuccess());
         getRays();
       },

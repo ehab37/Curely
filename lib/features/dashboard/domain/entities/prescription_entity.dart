@@ -29,6 +29,7 @@ class PrescriptionEntity {
   final String? hospital;
   String? diagnosis;
   final String examinationDate;
+  final DateTime? nextAppointmentDate;
   bool isFavorite;
   final List<File>? images;
   List<String>? imageUrls;
@@ -40,6 +41,7 @@ class PrescriptionEntity {
     this.hospital,
     this.diagnosis,
     required this.examinationDate,
+    this.nextAppointmentDate,
     this.isFavorite = false,
     this.images,
     this.imageUrls,

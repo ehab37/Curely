@@ -9,6 +9,7 @@ class PrescriptionModel {
   final String? hospital;
   final String? diagnosis;
   final String examinationDate;
+  final DateTime? nextAppointmentDate;
   final bool isFavorite;
   final List<File>? images;
   List<String> imageUrls;
@@ -20,6 +21,7 @@ class PrescriptionModel {
     this.hospital,
     this.diagnosis,
     required this.examinationDate,
+    this.nextAppointmentDate,
     required this.isFavorite,
     this.images,
     required this.imageUrls,
@@ -33,6 +35,7 @@ class PrescriptionModel {
       hospital: json['hospital'],
       diagnosis: json['diagnosis'],
       examinationDate: json['examinationDate'],
+      nextAppointmentDate: json['nextAppointmentDate'] != null ? DateTime.parse(json['nextAppointmentDate']) : null,
       isFavorite: json['isFavorite'],
       imageUrls: List<String>.from(json['imageUrls']),
     );
@@ -46,6 +49,7 @@ class PrescriptionModel {
       hospital: hospital,
       diagnosis: diagnosis,
       examinationDate: examinationDate.toReadableDate(),
+      nextAppointmentDate: nextAppointmentDate,
       isFavorite: isFavorite,
       images: images,
       imageUrls: imageUrls,
@@ -59,6 +63,7 @@ class PrescriptionModel {
       hospital: entity.hospital,
       diagnosis: entity.diagnosis,
       examinationDate: entity.examinationDate,
+      nextAppointmentDate: entity.nextAppointmentDate,
       isFavorite: entity.isFavorite,
       images: entity.images,
       imageUrls: entity.imageUrls!,
@@ -72,6 +77,7 @@ class PrescriptionModel {
       'hospital': hospital,
       'diagnosis': diagnosis,
       'examinationDate': examinationDate,
+      'nextAppointmentDate': nextAppointmentDate?.toIso8601String(),
       'isFavorite': isFavorite,
       'imageUrls': imageUrls,
     };

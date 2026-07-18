@@ -14,17 +14,16 @@ class SupabaseStorage implements StorageServices {
   @override
   Future<String> uploadFile({required File file, required String path}) async {
     String fileName = p.basename(file.path);
+    String finalImageName =
+        '$path/${DateTime.now().millisecondsSinceEpoch}$fileName';
 
     await _client.storage
         .from(DatabaseConstants.imagesBucket)
-        .upload(
-          '$path/${DateTime.now().millisecondsSinceEpoch}$fileName',
-          file,
-        );
+        .upload(finalImageName, file);
 
     final String publicUrl = _client.storage
         .from(DatabaseConstants.imagesBucket)
-        .getPublicUrl('$path/$fileName');
+        .getPublicUrl(finalImageName);
 
     return publicUrl;
   }
@@ -63,5 +62,24 @@ class SupabaseStorage implements StorageServices {
         .download(internalPath);
 
     return fileBytes;
+  }
+
+  @override
+  Future<void> deleteFile({required String url}) async {
+    final uri = Uri.parse(url);
+    final segments = uri.pathSegments;
+    final publicIndex = segments.indexOf('public');
+    if (publicIndex != -1 && publicIndex + 2 <= segments.length) {
+      final bucketName = segments[publicIndex + 1];
+      final internalPath = segments.sublist(publicIndex + 2).join('/');
+      await _client.storage.from(bucketName).remove([internalPath]);
+    }
+  }
+
+  @override
+  Future<void> deleteFiles({required List<String> urls}) async {
+    for (var url in urls) {
+      await deleteFile(url: url);
+    }
   }
 }

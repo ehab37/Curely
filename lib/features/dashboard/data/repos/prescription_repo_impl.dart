@@ -7,6 +7,7 @@ import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/network_manager.dart';
+import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/features/dashboard/data/models/prescription_model.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
@@ -18,11 +19,13 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
     required this.databaseService,
     required this.networkManager,
     required this.userDataRepo,
+    required this.storageServices,
   });
 
   final DatabaseService databaseService;
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
+  final StorageServices storageServices;
 
   UserEntity get user => userDataRepo.getUserDataLocally();
 
@@ -117,7 +120,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
 
   @override
   Future<Either<Failure, void>> deletePrescription({
-    required String docId,
+    required PrescriptionEntity prescription,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
@@ -127,8 +130,12 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
         path: DatabaseConstants.users,
         docId: user.uId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
-        subDocId: docId,
+        subDocId: prescription.docId,
       );
+      if (prescription.imageUrls != null &&
+          prescription.imageUrls!.isNotEmpty) {
+        await storageServices.deleteFiles(urls: prescription.imageUrls!);
+      }
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

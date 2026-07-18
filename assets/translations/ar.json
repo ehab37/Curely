@@ -355,7 +355,7 @@
   "medicine_notification_title": "حان وقت دواءك: {}",
   "medicine_notification_body": "لا تنس تناول جرعتك! اضغط للتأكيد.",
   "add_medicine_reminder_error": "تعذر إضافة التذكير، يرجى المحاولة مرة أخرى",
-  "cancel_medicine_reminder_error": "تعذر إلغاء التذكير",
+  "cancel_reminder_error": "تعذر إلغاء التذكير",
   "prescription_notification_title": "الموعد القادم مع د/ {}",
   "prescription_notification_body_today": "لا تنس موعدك القادم، اليوم!",
   "prescription_notification_body_tomorrow": "لا تنس موعدك القادم، غداً!",

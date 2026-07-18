@@ -1,4 +1,5 @@
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
+import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,9 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'manage_prescriptions_state.dart';
 
 class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
-  ManagePrescriptionsCubit({required this.prescriptionRepo})
-    : super(ManagePrescriptionsInitial());
+  ManagePrescriptionsCubit({
+    required this.prescriptionRepo,
+    required this.prescriptionNotificationRepo,
+  }) : super(ManagePrescriptionsInitial());
   final PrescriptionRepo prescriptionRepo;
+  final PrescriptionNotificationRepo prescriptionNotificationRepo;
 
   Future<void> getPrescriptions({
     String? searchText,
@@ -47,17 +51,31 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
     );
   }
 
-  Future<void> deletePrescriptions({required String docId}) async {
+  Future<void> deletePrescriptions({
+    required PrescriptionEntity prescription,
+  }) async {
     emit(ManagePrescriptionsLoading());
-    var result = await prescriptionRepo.deletePrescription(docId: docId);
+    var result = await prescriptionRepo.deletePrescription(
+      prescription: prescription,
+    );
     result.fold(
       (failure) {
         emit(DeletePrescriptionsFailure(failure.errMessage));
         getPrescriptions();
       },
-      (prescriptions) {
-        emit(DeletePrescriptionsSuccess());
-        getPrescriptions();
+      (success) async {
+        var result2 = await prescriptionNotificationRepo
+            .cancelPrescriptionNotification(prescription: prescription);
+        result2.fold(
+          (failure) {
+            emit(CancelPrescriptionsNotificationFailure(failure.errMessage));
+            getPrescriptions();
+          },
+          (success) {
+            emit(DeletePrescriptionsSuccess());
+            getPrescriptions();
+          },
+        );
       },
     );
   }

@@ -22,7 +22,7 @@ class DisplayAnalysisSuccess extends StatelessWidget {
           recordKey: analysisList[index].docId!,
           onDismissed: (direction) {
             context.read<ManageAnalysisCubit>().deleteAnalysis(
-              docId: analysisList[index].docId!,
+              analysis: analysisList[index],
             );
           },
           content: GestureDetector(

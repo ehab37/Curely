@@ -25,7 +25,7 @@ class DisplayPrescriptionsSuccess extends StatelessWidget {
           recordKey: prescriptionsList[index].docId!,
           onDismissed: (direction) {
             context.read<ManagePrescriptionsCubit>().deletePrescriptions(
-              docId: prescriptionsList[index].docId!,
+              prescription: prescriptionsList[index],
             );
           },
           content: GestureDetector(

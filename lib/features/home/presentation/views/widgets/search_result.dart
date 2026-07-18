@@ -4,6 +4,7 @@ import 'package:curely/core/widgets/custom_loading_indicator.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
+import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
@@ -44,6 +45,8 @@ class SearchResult extends StatelessWidget {
               return BlocProvider(
                 create: (context) => ManagePrescriptionsCubit(
                   prescriptionRepo: getIt<PrescriptionRepo>(),
+                  prescriptionNotificationRepo:
+                      getIt<PrescriptionNotificationRepo>(),
                 )..getPrescriptions(searchText: searchText),
                 child: DisplayPrescriptionsViewBody(),
               );
@@ -68,6 +71,8 @@ class SearchResult extends StatelessWidget {
                       ..getNotes(searchText: searchText),
                 child: NotesViewBody(),
               );
+            default:
+              return const SizedBox.shrink();
           }
         } else if (state is SearchLoading) {
           return CustomLoadingIndicator();

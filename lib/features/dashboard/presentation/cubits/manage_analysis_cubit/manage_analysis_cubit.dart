@@ -43,15 +43,15 @@ class ManageAnalysisCubit extends Cubit<ManageAnalysisState> {
     );
   }
 
-  Future<void> deleteAnalysis({required String docId}) async {
+  Future<void> deleteAnalysis({required AnalysisEntity analysis}) async {
     emit(ManageAnalysisLoading());
-    var result = await analysisRepo.deleteAnalysis(docId: docId);
+    var result = await analysisRepo.deleteAnalysis(analysis: analysis);
     result.fold(
       (failure) {
         emit(DeleteAnalysisFailure(failure.errMessage));
         getAnalysis();
       },
-      (analysis) {
+      (success) {
         emit(DeleteAnalysisSuccess());
         getAnalysis();
       },

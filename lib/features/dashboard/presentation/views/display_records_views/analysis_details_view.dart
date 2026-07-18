@@ -51,7 +51,7 @@ class AnalysisDetailsView extends StatelessWidget {
                   content: context.tr('delete_analysis_content'),
                   onDone: () {
                     context.read<ManageAnalysisCubit>().deleteAnalysis(
-                      docId: analysis.docId!,
+                      analysis: analysis,
                     );
                     GoRouter.of(context).pop();
                   },

@@ -7,4 +7,8 @@ abstract class PrescriptionNotificationRepo {
     required PrescriptionEntity prescription,
     required DateTime nextAppointmentDate,
   });
+
+  Future<Either<Failure, void>> cancelPrescriptionNotification({
+    required PrescriptionEntity prescription,
+  });
 }

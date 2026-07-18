@@ -54,7 +54,7 @@ class PrescriptionDetailsView extends StatelessWidget {
                   onDone: () {
                     context
                         .read<ManagePrescriptionsCubit>()
-                        .deletePrescriptions(docId: prescription.docId!);
+                        .deletePrescriptions(prescription: prescription);
                     GoRouter.of(context).pop();
                   },
                 ),

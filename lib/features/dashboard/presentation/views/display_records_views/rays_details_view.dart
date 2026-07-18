@@ -50,9 +50,7 @@ class RaysDetailsView extends StatelessWidget {
                   title: context.tr('delete_rays_title'),
                   content: context.tr('delete_rays_content'),
                   onDone: () {
-                    context.read<ManageRaysCubit>().deleteRays(
-                      docId: rays.docId!,
-                    );
+                    context.read<ManageRaysCubit>().deleteRays(rays: rays);
                     GoRouter.of(context).pop();
                   },
                 ),

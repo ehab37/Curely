@@ -52,7 +52,7 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
 
   Future<void> deleteMedicines({required MedicineEntity medicine}) async {
     emit(ManageMedicinesLoading());
-    var result = await medicineRepo.deleteMedicine(docId: medicine.docId!);
+    var result = await medicineRepo.deleteMedicine(medicine: medicine);
     result.fold(
       (failure) {
         emit(DeleteMedicinesFailure(failure.errMessage));

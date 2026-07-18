@@ -89,6 +89,7 @@ void setupGetIt() {
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
+      storageServices: getIt<StorageServices>(),
     ),
   );
   getIt.registerLazySingleton<PrescriptionNotificationRepo>(
@@ -101,6 +102,7 @@ void setupGetIt() {
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
+      storageServices: getIt<StorageServices>(),
     ),
   );
   getIt.registerLazySingleton<RaysRepo>(
@@ -108,6 +110,7 @@ void setupGetIt() {
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
+      storageServices: getIt<StorageServices>(),
     ),
   );
   getIt.registerLazySingleton<AnalysisRepo>(
@@ -115,6 +118,7 @@ void setupGetIt() {
       databaseService: getIt<DatabaseService>(),
       networkManager: getIt<NetworkManager>(),
       userDataRepo: getIt<UserDataRepo>(),
+      storageServices: getIt<StorageServices>(),
     ),
   );
   getIt.registerLazySingleton<NotesRepo>(

@@ -25,6 +25,13 @@ final class DeletePrescriptionsFailure extends ManagePrescriptionsState {
   DeletePrescriptionsFailure(this.errMessage);
 }
 
+final class CancelPrescriptionsNotificationFailure
+    extends ManagePrescriptionsState {
+  final String errMessage;
+
+  CancelPrescriptionsNotificationFailure(this.errMessage);
+}
+
 final class GetPrescriptionsSuccess extends ManagePrescriptionsState {
   final List<PrescriptionEntity> prescriptions;
 

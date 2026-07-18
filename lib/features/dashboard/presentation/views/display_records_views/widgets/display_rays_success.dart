@@ -21,9 +21,7 @@ class DisplayRaysSuccess extends StatelessWidget {
         return RecordsDismissibleWidget(
           recordKey: raysList[index].docId!,
           onDismissed: (direction) {
-            context.read<ManageRaysCubit>().deleteRays(
-              docId: raysList[index].docId!,
-            );
+            context.read<ManageRaysCubit>().deleteRays(rays: raysList[index]);
           },
           content: GestureDetector(
             onTap: () {

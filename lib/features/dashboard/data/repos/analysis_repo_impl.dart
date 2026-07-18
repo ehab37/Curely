@@ -7,6 +7,7 @@ import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/network_manager.dart';
+import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/features/dashboard/data/models/analysis_model.dart';
 import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
@@ -18,11 +19,13 @@ class AnalysisRepoImpl implements AnalysisRepo {
     required this.databaseService,
     required this.networkManager,
     required this.userDataRepo,
+    required this.storageServices,
   });
 
   final DatabaseService databaseService;
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
+  final StorageServices storageServices;
 
   UserEntity get user => userDataRepo.getUserDataLocally();
 
@@ -115,7 +118,9 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteAnalysis({required String docId}) async {
+  Future<Either<Failure, void>> deleteAnalysis({
+    required AnalysisEntity analysis,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
@@ -124,8 +129,11 @@ class AnalysisRepoImpl implements AnalysisRepo {
         path: DatabaseConstants.users,
         docId: user.uId,
         subCollectionPath: DatabaseConstants.analysisPath,
-        subDocId: docId,
+        subDocId: analysis.docId,
       );
+      if (analysis.imageUrls != null && analysis.imageUrls!.isNotEmpty) {
+        await storageServices.deleteFiles(urls: analysis.imageUrls!);
+      }
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

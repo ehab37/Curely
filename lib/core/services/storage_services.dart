@@ -10,4 +10,8 @@ abstract class StorageServices {
   });
 
   Future<Uint8List> downloadFile({required String url});
+
+  Future<void> deleteFile({required String url});
+
+  Future<void> deleteFiles({required List<String> urls});
 }

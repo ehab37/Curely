@@ -47,4 +47,23 @@ class PrescriptionNotificationRepoImpl implements PrescriptionNotificationRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> cancelPrescriptionNotification({
+    required PrescriptionEntity prescription,
+  }) async {
+    try {
+      if (prescription.nextAppointmentDate != null) {
+        for (int i = 0; i < 2; i++) {
+          final int notificationId = prescription.docId.hashCode + i;
+          await notificationService.cancelReminder(notificationId);
+          log("Cancelled notification with ID: $notificationId");
+        }
+      }
+      return Right(null);
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("cancel_reminder_error".tr()));
+    }
+  }
 }

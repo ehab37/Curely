@@ -77,9 +77,7 @@ class MedicineNotificationRepoImpl implements MedicineNotificationRepo {
       return Right(null);
     } catch (e) {
       log(e.toString());
-      return Left(
-        OtherErrors.fromOtherErrors("cancel_medicine_reminder_error".tr()),
-      );
+      return Left(OtherErrors.fromOtherErrors("cancel_reminder_error".tr()));
     }
   }
 }

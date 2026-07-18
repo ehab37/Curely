@@ -108,6 +108,9 @@ class _AddPrescriptionViewBodyState extends State<AddPrescriptionViewBody> {
                   examinationDate: examinationDate == null
                       ? DateTime.now().toString()
                       : examinationDate.toString(),
+                  nextAppointmentDate: context
+                      .read<AddPrescriptionCubit>()
+                      .nextAppointmentDate,
                   images: images,
                 );
                 await context.read<AddPrescriptionCubit>().addPrescription(

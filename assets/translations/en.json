@@ -355,7 +355,7 @@
   "medicine_notification_title": "Time for your medicine: {}",
   "medicine_notification_body": "Don't forget to take your dose! Tap to confirm.",
   "add_medicine_reminder_error": "Couldn't add the reminder, please try to add again",
-  "cancel_medicine_reminder_error": "Couldn't cancel the reminder",
+  "cancel_reminder_error": "Couldn't cancel the reminder",
   "prescription_notification_title": "Next Appointment for Dr/ {}",
   "prescription_notification_body_today": "Don't forget your next appointment, Today!",
   "prescription_notification_body_tomorrow": "Don't forget your next appointment, Tomorrow!",

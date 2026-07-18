@@ -11,7 +11,9 @@ abstract class AnalysisRepo {
 
   Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis();
 
-  Future<Either<Failure, void>> deleteAnalysis({required String docId});
+  Future<Either<Failure, void>> deleteAnalysis({
+    required AnalysisEntity analysis,
+  });
 
   Future<Either<Failure, void>> updateAnalysis({
     required AnalysisEntity analysis,

@@ -40,4 +40,17 @@ class FireStorage implements StorageServices {
     }
     return fileBytes;
   }
+
+  @override
+  Future<void> deleteFile({required String url}) async {
+    final ref = FirebaseStorage.instance.refFromURL(url);
+    await ref.delete();
+  }
+
+  @override
+  Future<void> deleteFiles({required List<String> urls}) async {
+    for (var url in urls) {
+      await deleteFile(url: url);
+    }
+  }
 }
