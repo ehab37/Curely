@@ -9,7 +9,7 @@ abstract class RaysRepo {
 
   Future<Either<Failure, List<RaysEntity>>> getFavoriteRays();
 
-  Future<Either<Failure, void>> deleteRays({required RaysEntity rays});
+  Future<Either<Failure, void>> deleteRays({required String docId});
 
   Future<Either<Failure, void>> updateRays({required RaysEntity rays});
 }

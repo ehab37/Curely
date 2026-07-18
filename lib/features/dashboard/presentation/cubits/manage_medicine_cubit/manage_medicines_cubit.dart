@@ -1,3 +1,4 @@
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
@@ -10,9 +11,11 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
   ManageMedicinesCubit({
     required this.medicineRepo,
     required this.medicineNotificationRepo,
+    required this.imagesRepo,
   }) : super(ManageMedicinesInitial());
   final MedicineRepo medicineRepo;
   final MedicineNotificationRepo medicineNotificationRepo;
+  final ImagesRepo imagesRepo;
 
   Future<void> getMedicines({
     String? searchText,
@@ -52,21 +55,24 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
 
   Future<void> deleteMedicines({required MedicineEntity medicine}) async {
     emit(ManageMedicinesLoading());
-    var result = await medicineRepo.deleteMedicine(medicine: medicine);
+    var result = await medicineNotificationRepo.cancelAllMedicineNotification(
+      medicine: medicine,
+    );
     result.fold(
       (failure) {
-        emit(DeleteMedicinesFailure(failure.errMessage));
-        getMedicines();
+        emit(CancelMedicinesNotificationFailure(failure.errMessage));
       },
-      (medicines) async {
-        var result2 = await medicineNotificationRepo
-            .cancelAllMedicineNotification(medicine: medicine);
+      (_) async {
+        var result2 = await medicineRepo.deleteMedicine(docId: medicine.docId!);
         result2.fold(
           (failure) {
-            emit(CancelMedicinesNotificationFailure(failure.errMessage));
-            getMedicines();
+            emit(DeleteMedicinesFailure(failure.errMessage));
+            updateMedicines(medicine: medicine..isReminderActive = false);
           },
-          (success) {
+          (success) async {
+            if (medicine.imageUrl != null) {
+              await imagesRepo.deleteImage(url: medicine.imageUrl!);
+            }
             emit(DeleteMedicinesSuccess());
             getMedicines();
           },
@@ -83,10 +89,9 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
     result.fold(
       (failure) {
         emit(CancelMedicinesNotificationFailure(failure.errMessage));
-        getMedicines();
       },
       (success) async {
-        updateMedicines(medicine: medicine..isReminderActive = false);
+        await updateMedicines(medicine: medicine..isReminderActive = false);
       },
     );
   }

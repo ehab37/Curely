@@ -14,4 +14,8 @@ abstract class ImagesRepo {
   });
 
   Future<Either<Failure, void>> downloadImage({required String url});
+
+  Future<Either<Failure, void>> deleteImage({required String url});
+
+  Future<Either<Failure, void>> deleteImages({required List<String> urls});
 }

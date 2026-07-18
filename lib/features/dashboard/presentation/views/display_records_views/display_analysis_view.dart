@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
@@ -28,9 +29,10 @@ class DisplayAnalysisView extends StatelessWidget {
             horizontal: SpacingConstants.horizontalPadding,
           ),
           child: BlocProvider(
-            create: (context) =>
-                ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>())
-                  ..getAnalysis(isFavoriteView: isFavoriteView),
+            create: (context) => ManageAnalysisCubit(
+              analysisRepo: getIt<AnalysisRepo>(),
+              imagesRepo: getIt<ImagesRepo>(),
+            )..getAnalysis(isFavoriteView: isFavoriteView),
             child: DisplayAnalysisViewBody(isFavoriteView: isFavoriteView),
           ),
         ),

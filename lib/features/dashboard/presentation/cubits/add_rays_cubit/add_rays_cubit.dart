@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -27,7 +28,10 @@ class AddRaysCubit extends Cubit<AddRaysState> {
         rays.imageUrls = urls;
         var result2 = await raysRepo.addRays(rays: rays);
         result2.fold(
-          (failure) {
+          (failure) async {
+            if (rays.imageUrls.isNotNullOrEmpty) {
+              await imagesRepo.deleteImages(urls: rays.imageUrls!);
+            }
             emit(AddRaysFailure(failure.errMessage));
           },
           (success) {

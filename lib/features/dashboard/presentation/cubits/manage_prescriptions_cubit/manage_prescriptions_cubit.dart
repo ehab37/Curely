@@ -1,3 +1,5 @@
+import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
@@ -10,9 +12,11 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
   ManagePrescriptionsCubit({
     required this.prescriptionRepo,
     required this.prescriptionNotificationRepo,
+    required this.imagesRepo,
   }) : super(ManagePrescriptionsInitial());
   final PrescriptionRepo prescriptionRepo;
   final PrescriptionNotificationRepo prescriptionNotificationRepo;
+  final ImagesRepo imagesRepo;
 
   Future<void> getPrescriptions({
     String? searchText,
@@ -55,23 +59,24 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
     required PrescriptionEntity prescription,
   }) async {
     emit(ManagePrescriptionsLoading());
-    var result = await prescriptionRepo.deletePrescription(
-      prescription: prescription,
-    );
+    var result = await prescriptionNotificationRepo
+        .cancelPrescriptionNotification(prescription: prescription);
     result.fold(
       (failure) {
-        emit(DeletePrescriptionsFailure(failure.errMessage));
-        getPrescriptions();
+        emit(CancelPrescriptionsNotificationFailure(failure.errMessage));
       },
-      (success) async {
-        var result2 = await prescriptionNotificationRepo
-            .cancelPrescriptionNotification(prescription: prescription);
+      (_) async {
+        var result2 = await prescriptionRepo.deletePrescription(
+          docId: prescription.docId!,
+        );
         result2.fold(
           (failure) {
-            emit(CancelPrescriptionsNotificationFailure(failure.errMessage));
-            getPrescriptions();
+            emit(DeletePrescriptionsFailure(failure.errMessage));
           },
-          (success) {
+          (success) async {
+            if (prescription.imageUrls.isNotNullOrEmpty) {
+              await imagesRepo.deleteImages(urls: prescription.imageUrls!);
+            }
             emit(DeletePrescriptionsSuccess());
             getPrescriptions();
           },

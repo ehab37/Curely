@@ -1,3 +1,4 @@
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/custom_empty_widget.dart';
 import 'package:curely/core/widgets/custom_loading_indicator.dart';
@@ -38,6 +39,7 @@ class SearchResult extends StatelessWidget {
                 create: (context) => ManageMedicinesCubit(
                   medicineRepo: getIt<MedicineRepo>(),
                   medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
+                  imagesRepo: getIt<ImagesRepo>(),
                 )..getMedicines(searchText: searchText),
                 child: DisplayMedicinesViewBody(),
               );
@@ -47,21 +49,24 @@ class SearchResult extends StatelessWidget {
                   prescriptionRepo: getIt<PrescriptionRepo>(),
                   prescriptionNotificationRepo:
                       getIt<PrescriptionNotificationRepo>(),
+                  imagesRepo: getIt<ImagesRepo>(),
                 )..getPrescriptions(searchText: searchText),
                 child: DisplayPrescriptionsViewBody(),
               );
             case 2:
               return BlocProvider(
-                create: (context) =>
-                    ManageRaysCubit(raysRepo: getIt<RaysRepo>())
-                      ..getRays(searchText: searchText),
+                create: (context) => ManageRaysCubit(
+                  raysRepo: getIt<RaysRepo>(),
+                  imagesRepo: getIt<ImagesRepo>(),
+                )..getRays(searchText: searchText),
                 child: DisplayRaysViewBody(),
               );
             case 3:
               return BlocProvider(
-                create: (context) =>
-                    ManageAnalysisCubit(analysisRepo: getIt<AnalysisRepo>())
-                      ..getAnalysis(searchText: searchText),
+                create: (context) => ManageAnalysisCubit(
+                  analysisRepo: getIt<AnalysisRepo>(),
+                  imagesRepo: getIt<ImagesRepo>(),
+                )..getAnalysis(searchText: searchText),
                 child: DisplayAnalysisViewBody(),
               );
             case 4:

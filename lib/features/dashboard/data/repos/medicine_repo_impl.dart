@@ -7,7 +7,6 @@ import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/network_manager.dart';
-import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/features/dashboard/data/models/medicine_model.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_repo.dart';
@@ -19,13 +18,11 @@ class MedicineRepoImpl implements MedicineRepo {
     required this.databaseService,
     required this.networkManager,
     required this.userDataRepo,
-    required this.storageServices,
   });
 
   final DatabaseService databaseService;
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
-  final StorageServices storageServices;
 
   UserEntity get user => userDataRepo.getUserDataLocally();
 
@@ -146,9 +143,7 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteMedicine({
-    required MedicineEntity medicine,
-  }) async {
+  Future<Either<Failure, void>> deleteMedicine({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
@@ -157,11 +152,8 @@ class MedicineRepoImpl implements MedicineRepo {
         path: DatabaseConstants.users,
         docId: user.uId,
         subCollectionPath: DatabaseConstants.medicinePath,
-        subDocId: medicine.docId,
+        subDocId: docId,
       );
-      if (medicine.imageUrl != null) {
-        await storageServices.deleteFile(url: medicine.imageUrl!);
-      }
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

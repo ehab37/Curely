@@ -15,9 +15,7 @@ abstract class MedicineRepo {
 
   Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines();
 
-  Future<Either<Failure, void>> deleteMedicine({
-    required MedicineEntity medicine,
-  });
+  Future<Either<Failure, void>> deleteMedicine({required String docId});
 
   Future<Either<Failure, void>> updateMedicine({
     required MedicineEntity medicine,

@@ -7,7 +7,6 @@ import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
 import 'package:curely/core/services/database_service.dart';
 import 'package:curely/core/services/network_manager.dart';
-import 'package:curely/core/services/storage_services.dart';
 import 'package:curely/features/dashboard/data/models/rays_model.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -19,13 +18,11 @@ class RaysRepoImpl implements RaysRepo {
     required this.databaseService,
     required this.networkManager,
     required this.userDataRepo,
-    required this.storageServices,
   });
 
   final DatabaseService databaseService;
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
-  final StorageServices storageServices;
 
   UserEntity get user => userDataRepo.getUserDataLocally();
 
@@ -117,7 +114,7 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteRays({required RaysEntity rays}) async {
+  Future<Either<Failure, void>> deleteRays({required String docId}) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
@@ -126,11 +123,8 @@ class RaysRepoImpl implements RaysRepo {
         path: DatabaseConstants.users,
         docId: user.uId,
         subCollectionPath: DatabaseConstants.raysPath,
-        subDocId: rays.docId,
+        subDocId: docId,
       );
-      if (rays.imageUrls != null && rays.imageUrls!.isNotEmpty) {
-        await storageServices.deleteFiles(urls: rays.imageUrls!);
-      }
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(AuthExceptionHandler.fromAuthException(e));

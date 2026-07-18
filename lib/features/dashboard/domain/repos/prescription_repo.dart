@@ -13,9 +13,7 @@ abstract class PrescriptionRepo {
 
   Future<Either<Failure, List<PrescriptionEntity>>> getFavoritePrescriptions();
 
-  Future<Either<Failure, void>> deletePrescription({
-    required PrescriptionEntity prescription,
-  });
+  Future<Either<Failure, void>> deletePrescription({required String docId});
 
   Future<Either<Failure, void>> updatePrescription({
     required PrescriptionEntity prescription,

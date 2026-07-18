@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
@@ -40,6 +41,7 @@ class DisplayMedicinesView extends StatelessWidget {
                 ManageMedicinesCubit(
                   medicineRepo: getIt<MedicineRepo>(),
                   medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
+                  imagesRepo: getIt<ImagesRepo>(),
                 )..getMedicines(
                   isFavoriteView: isFavoriteView,
                   isRemindersView: isRemindersView,

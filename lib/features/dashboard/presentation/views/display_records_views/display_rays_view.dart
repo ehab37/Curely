@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -28,9 +29,10 @@ class DisplayRaysView extends StatelessWidget {
             horizontal: SpacingConstants.horizontalPadding,
           ),
           child: BlocProvider(
-            create: (context) =>
-                ManageRaysCubit(raysRepo: getIt<RaysRepo>())
-                  ..getRays(isFavoriteView: isFavoriteView),
+            create: (context) => ManageRaysCubit(
+              raysRepo: getIt<RaysRepo>(),
+              imagesRepo: getIt<ImagesRepo>(),
+            )..getRays(isFavoriteView: isFavoriteView),
             child: DisplayRaysViewBody(isFavoriteView: isFavoriteView),
           ),
         ),

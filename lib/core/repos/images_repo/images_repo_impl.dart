@@ -80,4 +80,38 @@ class ImagesRepoImpl implements ImagesRepo {
       return Left(OtherErrors.fromOtherErrors("download_image_error".tr()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteImage({required String url}) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      await storageServices.deleteFile(url: url);
+      return Right(null);
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("delete_image_error".tr()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteImages({
+    required List<String> urls,
+  }) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      await storageServices.deleteFiles(urls: urls);
+      return Right(null);
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("delete_images_error".tr()));
+    }
+  }
 }

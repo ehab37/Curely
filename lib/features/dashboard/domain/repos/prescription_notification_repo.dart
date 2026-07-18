@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 abstract class PrescriptionNotificationRepo {
   Future<Either<Failure, void>> addPrescriptionNotification({
     required PrescriptionEntity prescription,
-    required DateTime nextAppointmentDate,
   });
 
   Future<Either<Failure, void>> cancelPrescriptionNotification({

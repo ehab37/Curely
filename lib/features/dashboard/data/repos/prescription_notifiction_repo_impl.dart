@@ -15,10 +15,9 @@ class PrescriptionNotificationRepoImpl implements PrescriptionNotificationRepo {
   @override
   Future<Either<Failure, void>> addPrescriptionNotification({
     required PrescriptionEntity prescription,
-    required DateTime nextAppointmentDate,
   }) async {
     try {
-      final exactDate = nextAppointmentDate.copyWith(hour: 11);
+      final exactDate = prescription.nextAppointmentDate!.copyWith(hour: 11);
       final notificationId = prescription.docId.hashCode;
       for (int i = 0; i < 2; i++) {
         await notificationService.zonedScheduleNotification(

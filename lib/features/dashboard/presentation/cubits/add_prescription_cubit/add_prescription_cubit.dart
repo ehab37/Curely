@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
@@ -43,17 +44,17 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
           prescription: prescription,
         );
         result2.fold(
-          (failure) {
+          (failure) async {
+            if (prescription.imageUrls.isNotNullOrEmpty) {
+              await imagesRepo.deleteImages(urls: prescription.imageUrls!);
+            }
             emit(AddPrescriptionFailure(failure.errMessage));
           },
           (docId) async {
             prescription.docId = docId;
-            if (nextAppointmentDate != null) {
+            if (prescription.nextAppointmentDate != null) {
               var result3 = await prescriptionNotificationRepo
-                  .addPrescriptionNotification(
-                    prescription: prescription,
-                    nextAppointmentDate: nextAppointmentDate!,
-                  );
+                  .addPrescriptionNotification(prescription: prescription);
               result3.fold((failure) {
                 emit(AddPrescriptionNotificationFailure(failure.errMessage));
               }, (success) {});

@@ -32,6 +32,8 @@ class DisplayMedicinesViewBody extends StatelessWidget {
             context,
             context.tr("record_deleted_successfully"),
           );
+        } else if (state is CancelMedicinesNotificationFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
         }
       },
       builder: (context, state) {

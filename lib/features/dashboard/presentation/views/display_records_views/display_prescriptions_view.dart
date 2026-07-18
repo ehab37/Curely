@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
@@ -33,6 +34,7 @@ class DisplayPrescriptionsView extends StatelessWidget {
               prescriptionRepo: getIt<PrescriptionRepo>(),
               prescriptionNotificationRepo:
                   getIt<PrescriptionNotificationRepo>(),
+              imagesRepo: getIt<ImagesRepo>(),
             )..getPrescriptions(isFavoriteView: isFavoriteView),
             child: DisplayPrescriptionsViewBody(isFavoriteView: isFavoriteView),
           ),

@@ -33,33 +33,46 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
         },
         (url) async {
           medicine.imageUrl = url;
-          await addMedicineAndNotification(medicine);
+          var result = await medicineRepo.addMedicine(medicine: medicine);
+          result.fold(
+            (failure) async {
+              if (medicine.imageUrl != null) {
+                await imagesRepo.deleteImage(url: medicine.imageUrl!);
+              }
+              emit(AddMedicineFailure(failure.errMessage));
+            },
+            (docId) async {
+              medicine.docId = docId;
+              await addMedicineNotification(medicine);
+              emit(AddMedicineSuccess());
+            },
+          );
         },
       );
     } else {
-      await addMedicineAndNotification(medicine);
+      var result = await medicineRepo.addMedicine(medicine: medicine);
+      result.fold(
+        (failure) {
+          emit(AddMedicineFailure(failure.errMessage));
+        },
+        (docId) async {
+          medicine.docId = docId;
+          await addMedicineNotification(medicine);
+          emit(AddMedicineSuccess());
+        },
+      );
     }
   }
 
-  Future<void> addMedicineAndNotification(MedicineEntity medicine) async {
-    var result2 = await medicineRepo.addMedicine(medicine: medicine);
-    result2.fold(
-      (failure) {
-        emit(AddMedicineFailure(failure.errMessage));
-      },
-      (docId) async {
-        medicine.docId = docId;
-        if (medicine.isReminderActive) {
-          var result3 = await medicineNotificationRepo.addMedicineNotification(
-            medicine: medicine,
-            remindersList: remindersList,
-          );
-          result3.fold((failure) {
-            emit(AddMedicineNotificationFailure(failure.errMessage));
-          }, (success) {});
-        }
-        emit(AddMedicineSuccess());
-      },
-    );
+  Future<void> addMedicineNotification(MedicineEntity medicine) async {
+    if (medicine.isReminderActive) {
+      var result3 = await medicineNotificationRepo.addMedicineNotification(
+        medicine: medicine,
+        remindersList: remindersList,
+      );
+      result3.fold((failure) {
+        emit(AddMedicineNotificationFailure(failure.errMessage));
+      }, (success) {});
+    }
   }
 }

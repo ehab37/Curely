@@ -50,6 +50,7 @@ class MedicineDetailsView extends StatelessWidget {
                       medicine: medicine,
                     );
                     GoRouter.of(context).pop();
+                    GoRouter.of(context).pop();
                   },
                 ),
               );
@@ -61,8 +62,6 @@ class MedicineDetailsView extends StatelessWidget {
         listener: (context, state) {
           if (state is GetMedicinesFailure) {
             InfoBox.errorFloatingBox(context, state.errMessage);
-          } else if (state is DeleteMedicinesSuccess) {
-            GoRouter.of(context).pop();
           }
         },
         builder: (context, state) {
