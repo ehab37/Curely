@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
-import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -24,20 +23,19 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
 
-  UserEntity get user => userDataRepo.getUserDataLocally();
-
   @override
   Future<Either<Failure, String>> addPrescription({
     required PrescriptionEntity prescription,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       String? docId = await databaseService.addData(
-        path: DatabaseConstants.users,
+        path: userDataRepo.getProfileRootPath(profileId),
         data: PrescriptionModel.fromEntity(prescription).toMap(),
-        docId: user.uId,
+        docId: profileId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
       );
       return Right(docId!);
@@ -54,6 +52,7 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   @override
   Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions({
     String? searchText,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
@@ -61,8 +60,8 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.prescriptionPath,
               )
               as List<Map<String, dynamic>>;
@@ -87,16 +86,17 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   }
 
   @override
-  Future<Either<Failure, List<PrescriptionEntity>>>
-  getFavoritePrescriptions() async {
+  Future<Either<Failure, List<PrescriptionEntity>>> getFavoritePrescriptions({
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.prescriptionPath,
                 query: {"field": "isFavorite", "value": true},
               )
@@ -117,17 +117,18 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
 
   @override
   Future<Either<Failure, void>> deletePrescription({
-    required String docId,
+    required PrescriptionEntity prescription,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
-        subDocId: docId,
+        subDocId: prescription.docId,
       );
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -143,14 +144,15 @@ class PrescriptionRepoImpl implements PrescriptionRepo {
   @override
   Future<Either<Failure, void>> updatePrescription({
     required PrescriptionEntity prescription,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.prescriptionPath,
         subDocId: prescription.docId,
         data: PrescriptionModel.fromEntity(prescription).toMap(),

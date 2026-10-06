@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
@@ -19,9 +20,10 @@ class NotesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ManageNotesCubit(notesRepo: getIt<NotesRepo>())
-            ..getNotes(isFavoriteView: isFavoriteView),
+      create: (context) => ManageNotesCubit(
+        notesRepo: getIt<NotesRepo>(),
+        activeProfileCubit: getIt<ActiveProfileCubit>(),
+      )..getNotes(isFavoriteView: isFavoriteView),
       child: Builder(
         builder: (context) {
           return Scaffold(
@@ -35,13 +37,16 @@ class NotesView extends StatelessWidget {
                       final cubit = context.read<ManageNotesCubit>();
                       showCustomBottomSheet(
                         context,
-                        BlocProvider.value(value: cubit, child: AddNote()),
+                        BlocProvider.value(
+                          value: cubit,
+                          child: const AddNote(),
+                        ),
                       );
                     },
                   ),
             body: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: SpacingConstants.horizontalPadding,
                 ),
                 child: NotesViewBody(isFavoriteView: isFavoriteView),

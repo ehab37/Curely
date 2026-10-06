@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/utils/info_box.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
@@ -23,6 +24,7 @@ class AddPrescriptionView extends StatelessWidget {
         imagesRepo: getIt<ImagesRepo>(),
         prescriptionRepo: getIt<PrescriptionRepo>(),
         prescriptionNotificationRepo: getIt<PrescriptionNotificationRepo>(),
+        activeProfileCubit: getIt<ActiveProfileCubit>(),
       ),
       child: PopScope(
         onPopInvokedWithResult: (didPop, result) =>
@@ -54,7 +56,7 @@ class AddPrescriptionView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                           horizontal: SpacingConstants.horizontalPadding,
                         ),
-                        child: AddPrescriptionViewBody(),
+                        child: const AddPrescriptionViewBody(),
                       ),
                     ),
                   );

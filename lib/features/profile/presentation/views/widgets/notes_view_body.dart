@@ -17,7 +17,19 @@ class NotesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ManageNotesCubit, ManageNotesState>(
+    return BlocConsumer<ManageNotesCubit, ManageNotesState>(
+      listener: (context, state) {
+        if (state is DeleteNoteFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
+        } else if (state is DeleteNoteSuccess) {
+          InfoBox.successFloatingBox(
+            context,
+            context.tr("note_deleted_successfully"),
+          );
+        } else if (state is AddNoteFailure) {
+          InfoBox.errorFloatingBox(context, state.errMessage);
+        }
+      },
       builder: (context, state) {
         if (state is GetNotesSuccess) {
           if (state.notes.isEmpty) {
@@ -33,20 +45,12 @@ class NotesViewBody extends StatelessWidget {
           return CustomErrorWidget(
             error: state.errMessage,
             onTryAgain: () {
-              context.read<ManageNotesCubit>().getNotes();
+              context.read<ManageNotesCubit>().getNotes(
+                isFavoriteView: isFavoriteView,
+              );
             },
           );
         } else {
-          if (state is DeleteNoteFailure) {
-            InfoBox.errorFloatingBox(context, state.errMessage);
-          } else if (state is DeleteNoteSuccess) {
-            InfoBox.successFloatingBox(
-              context,
-              context.tr("note_deleted_successfully"),
-            );
-          } else if (state is AddNoteFailure) {
-            InfoBox.errorFloatingBox(context, state.errMessage);
-          }
           return CustomSkeletonizer(
             child: ListView.builder(
               itemBuilder: (context, index) {

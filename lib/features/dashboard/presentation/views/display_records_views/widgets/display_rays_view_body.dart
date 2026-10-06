@@ -41,7 +41,9 @@ class DisplayRaysViewBody extends StatelessWidget {
           return CustomErrorWidget(
             error: state.errMessage,
             onTryAgain: () {
-              context.read<ManageRaysCubit>().getRays();
+              context.read<ManageRaysCubit>().getRays(
+                isFavoriteView: isFavoriteView,
+              );
             },
           );
         } else {

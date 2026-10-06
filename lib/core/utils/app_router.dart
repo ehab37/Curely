@@ -31,6 +31,8 @@ import 'package:curely/features/dashboard/presentation/views/display_records_vie
 import 'package:curely/features/home/presentation/views/doctor_ai_view.dart';
 import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
+import 'package:curely/features/profile/presentation/cubits/manage_dependents_cubit/manage_dependents_cubit.dart';
+import 'package:curely/features/profile/presentation/views/manage_dependents_view.dart';
 import 'package:curely/features/profile/presentation/views/notes_view.dart';
 import 'package:curely/features/profile/presentation/views/profile_view.dart';
 import 'package:curely/features/welcome/presentation/views/language_view.dart';
@@ -219,6 +221,13 @@ abstract class AppRouter {
       GoRoute(
         path: AppRoutesConstants.kDoctorAiView,
         builder: (context, state) => DoctorAiView(),
+      ),
+      GoRoute(
+        path: AppRoutesConstants.kManageDependentsView,
+        builder: (context, state) => BlocProvider.value(
+          value: state.extra as ManageDependentsCubit,
+          child: const ManageDependentsView(),
+        ),
       ),
     ],
   );

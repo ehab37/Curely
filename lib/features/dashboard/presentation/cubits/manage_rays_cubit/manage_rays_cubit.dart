@@ -1,4 +1,5 @@
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -8,10 +9,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'manage_rays_state.dart';
 
 class ManageRaysCubit extends Cubit<ManageRaysState> {
-  ManageRaysCubit({required this.raysRepo, required this.imagesRepo})
-    : super(ManageRaysInitial());
+  ManageRaysCubit({
+    required this.raysRepo,
+    required this.imagesRepo,
+    required this.activeProfileCubit,
+  }) : super(ManageRaysInitial());
   final RaysRepo raysRepo;
   final ImagesRepo imagesRepo;
+  final ActiveProfileCubit activeProfileCubit;
+
+  String get profileId => activeProfileCubit.activeProfileId;
 
   Future<void> getRays({
     String? searchText,
@@ -19,8 +26,8 @@ class ManageRaysCubit extends Cubit<ManageRaysState> {
   }) async {
     emit(ManageRaysLoading());
     var result = isFavoriteView
-        ? await raysRepo.getFavoriteRays()
-        : await raysRepo.getRays(searchText: searchText);
+        ? await raysRepo.getFavoriteRays(profileId: profileId)
+        : await raysRepo.getRays(searchText: searchText, profileId: profileId);
     result.fold(
       (failure) {
         emit(GetRaysFailure(failure.errMessage));
@@ -33,7 +40,7 @@ class ManageRaysCubit extends Cubit<ManageRaysState> {
 
   Future<void> updateRays({required RaysEntity rays}) async {
     emit(ManageRaysLoading());
-    var result = await raysRepo.updateRays(rays: rays);
+    var result = await raysRepo.updateRays(rays: rays, profileId: profileId);
     result.fold(
       (failure) {
         emit(UpdateRaysFailure(failure.errMessage));
@@ -48,7 +55,7 @@ class ManageRaysCubit extends Cubit<ManageRaysState> {
 
   Future<void> deleteRays({required RaysEntity rays}) async {
     emit(ManageRaysLoading());
-    var result = await raysRepo.deleteRays(docId: rays.docId!);
+    var result = await raysRepo.deleteRays(rays: rays, profileId: profileId);
     result.fold(
       (failure) {
         emit(DeleteRaysFailure(failure.errMessage));

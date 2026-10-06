@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/build_custom_app_bar.dart';
@@ -32,6 +33,7 @@ class DisplayAnalysisView extends StatelessWidget {
             create: (context) => ManageAnalysisCubit(
               analysisRepo: getIt<AnalysisRepo>(),
               imagesRepo: getIt<ImagesRepo>(),
+              activeProfileCubit: getIt<ActiveProfileCubit>(),
             )..getAnalysis(isFavoriteView: isFavoriteView),
             child: DisplayAnalysisViewBody(isFavoriteView: isFavoriteView),
           ),

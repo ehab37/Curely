@@ -12,11 +12,15 @@ class RecordsDismissibleWidget extends StatelessWidget {
     required this.recordKey,
     required this.onDismissed,
     required this.content,
+    this.title,
+    this.supTitle,
   });
 
   final String recordKey;
   final void Function(DismissDirection) onDismissed;
   final Widget content;
+  final String? title;
+  final String? supTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +33,18 @@ class RecordsDismissibleWidget extends StatelessWidget {
           ),
           color: AppColors.error,
         ),
-        alignment: AlignmentDirectional.centerStart,
-        padding: const EdgeInsetsDirectional.only(start: 20.0),
+        alignment: AlignmentDirectional.centerEnd,
+        padding: const EdgeInsetsDirectional.only(end: 20.0),
         child: const Icon(Icons.delete, color: AppColors.background),
       ),
-      direction: DismissDirection.startToEnd,
+      direction: DismissDirection.endToStart,
       confirmDismiss: (DismissDirection direction) async {
         return await showAlertDialog(
           context: context,
           content: CustomAlertDialog(
             dialogContext: context,
-            title: context.tr('delete_record_title'),
-            content: context.tr('delete_record_content'),
+            title: title ?? context.tr('delete_record_title'),
+            content: supTitle ?? context.tr('delete_record_content'),
             onDone: () {
               GoRouter.of(context).pop(true);
             },

@@ -26,11 +26,11 @@ class MedicineDismissibleWidget extends StatelessWidget {
           ),
           color: AppColors.error,
         ),
-        alignment: AlignmentDirectional.centerStart,
-        padding: const EdgeInsetsDirectional.only(start: 20.0),
+        alignment: AlignmentDirectional.centerEnd,
+        padding: const EdgeInsetsDirectional.only(end: 20.0),
         child: const Icon(Icons.delete, color: AppColors.background),
       ),
-      direction: DismissDirection.startToEnd,
+      direction: DismissDirection.endToStart,
       confirmDismiss: (DismissDirection direction) async {
         return await showAlertDialog(
           context: context,

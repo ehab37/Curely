@@ -1,4 +1,5 @@
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
@@ -13,10 +14,14 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
     required this.prescriptionRepo,
     required this.prescriptionNotificationRepo,
     required this.imagesRepo,
+    required this.activeProfileCubit,
   }) : super(ManagePrescriptionsInitial());
   final PrescriptionRepo prescriptionRepo;
   final PrescriptionNotificationRepo prescriptionNotificationRepo;
   final ImagesRepo imagesRepo;
+  final ActiveProfileCubit activeProfileCubit;
+
+  String get profileId => activeProfileCubit.activeProfileId;
 
   Future<void> getPrescriptions({
     String? searchText,
@@ -24,8 +29,11 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
   }) async {
     emit(ManagePrescriptionsLoading());
     var result = isFavoriteView
-        ? await prescriptionRepo.getFavoritePrescriptions()
-        : await prescriptionRepo.getPrescriptions(searchText: searchText);
+        ? await prescriptionRepo.getFavoritePrescriptions(profileId: profileId)
+        : await prescriptionRepo.getPrescriptions(
+            searchText: searchText,
+            profileId: profileId,
+          );
     result.fold(
       (failure) {
         emit(GetPrescriptionsFailure(failure.errMessage));
@@ -42,6 +50,7 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
     emit(ManagePrescriptionsLoading());
     var result = await prescriptionRepo.updatePrescription(
       prescription: prescription,
+      profileId: profileId,
     );
     result.fold(
       (failure) {
@@ -67,7 +76,8 @@ class ManagePrescriptionsCubit extends Cubit<ManagePrescriptionsState> {
       },
       (_) async {
         var result2 = await prescriptionRepo.deletePrescription(
-          docId: prescription.docId!,
+          prescription: prescription,
+          profileId: profileId,
         );
         result2.fold(
           (failure) {

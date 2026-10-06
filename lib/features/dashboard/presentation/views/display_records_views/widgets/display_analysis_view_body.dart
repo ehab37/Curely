@@ -41,7 +41,9 @@ class DisplayAnalysisViewBody extends StatelessWidget {
           return CustomErrorWidget(
             error: state.errMessage,
             onTryAgain: () {
-              context.read<ManageAnalysisCubit>().getAnalysis();
+              context.read<ManageAnalysisCubit>().getAnalysis(
+                isFavoriteView: isFavoriteView,
+              );
             },
           );
         } else {

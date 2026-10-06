@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
-import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -24,18 +23,19 @@ class RaysRepoImpl implements RaysRepo {
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
 
-  UserEntity get user => userDataRepo.getUserDataLocally();
-
   @override
-  Future<Either<Failure, void>> addRays({required RaysEntity rays}) async {
+  Future<Either<Failure, void>> addRays({
+    required RaysEntity rays,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
-        path: DatabaseConstants.users,
+        path: userDataRepo.getProfileRootPath(profileId),
         data: RaysModel.fromEntity(rays).toMap(),
-        docId: user.uId,
+        docId: profileId,
         subCollectionPath: DatabaseConstants.raysPath,
       );
       return const Right(null);
@@ -52,6 +52,7 @@ class RaysRepoImpl implements RaysRepo {
   @override
   Future<Either<Failure, List<RaysEntity>>> getRays({
     String? searchText,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
@@ -59,8 +60,8 @@ class RaysRepoImpl implements RaysRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.raysPath,
               )
               as List<Map<String, dynamic>>;
@@ -85,15 +86,17 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
-  Future<Either<Failure, List<RaysEntity>>> getFavoriteRays() async {
+  Future<Either<Failure, List<RaysEntity>>> getFavoriteRays({
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.raysPath,
                 query: {"field": "isFavorite", "value": true},
               )
@@ -114,16 +117,19 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteRays({required String docId}) async {
+  Future<Either<Failure, void>> deleteRays({
+    required RaysEntity rays,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.raysPath,
-        subDocId: docId,
+        subDocId: rays.docId,
       );
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -137,14 +143,17 @@ class RaysRepoImpl implements RaysRepo {
   }
 
   @override
-  Future<Either<Failure, void>> updateRays({required RaysEntity rays}) async {
+  Future<Either<Failure, void>> updateRays({
+    required RaysEntity rays,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.raysPath,
         subDocId: rays.docId,
         data: RaysModel.fromEntity(rays).toMap(),

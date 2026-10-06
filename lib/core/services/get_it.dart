@@ -1,3 +1,4 @@
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/repos/images_repo/images_repo_impl.dart';
@@ -19,7 +20,7 @@ import 'package:curely/features/auth/domain/repos/auth_repo.dart';
 import 'package:curely/features/dashboard/data/repos/analysis_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/medicine_notification_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/medicine_repo_impl.dart';
-import 'package:curely/features/dashboard/data/repos/prescription_notifiction_repo_impl.dart';
+import 'package:curely/features/dashboard/data/repos/prescription_notification_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/prescription_repo_impl.dart';
 import 'package:curely/features/dashboard/data/repos/rays_repo_impl.dart';
 import 'package:curely/features/dashboard/domain/repos/analysis_repo.dart';
@@ -30,8 +31,10 @@ import 'package:curely/features/dashboard/domain/repos/prescription_repo.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
 import 'package:curely/features/home/data/repos/home_repo_impl.dart';
 import 'package:curely/features/home/domain/repos/home_repo.dart';
+import 'package:curely/features/profile/data/repos/dependents_repo_impl.dart';
 import 'package:curely/features/profile/data/repos/notes_repo_impl.dart';
 import 'package:curely/features/profile/data/repos/profile_repo_impl.dart';
+import 'package:curely/features/profile/domain/repos/dependents_repo.dart';
 import 'package:curely/features/profile/domain/repos/notes_repo.dart';
 import 'package:curely/features/profile/domain/repos/profile_repo.dart';
 import 'package:curely/features/welcome/presentation/cubits/language_cubit.dart';
@@ -42,6 +45,9 @@ final getIt = GetIt.instance;
 void setupGetIt() {
   getIt.registerFactory<LanguageCubit>(() => LanguageCubit());
   getIt.registerFactory<ThemeCubit>(() => ThemeCubit());
+  getIt.registerFactory<ActiveProfileCubit>(
+    () => ActiveProfileCubit(userDataRepo: getIt<UserDataRepo>()),
+  );
   getIt.registerLazySingleton<FirebaseAuthServices>(
     () => FirebaseAuthServices(),
   );
@@ -70,6 +76,13 @@ void setupGetIt() {
     () => ProfileRepoImpl(
       userDataRepo: getIt<UserDataRepo>(),
       networkManager: getIt<NetworkManager>(),
+    ),
+  );
+  getIt.registerLazySingleton<DependentsRepo>(
+    () => DependentsRepoImpl(
+      databaseService: getIt<DatabaseService>(),
+      networkManager: getIt<NetworkManager>(),
+      userDataRepo: getIt<UserDataRepo>(),
     ),
   );
   getIt.registerLazySingleton<ImagesRepo>(

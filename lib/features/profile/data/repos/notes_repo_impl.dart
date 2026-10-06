@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
-import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -24,18 +23,19 @@ class NotesRepoImpl implements NotesRepo {
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
 
-  UserEntity get user => userDataRepo.getUserDataLocally();
-
   @override
-  Future<Either<Failure, void>> addNote({required NoteEntity note}) async {
+  Future<Either<Failure, void>> addNote({
+    required NoteEntity note,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
-        path: DatabaseConstants.users,
+        path: userDataRepo.getProfileRootPath(profileId),
         data: NoteModel.fromEntity(note).toMap(),
-        docId: user.uId,
+        docId: profileId,
         subCollectionPath: DatabaseConstants.notesPath,
       );
       return const Right(null);
@@ -52,6 +52,7 @@ class NotesRepoImpl implements NotesRepo {
   @override
   Future<Either<Failure, List<NoteEntity>>> getNotes({
     String? searchText,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
@@ -59,8 +60,8 @@ class NotesRepoImpl implements NotesRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.notesPath,
               )
               as List<Map<String, dynamic>>;
@@ -85,15 +86,17 @@ class NotesRepoImpl implements NotesRepo {
   }
 
   @override
-  Future<Either<Failure, List<NoteEntity>>> getFavoriteNotes() async {
+  Future<Either<Failure, List<NoteEntity>>> getFavoriteNotes({
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.notesPath,
                 query: {"field": "isFavorite", "value": true},
               )
@@ -113,14 +116,17 @@ class NotesRepoImpl implements NotesRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteNote({required String docId}) async {
+  Future<Either<Failure, void>> deleteNote({
+    required String docId,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.notesPath,
         subDocId: docId,
       );
@@ -136,14 +142,17 @@ class NotesRepoImpl implements NotesRepo {
   }
 
   @override
-  Future<Either<Failure, void>> updateNote({required NoteEntity note}) async {
+  Future<Either<Failure, void>> updateNote({
+    required NoteEntity note,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.notesPath,
         subDocId: note.docId,
         data: NoteModel.fromEntity(note).toMap(),

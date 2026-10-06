@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/prescription_notification_repo.dart';
@@ -14,10 +15,15 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
     required this.imagesRepo,
     required this.prescriptionRepo,
     required this.prescriptionNotificationRepo,
+    required this.activeProfileCubit,
   }) : super(AddPrescriptionInitial());
   final ImagesRepo imagesRepo;
   final PrescriptionRepo prescriptionRepo;
   final PrescriptionNotificationRepo prescriptionNotificationRepo;
+  final ActiveProfileCubit activeProfileCubit;
+
+  String get profileId => activeProfileCubit.activeProfileId;
+
   DateTime? nextAppointmentDate;
 
   void updateNextAppointmentDate(DateTime? date) {
@@ -42,6 +48,7 @@ class AddPrescriptionCubit extends Cubit<AddPrescriptionState> {
         prescription.imageUrls = urls;
         var result2 = await prescriptionRepo.addPrescription(
           prescription: prescription,
+          profileId: profileId,
         );
         result2.fold(
           (failure) async {

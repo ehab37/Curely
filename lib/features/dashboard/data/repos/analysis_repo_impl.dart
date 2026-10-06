@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
-import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -24,20 +23,19 @@ class AnalysisRepoImpl implements AnalysisRepo {
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
 
-  UserEntity get user => userDataRepo.getUserDataLocally();
-
   @override
   Future<Either<Failure, void>> addAnalysis({
     required AnalysisEntity analysis,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.addData(
-        path: DatabaseConstants.users,
+        path: userDataRepo.getProfileRootPath(profileId),
         data: AnalysisModel.fromEntity(analysis).toMap(),
-        docId: user.uId,
+        docId: profileId,
         subCollectionPath: DatabaseConstants.analysisPath,
       );
       return const Right(null);
@@ -54,6 +52,7 @@ class AnalysisRepoImpl implements AnalysisRepo {
   @override
   Future<Either<Failure, List<AnalysisEntity>>> getAnalysis({
     String? searchText,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
@@ -61,8 +60,8 @@ class AnalysisRepoImpl implements AnalysisRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.analysisPath,
               )
               as List<Map<String, dynamic>>;
@@ -87,15 +86,17 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }
 
   @override
-  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis() async {
+  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis({
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.analysisPath,
                 query: {"field": "isFavorite", "value": true},
               )
@@ -115,16 +116,19 @@ class AnalysisRepoImpl implements AnalysisRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteAnalysis({required String docId}) async {
+  Future<Either<Failure, void>> deleteAnalysis({
+    required AnalysisEntity analysis,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.analysisPath,
-        subDocId: docId,
+        subDocId: analysis.docId,
       );
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -140,14 +144,15 @@ class AnalysisRepoImpl implements AnalysisRepo {
   @override
   Future<Either<Failure, void>> updateAnalysis({
     required AnalysisEntity analysis,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.analysisPath,
         subDocId: analysis.docId,
         data: AnalysisModel.fromEntity(analysis).toMap(),

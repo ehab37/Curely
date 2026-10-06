@@ -47,7 +47,9 @@ class DisplayPrescriptionsViewBody extends StatelessWidget {
           return CustomErrorWidget(
             error: state.errMessage,
             onTryAgain: () {
-              context.read<ManagePrescriptionsCubit>().getPrescriptions();
+              context.read<ManagePrescriptionsCubit>().getPrescriptions(
+                isFavoriteView: isFavoriteView,
+              );
             },
           );
         } else {

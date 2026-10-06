@@ -70,4 +70,13 @@ class UserDataRepoImpl implements UserDataRepo {
     );
     return value;
   }
+
+  @override
+  String getProfileRootPath(String profileId) {
+    if (profileId == getUserDataLocally().uId) {
+      return DatabaseConstants.users;
+    } else {
+      return '${DatabaseConstants.users}/${getUserDataLocally().uId}/dependents';
+    }
+  }
 }

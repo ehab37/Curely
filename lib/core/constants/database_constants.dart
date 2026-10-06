@@ -4,6 +4,7 @@ class DatabaseConstants {
   DatabaseConstants._();
 
   static const String users = "users";
+  static const String dependents = "dependents";
   static const String createdAt = "createdAt";
 
   static const String name = "name";
@@ -14,6 +15,7 @@ class DatabaseConstants {
   static const String weight = "weight";
   static const String dateOfBirth = "dateOfBirth";
   static const String profileImage = "profileImage";
+  static const String relationship = "relationship";
 
   static const String profile = "profile";
   static const String error = "error";

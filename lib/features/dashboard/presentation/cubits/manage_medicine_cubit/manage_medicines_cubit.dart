@@ -1,3 +1,4 @@
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
@@ -12,10 +13,14 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
     required this.medicineRepo,
     required this.medicineNotificationRepo,
     required this.imagesRepo,
+    required this.activeProfileCubit,
   }) : super(ManageMedicinesInitial());
   final MedicineRepo medicineRepo;
   final MedicineNotificationRepo medicineNotificationRepo;
   final ImagesRepo imagesRepo;
+  final ActiveProfileCubit activeProfileCubit;
+
+  String get profileId => activeProfileCubit.activeProfileId;
 
   Future<void> getMedicines({
     String? searchText,
@@ -24,10 +29,13 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
   }) async {
     emit(ManageMedicinesLoading());
     var result = isRemindersView
-        ? await medicineRepo.getReminderMedicines()
+        ? await medicineRepo.getReminderMedicines(profileId: profileId)
         : isFavoriteView
-        ? await medicineRepo.getFavoriteMedicines()
-        : await medicineRepo.getMedicines(searchText: searchText);
+        ? await medicineRepo.getFavoriteMedicines(profileId: profileId)
+        : await medicineRepo.getMedicines(
+            searchText: searchText,
+            profileId: profileId,
+          );
     result.fold(
       (failure) {
         emit(GetMedicinesFailure(failure.errMessage));
@@ -40,7 +48,10 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
 
   Future<void> updateMedicines({required MedicineEntity medicine}) async {
     emit(ManageMedicinesLoading());
-    var result = await medicineRepo.updateMedicine(medicine: medicine);
+    var result = await medicineRepo.updateMedicine(
+      medicine: medicine,
+      profileId: profileId,
+    );
     result.fold(
       (failure) {
         emit(UpdateMedicinesFailure(failure.errMessage));
@@ -63,7 +74,10 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
         emit(CancelMedicinesNotificationFailure(failure.errMessage));
       },
       (_) async {
-        var result2 = await medicineRepo.deleteMedicine(docId: medicine.docId!);
+        var result2 = await medicineRepo.deleteMedicine(
+          medicine: medicine,
+          profileId: profileId,
+        );
         result2.fold(
           (failure) {
             emit(DeleteMedicinesFailure(failure.errMessage));
@@ -89,6 +103,7 @@ class ManageMedicinesCubit extends Cubit<ManageMedicinesState> {
     result.fold(
       (failure) {
         emit(CancelMedicinesNotificationFailure(failure.errMessage));
+        getMedicines();
       },
       (success) async {
         await updateMedicines(medicine: medicine..isReminderActive = false);

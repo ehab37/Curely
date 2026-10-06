@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/assets_constants.dart';
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/global_cubits/theme_cubit/theme_cubit.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/services/local_notifications_service.dart';
@@ -50,6 +51,7 @@ void main() async {
           providers: [
             BlocProvider(create: (context) => getIt<LanguageCubit>()),
             BlocProvider(create: (context) => getIt<ThemeCubit>()),
+            BlocProvider(create: (context) => getIt<ActiveProfileCubit>()),
           ],
           child: const Curely(),
         ),

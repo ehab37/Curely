@@ -1,5 +1,6 @@
 import 'package:curely/core/constants/database_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/rays_repo.dart';
@@ -9,10 +10,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'add_rays_state.dart';
 
 class AddRaysCubit extends Cubit<AddRaysState> {
-  AddRaysCubit({required this.imagesRepo, required this.raysRepo})
-    : super(AddRaysInitial());
+  AddRaysCubit({
+    required this.imagesRepo,
+    required this.raysRepo,
+    required this.activeProfileCubit,
+  }) : super(AddRaysInitial());
   final ImagesRepo imagesRepo;
   final RaysRepo raysRepo;
+  final ActiveProfileCubit activeProfileCubit;
+
+  String get profileId => activeProfileCubit.activeProfileId;
 
   Future<void> addRays({required RaysEntity rays}) async {
     emit(AddRaysLoading());
@@ -26,7 +33,7 @@ class AddRaysCubit extends Cubit<AddRaysState> {
       },
       (urls) async {
         rays.imageUrls = urls;
-        var result2 = await raysRepo.addRays(rays: rays);
+        var result2 = await raysRepo.addRays(rays: rays, profileId: profileId);
         result2.fold(
           (failure) async {
             if (rays.imageUrls.isNotNullOrEmpty) {

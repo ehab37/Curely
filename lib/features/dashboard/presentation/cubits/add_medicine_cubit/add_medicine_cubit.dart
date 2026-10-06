@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
 import 'package:curely/features/dashboard/domain/repos/medicine_notification_repo.dart';
@@ -13,11 +14,15 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
     required this.imagesRepo,
     required this.medicineRepo,
     required this.medicineNotificationRepo,
+    required this.activeProfileCubit,
   }) : super(AddMedicineInitial());
   final ImagesRepo imagesRepo;
   final MedicineRepo medicineRepo;
   final MedicineNotificationRepo medicineNotificationRepo;
+  final ActiveProfileCubit activeProfileCubit;
   List<TimeOfDay> remindersList = [];
+
+  String get profileId => activeProfileCubit.activeProfileId;
 
   Future<void> addMedicine({required MedicineEntity medicine}) async {
     emit(AddMedicineLoading());
@@ -33,7 +38,10 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
         },
         (url) async {
           medicine.imageUrl = url;
-          var result = await medicineRepo.addMedicine(medicine: medicine);
+          var result = await medicineRepo.addMedicine(
+            medicine: medicine,
+            profileId: profileId,
+          );
           result.fold(
             (failure) async {
               if (medicine.imageUrl != null) {
@@ -50,7 +58,10 @@ class AddMedicineCubit extends Cubit<AddMedicineState> {
         },
       );
     } else {
-      var result = await medicineRepo.addMedicine(medicine: medicine);
+      var result = await medicineRepo.addMedicine(
+        medicine: medicine,
+        profileId: profileId,
+      );
       result.fold(
         (failure) {
           emit(AddMedicineFailure(failure.errMessage));

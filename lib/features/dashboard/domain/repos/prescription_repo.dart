@@ -5,17 +5,25 @@ import 'package:dartz/dartz.dart';
 abstract class PrescriptionRepo {
   Future<Either<Failure, String>> addPrescription({
     required PrescriptionEntity prescription,
+    required String profileId,
   });
 
   Future<Either<Failure, List<PrescriptionEntity>>> getPrescriptions({
     String? searchText,
+    required String profileId,
   });
 
-  Future<Either<Failure, List<PrescriptionEntity>>> getFavoritePrescriptions();
+  Future<Either<Failure, List<PrescriptionEntity>>> getFavoritePrescriptions({
+    required String profileId,
+  });
 
-  Future<Either<Failure, void>> deletePrescription({required String docId});
+  Future<Either<Failure, void>> deletePrescription({
+    required PrescriptionEntity prescription,
+    required String profileId,
+  });
 
   Future<Either<Failure, void>> updatePrescription({
     required PrescriptionEntity prescription,
+    required String profileId,
   });
 }

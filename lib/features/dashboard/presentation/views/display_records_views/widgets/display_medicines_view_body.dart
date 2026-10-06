@@ -60,7 +60,10 @@ class DisplayMedicinesViewBody extends StatelessWidget {
           return CustomErrorWidget(
             error: state.errMessage,
             onTryAgain: () {
-              context.read<ManageMedicinesCubit>().getMedicines();
+              context.read<ManageMedicinesCubit>().getMedicines(
+                isRemindersView: isRemindersView,
+                isFavoriteView: isFavoriteView,
+              );
             },
           );
         } else {

@@ -1,3 +1,4 @@
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/repos/images_repo/images_repo.dart';
 import 'package:curely/core/services/get_it.dart';
 import 'package:curely/core/widgets/custom_empty_widget.dart';
@@ -40,6 +41,7 @@ class SearchResult extends StatelessWidget {
                   medicineRepo: getIt<MedicineRepo>(),
                   medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
                   imagesRepo: getIt<ImagesRepo>(),
+                  activeProfileCubit: getIt<ActiveProfileCubit>(),
                 )..getMedicines(searchText: searchText),
                 child: DisplayMedicinesViewBody(),
               );
@@ -50,6 +52,7 @@ class SearchResult extends StatelessWidget {
                   prescriptionNotificationRepo:
                       getIt<PrescriptionNotificationRepo>(),
                   imagesRepo: getIt<ImagesRepo>(),
+                  activeProfileCubit: getIt<ActiveProfileCubit>(),
                 )..getPrescriptions(searchText: searchText),
                 child: DisplayPrescriptionsViewBody(),
               );
@@ -58,6 +61,7 @@ class SearchResult extends StatelessWidget {
                 create: (context) => ManageRaysCubit(
                   raysRepo: getIt<RaysRepo>(),
                   imagesRepo: getIt<ImagesRepo>(),
+                  activeProfileCubit: getIt<ActiveProfileCubit>(),
                 )..getRays(searchText: searchText),
                 child: DisplayRaysViewBody(),
               );
@@ -66,14 +70,16 @@ class SearchResult extends StatelessWidget {
                 create: (context) => ManageAnalysisCubit(
                   analysisRepo: getIt<AnalysisRepo>(),
                   imagesRepo: getIt<ImagesRepo>(),
+                  activeProfileCubit: getIt<ActiveProfileCubit>(),
                 )..getAnalysis(searchText: searchText),
                 child: DisplayAnalysisViewBody(),
               );
             case 4:
               return BlocProvider(
-                create: (context) =>
-                    ManageNotesCubit(notesRepo: getIt<NotesRepo>())
-                      ..getNotes(searchText: searchText),
+                create: (context) => ManageNotesCubit(
+                  notesRepo: getIt<NotesRepo>(),
+                  activeProfileCubit: getIt<ActiveProfileCubit>(),
+                )..getNotes(searchText: searchText),
                 child: NotesViewBody(),
               );
             default:

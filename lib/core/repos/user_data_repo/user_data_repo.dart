@@ -16,4 +16,6 @@ abstract class UserDataRepo {
   Future<void> deleteUserDataLocally();
 
   Future<bool> checkIfDataExists({required String docId});
+
+  String getProfileRootPath(String profileId);
 }

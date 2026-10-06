@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curely/core/constants/database_constants.dart';
-import 'package:curely/core/entities/user_entity.dart';
 import 'package:curely/core/error/exceptions.dart';
 import 'package:curely/core/error/failures.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -24,20 +23,19 @@ class MedicineRepoImpl implements MedicineRepo {
   final NetworkManager networkManager;
   final UserDataRepo userDataRepo;
 
-  UserEntity get user => userDataRepo.getUserDataLocally();
-
   @override
   Future<Either<Failure, String>> addMedicine({
     required MedicineEntity medicine,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       String? docId = await databaseService.addData(
-        path: DatabaseConstants.users,
+        path: userDataRepo.getProfileRootPath(profileId),
         data: MedicineModel.fromEntity(medicine).toMap(),
-        docId: user.uId,
+        docId: profileId,
         subCollectionPath: DatabaseConstants.medicinePath,
       );
       return Right(docId!);
@@ -54,6 +52,7 @@ class MedicineRepoImpl implements MedicineRepo {
   @override
   Future<Either<Failure, List<MedicineEntity>>> getMedicines({
     String? searchText,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
@@ -61,8 +60,8 @@ class MedicineRepoImpl implements MedicineRepo {
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.medicinePath,
               )
               as List<Map<String, dynamic>>;
@@ -87,15 +86,17 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
-  Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines() async {
+  Future<Either<Failure, List<MedicineEntity>>> getReminderMedicines({
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.medicinePath,
                 query: {"field": "isReminderActive", "value": true},
               )
@@ -115,15 +116,17 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
-  Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines() async {
+  Future<Either<Failure, List<MedicineEntity>>> getFavoriteMedicines({
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       var data =
           await databaseService.getData(
-                path: DatabaseConstants.users,
-                docId: user.uId,
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
                 subCollectionPath: DatabaseConstants.medicinePath,
                 query: {"field": "isFavorite", "value": true},
               )
@@ -143,16 +146,19 @@ class MedicineRepoImpl implements MedicineRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteMedicine({required String docId}) async {
+  Future<Either<Failure, void>> deleteMedicine({
+    required MedicineEntity medicine,
+    required String profileId,
+  }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.deleteData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.medicinePath,
-        subDocId: docId,
+        subDocId: medicine.docId,
       );
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -168,14 +174,15 @@ class MedicineRepoImpl implements MedicineRepo {
   @override
   Future<Either<Failure, void>> updateMedicine({
     required MedicineEntity medicine,
+    required String profileId,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
       }
       await databaseService.updateData(
-        path: DatabaseConstants.users,
-        docId: user.uId,
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
         subCollectionPath: DatabaseConstants.medicinePath,
         subDocId: medicine.docId,
         data: MedicineModel.fromEntity(medicine).toMap(),
