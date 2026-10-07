@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
@@ -22,9 +23,14 @@ class ProfileSwitcherWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          context.tr("family_profiles"),
-          style: Theme.of(context).textTheme.titleSmall,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: SpacingConstants.horizontalPadding,
+          ),
+          child: Text(
+            context.tr("family_profiles"),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
         ),
         8.verticalSpacing,
         BlocBuilder<ManageDependentsCubit, ManageDependentsState>(
@@ -45,6 +51,7 @@ class ProfileSwitcherWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
+                  24.horizontalSpacing,
                   ...profiles.map((profile) {
                     final bool isActive =
                         activeProfileCubit.activeProfileId == profile['id'];
@@ -65,7 +72,12 @@ class ProfileSwitcherWidget extends StatelessWidget {
                     );
                   }),
                   state is ManageDependentsLoading
-                      ? CustomLoadingIndicator()
+                      ? Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            start: 16.0,
+                          ),
+                          child: CustomLoadingIndicator(),
+                        )
                       : GestureDetector(
                           onTap: () {
                             GoRouter.of(context).push(
@@ -79,6 +91,7 @@ class ProfileSwitcherWidget extends StatelessWidget {
                             isAddButton: true,
                           ),
                         ),
+                  24.horizontalSpacing,
                 ],
               ),
             );

@@ -29,10 +29,14 @@ class DependentsRepoImpl implements DependentsRepo {
   @override
   Future<Either<Failure, String>> addDependent({
     required DependentEntity dependent,
+    required int dependentsNumber,
   }) async {
     try {
       if (!await networkManager.isInternetAvailable()) {
         throw CustomException(message: "no_internet_connection".tr());
+      }
+      if (dependentsNumber > 8) {
+        throw CustomException(message: "max_dependents_reached".tr());
       }
       String? docId = await databaseService.addData(
         path: DatabaseConstants.users,

@@ -7,6 +7,8 @@ const List<String> relationshipsList = [
   'mother',
   'husband',
   'wife',
+  'brother',
+  'sister',
   'other',
 ];
 

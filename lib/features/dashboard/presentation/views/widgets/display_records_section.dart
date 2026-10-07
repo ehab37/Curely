@@ -1,4 +1,5 @@
 import 'package:curely/core/constants/app_routes_constant.dart';
+import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:curely/core/widgets/custom_nav_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,49 +12,58 @@ class DisplayRecordsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          context.tr("display_records"),
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        8.verticalSpacing,
-        CustomNavBar(
-          text: context.tr("display_medicines"),
-          prefixIcon: FontAwesomeIcons.pills,
-          suffixIcon: Icons.arrow_forward_ios,
-          onPressed: () {
-            GoRouter.of(context).push(AppRoutesConstants.kDisplayMedicineView);
-          },
-        ),
-        CustomNavBar(
-          text: context.tr("display_prescriptions"),
-          prefixIcon: FontAwesomeIcons.fileMedical,
-          suffixIcon: Icons.arrow_forward_ios,
-          onPressed: () {
-            GoRouter.of(
-              context,
-            ).push(AppRoutesConstants.kDisplayPrescriptionView);
-          },
-        ),
-        CustomNavBar(
-          text: context.tr("display_rays"),
-          prefixIcon: FontAwesomeIcons.xRay,
-          suffixIcon: Icons.arrow_forward_ios,
-          onPressed: () {
-            GoRouter.of(context).push(AppRoutesConstants.kDisplayRaysView);
-          },
-        ),
-        CustomNavBar(
-          text: context.tr("display_analysis"),
-          prefixIcon: FontAwesomeIcons.flaskVial,
-          suffixIcon: Icons.arrow_forward_ios,
-          onPressed: () {
-            GoRouter.of(context).push(AppRoutesConstants.kDisplayAnalysisView);
-          },
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: SpacingConstants.horizontalPadding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.tr("display_records"),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          8.verticalSpacing,
+          CustomNavBar(
+            text: context.tr("display_medicines"),
+            prefixIcon: FontAwesomeIcons.pills,
+            suffixIcon: Icons.arrow_forward_ios,
+            onPressed: () {
+              GoRouter.of(
+                context,
+              ).push(AppRoutesConstants.kDisplayMedicineView);
+            },
+          ),
+          CustomNavBar(
+            text: context.tr("display_prescriptions"),
+            prefixIcon: FontAwesomeIcons.fileMedical,
+            suffixIcon: Icons.arrow_forward_ios,
+            onPressed: () {
+              GoRouter.of(
+                context,
+              ).push(AppRoutesConstants.kDisplayPrescriptionView);
+            },
+          ),
+          CustomNavBar(
+            text: context.tr("display_rays"),
+            prefixIcon: FontAwesomeIcons.xRay,
+            suffixIcon: Icons.arrow_forward_ios,
+            onPressed: () {
+              GoRouter.of(context).push(AppRoutesConstants.kDisplayRaysView);
+            },
+          ),
+          CustomNavBar(
+            text: context.tr("display_analysis"),
+            prefixIcon: FontAwesomeIcons.flaskVial,
+            suffixIcon: Icons.arrow_forward_ios,
+            onPressed: () {
+              GoRouter.of(
+                context,
+              ).push(AppRoutesConstants.kDisplayAnalysisView);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

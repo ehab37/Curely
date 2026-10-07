@@ -1,5 +1,4 @@
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/core/theme/app_colors.dart';
 import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/records_dismissible_widget.dart';
 import 'package:curely/features/profile/domain/entities/dependent_entity.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_dependents_cubit/manage_dependents_cubit.dart';
@@ -26,7 +25,7 @@ class DependentItem extends StatelessWidget {
       supTitle: context.tr("delete_profile_content", args: [dependent.name]),
       content: Card(
         child: ListTile(
-          contentPadding: EdgeInsetsDirectional.only(start: 16, end: 8),
+          contentPadding: EdgeInsetsDirectional.symmetric(horizontal: 16),
           leading: CircleAvatar(
             backgroundColor: Theme.of(context).primaryColor,
             child: Text(
@@ -42,8 +41,7 @@ class DependentItem extends StatelessWidget {
             context.tr(dependent.relationship),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          trailing: InkWell(
-            borderRadius: BorderRadius.circular(25),
+          trailing: GestureDetector(
             onTap: () {
               showCustomBottomSheet(
                 context,
@@ -53,10 +51,7 @@ class DependentItem extends StatelessWidget {
                 ),
               );
             },
-            child: CircleAvatar(
-              backgroundColor: AppColors.transparent,
-              child: Icon(Icons.edit_outlined, color: AppColors.primary),
-            ),
+            child: Icon(Icons.edit_outlined),
           ),
         ),
       ),

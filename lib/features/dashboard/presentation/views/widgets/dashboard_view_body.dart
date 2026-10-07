@@ -1,4 +1,3 @@
-import 'package:curely/core/constants/spacing_constants.dart';
 import 'package:curely/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'add_records_section.dart';
@@ -10,21 +9,16 @@ class DashboardViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: SpacingConstants.horizontalPadding,
-      ),
-      child: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          ProfileSwitcherWidget(),
-          12.verticalSpacing,
-          DisplayRecordsSection(),
-          16.verticalSpacing,
-          AddRecordsSection(),
-          16.verticalSpacing,
-        ],
-      ),
+    return ListView(
+      physics: const BouncingScrollPhysics(),
+      children: [
+        ProfileSwitcherWidget(),
+        12.verticalSpacing,
+        DisplayRecordsSection(),
+        16.verticalSpacing,
+        AddRecordsSection(),
+        16.verticalSpacing,
+      ],
     );
   }
 }

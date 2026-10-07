@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 abstract class DependentsRepo {
   Future<Either<Failure, String>> addDependent({
     required DependentEntity dependent,
+    required int dependentsNumber,
   });
 
   Future<Either<Failure, List<DependentEntity>>> getDependents();

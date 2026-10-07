@@ -45,7 +45,7 @@ final getIt = GetIt.instance;
 void setupGetIt() {
   getIt.registerFactory<LanguageCubit>(() => LanguageCubit());
   getIt.registerFactory<ThemeCubit>(() => ThemeCubit());
-  getIt.registerFactory<ActiveProfileCubit>(
+  getIt.registerLazySingleton<ActiveProfileCubit>(
     () => ActiveProfileCubit(userDataRepo: getIt<UserDataRepo>()),
   );
   getIt.registerLazySingleton<FirebaseAuthServices>(

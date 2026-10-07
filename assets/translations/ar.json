@@ -374,6 +374,8 @@
   "mother": "أم",
   "husband": "زوج",
   "wife": "زوجة",
+  "brother": "أخ",
+  "sister": "أخت",
   "me": "أنا",
   "profile_name": "اسم الملف",
   "enter_profile_name": "أدخل اسم الملف",
@@ -383,5 +385,6 @@
   "no_family_profiles_added_yet": "لم يتم إضافة ملفات عائلية بعد",
   "added_successfully": "تمت الإضافة بنجاح",
   "updated_successfully": "تم التحديث بنجاح",
-  "deleted_successfully": "تم الحذف بنجاح"
+  "deleted_successfully": "تم الحذف بنجاح",
+  "max_dependents_reached": "تم الوصول إلى الحد الأقصى للملفات الشخصية المضافة"
 }

@@ -9,6 +9,7 @@ part 'manage_dependents_state.dart';
 class ManageDependentsCubit extends Cubit<ManageDependentsState> {
   final DependentsRepo dependentsRepo;
   final ActiveProfileCubit activeProfileCubit;
+  List<DependentEntity> dependents = [];
 
   ManageDependentsCubit({
     required this.dependentsRepo,
@@ -18,15 +19,20 @@ class ManageDependentsCubit extends Cubit<ManageDependentsState> {
   Future<void> getDependents() async {
     emit(ManageDependentsLoading());
     var result = await dependentsRepo.getDependents();
-    result.fold(
-      (failure) => emit(GetDependentsFailure(failure.errMessage)),
-      (dependents) => emit(GetDependentsSuccess(dependents)),
-    );
+    result.fold((failure) => emit(GetDependentsFailure(failure.errMessage)), (
+      fetchedDependents,
+    ) {
+      dependents = fetchedDependents;
+      emit(GetDependentsSuccess(dependents));
+    });
   }
 
   Future<void> addDependent({required DependentEntity dependent}) async {
     emit(ManageDependentsLoading());
-    var result = await dependentsRepo.addDependent(dependent: dependent);
+    var result = await dependentsRepo.addDependent(
+      dependent: dependent,
+      dependentsNumber: dependents.length,
+    );
     result.fold(
       (failure) {
         emit(AddDependentFailure(failure.errMessage));
