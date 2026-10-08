@@ -30,16 +30,13 @@ class _MainViewState extends State<MainView> {
           });
         },
       ),
-      body: IndexedStack(
-        index: currentViewIndex,
-        children: [
-          HomeView(bottomNavigationKey: _bottomNavigationKey),
-          DashboardView(),
-          SearchView(),
-          FavoriteView(),
-          ProfileView(),
-        ],
-      ),
+      body: [
+        HomeView(bottomNavigationKey: _bottomNavigationKey),
+        DashboardView(),
+        SearchView(),
+        FavoriteView(),
+        ProfileView(),
+      ][currentViewIndex],
     );
   }
 }
