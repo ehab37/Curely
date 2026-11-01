@@ -17,7 +17,7 @@ Curely is a professional-grade personal health management application built with
 *   **User Lifecycle:** Comprehensive flows for **Registration**, **Password Reset**, and **Account Deletion**.
 *   **Legal Compliance:** Integrated **Terms & Conditions** acceptance flow to ensure user data privacy awareness.
 
-### 📋 Intelligent Health Dashboard
+### 📋 Intelligent Health Records
 *   **Unified Medical Records:** Centralized management for all your health data.
 *   **Medication Management:** Track current and past medicines with detailed usage instructions and notes.
 *   **Digital Archive:** Securely store and categorize **Prescriptions**, **Radiology Reports (Rays)**, and **Lab Analysis** results.

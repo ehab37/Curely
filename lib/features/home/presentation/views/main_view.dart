@@ -1,4 +1,4 @@
-import 'package:curely/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:curely/features/records/presentation/views/my_records_view.dart';
 import 'package:curely/features/home/presentation/views/favorite_view.dart';
 import 'package:curely/features/home/presentation/views/home_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
@@ -32,7 +32,7 @@ class _MainViewState extends State<MainView> {
       ),
       body: [
         HomeView(bottomNavigationKey: _bottomNavigationKey),
-        DashboardView(),
+        MyRecordsView(),
         SearchView(),
         FavoriteView(),
         ProfileView(),

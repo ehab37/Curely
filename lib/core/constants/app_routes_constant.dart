@@ -10,7 +10,7 @@ abstract class AppRoutesConstants {
   static const kHomeView = "/homeView";
   static const kSearchView = "/searchView";
   static const kProfileView = "/profileView";
-  static const kDashboardView = "/dashboardView";
+  static const kMyRecordsView = "/myRecordsView";
   static const kAddMedicineView = "/addMedicineView";
   static const kAddPrescriptionView = "/addPrescriptionView";
   static const kAddRaysView = "/addRaysView";

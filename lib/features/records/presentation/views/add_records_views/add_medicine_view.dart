@@ -1,0 +1,71 @@
+import 'package:curely/core/constants/spacing_constants.dart';
+import 'package:curely/core/global_cubits/active_profile_cubit/active_profile_cubit.dart';
+import 'package:curely/core/utils/info_box.dart';
+import 'package:curely/core/repos/images_repo/images_repo.dart';
+import 'package:curely/core/services/get_it.dart';
+import 'package:curely/core/widgets/build_custom_app_bar.dart';
+import 'package:curely/core/widgets/custom_progress_hud.dart';
+import 'package:curely/features/records/domain/repos/medicine_notification_repo.dart';
+import 'package:curely/features/records/domain/repos/medicine_repo.dart';
+import 'package:curely/features/records/presentation/cubits/add_medicine_cubit/add_medicine_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'widgets/add_medicine_view_body.dart';
+
+class AddMedicineView extends StatelessWidget {
+  const AddMedicineView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AddMedicineCubit(
+        imagesRepo: getIt<ImagesRepo>(),
+        medicineRepo: getIt<MedicineRepo>(),
+        medicineNotificationRepo: getIt<MedicineNotificationRepo>(),
+        activeProfileCubit: getIt<ActiveProfileCubit>(),
+      ),
+      child: PopScope(
+        onPopInvokedWithResult: (didPop, result) =>
+            didPop ? ScaffoldMessenger.of(context).clearSnackBars() : null,
+        child: Scaffold(
+          appBar: buildCustomAppBar(
+            title: context.tr("add_medicine"),
+            isBackable: true,
+          ),
+          body: Builder(
+            builder: (context) {
+              return BlocConsumer<AddMedicineCubit, AddMedicineState>(
+                listener: (context, state) {
+                  if (state is AddMedicineSuccess) {
+                    GoRouter.of(context).pop();
+                  } else if (state is AddMedicineFailure) {
+                    InfoBox.errorFloatingBox(context, state.errMessage);
+                  } else if (state is UploadImageFailure) {
+                    InfoBox.errorFloatingBox(context, state.errMessage);
+                  } else if (state is AddMedicineNotificationFailure) {
+                    InfoBox.errorFloatingBox(context, state.errMessage);
+                  }
+                },
+                builder: (context, state) {
+                  return CustomProgressHud(
+                    isLoading: state is AddMedicineLoading ? true : false,
+                    child: SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: SpacingConstants.horizontalPadding,
+                        ),
+                        child: const AddMedicineViewBody(),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

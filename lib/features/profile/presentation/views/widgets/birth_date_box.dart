@@ -1,5 +1,5 @@
 import 'package:curely/core/widgets/custom_date_box.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/widgets/custom_icon_button_row.dart';
+import 'package:curely/features/records/presentation/views/add_records_views/widgets/custom_icon_button_row.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

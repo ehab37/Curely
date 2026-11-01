@@ -58,8 +58,8 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   Divider(),
                   ListTile(
-                    title: Text(context.tr("dashboard")),
-                    leading: const Icon(Icons.dashboard_outlined),
+                    title: Text(context.tr("my_records")),
+                    leading: const Icon(Icons.folder_shared_outlined),
                     onTap: () {
                       Scaffold.of(context).closeDrawer();
                       bottomNavigationKey.currentState?.setPage(1);

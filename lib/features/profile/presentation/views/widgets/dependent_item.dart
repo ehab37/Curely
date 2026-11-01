@@ -1,5 +1,5 @@
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/records_dismissible_widget.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/widgets/records_dismissible_widget.dart';
 import 'package:curely/features/profile/domain/entities/dependent_entity.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_dependents_cubit/manage_dependents_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';

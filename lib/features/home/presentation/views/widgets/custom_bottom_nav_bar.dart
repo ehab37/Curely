@@ -15,7 +15,7 @@ class CustomBottomNavBar extends StatelessWidget {
   List<Widget> bottomNavBarIconsList(BuildContext context) => [
     Icon(Icons.home_filled, color: Theme.of(context).colorScheme.onPrimary),
     Icon(
-      Icons.dashboard_outlined,
+      Icons.folder_shared_outlined,
       color: Theme.of(context).colorScheme.onPrimary,
     ),
     FaIcon(

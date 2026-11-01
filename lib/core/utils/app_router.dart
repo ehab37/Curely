@@ -2,32 +2,32 @@ import 'package:curely/core/constants/app_routes_constant.dart';
 import 'package:curely/core/constants/cache_constants.dart';
 import 'package:curely/core/services/cache_helper.dart';
 import 'package:curely/core/services/firebase_auth_services.dart';
-import 'package:curely/features/dashboard/presentation/views/image_view.dart';
+import 'package:curely/features/records/presentation/views/image_view.dart';
 import 'package:curely/features/auth/presentation/views/login_view.dart';
 import 'package:curely/features/auth/presentation/views/register_view.dart';
 import 'package:curely/features/auth/presentation/views/reset_password_view.dart';
 import 'package:curely/features/auth/presentation/views/terms_and_conditions_view.dart';
-import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
-import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
-import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
-import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
-import 'package:curely/features/dashboard/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
-import 'package:curely/features/dashboard/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
-import 'package:curely/features/dashboard/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
-import 'package:curely/features/dashboard/presentation/cubits/manage_rays_cubit/manage_rays_cubit.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/add_analysis_view.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/add_medicine_view.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/add_prescription_view.dart';
-import 'package:curely/features/dashboard/presentation/views/add_records_views/add_rays_view.dart';
-import 'package:curely/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/analysis_details_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/display_analysis_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/display_medicines_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/display_prescriptions_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/display_rays_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/medicine_details_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/prescription_details_view.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/rays_details_view.dart';
+import 'package:curely/features/records/domain/entities/analysis_entity.dart';
+import 'package:curely/features/records/domain/entities/medicine_entity.dart';
+import 'package:curely/features/records/domain/entities/prescription_entity.dart';
+import 'package:curely/features/records/domain/entities/rays_entity.dart';
+import 'package:curely/features/records/presentation/cubits/manage_analysis_cubit/manage_analysis_cubit.dart';
+import 'package:curely/features/records/presentation/cubits/manage_medicine_cubit/manage_medicines_cubit.dart';
+import 'package:curely/features/records/presentation/cubits/manage_prescriptions_cubit/manage_prescriptions_cubit.dart';
+import 'package:curely/features/records/presentation/cubits/manage_rays_cubit/manage_rays_cubit.dart';
+import 'package:curely/features/records/presentation/views/add_records_views/add_analysis_view.dart';
+import 'package:curely/features/records/presentation/views/add_records_views/add_medicine_view.dart';
+import 'package:curely/features/records/presentation/views/add_records_views/add_prescription_view.dart';
+import 'package:curely/features/records/presentation/views/add_records_views/add_rays_view.dart';
+import 'package:curely/features/records/presentation/views/my_records_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/analysis_details_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/display_analysis_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/display_medicines_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/display_prescriptions_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/display_rays_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/medicine_details_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/prescription_details_view.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/rays_details_view.dart';
 import 'package:curely/features/home/presentation/views/doctor_ai_view.dart';
 import 'package:curely/features/home/presentation/views/main_view.dart';
 import 'package:curely/features/home/presentation/views/search_view.dart';
@@ -101,8 +101,8 @@ abstract class AppRouter {
         builder: (context, state) => const ProfileView(),
       ),
       GoRoute(
-        path: AppRoutesConstants.kDashboardView,
-        builder: (context, state) => const DashboardView(),
+        path: AppRoutesConstants.kMyRecordsView,
+        builder: (context, state) => const MyRecordsView(),
       ),
       GoRoute(
         path: AppRoutesConstants.kAddMedicineView,

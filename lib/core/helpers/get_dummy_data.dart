@@ -1,7 +1,7 @@
-import 'package:curely/features/dashboard/domain/entities/analysis_entity.dart';
-import 'package:curely/features/dashboard/domain/entities/medicine_entity.dart';
-import 'package:curely/features/dashboard/domain/entities/prescription_entity.dart';
-import 'package:curely/features/dashboard/domain/entities/rays_entity.dart';
+import 'package:curely/features/records/domain/entities/analysis_entity.dart';
+import 'package:curely/features/records/domain/entities/medicine_entity.dart';
+import 'package:curely/features/records/domain/entities/prescription_entity.dart';
+import 'package:curely/features/records/domain/entities/rays_entity.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

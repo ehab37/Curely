@@ -1,0 +1,170 @@
+import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curely/core/constants/database_constants.dart';
+import 'package:curely/core/error/exceptions.dart';
+import 'package:curely/core/error/failures.dart';
+import 'package:curely/core/repos/user_data_repo/user_data_repo.dart';
+import 'package:curely/core/services/database_service.dart';
+import 'package:curely/core/services/network_manager.dart';
+import 'package:curely/features/records/data/models/analysis_model.dart';
+import 'package:curely/features/records/domain/entities/analysis_entity.dart';
+import 'package:curely/features/records/domain/repos/analysis_repo.dart';
+import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+class AnalysisRepoImpl implements AnalysisRepo {
+  AnalysisRepoImpl({
+    required this.databaseService,
+    required this.networkManager,
+    required this.userDataRepo,
+  });
+
+  final DatabaseService databaseService;
+  final NetworkManager networkManager;
+  final UserDataRepo userDataRepo;
+
+  @override
+  Future<Either<Failure, void>> addAnalysis({
+    required AnalysisEntity analysis,
+    required String profileId,
+  }) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      await databaseService.addData(
+        path: userDataRepo.getProfileRootPath(profileId),
+        data: AnalysisModel.fromEntity(analysis).toMap(),
+        docId: profileId,
+        subCollectionPath: DatabaseConstants.analysisPath,
+      );
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AnalysisEntity>>> getAnalysis({
+    String? searchText,
+    required String profileId,
+  }) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      var data =
+          await databaseService.getData(
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
+                subCollectionPath: DatabaseConstants.analysisPath,
+              )
+              as List<Map<String, dynamic>>;
+      if (searchText != null) {
+        final query = searchText.toLowerCase().trim();
+        data = data.where((element) {
+          return element.toString().toLowerCase().contains(query);
+        }).toList();
+      }
+      List<AnalysisEntity> analysis = data
+          .map((e) => AnalysisModel.fromJson(e).toEntity())
+          .toList();
+      return Right(analysis);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AnalysisEntity>>> getFavoriteAnalysis({
+    required String profileId,
+  }) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      var data =
+          await databaseService.getData(
+                path: userDataRepo.getProfileRootPath(profileId),
+                docId: profileId,
+                subCollectionPath: DatabaseConstants.analysisPath,
+                query: {"field": "isFavorite", "value": true},
+              )
+              as List<Map<String, dynamic>>;
+      List<AnalysisEntity> analysis = data
+          .map((e) => AnalysisModel.fromJson(e).toEntity())
+          .toList();
+      return Right(analysis);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteAnalysis({
+    required AnalysisEntity analysis,
+    required String profileId,
+  }) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      await databaseService.deleteData(
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
+        subCollectionPath: DatabaseConstants.analysisPath,
+        subDocId: analysis.docId,
+      );
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateAnalysis({
+    required AnalysisEntity analysis,
+    required String profileId,
+  }) async {
+    try {
+      if (!await networkManager.isInternetAvailable()) {
+        throw CustomException(message: "no_internet_connection".tr());
+      }
+      await databaseService.updateData(
+        path: userDataRepo.getProfileRootPath(profileId),
+        docId: profileId,
+        subCollectionPath: DatabaseConstants.analysisPath,
+        subDocId: analysis.docId,
+        data: AnalysisModel.fromEntity(analysis).toMap(),
+      );
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(AuthExceptionHandler.fromAuthException(e));
+    } on CustomException catch (e) {
+      return Left(OtherErrors.fromOtherErrors(e.message));
+    } catch (e) {
+      log(e.toString());
+      return Left(OtherErrors.fromOtherErrors("something_went_wrong".tr()));
+    }
+  }
+}

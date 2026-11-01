@@ -1,5 +1,5 @@
 import 'package:curely/core/helpers/show_custom_bottom_sheet.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/records_dismissible_widget.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/widgets/records_dismissible_widget.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

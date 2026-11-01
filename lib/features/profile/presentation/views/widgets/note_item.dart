@@ -1,5 +1,5 @@
 import 'package:curely/core/theme/styles.dart';
-import 'package:curely/features/dashboard/presentation/views/display_records_views/widgets/custom_fav_icon.dart';
+import 'package:curely/features/records/presentation/views/display_records_views/widgets/custom_fav_icon.dart';
 import 'package:curely/features/profile/domain/entities/note_entity.dart';
 import 'package:curely/features/profile/presentation/cubits/manage_notes_cubit/manage_notes_cubit.dart';
 import 'package:flutter/material.dart';
